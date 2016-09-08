@@ -12,6 +12,8 @@ public class Solution {
     }
 
     private static final int MAX = 100000;
+    private static final int MIN = 10000;
+
     private static long[] pentagons = new long[MAX];
 
     static {
@@ -42,7 +44,7 @@ public class Solution {
     }
 
 
-    public static boolean conditionFirst(int a, int b) {
+    public static boolean checkCondition(int a, int b) {
         if (a != b)
             return (isPentagon(Math.abs(pentagons[a] - pentagons[b])) &&
                     isPentagon(Math.abs(pentagons[a] + pentagons[b])));
@@ -64,15 +66,23 @@ public class Solution {
      * @param args
      */
     public static void main(String[] args) {
-        int dist = 1040;
+        int dist = 2167-1019;
+        long diff = 5482659;
 
-        for (int i = 1; i < MAX; i++) {
-            for (int j = i+1; j < i + dist && j < MAX; j++) {
-                if (conditionFirst(i, j)) {
-                    System.out.println(printHelp(i) + " " + printHelp(j) + " " + getDiff(i, j));
-                    dist = j-i;
+
+        for (int i = MIN; i < MAX; i++) {
+            for (int j = i+1; j < i + dist && j < MAX-1 && getDiff(j, j+1)< diff; j++) {
+                if (checkCondition(i, j)) {
+
+                    diff = getDiff(i,j);
+                    dist = j-i; //update distance accordingly
+                    System.out.println("Progress " + (float)i*100/(float)MAX + "%");
+                    System.out.println(printHelp(i) + " " + printHelp(j) + " diff " + getDiff(i, j));
+
                     continue;
                 }
+
+
             }
 
         }
