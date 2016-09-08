@@ -1,7 +1,7 @@
 package eulerproject.problem44;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
