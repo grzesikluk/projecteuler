@@ -1,5 +1,9 @@
 package eulerproject.problem43;
 
+import eulerproject.tools.Listener;
+import eulerproject.tools.Permutation;
+import eulerproject.tools.PermutationImpl;
+
 import java.util.LinkedList;
 
 /**

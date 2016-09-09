@@ -1,19 +1,19 @@
-package projecteuler.problem49;
+package eulerproject.problem49;
 
 import org.junit.Assert;
 import org.junit.Test;
-import projecteuler.problem43.Listener;
-import projecteuler.problem43.ListenerImplCheck;
-import projecteuler.problem43.Permutation;
-import projecteuler.problem43.PermutationImpl;
+import eulerproject.tools.Listener;
+import eulerproject.tools.Permutation;
+import eulerproject.tools.PermutationImpl;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import static eulerproject.problem49.Solution.checkCondition;
 import static org.junit.Assert.*;
-import static projecteuler.problem49.Solution.checkCondition;
-import static projecteuler.problem49.Solution.convertInteger;
+import static eulerproject.problem49.Solution.checkCondition;
+import static eulerproject.problem49.Solution.convertInteger;
 
 /**
  * Created by grzesikl on 09/09/2016.

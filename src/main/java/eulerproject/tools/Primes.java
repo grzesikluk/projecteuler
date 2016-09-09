@@ -1,4 +1,4 @@
-package eulerproject.problem50;
+package eulerproject.tools;
 
 /**
  * Created by Lukasz on 2016-08-30.

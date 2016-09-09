@@ -1,5 +1,7 @@
 package eulerproject.problem50;
 
+import eulerproject.tools.Primes;
+
 /**
  * Created by Lukasz on 2016-08-30.
  */

@@ -1,5 +1,7 @@
 package eulerproject.problem43;
 
+import eulerproject.tools.Listener;
+
 import java.util.LinkedList;
 
 /**

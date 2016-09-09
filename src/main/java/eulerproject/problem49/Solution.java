@@ -1,11 +1,8 @@
-package projecteuler.problem49;
+package eulerproject.problem49;
 
-import projecteuler.problem43.Listener;
-import projecteuler.problem43.ListenerImplCheck;
-import projecteuler.problem43.Permutation;
-import projecteuler.problem43.PermutationImpl;
-import projecteuler.problem50.Primes;
-import sun.awt.image.ImageWatched;
+import eulerproject.tools.Permutation;
+import eulerproject.tools.PermutationImpl;
+import eulerproject.tools.Primes;
 
 import java.util.*;
 

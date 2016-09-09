@@ -1,6 +1,6 @@
 package eulerproject.problem46;
 
-import eulerproject.problem50.Primes;
+import eulerproject.tools.Primes;
 
 /**
  * Created by Lukasz on 2016-08-30.

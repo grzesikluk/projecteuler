@@ -1,7 +1,6 @@
-package projecteuler.problem49;
+package eulerproject.problem49;
 
-import projecteuler.problem43.Listener;
-import projecteuler.problem50.Primes;
+import eulerproject.tools.Listener;
 
 import java.util.HashSet;
 import java.util.LinkedList;

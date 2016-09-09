@@ -1,6 +1,6 @@
-package projecteuler.problem49;
+package eulerproject.problem49;
 
-import projecteuler.problem43.Listener;
+import eulerproject.tools.Listener;
 
 import java.util.LinkedList;
 

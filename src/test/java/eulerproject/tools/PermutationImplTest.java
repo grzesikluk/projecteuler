@@ -1,11 +1,13 @@
-package eulerproject.problem43;
+package eulerproject.tools;
 
+import eulerproject.tools.Listener;
+import eulerproject.tools.ListenerImpl;
+import eulerproject.tools.Permutation;
+import eulerproject.tools.PermutationImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Lukasz on 2016-08-28.

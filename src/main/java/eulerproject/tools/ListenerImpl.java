@@ -1,4 +1,6 @@
-package eulerproject.problem43;
+package eulerproject.tools;
+
+import eulerproject.tools.Listener;
 
 import java.util.LinkedList;
 
