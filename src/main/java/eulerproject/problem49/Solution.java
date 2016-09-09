@@ -25,6 +25,7 @@ public class Solution {
             if (checkCondition(k)) {
 //                System.out.println(k);
 //                System.exit(0); //found first
+
             }
         }
     }
@@ -54,15 +55,16 @@ public class Solution {
 
                 if (primeListDifferences.containsKey(diff)) {
                     primeListDifferences.replace(diff, (primeListDifferences.get(diff)) + 1);
-                    if (primeListDifferences.get(diff) > 1)
-                        System.out.println(" Pair i =" + primeList.get(i) + " j= " + primeList.get(j) + " diff is " + diff + " count is "+primeListDifferences.get(diff));
+
+
                 } else {
                     primeListDifferences.put(diff, 1);
                 }
+                System.out.println(" Pair i =" + primeList.get(i) + " j= " + primeList.get(j) + " diff is " + diff + " count is " + primeListDifferences.get(diff));
             }
 
         for (Integer diff : primeListDifferences.keySet()) {
-            if (primeListDifferences.get(diff) > 1)
+            if (primeListDifferences.get(diff) > 3)
                 return true;
         }
 
