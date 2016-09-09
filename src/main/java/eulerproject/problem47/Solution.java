@@ -2,6 +2,7 @@ package projecteuler.problem47;
 
 import java.util.HashSet;
 import java.util.Set;
+import eulerproject.problem50.Primes;
 
 /**
  * Created by grzesikl on 09/09/2016.
