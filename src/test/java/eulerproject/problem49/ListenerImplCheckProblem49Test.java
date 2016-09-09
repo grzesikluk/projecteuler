@@ -1,12 +1,11 @@
-package projecteuler.problem49;
+package eulerproject.problem49;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
 
-import static org.junit.Assert.*;
-import static projecteuler.problem49.ListenerImplCheckProblem49.toNumber;
+import static eulerproject.problem49.ListenerImplCheckProblem49.toNumber;
 
 /**
  * Created by grzesikl on 09/09/2016.
