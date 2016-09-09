@@ -1,51 +1,61 @@
-package eulerproject.problem49;
+package projecteuler.problem49;
 
-import eulerproject.problem43.Permutation;
-import eulerproject.problem43.PermutationImpl;
-import eulerproject.problem50.Primes;
+import projecteuler.problem43.Listener;
+import projecteuler.problem43.ListenerImplCheck;
+import projecteuler.problem43.Permutation;
+import projecteuler.problem43.PermutationImpl;
+import projecteuler.problem50.Primes;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
- * Created by Lukasz on 2016-09-06.
+ * Created by grzesikl on 09/09/2016.
  */
 public class Solution {
-    private static final int MAX = 9999;
-    private static final int MIN = 1000;
+    public static final int MIN = 1000;
+    public static final int MAX = 9999;
 
-    private static Primes primes = new Primes(9999);
-    private static LinkedList<Character> list = new LinkedList<Character>();
+    private static Primes primes = new Primes(MAX);
+
 
     public static void main(String[] args) {
-        Permutation<Character> perm = new PermutationImpl<Character>();
-        PermListenerImpl<Character> listener = new PermListenerImpl<Character>();
 
-        for (int i = MIN; i<MAX; i= primes.getNextPrime(i) )     {
-            addToList(i);
-            listener.clear();
-            perm.generate(list.size() - 1, list, listener);
-            check(listener.getList());
+        for (int k=MIN;k<=MAX;k++) {
+            if (checkCondition(k)) {
+                System.out.println(k);
+//                System.exit(0); //found first
+            }
+        }
+    }
+
+    public static boolean checkCondition(int k) {
+        LinkedList<Character> numberListChar = convertInteger(k);
+        Permutation<Character> perm = new PermutationImpl<Character>();
+        ListenerImplCheckProblem49<Character> listener = new ListenerImplCheckProblem49<>();
+
+        perm.generate(numberListChar.size()-1,numberListChar,listener);
+
+        int counter=0;
+
+        for (Integer i:listener.getResults()) {
+            if (i<MAX && i>MIN)
+                if (primes.isPrime(i))
+                    counter++;
+
         }
 
-    }
-
-
-    private static void addToList(int k) {
-        char[] charArray = new Integer(k).toString().toCharArray();
-
-        list.clear();
-        for (Character c:charArray)
-            list.add(c);
+        return  counter>3;
 
     }
 
-    private static boolean check(List<Integer> l) {
-        //TODO check
-        return false;
+    public static LinkedList<Character> convertInteger(int k) {
+        String kStr = new Integer(k).toString();
+        LinkedList<Character> list = new LinkedList<>();
+
+        for(int i=0;i<kStr.length();i++)
+            list.add(kStr.charAt(i));
+        return list;
     }
-
-
 
 
 
