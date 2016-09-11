@@ -1,9 +1,9 @@
 package eulerproject.tools;
 
-import eulerproject.tools.Listener;
-import eulerproject.tools.ListenerImpl;
-import eulerproject.tools.Permutation;
-import eulerproject.tools.PermutationImpl;
+import eulerproject.tools.permutation.Listener;
+import eulerproject.tools.permutation.ListenerImpl;
+import eulerproject.tools.permutation.Permutation;
+import eulerproject.tools.permutation.PermutationImpl;
 import org.junit.Before;
 import org.junit.Test;
 

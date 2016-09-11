@@ -1,6 +1,4 @@
-package eulerproject.tools;
-
-import eulerproject.tools.Listener;
+package eulerproject.tools.permutation;
 
 import java.util.LinkedList;
 
