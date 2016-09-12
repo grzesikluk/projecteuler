@@ -17,19 +17,34 @@ public class Solution {
     public static final int PRIME_FAMILY = 8; //eight prime value family
 
     public static void main(String[] args) {
+        Set<Set<Integer>> subSets = new HashSet<>();
+        Set<Integer> setOfPrimes = new HashSet<>();
 
-        for(int number = 2; number < MAX; number++) {
+        for (int number = 11; number < MAX; number++) {
+            int tempLength = new Integer(number).toString().length();
+            int checkNumber;
+            int numLength = 1;
 
-            for(int i=0;i<10;i++){
-                //generate sub sets if length of number changed
-                //replace with {0-9] according to the subsets
-                // check if prime
-                // count how many primes there are
-                // if eight return smallest prime got and exit.
-
-
+            if (tempLength != numLength) {
+                numLength = tempLength;
+                subSets = getSubset(numLength);
             }
 
+            for (Set<Integer> subSet : subSets) {
+                for (int i = 0; i < 10; i++) {
+                    checkNumber = replaceNumbers(subSet,number,i);
+                    if (checkNumber>=number)
+                        if (primes.isPrime(checkNumber))
+                            setOfPrimes.add(checkNumber);
+                }
+
+                if (setOfPrimes.size() == PRIME_FAMILY) {
+                    System.out.println(setOfPrimes);
+                    System.exit(0);
+                }
+                setOfPrimes.clear();
+
+            }
 
         }
 
@@ -41,16 +56,28 @@ public class Solution {
         ListenerProblem51<Integer> listener = new ListenerProblem51<>();
         Set<Integer> set = new HashSet<>();
 
-        for (int i=0;i<length;i++)
+        for (int i = 0; i < length; i++)
             set.add(i);
 
-
-        generator.generate(set,listener);
+        generator.generate(set, listener);
         return listener.getResult();
-
 
     }
 
+    public static int replaceNumbers(Set<Integer> subSet,int number, int k) {
+        String strNumber = new Integer(number).toString();
+        String resultString = "";
+        String strK = new Integer(k).toString();
 
+        for(int i =0;i<strNumber.length();i++) {
+            if (subSet.contains(i))
+                resultString+=strK;
+            else
+                resultString+=strNumber.charAt(i);
+        }
+
+        return new Integer(resultString);
+
+    }
 
 }
