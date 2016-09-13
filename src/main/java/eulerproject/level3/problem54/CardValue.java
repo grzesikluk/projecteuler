@@ -4,7 +4,7 @@ package eulerproject.level3.problem54;
  * Created by grzesikl on 13/09/2016.
  */
 public enum CardValue {
-    two("2"), three("3"), four("4"), five("5"), six("6"), seven("7"), eight("8"), nine("9"), ten("10"), jack("J"), queen("Q"), king("K"), ace("A");
+    two("2"), three("3"), four("4"), five("5"), six("6"), seven("7"), eight("8"), nine("9"), ten("T"), jack("J"), queen("Q"), king("K"), ace("A");
 
     String symbol;
 
@@ -27,7 +27,7 @@ public enum CardValue {
             case "7": return seven;
             case "8": return eight;
             case "9": return nine;
-            case "10": return ten;
+            case "T": return ten;
             case "J": return jack;
             case "Q": return queen;
             case "K": return king;

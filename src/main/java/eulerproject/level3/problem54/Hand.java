@@ -55,10 +55,10 @@ public class Hand implements Comparable {
 
     public boolean isRoyalFlush() {
 
-        return this.equals(new Hand("10D JD QD KD AD")) ||
-                this.equals(new Hand("10S JS QS KS AS")) ||
-                this.equals(new Hand("10C JC QC KC AC")) ||
-                this.equals(new Hand("10H JH QH KH AH"));
+        return this.equals(new Hand("TD JD QD KD AD")) ||
+                this.equals(new Hand("TS JS QS KS AS")) ||
+                this.equals(new Hand("TC JC QC KC AC")) ||
+                this.equals(new Hand("TH JH QH KH AH"));
 
     }
 

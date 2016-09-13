@@ -22,7 +22,7 @@ public class Solution {
                 Hand handTwo  = new Hand(line.substring(15));
                 System.out.println(handOne.toString() + handTwo.toString());
 
-                if (handOne.compareTo(handTwo)>0)
+                if (handOne.compareTo(handTwo)>=0)
                     counter++;
             }
 

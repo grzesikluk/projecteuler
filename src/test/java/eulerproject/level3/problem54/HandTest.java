@@ -19,7 +19,7 @@ public class HandTest {
 
     @Test
     public void testIsStraight() throws Exception {
-        Assert.assertTrue(new Hand("9S 10S JS QS KC").isStraight());
+        Assert.assertTrue(new Hand("9S TS JS QS KC").isStraight());
         Assert.assertFalse(new Hand("2C 3C 5C 4C 6C").isStraight());
         Assert.assertTrue(new Hand("2C 3C 5S 4C 6C").isStraight());
         Assert.assertFalse(new Hand("QS JD QH QC KS").isStraight());
@@ -28,7 +28,7 @@ public class HandTest {
 
     @Test
     public void testIsFlush() throws Exception {
-        Assert.assertTrue(new Hand("9S 10S 4S KS AS").isFlush());
+        Assert.assertTrue(new Hand("9S TS 4S KS AS").isFlush());
         Assert.assertTrue(new Hand("2C 5C AC QC JC").isFlush());
         Assert.assertFalse(new Hand("QS JD QH QC KS").isFlush());
 
@@ -51,23 +51,23 @@ public class HandTest {
 
     @Test
     public void testIsStraightFlush() throws Exception {
-        Assert.assertTrue(new Hand("9S 10S JS QS KS").isStraightFlush());
-        Assert.assertTrue(new Hand("JH QH 8H 9H 10H").isStraightFlush());
+        Assert.assertTrue(new Hand("9S TS JS QS KS").isStraightFlush());
+        Assert.assertTrue(new Hand("JH QH 8H 9H TH").isStraightFlush());
         Assert.assertFalse(new Hand("2H 3H 4H 5D 6H").isStraightFlush());
     }
 
     @Test
     public void testIsRoyalFlush() throws Exception {
-        Assert.assertTrue(new Hand("10S JS QS KS AS").isRoyalFlush());
-        Assert.assertTrue(new Hand("10H JH QH KH AH").isRoyalFlush());
+        Assert.assertTrue(new Hand("TS JS QS KS AS").isRoyalFlush());
+        Assert.assertTrue(new Hand("TH JH QH KH AH").isRoyalFlush());
         Assert.assertFalse(new Hand("9H JH QH KH AH").isRoyalFlush());
     }
 
     @Test
     public void testToString() throws Exception {
 
-        Hand hand = new Hand("10S 4C 6D JS AC");
-        Assert.assertEquals("[4C, 6D, 10S, JS, AC]", hand.toString());
+        Hand hand = new Hand("TS 4C 6D JS AC");
+        Assert.assertEquals("[4C, 6D, TS, JS, AC]", hand.toString());
     }
 
     @Test
