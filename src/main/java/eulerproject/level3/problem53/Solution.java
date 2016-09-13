@@ -1,4 +1,4 @@
-package projecteuler.problem53;
+package eulerproject.level3.problem53;
 
 import java.math.BigInteger;
 
