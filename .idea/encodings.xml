@@ -1,17 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem31/Coin.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem31/Solution.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/Listener.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/ListenerImpl.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/ListenerImplCheck.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/Permutation.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/PermutationImpl.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem43/Solution.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/eulerproject/problem48/Solution.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/eulerproject/problem31/CoinTest.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/eulerproject/problem43/ListenerImplCheckTest.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/eulerproject/problem43/PermutationImplTest.java" charset="UTF-8" />
-  </component>
-</project>
+<project version="4" />

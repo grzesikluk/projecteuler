@@ -1,5 +1,7 @@
 package eulerproject.level3.problem56;
 
+import java.math.BigInteger;
+
 /**
  * Created by Lukasz on 2016-09-13.
  */

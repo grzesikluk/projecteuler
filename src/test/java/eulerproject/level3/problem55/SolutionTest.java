@@ -1,6 +1,13 @@
 package eulerproject.level3.problem55;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.math.BigInteger;
+
+import static eulerproject.level3.problem55.Solution.isLychrelNumber;
+import static eulerproject.level3.problem55.Solution.isPalindrome;
+import static eulerproject.level3.problem55.Solution.reverseInt;
 
 /**
  * Created by Lukasz on 2016-09-13.
