@@ -1,9 +1,19 @@
-package eulerproject.level3.problem57;
+package eulerproject.tools.fractions;
+
+import eulerproject.tools.Primes;
 
 /**
  * Created by grzesikl on 15/09/2016.
  */
 public class Fraction {
+
+    final static Primes primes;
+
+    static {
+        primes = new Primes(1000000);
+        primes.generatePrimes();
+    }
+
     public Fraction(long nominator, long denominator) {
         this.nominator = nominator;
         this.denominator = denominator;
@@ -62,13 +72,16 @@ public class Fraction {
 
     public Fraction simplifyFraction() {
         Fraction result = new Fraction(this);
+        int i = 2;
 
-        for(long i = result.getDenominator()/2;i>0;i--) {
+        while(i>0 && i<=result.getDenominator() && i<=result.getDenominator()) {
 
             if(result.getNominator()%i == 0&& result.getDenominator()%i == 0) {
                 result = new Fraction(result.getNominator()/i,result.getDenominator()/i);
             }
-
+            else {
+                i = primes.getNextPrime(i);
+            }
         }
 
         return result;

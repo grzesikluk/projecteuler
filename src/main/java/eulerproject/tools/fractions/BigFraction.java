@@ -1,4 +1,6 @@
-package eulerproject.level3.problem57;
+package eulerproject.tools.fractions;
+
+import eulerproject.tools.Primes;
 
 import java.math.BigInteger;
 
@@ -6,6 +8,15 @@ import java.math.BigInteger;
  * Created by grzesikl on 15/09/2016.
  */
 public class BigFraction {
+
+    static final Primes primes;
+    private static final int MAX = 10000000;
+
+    static {
+        primes = new Primes(10000000);
+        primes.generatePrimes();
+    }
+
     public BigFraction(BigInteger nominator, BigInteger denominator) {
         this.nominator = nominator;
         this.denominator = denominator;
@@ -37,52 +48,60 @@ public class BigFraction {
 
     @Override
     public String toString() {
-        return "["+nominator.toString()+"/"+denominator.toString()+"]";
+        return "[" + nominator.toString() + "/" + denominator.toString() + "]";
     }
 
     public BigFraction add(BigFraction oth) {
         BigFraction result;
 
-        if(!isCommonDenominator(oth)) {
+        if (!isCommonDenominator(oth)) {
             BigInteger denominator = getDenominator().multiply(oth.getDenominator());
             BigInteger nominator = getNominator().multiply(oth.getDenominator()).add(oth.getNominator().multiply(getDenominator()));
 
-            result = new BigFraction(nominator,denominator);
+            result = new BigFraction(nominator, denominator);
 
-        }
-        else {
-            result = new BigFraction(getNominator().add(oth.getNominator()),getDenominator());
+        } else {
+            result = new BigFraction(getNominator().add(oth.getNominator()), getDenominator());
         }
 
         return result;
 
-    };
+    }
+
+    ;
 
     public boolean isCommonDenominator(BigFraction oth) {
         return oth.getDenominator() == getDenominator();
     }
 
     public BigFraction simplifyFraction() {
-        BigInteger i = new BigInteger(getDenominator().toString()).divide(new BigInteger("2"));
         BigInteger zero = new BigInteger("0");
-        BigInteger one  = new BigInteger("1");
+        BigInteger one = new BigInteger("1");
         BigFraction result = new BigFraction(this);
+        BigInteger bigI = new BigInteger("2");
+        int i = 2;
 
-        while(i.compareTo(zero)>0)  {
-            BigInteger bigI = new BigInteger(i.toString());
+        while (i >0 && bigI.compareTo(result.getDenominator()) <= 0 && bigI.compareTo(result.getNominator()) <= 0 ) {
+            bigI = new BigInteger(new Integer(i).toString());
 
-            if(result.getNominator().mod(bigI).equals(zero) && result.getDenominator().mod(bigI).equals(zero)) {
-                result = new BigFraction(result.getNominator().divide(bigI),result.getDenominator().divide(bigI));
+            try {
+                if (result.getNominator().mod(bigI).equals(zero) && result.getDenominator().mod(bigI).equals(zero)) {
+                    result = new BigFraction(result.getNominator().divide(bigI), result.getDenominator().divide(bigI));
+                } else {
+                    i = primes.getNextPrime(i);
+                }
+            } catch (Exception e) {
+                System.out.println(i);
+                System.out.println(result);
+                return result;
             }
-
-            i = i.subtract(one);
         }
 
         return result;
     }
 
     public BigFraction revertFraction() {
-        return new BigFraction(getDenominator(),getNominator());
+        return new BigFraction(getDenominator(), getNominator());
     }
 
     @Override
@@ -92,7 +111,7 @@ public class BigFraction {
 
         BigFraction fraction = (BigFraction) o;
 
-        if (nominator.compareTo(fraction.nominator) !=0) return false;
+        if (nominator.compareTo(fraction.nominator) != 0) return false;
         return denominator.compareTo(fraction.denominator) == 0;
 
     }

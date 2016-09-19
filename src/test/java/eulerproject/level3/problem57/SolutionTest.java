@@ -1,5 +1,7 @@
 package eulerproject.level3.problem57;
 
+import eulerproject.tools.fractions.BigFraction;
+import eulerproject.tools.fractions.Fraction;
 import org.junit.Assert;
 import org.junit.Test;
 
