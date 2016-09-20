@@ -46,15 +46,17 @@ public class SpiralNumberArrayTest {
     @Test
     public void getFirstDiagonal2() throws Exception {
         SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray1);
+        Assert.assertArrayEquals(new int[]{1},testSpiralArray.getFirstDiagonal(1));
         Assert.assertArrayEquals(new int[]{5,1,9},testSpiralArray.getFirstDiagonal(3));
-        Assert.assertArrayEquals(new int[]{17,5,1,9,24},testSpiralArray.getFirstDiagonal(5));
-        Assert.assertArrayEquals(new int[]{37,17,5,1,9,24,49},testSpiralArray.getFirstDiagonal(7));
+        Assert.assertArrayEquals(new int[]{17,5,1,9,25},testSpiralArray.getFirstDiagonal(5));
+        Assert.assertArrayEquals(new int[]{37,17,5,1,9,25,49},testSpiralArray.getFirstDiagonal(7));
     }
 
 
     @Test
     public void getSecondDiagonal() throws Exception {
-        SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray2);
+        SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray1);
+        Assert.assertArrayEquals(new int[]{1},testSpiralArray.getSecondDiagonal(1));
         Assert.assertArrayEquals(new int[]{3,1,7},testSpiralArray.getSecondDiagonal(3));
         Assert.assertArrayEquals(new int[]{13,3,1,7,21},testSpiralArray.getSecondDiagonal(5));
         Assert.assertArrayEquals(new int[]{31,13,3,1,7,21,43},testSpiralArray.getSecondDiagonal(7));

@@ -5,14 +5,15 @@ package eulerproject.level3.problem58;
  */
 public class Solution {
 
-    private static final int MIN = 3957;
-    private static final int MAX = 10000;
+    private static final int MAX = 10001;
     private static final double THRESHOLD = 0.1;
 
     public static void main(String[] args) {
-        int k = MIN;
+        SpiralNumberArray spiralArray = new SpiralNumberArray(MAX);
+
+        int k =3;
         while(k<MAX) {
-            if (new SpiralNumberArray(k).getPrimeRatioOnDiagonals(k)< THRESHOLD) {
+            if (spiralArray.getPrimeRatioOnDiagonals(k)< THRESHOLD) {
                 System.out.println(k);
                 break;
             }

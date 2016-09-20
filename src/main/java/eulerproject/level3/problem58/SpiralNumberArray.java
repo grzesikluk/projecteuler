@@ -11,6 +11,10 @@ public class SpiralNumberArray {
     private Primes primes;
 
     SpiralNumberArray(int k) {
+        if(k*k > Integer.MAX_VALUE)
+            throw
+                new IllegalArgumentException("Value too big");
+
         if (k > 2 && k % 2 != 0) {
             //must be bigger than 2 and odd
             array = new int[k][k];
@@ -121,18 +125,26 @@ public class SpiralNumberArray {
      * @return
      */
     public int[] getSecondDiagonal(int k) {
+        int shift = (k+1)/2-1;
         int[] diagonal = new int[k];
+        int middle = array.length/2+1;
+        int startPosition = middle-shift;
 
-        for(int i=(array.length/2-k);i<k;i++)
-            diagonal[i]=array[i+k][array.length-i-1+k];
+        for(int i=0;i<k;i++)
+            diagonal[i] = array[startPosition+i-1][array.length-startPosition-i];
+
         return diagonal;
     }
 
     public int[] getFirstDiagonal(int k) {
+        int shift = (k+1)/2-1;
         int[] diagonal = new int[k];
+        int middle = array.length/2+1;
+        int startPosition = middle-shift-1;
 
-        for(int i=(array.length/2-k/2);i<k;i++)
-            diagonal[i]=array[i+k][i];
+        for(int i=0;i<k;i++)
+            diagonal[i] = array[i+startPosition][i+startPosition];
+
         return diagonal;
     }
 
