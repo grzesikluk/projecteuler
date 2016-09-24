@@ -5,20 +5,21 @@ package eulerproject.level3.problem58;
  */
 public class Solution {
 
-    private static final int MAX = 10001;
+    private static final int MAX = 30001;
     private static final double THRESHOLD = 0.1;
 
     public static void main(String[] args) {
-        SpiralNumberArray spiralArray = new SpiralNumberArray(MAX);
+        SpiralNumberArrayDiagonal spiralArray = new SpiralNumberArrayDiagonal(MAX);
 
         int k =3;
+        double result =0;
         while(k<MAX) {
-            if (spiralArray.getPrimeRatioOnDiagonals(k)< THRESHOLD) {
+            if ((result=spiralArray.getPrimeRatioOnDiagonals(k))< THRESHOLD) {
                 System.out.println(k);
-                break;
+                System.out.println(result);
+                System.exit(0); ;
             }
             k+=2;
-            System.out.println((double)k/(double)MAX);
         }
 
     }
