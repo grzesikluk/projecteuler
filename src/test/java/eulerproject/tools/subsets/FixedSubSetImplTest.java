@@ -7,9 +7,9 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * Created by Lukasz on 2016-09-11.
+ * Created by Lukasz on 2016-09-26.
  */
-public class SubSetGeneratorTest {
+public class FixedSubSetImplTest {
     Set<Integer> set ;
 
     @Before
@@ -23,26 +23,17 @@ public class SubSetGeneratorTest {
     @Test
     public void testGenerate() throws Exception {
         TestListener sluchacz = new TestListener();
-        SubSets<Integer> generator = new SubSetsImpl<>();
-        generator.generate(set,sluchacz);
+        FixedSubSet<Integer> generator = new FixedSubSetImpl<>();
+        generator.generate(set,sluchacz,2);
 
         List<Set<Integer>> resultArray = new ArrayList<>();
 
-        resultArray.add(new HashSet<Integer>(Arrays.asList(1)));
-        resultArray.add(new HashSet<Integer>(Arrays.asList(2)));
         resultArray.add(new HashSet<Integer>(Arrays.asList(1,2)));
-        resultArray.add(new HashSet<Integer>(Arrays.asList(3)));
         resultArray.add(new HashSet<Integer>(Arrays.asList(1,3)));
         resultArray.add(new HashSet<Integer>(Arrays.asList(2,3)));
-        resultArray.add(new HashSet<Integer>(Arrays.asList(1,2,3)));
 
         Assert.assertEquals(resultArray,sluchacz.getResultSet());
 
-
     }
+
 }
-
-
-
-
-
