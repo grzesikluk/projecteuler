@@ -1,8 +1,10 @@
 package eulerproject.tools.subsets;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Lukasz on 2016-09-26.
@@ -12,40 +14,36 @@ public class FixedSubSetImpl<T> implements  FixedSubSet<T> {
 
     @Override
     public void generate(Set<T> set, Listener<T> listener, int k) {
-        Iterator<T> iterator = set.iterator();
-        T element;
+        List<Boolean> used = new ArrayList<>(set.size());
+        set.forEach(a->used.add(false));
 
-        if (set.isEmpty())
-            return;
-
-        Set<Set<T>> subsetResult = new HashSet<>();
-
-
-        while(iterator.hasNext()) {
-            element = iterator.next();
-
-            Set<Set<T>> temp = new HashSet<>();
-
-            for (Set<T> a:subsetResult) {
-                temp.add(new HashSet<T>(a));
-            }
-
-            for (Set<T> a:temp) {
-                a.add(element);
-            }
-
-            Set<T> single = new HashSet<>();
-            single.add(element);
-            temp.add(single);
-
-
-            subsetResult.addAll(temp);
-        }
-        for(Set<T> resElem :subsetResult ) {
-            if(resElem.size() == k)
-                listener.activate(resElem);
-        }
+        subset(set.stream().collect(Collectors.toList()), k, 0, 0,used,listener);
 
     }
 
+
+    private void subset(List<T> inputSet, int k, int start, int currLen, List<Boolean> used, Listener<T> listener) {
+
+        if (currLen == k) {
+            Set<T> subSet = new HashSet<T>();
+
+            for (int i = 0; i < inputSet.size(); i++) {
+                if (used.get(i) == true) {
+                    subSet.add(inputSet.get(i));
+                }
+            }
+            listener.activate(subSet);
+
+            return;
+        }
+        if (start == inputSet.size()) {
+            return;
+        }
+
+        used.set(start,true);
+        subset(inputSet, k, start + 1, currLen + 1, used,listener);
+
+        used.set(start,false);
+        subset(inputSet, k, start + 1, currLen, used,listener);
+    }
 }

@@ -1,6 +1,6 @@
 package eulerproject.tools.fractions;
 
-import eulerproject.tools.Primes;
+import eulerproject.tools.primes.Primes;
 
 import java.math.BigInteger;
 

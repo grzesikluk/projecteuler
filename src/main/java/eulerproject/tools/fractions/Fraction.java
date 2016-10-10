@@ -1,6 +1,6 @@
 package eulerproject.tools.fractions;
 
-import eulerproject.tools.Primes;
+import eulerproject.tools.primes.Primes;
 
 /**
  * Created by grzesikl on 15/09/2016.

@@ -1,4 +1,4 @@
-package eulerproject.tools;
+package eulerproject.tools.primes;
 
 /**
  * Created by Lukasz on 2016-08-30.
@@ -14,7 +14,7 @@ public class Primes {
     private  int max_value;
     private  boolean[] primes;
 
-    public  void generatePrimes() {
+    public void generatePrimes() {
         primes[0] = false;
         primes[1] = false;
         for (int i = 2; i < max_value; i++)

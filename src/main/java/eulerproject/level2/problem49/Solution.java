@@ -2,7 +2,7 @@ package eulerproject.level2.problem49;
 
 import eulerproject.tools.permutation.Permutation;
 import eulerproject.tools.permutation.PermutationImpl;
-import eulerproject.tools.Primes;
+import eulerproject.tools.primes.Primes;
 
 import java.util.*;
 

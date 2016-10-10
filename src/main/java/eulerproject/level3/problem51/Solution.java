@@ -1,6 +1,6 @@
 package eulerproject.level3.problem51;
 
-import eulerproject.tools.Primes;
+import eulerproject.tools.primes.Primes;
 import eulerproject.tools.subsets.SubSets;
 import eulerproject.tools.subsets.SubSetsImpl;
 
