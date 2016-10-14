@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
  * Created by Lukasz on 2016-10-10.
  */
 public class Problem60Listener<T> implements Listener<T> {
-    PrimesSet primes;
+    private PrimesSet primes;
+    private List<T> list;
 
     Problem60Listener(PrimesSet p) {
         primes = p;
@@ -20,6 +21,9 @@ public class Problem60Listener<T> implements Listener<T> {
 
     @Override
     public void activate(Set<T> set) {
+
+//        System.out.println(set);
+
         if (check(set))
             System.out.println(set);
     }
@@ -27,7 +31,7 @@ public class Problem60Listener<T> implements Listener<T> {
 
     public boolean check(Set<T> set) {
 
-        List<T> list = set.stream().collect(Collectors.toList());
+        list = set.stream().collect(Collectors.toList());
 
         for(int i =0; i < list.size()-1;i++) {
             for (int j=i+1;j<list.size();j++) {

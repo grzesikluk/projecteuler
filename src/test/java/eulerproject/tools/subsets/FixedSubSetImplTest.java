@@ -36,4 +36,21 @@ public class FixedSubSetImplTest {
 
     }
 
+
+    @Test
+    public void testGenerate2() throws Exception {
+        TestListener sluchacz = new TestListener();
+        FixedSubSet<Integer> generator = new FixedSubSetImpl2<>();
+        generator.generate(set,sluchacz,2);
+
+        List<Set<Integer>> resultArray = new ArrayList<>();
+
+        resultArray.add(new HashSet<Integer>(Arrays.asList(1,2)));
+        resultArray.add(new HashSet<Integer>(Arrays.asList(1,3)));
+        resultArray.add(new HashSet<Integer>(Arrays.asList(2,3)));
+
+        Assert.assertEquals(resultArray,sluchacz.getResultSet());
+
+    }
+
 }

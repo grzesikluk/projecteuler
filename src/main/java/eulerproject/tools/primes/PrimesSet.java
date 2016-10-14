@@ -46,4 +46,8 @@ public class PrimesSet {
         return primeSet;
     }
 
+    public Integer getMax() {
+        return primeSet.stream().max((a,b)->a-b).orElse(0);
+    }
+
 }
