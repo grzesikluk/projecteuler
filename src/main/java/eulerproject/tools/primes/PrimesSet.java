@@ -19,6 +19,7 @@ public class PrimesSet {
                 primeSet.add(i);
             }
         }
+
     }
 
     public boolean isPrime(int k) {
@@ -49,5 +50,8 @@ public class PrimesSet {
     public Integer getMax() {
         return primeSet.stream().max((a,b)->a-b).orElse(0);
     }
+
+
+
 
 }
