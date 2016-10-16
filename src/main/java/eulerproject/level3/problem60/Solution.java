@@ -2,8 +2,11 @@ package eulerproject.level3.problem60;
 
 import eulerproject.tools.primes.PrimesSet;
 import eulerproject.tools.subsets.FixedSubSetImpl4;
+import eulerproject.tools.subsets.FixedSubSetImpl5;
 import eulerproject.tools.subsets.ParralellFixedSubSet;
 
+import java.time.DateTimeException;
+import java.time.LocalTime;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,8 +17,8 @@ import java.util.concurrent.Executors;
 public class Solution {
 
     private static PrimesSet primes;
-    private static int MAX_PRIME = 10000000;
-    private static int MAX = 300;
+    private static int MAX_PRIME = 1000000;
+    private static int MAX = 400;
     private static int NUM_THREADS = 100;
 
     static {
@@ -33,6 +36,7 @@ public class Solution {
 //            System.out.println("Starting " + i + " thread with min= "+chunkSize*i+" max=" +chunkSize*(i+1) );
             new Thread(new MyTask(chunkSize*i,chunkSize*(i+1),MAX)).start();
         }
+        System.out.println("Threads started "+ LocalTime.now());
 
     }
 

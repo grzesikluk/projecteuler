@@ -1,5 +1,6 @@
 package eulerproject.tools.subsets;
 
+import java.time.LocalTime;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ public class FixedSubSetImpl4<T> implements  ParralellFixedSubSet<T> {
     @Override
     public void generate(Set<T> set, Listener<T> listener, int minIx ,int maxIx, int maxSize) {
 
+        System.out.println("Starting thread "+ LocalTime.now());
         if (set.isEmpty())
             return;
 
@@ -36,6 +38,6 @@ public class FixedSubSetImpl4<T> implements  ParralellFixedSubSet<T> {
                             listener.activate(resSet);
 
                         }
-
+        System.out.println("Finished thread "+ LocalTime.now());
     }
 }
