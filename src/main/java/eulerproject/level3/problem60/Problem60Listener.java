@@ -1,8 +1,8 @@
 package eulerproject.level3.problem60;
 
-import eulerproject.tools.primes.PrimesSet;
 import eulerproject.tools.subsets.Listener;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,21 +11,17 @@ import java.util.stream.Collectors;
  * Created by Lukasz on 2016-10-10.
  */
 public class Problem60Listener<T> implements Listener<T> {
-    private PrimesSet primes;
     private List<T> list;
-
-    Problem60Listener(PrimesSet p) {
-        primes = p;
-    }
 
 
     @Override
     public void activate(Set<T> set) {
 
-//        System.out.println(set);
-
-        if (check(set))
-            System.out.println(set);
+        if (check(set)) {
+            final int[] sum = {0};
+            set.stream().forEach(a-> sum[0] = sum[0] + (Integer)a);
+            System.out.println(set + " " + sum[0]);
+        }
     }
 
 
@@ -44,11 +40,12 @@ public class Problem60Listener<T> implements Listener<T> {
     }
 
 
-    private boolean isConcatenationPrime(Integer a, Integer b)     {
-        Integer ab = new Integer(a.toString()+b.toString());
-        Integer ba = new Integer(b.toString()+a.toString());
+    private boolean isConcatenationPrime(Integer a, Integer b) {
+        BigInteger ab = new BigInteger(a.toString()+b.toString());
+        BigInteger ba = new BigInteger(b.toString()+a.toString());
 
-        return primes.isPrime(ab) && primes.isPrime(ba);
+        return ab.isProbablePrime(1) && ba.isProbablePrime(1);
     }
+
 
 }

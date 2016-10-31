@@ -23,7 +23,7 @@ public class FixedSubSetImplTest {
     @Test
     public void testGenerate() throws Exception {
         TestListener sluchacz = new TestListener();
-        FixedSubSet<Integer> generator = new FixedSubSetImpl<>();
+        FixedSubSet<Integer> generator = new RecursiveFixSubsetImpl<>();
         generator.generate(set,sluchacz,2);
 
         List<Set<Integer>> resultArray = new ArrayList<>();
@@ -40,7 +40,7 @@ public class FixedSubSetImplTest {
     @Test
     public void testGenerate2() throws Exception {
         TestListener sluchacz = new TestListener();
-        FixedSubSet<Integer> generator = new FixedSubSetImpl2<>();
+        FixedSubSet<Integer> generator = new NonRecursiveFixedSubsetImpl<>();
         generator.generate(set,sluchacz,2);
 
         List<Set<Integer>> resultArray = new ArrayList<>();

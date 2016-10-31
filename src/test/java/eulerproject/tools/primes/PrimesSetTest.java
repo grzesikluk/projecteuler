@@ -7,6 +7,7 @@ import org.junit.Test;
  * Created by Lukasz on 2016-10-10.
  */
 public class PrimesSetTest {
+
     PrimesSet primes = new PrimesSet(100);
 
 

@@ -3,7 +3,3 @@ result will always be prime. For example, taking 7 and 109, both 7109 and 1097 a
 792, represents the lowest sum for a set of four primes with this property.
 
 Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
-
-
-Soluton comment:
-* generate subset of five from n primes

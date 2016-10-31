@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Lukasz on 2016-09-26.
  */
-public class FixedSubSetImpl<T> implements  FixedSubSet<T> {
+public class RecursiveFixSubsetImpl<T> implements  FixedSubSet<T> {
 
 
     @Override

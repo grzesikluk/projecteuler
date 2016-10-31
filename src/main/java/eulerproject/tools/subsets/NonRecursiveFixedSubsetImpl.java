@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by Lukasz on 2016-09-26.
  */
-public class FixedSubSetImpl2<T> implements  FixedSubSet<T> {
+public class NonRecursiveFixedSubsetImpl<T> implements  FixedSubSet<T> {
 
 
     @Override
