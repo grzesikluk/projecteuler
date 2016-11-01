@@ -7,13 +7,12 @@ import java.math.BigInteger;
  */
 public class Solution {
 
-    public static final long MAX = 60;
+    public static final long MAX = 100;
     public static long counter = 0;
 
     public static void main(String[] args) {
 
         for(long i =1;i< MAX;i++)  {
-            System.out.println(" checking " + i);
             counter+= isCheckValid(i);
         }
         System.out.println(counter);
@@ -30,8 +29,9 @@ public class Solution {
         int length = powerNumber.toString().length();
         int powerIx = 1;
         int counter = 0;
+        int watchdog = 100;
 
-        while( Math.abs(length - powerIx) < 2) {
+        while( Math.abs(length - powerIx) < 2 && watchdog>0) {
 
             if(length == powerIx)
                 counter++;
@@ -39,6 +39,7 @@ public class Solution {
             powerIx++;
             powerNumber = powerNumber.multiply(number);
             length = powerNumber.toString().length();
+            watchdog--;
         }
 
         return counter;
