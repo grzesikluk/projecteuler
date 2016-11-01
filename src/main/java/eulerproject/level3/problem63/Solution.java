@@ -7,19 +7,16 @@ import java.math.BigInteger;
  */
 public class Solution {
 
-    public static final long MAX = 200000000;
-    public static long counter =0;
+    public static final long MAX = 60;
+    public static long counter = 0;
 
     public static void main(String[] args) {
 
-
         for(long i =1;i< MAX;i++)  {
-            if(isCheckValid(i) < 0)
-                counter++;
+            System.out.println(" checking " + i);
+            counter+= isCheckValid(i);
         }
         System.out.println(counter);
-
-
     }
 
 
@@ -28,31 +25,23 @@ public class Solution {
      * @return
      */
     public static int isCheckValid(long k) {
-        System.out.println(" isCheckValid k= " + k );
-
         BigInteger powerNumber = new BigInteger(new Long(k).toString());
         BigInteger number = new BigInteger(new Long(k).toString());
-        int powerIx = 1;
         int length = powerNumber.toString().length();
+        int powerIx = 1;
+        int counter = 0;
 
-        while( length  !=  powerIx) {
+        while( Math.abs(length - powerIx) < 2) {
 
-            if( length > powerIx + 10)    //this condition must be udpated.
-                return 0;
+            if(length == powerIx)
+                counter++;
 
-            System.out.println(" len of number " + length + " power no: " + powerNumber+  " power ix " + powerIx);
-
-            //next iteration
             powerIx++;
             powerNumber = powerNumber.multiply(number);
             length = powerNumber.toString().length();
-
         }
 
-        System.out.println(" k= " + k + " power" + powerNumber);
-
-        return powerIx;
-
+        return counter;
     }
 
 
