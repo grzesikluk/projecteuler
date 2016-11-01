@@ -11,17 +11,17 @@ import static eulerproject.level3.problem63.Solution.isCheckValid;
 public class SolutionTest {
     @Test
     public void testIsCheckValid1() throws Exception {
-        Assert.assertFalse(isCheckValid(12));
+        Assert.assertEquals(0,isCheckValid(1232));
     }
 
     @Test
     public void testIsCheckValid2() throws Exception {
-        Assert.assertTrue(isCheckValid(89));
+        Assert.assertEquals(9,isCheckValid(89));
     }
 
     @Test
     public void testIsCheckValid3() throws Exception {
-        Assert.assertTrue(isCheckValid(75));
+        Assert.assertEquals(5,isCheckValid(75));
     }
 
 }
