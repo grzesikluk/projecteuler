@@ -16,7 +16,7 @@ public class Solution {
 
     private static PrimesSet primes;
     private static ArrayList<Integer> primesArray;
-    private static int MAX_PRIME = 30000;
+    private static int MAX_PRIME = 300000000;
     private static int MAX = 300;
     private static int NUM_THREADS = 100;
 

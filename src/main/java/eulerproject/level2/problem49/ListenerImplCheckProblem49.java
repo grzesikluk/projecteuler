@@ -4,6 +4,7 @@ import eulerproject.tools.permutation.Listener;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
 public class ListenerImplCheckProblem49<T> implements Listener<T> {
     private Set<Integer> setOfConvertedResults = new HashSet<>();
 
-    public void activate(LinkedList<T> list) {
+    public void activate(List<T> list) {
         setOfConvertedResults.add(toNumber((LinkedList<Character>) list));
     }
 
@@ -21,7 +22,7 @@ public class ListenerImplCheckProblem49<T> implements Listener<T> {
         return setOfConvertedResults;
     }
 
-    public static int toNumber(LinkedList<Character> list) {
+    public static int toNumber(List<Character> list) {
         String tempStr = "";
         String resString;
 

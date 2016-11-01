@@ -1,12 +1,12 @@
 package eulerproject.tools.permutation;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Lukasz on 2016-08-28.
  */
 public interface Permutation <T>{
 
-    public void generate(int k, LinkedList<T> input, Listener listener);
+    public void generate(int k, List<T> input, Listener listener);
 
 }

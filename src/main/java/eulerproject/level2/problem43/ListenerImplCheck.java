@@ -3,6 +3,7 @@ package eulerproject.level2.problem43;
 import eulerproject.tools.permutation.Listener;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Lukasz on 2016-08-28.
@@ -11,7 +12,7 @@ public class ListenerImplCheck<T> implements Listener<T> {
 
     long result = 0;
 
-    public void activate(LinkedList<T> list) {
+    public void activate(List<T> list) {
         if(check((LinkedList<Character>)list) ){
             System.out.println(list);
             result+= toNumber((LinkedList<Character>)list,0,1,2,3,4,5,6,7,8,9);
@@ -21,7 +22,7 @@ public class ListenerImplCheck<T> implements Listener<T> {
 
     }
 
-    public static boolean check(LinkedList<Character> list) {
+    public static boolean check(List<Character> list) {
 
 
         return
@@ -37,7 +38,7 @@ public class ListenerImplCheck<T> implements Listener<T> {
 
     }
 
-    public static long toNumber(LinkedList<Character> list, int... k) {
+    public static long toNumber(List<Character> list, int... k) {
         LinkedList<Character> temp = new LinkedList<Character>();
 
         for (int i : k) {
