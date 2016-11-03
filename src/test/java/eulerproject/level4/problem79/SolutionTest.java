@@ -32,7 +32,7 @@ public class SolutionTest {
     @Test
     public void testDecodePassword() throws Exception {
 
-        Assert.assertEquals("123456789",decodePassword());
+        Assert.assertEquals("123456789",decodePassword(1));
 
     }
 

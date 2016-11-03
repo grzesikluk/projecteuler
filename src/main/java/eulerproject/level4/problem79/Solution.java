@@ -14,7 +14,8 @@ public class Solution {
     public static void main(String[] args) throws IOException {
 
         getFileContent(FILENAME);
-        System.out.println(decodePassword());
+        for(int i=0;i<10;i++)
+            System.out.println(decodePassword(i));
 
     }
 
@@ -25,11 +26,11 @@ public class Solution {
         lines.close();
     }
 
-    public static String decodePassword() {
+    public static String decodePassword(int startPoint) {
         String result;
 
         //pick first elem
-        result = codesArray.stream().collect(Collectors.toList()).get(0);
+        result = codesArray.stream().collect(Collectors.toList()).get(startPoint);
 
         char middleChar = 'x';
         int i = 0;
