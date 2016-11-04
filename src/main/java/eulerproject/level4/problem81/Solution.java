@@ -11,11 +11,9 @@ import java.util.stream.Stream;
  */
 public class Solution {
     private static final int MAX = 80;
-
     private static int[][] array = new int[MAX][MAX];
-
-    private static String FILENAME = "C:\\Users\\grzesikl\\IdeaProjects\\ProjectEuler\\src\\main\\java\\eulerproject\\level4\\problem81\\p01_matrix.txt";
-
+    
+    private static String FILENAME = "C:\\Users\\Lukasz\\IdeaProjects\\projecteuler\\src\\main\\java\\eulerproject\\level4\\problem81\\p01_matrix.txt";
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
         System.out.println(getMinimalPath(array));
@@ -117,33 +115,6 @@ public class Solution {
             return;
         }
 
-
-    }
-
-}
-
-        do {
-//            System.out.println("i= "+i + " j= " + j + " tab = " + tab[i][j]);
-            result += tab[i][j];
-
-            if (i == 0) {
-                j--;
-                continue;
-            }
-            if (j == 0) {
-                i--;
-                continue;
-            }
-
-            if (tab[i - 1][j] < tab[i][j - 1])
-                i--;
-            else
-                j--;
-
-
-        } while (!(i == 0 && j == 0));
-
-        return result;
 
     }
 
