@@ -83,6 +83,10 @@ public class SolutionTest {
     @Test
     public void testCheckRuleFive() throws Exception {
         Assert.assertEquals(2,checkRuleFive("MCVIIII"));
+        Assert.assertEquals(4,checkRuleFive("MMMMDCCCCVII"));
+        Assert.assertEquals(0,checkRuleFive("IIIIIIII"));
+        Assert.assertEquals(4,checkRuleFive("IIIIIIII"));
+
 
     }
 }

@@ -3,6 +3,7 @@ package eulerproject.level4.problem89;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,6 +16,8 @@ import static java.util.stream.Collectors.toList;
 public class Solution {
     private static final String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem89\\roman.txt";
     private static List<String> romanNumbers;
+    private static List<String> optimisedRomanNumbers;
+
 
     public static enum RomanNumbers implements Comparable<RomanNumbers> {
         I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
@@ -53,15 +56,23 @@ public class Solution {
 
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
-        for (String rn : romanNumbers) {
-            System.out.println(rn + " " + getEvaluation(rn));
-        }
+        optimisedRomanNumbers = new LinkedList<>();
 
+        for (String rn : romanNumbers) {
+            String optimised = optimiseRomanNumber(rn);
+            if (!optimised.equals(rn))
+                System.out.print("* ");
+
+            System.out.println(rn + " " + optimiseRomanNumber(rn));
+            optimisedRomanNumbers.add(optimised);
+        }
+        System.out.println(romanNumbers.stream().mapToInt(s -> s.length()).sum());
+        System.out.println(optimisedRomanNumbers.stream().mapToInt(s -> s.length()).sum());
 
     }
 
     private static void loadContents(String fileName) throws IOException {
-        romanNumbers = Files.lines(Paths.get(fileName)).collect(toList());
+        romanNumbers = Files.lines(Paths.get(fileName)).map(s -> s.trim()).collect(toList());
 
     }
 
@@ -73,7 +84,6 @@ public class Solution {
      */
     public static int checkRuleOne(String s) {
         for (int i = 0; i < s.length() - 1; i++) {
-
             if (RomanNumbers.getRomanNumber(s.charAt(i)).compareTo(RomanNumbers.getRomanNumber(s.charAt(i + 1))) < 0) {
                 return i;
             }
@@ -174,6 +184,16 @@ public class Solution {
 
         if ((result = findString(s, "VIIII")) >= 0)
             return result;
+        if ((result = findString(s, "DCCCC")) >= 0)
+            return result;
+        if ((result = findString(s, "CCCC[LXVI]")) >= 0)
+            return result;
+        if ((result = findString(s, "IIII")) >= 0)
+            return result;
+        if ((result = findString(s, "XXXX")) >= 0)
+            return result;
+        if ((result = findString(s, "LXXXX")) >= 0)
+            return result;
 
 
         return -1;
@@ -238,11 +258,30 @@ public class Solution {
                 continue;
 
             }
+        }
+        oldValue = "";
+        //part two optimisation
+        while (!output.equals(oldValue)) {
+            oldValue = output;
 
-            //part two optimisation
+            output = output.replace("VIIII", "IX");
+            output = output.replace("DCCCC", "CM");
+            output = output.replace("CCCC", "CD");
+            output = output.replace("IIII", "IV");
+            output = output.replace("XXXX", "XL");
+            output = output.replace("LXXXX", "XC");
+
+            output = output.replace("DCD", "CM");
+            output = output.replace("LXL", "XC");
+            output = output.replace("VIV", "IX");
+
 
         }
+
+
         return output;
-    };
+    }
+
+    ;
 
 }
