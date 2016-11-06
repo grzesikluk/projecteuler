@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Solution {
-    private static final String FILENAME = "C:\\Users\\Lukasz\\IdeaProjects\\projecteuler\\src\\main\\java\\eulerproject\\level4\\problem79\\keylog.txt";
+    private static final String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem79\\keylog.txt";
     private static Set<String> codesArray;
 
     public static void main(String[] args) throws IOException {

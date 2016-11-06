@@ -13,7 +13,7 @@ public class Solution {
     private static final int MAX = 80;
     private static int[][] array = new int[MAX][MAX];
     
-    private static String FILENAME = "C:\\Users\\Lukasz\\IdeaProjects\\projecteuler\\src\\main\\java\\eulerproject\\level4\\problem81\\p01_matrix.txt";
+    private static String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem81\\p01_matrix.txt";
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
         System.out.println(getMinimalPath(array));

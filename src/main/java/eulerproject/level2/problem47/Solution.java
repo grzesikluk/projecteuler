@@ -1,4 +1,4 @@
-package projecteuler.problem47;
+package eulerproject.level2.problem47;
 
 import java.util.HashSet;
 import java.util.Set;

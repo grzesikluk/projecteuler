@@ -10,10 +10,19 @@ import static eulerproject.level4.problem89.Solution.RomanNumbers.*;
  * Created by Lukasz on 2016-11-05.
  */
 public class SolutionTest {
+
+
     @Test
-    public void testFindNextSubstractivePair() throws Exception {
+    public void testOptimiseRomanNumber() throws Exception {
+
+        Assert.assertEquals("XXV",optimiseRomanNumber("XXIIIII"));
+        Assert.assertEquals("XXV",optimiseRomanNumber("XVVV"));
+        Assert.assertEquals("MCLX",optimiseRomanNumber("MCXXXXXX"));
+        Assert.assertEquals("MDLX",optimiseRomanNumber("MCCCCCXXXXXX"));
+//        Assert.assertEquals("IX",optimiseRomanNumber("VIIII"));
 
     }
+
 
     @Test
     public void testEqualsOnRomanNumber() throws Exception {
@@ -47,4 +56,33 @@ public class SolutionTest {
         Assert.assertEquals(-1,checkRuleThree("LCI"));
     }
 
+    /**
+     * I can only be placed before V and X.
+     X can only be placed before L and C.
+     C can only be placed before D and M.
+     * @throws Exception
+     */
+    @Test
+    public void testCheckRuleFour() throws Exception {
+        Assert.assertEquals(-1,checkRuleFour("XXIX"));
+        Assert.assertEquals(-1,checkRuleFour("XXIV"));
+        Assert.assertEquals(-1,checkRuleFour("MCXL"));
+        Assert.assertEquals(-1,checkRuleFour("MCXC"));
+        Assert.assertEquals(-1,checkRuleFour("MCDXX"));
+        Assert.assertEquals(-1,checkRuleFour("MCMCDXX"));
+
+        Assert.assertEquals(1,checkRuleFour("XVXI"));
+        Assert.assertEquals(1,checkRuleFour("LIL"));
+        Assert.assertEquals(2,checkRuleFour("MCVC"));
+        Assert.assertEquals(2,checkRuleFour("MCIL"));
+        Assert.assertEquals(1,checkRuleFour("MLMCDXX"));
+        Assert.assertEquals(1,checkRuleFour("MDMCDXX"));
+        Assert.assertEquals(4,checkRuleFour("MMMMVMCDXX"));
+    }
+
+    @Test
+    public void testCheckRuleFive() throws Exception {
+        Assert.assertEquals(2,checkRuleFive("MCVIIII"));
+
+    }
 }

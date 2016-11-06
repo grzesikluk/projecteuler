@@ -1,11 +1,11 @@
-package projecteuler.problem47;
+package eulerproject.level2.problem47;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static projecteuler.problem47.Solution.checkCondition;
-import static projecteuler.problem47.Solution.getNumberOfDistinctPrimes;
+import static eulerproject.level2.problem47.Solution.checkCondition;
+import static eulerproject.level2.problem47.Solution.getNumberOfDistinctPrimes;
 
 /**
  * Created by grzesikl on 09/09/2016.
