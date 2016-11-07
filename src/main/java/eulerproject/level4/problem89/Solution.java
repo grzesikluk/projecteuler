@@ -1,5 +1,6 @@
 package eulerproject.level4.problem89;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +16,8 @@ import static java.util.stream.Collectors.toList;
  */
 public class Solution {
     private static final String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem89\\roman.txt";
+    private static final String FILENAME_OUT = "src\\main\\resources\\eulerproject\\level4\\problem89\\roman_out.txt";
+
     private static List<String> romanNumbers;
     private static List<String> optimisedRomanNumbers;
 
@@ -58,22 +61,33 @@ public class Solution {
         loadContents(FILENAME);
         optimisedRomanNumbers = new LinkedList<>();
 
-        for (String rn : romanNumbers) {
-            String optimised = optimiseRomanNumber(rn);
-            if (!optimised.equals(rn))
-                System.out.print("* ");
+        romanNumbers.stream().forEach(s->optimisedRomanNumbers.add(optimiseRomanNumber(s)));
 
-            System.out.println(rn + " " + optimiseRomanNumber(rn));
-            optimisedRomanNumbers.add(optimised);
-        }
-        System.out.println(romanNumbers.stream().mapToInt(s -> s.length()).sum());
-        System.out.println(optimisedRomanNumbers.stream().mapToInt(s -> s.length()).sum());
+        System.out.println(romanNumbers.stream().mapToInt(s -> s.length()).sum()-optimisedRomanNumbers.stream().mapToInt(s -> s.length()).sum());
+
+        writeContents(FILENAME_OUT);
 
     }
 
     private static void loadContents(String fileName) throws IOException {
         romanNumbers = Files.lines(Paths.get(fileName)).map(s -> s.trim()).collect(toList());
 
+    }
+
+    private static void writeContents(String fileName) throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName))) {
+
+            for (String rn : romanNumbers) {
+                String optimised = optimiseRomanNumber(rn);
+                if (!optimised.equals(rn))
+                    writer.write("* ");
+
+                writer.write(rn + " " + optimiseRomanNumber(rn) + "\n");
+                optimisedRomanNumbers.add(optimised);
+
+            }
+
+        } // the file will be automatically closed
     }
 
     /**
