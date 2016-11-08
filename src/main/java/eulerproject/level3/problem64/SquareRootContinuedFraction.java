@@ -10,7 +10,7 @@ import java.util.List;
  * <p>
  * https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
  */
-public class SquareRootContinuedFractionFactor {
+public class SquareRootContinuedFraction {
 
     private int m;
     private int S;
@@ -27,7 +27,7 @@ public class SquareRootContinuedFractionFactor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SquareRootContinuedFractionFactor that = (SquareRootContinuedFractionFactor) o;
+        SquareRootContinuedFraction that = (SquareRootContinuedFraction) o;
 
         if (m != that.m) return false;
         if (S != that.S) return false;
@@ -45,7 +45,7 @@ public class SquareRootContinuedFractionFactor {
         return result;
     }
 
-    public SquareRootContinuedFractionFactor(int m, int S, int d, int a) {
+    public SquareRootContinuedFraction(int m, int S, int d, int a) {
         this.m = m;
         this.a = a;
 
@@ -53,9 +53,17 @@ public class SquareRootContinuedFractionFactor {
         this.S = S;
     }
 
+    public SquareRootContinuedFraction(int S) {
+        this.m = 0;
+        this.S = S;
+        this.a = (int)Math.floor(Math.sqrt(S));
+        this.d = 1;
+
+    }
+
     @Override
     public String toString() {
-        return "SquareRootContinuedFractionFactor{" +
+        return "SquareRootContinuedFraction{" +
                 "m=" + m +
                 ", S=" + S +
                 ", d=" + d +
@@ -63,13 +71,13 @@ public class SquareRootContinuedFractionFactor {
                 '}';
     }
 
-    public SquareRootContinuedFractionFactor getNextFractionFactor() {
+    public SquareRootContinuedFraction getNextFractionFactor() {
         int nextM = d * a - m;
         int nextD = (S - nextM * nextM) / d;
         int floorS = (int) Math.floor(Math.sqrt(S));
         int nextA = (int) Math.floor((floorS + nextM) / nextD);
 
-        return new SquareRootContinuedFractionFactor(nextM, S, nextD, nextA);
+        return new SquareRootContinuedFraction(nextM, S, nextD, nextA);
     }
 
 
@@ -77,7 +85,7 @@ public class SquareRootContinuedFractionFactor {
         int l = limit-1;
         int s = (int) Math.floor(Math.sqrt(S));
         List<Integer> result = new ArrayList<>();
-        SquareRootContinuedFractionFactor sFactor = new SquareRootContinuedFractionFactor(0, S, 1, s);
+        SquareRootContinuedFraction sFactor = new SquareRootContinuedFraction(0, S, 1, s);
 
         result.add(s);
 
