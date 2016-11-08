@@ -1,67 +1,26 @@
 package eulerproject.level3.problem64;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by grzesikl on 08/11/2016.
  * <p>
  * The factor is An = An-1, 1/(sqrt(square)-denomNumber))
+ * <p>
+ * https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
  */
 public class SquareRootContinuedFractionFactor {
 
-    private int factor;
+    private int m;
+    private int S;
+    private int d;
 
-    public SquareRootContinuedFractionFactor(int prevFactor, int square, int nominator, int denomNumber) {
-        this.factor = prevFactor;
-        this.square = square;
-        this.nominator = nominator;
-        this.denomNumber = denomNumber;
+    public int getA() {
+        return a;
     }
 
-    private int square;
-    private int nominator;
-    private int denomNumber;
-
-    public int getDenomNumber() {
-        return denomNumber;
-    }
-
-    public void setDenomNumber(int denomNumber) {
-        this.denomNumber = denomNumber;
-    }
-
-    public int getFactor() {
-        return factor;
-    }
-
-    public void setFactor(int factor) {
-        this.factor = factor;
-    }
-
-    public int getSquare() {
-        return square;
-    }
-
-    public void setSquare(int square) {
-        this.square = square;
-    }
-
-    public int getNominator() {
-        return nominator;
-    }
-
-    public void setNominator(int nominator) {
-        this.nominator = nominator;
-    }
-
-
-    public SquareRootContinuedFractionFactor getNextFractionFactor() {
-        int nominatorCalculated = this.square - this.factor * this.factor;
-        int denominatorNotNormalised = factor - square + factor*factor;
-        int denominatorCalculated = denominatorNotNormalised%nominatorCalculated;
-        int factorCorrection = denominatorCalculated/nominatorCalculated;
-
-        return new SquareRootContinuedFractionFactor(1+factorCorrection,square,nominatorCalculated,denominatorCalculated);
-    }
-
+    private int a;
 
     @Override
     public boolean equals(Object o) {
@@ -70,24 +29,66 @@ public class SquareRootContinuedFractionFactor {
 
         SquareRootContinuedFractionFactor that = (SquareRootContinuedFractionFactor) o;
 
-        if (factor != that.factor) return false;
-        if (square != that.square) return false;
-        if (nominator != that.nominator) return false;
-        return denomNumber == that.denomNumber;
+        if (m != that.m) return false;
+        if (S != that.S) return false;
+        if (d != that.d) return false;
+        return a == that.a;
 
     }
 
     @Override
     public int hashCode() {
-        int result = factor;
-        result = 31 * result + square;
-        result = 31 * result + nominator;
-        result = 31 * result + denomNumber;
+        int result = m;
+        result = 31 * result + S;
+        result = 31 * result + d;
+        result = 31 * result + a;
         return result;
+    }
+
+    public SquareRootContinuedFractionFactor(int m, int S, int d, int a) {
+        this.m = m;
+        this.a = a;
+
+        this.d = d;
+        this.S = S;
     }
 
     @Override
     public String toString() {
-        return "S: " + square + " F: " + factor + " N: " + nominator + " D: " + denomNumber;
+        return "SquareRootContinuedFractionFactor{" +
+                "m=" + m +
+                ", S=" + S +
+                ", d=" + d +
+                ", a=" + a +
+                '}';
     }
+
+    public SquareRootContinuedFractionFactor getNextFractionFactor() {
+        int nextM = d * a - m;
+        int nextD = (S - nextM * nextM) / d;
+        int floorS = (int) Math.floor(Math.sqrt(S));
+        int nextA = (int) Math.floor((floorS + nextM) / nextD);
+
+        return new SquareRootContinuedFractionFactor(nextM, S, nextD, nextA);
+    }
+
+
+    public List<Integer> getFactors(int limit) {
+        int l = limit-1;
+        int s = (int) Math.floor(Math.sqrt(S));
+        List<Integer> result = new ArrayList<>();
+        SquareRootContinuedFractionFactor sFactor = new SquareRootContinuedFractionFactor(0, S, 1, s);
+
+        result.add(s);
+
+        while (l > 0) {
+            sFactor = sFactor.getNextFractionFactor();
+            result.add(sFactor.getA());
+
+            l--;
+        }
+
+        return result;
+    }
+
 }
