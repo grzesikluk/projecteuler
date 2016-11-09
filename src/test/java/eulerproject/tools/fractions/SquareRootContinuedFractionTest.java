@@ -1,4 +1,4 @@
-package eulerproject.level3.problem64;
+package eulerproject.tools.fractions;
 
 import org.junit.Assert;
 import org.junit.Test;

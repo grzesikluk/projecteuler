@@ -1,4 +1,4 @@
-package eulerproject.level3.problem64;
+package eulerproject.tools.fractions;
 
 import java.util.ArrayList;
 import java.util.List;
