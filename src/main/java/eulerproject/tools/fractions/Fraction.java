@@ -1,8 +1,17 @@
 package eulerproject.tools.fractions;
+
+
 /**
  * Created by grzesikl on 15/09/2016.
  */
 public class Fraction {
+    
+     final static Primes primes;		
+ 		
+     static {		
+         primes = new Primes(1000000);		
+         primes.generatePrimes();		
+     }
 
     public Fraction(long nominator, long denominator) {
         this.nominator = nominator;
