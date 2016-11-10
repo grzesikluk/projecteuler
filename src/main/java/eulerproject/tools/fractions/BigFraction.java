@@ -1,7 +1,4 @@
 package eulerproject.tools.fractions;
-
-import eulerproject.tools.primes.Primes;
-
 import java.math.BigInteger;
 
 /**
@@ -9,13 +6,6 @@ import java.math.BigInteger;
  */
 public class BigFraction {
 
-    static final Primes primes;
-    private static final int MAX = 10000000;
-
-    static {
-        primes = new Primes(10000000);
-        primes.generatePrimes();
-    }
 
     public BigFraction(BigInteger nominator, BigInteger denominator) {
         this.nominator = nominator;
