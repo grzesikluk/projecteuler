@@ -6,39 +6,31 @@ import org.junit.Test;
 import java.math.BigInteger;
 
 /**
- * Created by grzesikl on 15/09/2016.
+ * Created by grzesikl on 10/11/2016.
  */
 public class BigFractionTest {
     @Test
-    public void testAdd() throws Exception {
-
-        Assert.assertEquals(generateBigFraction(3, 2), generateBigFraction(1, 1).add(generateBigFraction(1, 2)));
-        Assert.assertEquals(generateBigFraction(7, 12), generateBigFraction(1, 3).add(generateBigFraction(1, 4)));
-        Assert.assertEquals(generateBigFraction(32, 85), generateBigFraction(1, 5).add(generateBigFraction(3, 17)));
-
+    public void testIsResilent() throws Exception {
+        Assert.assertTrue(new BigFraction(new BigInteger("1"),new BigInteger("3")).isResilent());
+        Assert.assertTrue(new BigFraction(new BigInteger("2"),new BigInteger("3")).isResilent());
+        Assert.assertFalse(new BigFraction(new BigInteger("2"),new BigInteger("4")).isResilent());
     }
 
     @Test
-    public void testSimplifyFraction() throws Exception {
-        Assert.assertEquals(generateBigFraction(1, 10), generateBigFraction(10, 100).simplifyFraction());
-        Assert.assertEquals(generateBigFraction(1, 2), generateBigFraction(7, 14).simplifyFraction());
-        Assert.assertEquals(generateBigFraction(5, 1), generateBigFraction(50, 10).simplifyFraction());
-        Assert.assertEquals(generateBigFraction(51, 145), generateBigFraction(51, 145).simplifyFraction());
+    public void testGetResilenceFactor() throws Exception {
+        Assert.assertEquals(new BigFraction(new BigInteger("4"), new BigInteger("11")),
+                new BigFraction(new BigInteger("1"),new BigInteger("12")).getResilenceFactor());
+    }
+
+    @Test
+    public void testCompareTo() {
+        Assert.assertTrue(new BigFraction(new BigInteger("1"),new BigInteger("2")).compareTo(new BigFraction(new BigInteger("2"),new BigInteger("3")))<0);
+        Assert.assertTrue(new BigFraction(new BigInteger("2"),new BigInteger("51")).compareTo(new BigFraction(new BigInteger("2"),new BigInteger("50")))<0);
+        Assert.assertTrue(new BigFraction(new BigInteger("1"),new BigInteger("2")).compareTo(new BigFraction(new BigInteger("1"),new BigInteger("2")))==0);
+        Assert.assertTrue(new BigFraction(new BigInteger("1"),new BigInteger("4")).compareTo(new BigFraction(new BigInteger("2"),new BigInteger("8")))==0);
+        Assert.assertTrue(new BigFraction(new BigInteger("51"),new BigInteger("50")).compareTo(new BigFraction(new BigInteger("1"),new BigInteger("1")))>0);
 
     }
 
-
-    @Test (timeout=5000)
-    public void testSimplifyFraction_long() throws Exception {
-        Assert.assertEquals(generateBigFraction("1311738121", "3166815962"), generateBigFraction("1311738121", "3166815962").simplifyFraction());
-    }
-
-    private static BigFraction generateBigFraction(int a, int b) {
-        return new BigFraction(new BigInteger(new Integer(a).toString()), new BigInteger(new Integer(b).toString()));
-    }
-
-    private static BigFraction generateBigFraction(String a, String b) {
-        return new BigFraction(new BigInteger(a), new BigInteger(b));
-    }
 
 }

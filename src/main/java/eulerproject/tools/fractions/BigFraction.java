@@ -6,7 +6,7 @@ import java.math.BigInteger;
 /**
  * Created by grzesikl on 15/09/2016.
  */
-public class BigFraction {
+public class BigFraction implements Comparable{
 
     static final Primes primes;
     private static final int MAX = 10000000;
@@ -66,9 +66,14 @@ public class BigFraction {
 
         return result;
 
-    }
+    };
 
-    ;
+
+    public BigFraction sub(BigFraction oth) {
+        BigFraction othRev = new BigFraction(oth.getNominator().negate(),oth.getDenominator());
+        return this.add(othRev);
+
+    };
 
     public boolean isCommonDenominator(BigFraction oth) {
         return oth.getDenominator() == getDenominator();
@@ -93,12 +98,37 @@ public class BigFraction {
             } catch (Exception e) {
                 System.out.println(i);
                 System.out.println(result);
-                return result;
+//                return result;
             }
         }
 
         return result;
     }
+
+//    public boolean isResilent() {
+//        BigInteger zero = new BigInteger("0");
+//        BigFraction result = new BigFraction(this);
+//        BigInteger bigI = new BigInteger("2");
+//        int i = 2;
+//
+//        while (i > 0 ) {
+//
+//            try {
+//                if (result.getNominator().mod(bigI).equals(zero) && result.getDenominator().mod(bigI).equals(zero)) {
+//                    return false;
+//                } else {
+//                    i = primes.getNextPrime(i);
+//                }
+//            } catch (Exception e) {
+//                System.out.println(i);
+//                System.out.println(result);
+//            }
+//            bigI = new BigInteger(new Integer(i).toString());
+//        }
+//
+//        return true;
+//    }
+
 
     public BigFraction revertFraction() {
         return new BigFraction(getDenominator(), getNominator());
@@ -117,4 +147,31 @@ public class BigFraction {
     }
 
 
+    public boolean isResilent() {
+        if(!this.equals(this.simplifyFraction()))
+            return false;
+        return true;
+    }
+
+    public BigFraction getResilenceFactor() {
+        BigInteger counter = new BigInteger("0");
+
+        BigInteger i= new BigInteger("1");
+        BigInteger d= denominator.subtract(i);
+
+        while(i.compareTo(denominator) < 0) {
+            if(new BigFraction(i,denominator).isResilent())
+                counter=counter.add(new BigInteger("1"));
+            i=i.add(new BigInteger("1"));
+
+        }
+
+        return new BigFraction(counter,d).simplifyFraction();
+
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.sub((BigFraction)o).getNominator().intValue();
+    }
 }
