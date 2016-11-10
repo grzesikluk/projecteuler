@@ -1,10 +1,20 @@
 package eulerproject.tools.fractions;
-import java.math.BigInteger;
 
+import eulerproject.tools.primes.Primes;
+
+import java.math.BigInteger;
 /**
  * Created by grzesikl on 15/09/2016.
  */
 public class BigFraction {
+
+    static final Primes primes;
+    private static final int MAX = 10000000;
+
+    static {
+        primes = new Primes(10000000);
+        primes.generatePrimes();
+    }
 
 
     public BigFraction(BigInteger nominator, BigInteger denominator) {
@@ -71,7 +81,7 @@ public class BigFraction {
         BigInteger bigI = new BigInteger("2");
         int i = 2;
 
-        while (i >0 && bigI.compareTo(result.getDenominator()) <= 0 && bigI.compareTo(result.getNominator()) <= 0 ) {
+        while (i > 0 && bigI.compareTo(result.getDenominator()) <= 0 && bigI.compareTo(result.getNominator()) <= 0) {
             bigI = new BigInteger(new Integer(i).toString());
 
             try {
