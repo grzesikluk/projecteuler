@@ -7,13 +7,6 @@ import eulerproject.tools.primes.Primes;
  */
 public class Fraction {
 
-    final static Primes primes;
-
-    static {
-        primes = new Primes(1000000);
-        primes.generatePrimes();
-    }
-
     public Fraction(long nominator, long denominator) {
         this.nominator = nominator;
         this.denominator = denominator;
