@@ -109,10 +109,22 @@ public class Fraction implements Comparable {
     }
 
     public boolean isResilent() {
-        if (!this.simplifyFraction().equals(this))
-            return false;
+
+        int i = 2;
+        long nom = getNominator();
+        long den = getDenominator();
+
+        while (i > 0 && i <= nom && i <= den) {
+
+            if (nom % i == 0 && den % i == 0) {
+                return false;
+            } else {
+                i = primes.getNextPrime(i);
+            }
+        }
 
         return true;
+
     }
 
     public Fraction getResilenceFactor() {
@@ -131,5 +143,10 @@ public class Fraction implements Comparable {
     @Override
     public int compareTo(Object o) {
         return (int) this.sub((Fraction)o).getNominator();
+    }
+
+
+    public double asDouble() {
+        return (double)nominator/(double)denominator;
     }
 }
