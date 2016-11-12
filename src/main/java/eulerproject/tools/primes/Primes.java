@@ -36,11 +36,12 @@ public class Primes {
 
     public int getNextPrime(int k) {
         for(int i=k+1;i<max_value;i++) {
-            if(isPrime(i))
+            if(primes[i] == true)
                 return i;
         }
 
         return 0;
     }
+
 
 }

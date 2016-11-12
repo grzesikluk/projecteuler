@@ -3,7 +3,12 @@ package eulerproject.tools;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+
+import static eulerproject.tools.StringHelper.convertToCharList;
 import static eulerproject.tools.StringHelper.findPeriodInSubstring;
+import static eulerproject.tools.StringHelper.isPermutation;
 
 
 /**
@@ -65,5 +70,26 @@ public class StringHelperTest {
     public void testFindPeriodInSubstring11() throws Exception {
         Assert.assertEquals("121411111029921011114211198", findPeriodInSubstring("99121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211198121411111029921011114211", 1));
     }
+
+
+
+    @Test
+    public void testIsPermutation() throws Exception {
+
+        Assert.assertTrue(isPermutation("asdf","adfs"));
+        Assert.assertTrue(isPermutation("1234","4321"));
+        Assert.assertTrue(isPermutation("111234","121314"));
+
+    }
+
+    @Test
+    public void testConvertToCharList() throws Exception {
+        LinkedList<Character> list =   new LinkedList<Character>();
+        list.addAll(Arrays.asList('a','b','c','d'));
+
+        Assert.assertEquals(list,convertToCharList(new char[]{'a','b','c','d'}));
+
+    }
+
 }
 
