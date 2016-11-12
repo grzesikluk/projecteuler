@@ -1,15 +1,14 @@
-package eulerproject.level3.problem69;
+package eulerproject.tools.functions;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import static eulerproject.level3.problem69.Solution.eulersTotientFunction;
-import static org.junit.Assert.*;
+import static eulerproject.level3.problem70.Solution.eulersTotientFunction;
 
 /**
  * Created by Lukasz on 2016-11-12.
  */
-public class SolutionTest {
+public class EulersTotientTest {
     @Test
     public void testEulersTotientFunction() throws Exception {
         Assert.assertEquals(1,eulersTotientFunction(2));
@@ -18,5 +17,6 @@ public class SolutionTest {
         Assert.assertEquals(6,eulersTotientFunction(7));
         Assert.assertEquals(6,eulersTotientFunction(9));
     }
+
 
 }
