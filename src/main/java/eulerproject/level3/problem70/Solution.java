@@ -1,7 +1,10 @@
 package eulerproject.level3.problem70;
 
 import eulerproject.tools.StringHelper;
-import eulerproject.tools.primes.Primes;
+import eulerproject.tools.primes.PrimesSet;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
 
@@ -10,12 +13,14 @@ import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
  */
 public class Solution {
 
-    private static Primes primes;
+    private static PrimesSet primes;
+    private static List<Integer> primesList;
     private static int MAX = 10000000;
 
     static {
-        primes = new Primes(MAX);
-        primes.generatePrimes();
+        primes = new PrimesSet(MAX);
+        primesList = primes.getSet().stream().collect(Collectors.toList());
+
         System.out.println("got primes");
     }
 
@@ -24,16 +29,17 @@ public class Solution {
         double val = 100, temp = 0;
         int prime = 2;
 
-        for (int i = 2; i < MAX && i > 0; i = primes.getNextPrime(i)) {
-            int fi = eulersTotientFunction(i);
+        for (int i = 2; i < MAX ;i++) {
+
+            int fi = eulersTotientFunction(i,primesList);
 
             if ((temp = (double) i / (double) fi) < val) {
                 if (StringHelper.isPermutation(new Integer(fi).toString(), new Integer(i).toString())) {
                     store = i;
                     val = temp;
-
+                    System.out.println("Found permuted min = " + val + " is for n=" + store);
                 }
-                System.out.println("Found permuted min = " + val + " is for n=" + store);
+
             }
 
         }
@@ -42,10 +48,4 @@ public class Solution {
 
     }
 
-    public static boolean check(int k) {
-        String input = new Integer(k).toString();
-        String output = new Integer(eulersTotientFunction(k)).toString();
-
-        return StringHelper.isPermutation(input, output);
-    }
 }

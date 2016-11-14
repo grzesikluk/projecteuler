@@ -1,7 +1,11 @@
 package eulerproject.tools.functions;
 
+import eulerproject.tools.primes.PrimesSet;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
 
@@ -24,5 +28,15 @@ public class EulersTotientTest {
         Assert.assertEquals(eulersTotientFunction(4*7),eulersTotientFunction(4)*eulersTotientFunction(7));
     }
 
+    @Test
+    public void testEulersTotientFunction3() throws Exception {
+        List<Integer> primes = new PrimesSet(10).getSet().stream().collect(Collectors.toList());
+
+        Assert.assertEquals(1,eulersTotientFunction(2, primes));
+        Assert.assertEquals(2,eulersTotientFunction(3, primes));
+        Assert.assertEquals(4,eulersTotientFunction(5, primes));
+        Assert.assertEquals(6,eulersTotientFunction(7, primes));
+        Assert.assertEquals(6,eulersTotientFunction(9, primes));
+    }
 
 }
