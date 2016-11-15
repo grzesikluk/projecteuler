@@ -28,22 +28,23 @@ public class EulersTotient {
 
     /**
      * Fast solution based on following
+     *
      * @param k
      * @param primes
      * @return
      */
-    public static  int eulersTotientFunction(int k, List<Integer> primes) {
+    public static int eulersTotientFunction(int k, int[] primes) {
         double result = k;
-        int i=0;
+        int i = 0;
 
         do {
-            if(k%primes.get(i)==0)
-                result*=(1-1/(double)primes.get(i));
+            if (k % primes[i] == 0)
+                result *= (1 - 1 / (double) primes[i]);
             i++;
         }
-        while(i< primes.size() && primes.get(i)<= k);
+        while (i < primes.length && primes[i] <= k);
 
-        return (int)result;
+        return (int) result;
 
     }
 

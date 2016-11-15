@@ -14,12 +14,21 @@ import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
 public class Solution {
 
     private static PrimesSet primes;
-    private static List<Integer> primesList;
+    private static int[] primesList;
     private static int MAX = 10000000;
+    private static int[] resultsEulerFunction;
 
     static {
+
         primes = new PrimesSet(MAX);
-        primesList = primes.getSet().stream().collect(Collectors.toList());
+        primesList = new int[MAX];
+        resultsEulerFunction = new int[MAX];
+
+        int ix = 0;
+        for (Integer i : primes.getSet()) {
+            primesList[ix++] = i;
+
+        }
 
         System.out.println("got primes");
     }
@@ -27,25 +36,46 @@ public class Solution {
     public static void main(String[] args) {
         int store = 0;
         double val = 100, temp = 0;
-        int prime = 2;
+        int fi = 0;
 
-        for (int i = 2; i < MAX ;i++) {
+        calculateResults();
 
-            int fi = eulersTotientFunction(i,primesList);
+        for (int i = 2; i < MAX; i++) {
+
+            fi = resultsEulerFunction[i];
 
             if ((temp = (double) i / (double) fi) < val) {
-                if (StringHelper.isPermutation(new Integer(fi).toString(), new Integer(i).toString())) {
+                if (StringHelper.isPermutation(Integer.toString(fi), Integer.toString(i))) {
                     store = i;
                     val = temp;
                     System.out.println("Found permuted min = " + val + " is for n=" + store);
                 }
-
             }
-
         }
 
         System.out.println("Min = " + val + " is for n=" + store);
 
     }
 
+    public static void calculateResults() {
+        System.out.println("start calculate ");
+        for (int i = 2; i < MAX; i++) {
+
+            if(resultsEulerFunction[i] == 0) {
+
+                if (primes.getSet().contains(i)) {
+                    resultsEulerFunction[i] = i - 1;
+                    //use other primes to generate results
+                }
+                else
+                    resultsEulerFunction[i] = eulersTotientFunction(i, primesList);
+                if (i % 1000 == 0)
+                    System.out.println((double) i / MAX);
+            }
+            else {
+                // do skip
+            }
+        }
+        System.out.println("stop calculate");
+    }
 }

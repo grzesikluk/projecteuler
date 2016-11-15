@@ -30,7 +30,8 @@ public class EulersTotientTest {
 
     @Test
     public void testEulersTotientFunction3() throws Exception {
-        List<Integer> primes = new PrimesSet(10).getSet().stream().collect(Collectors.toList());
+        int[] primes = {2,3,5,7,11,13};
+
 
         Assert.assertEquals(1,eulersTotientFunction(2, primes));
         Assert.assertEquals(2,eulersTotientFunction(3, primes));
