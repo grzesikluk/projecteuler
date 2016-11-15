@@ -3,9 +3,6 @@ package eulerproject.level3.problem70;
 import eulerproject.tools.StringHelper;
 import eulerproject.tools.primes.PrimesSet;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
 
 /**
@@ -16,13 +13,13 @@ public class Solution {
     private static PrimesSet primes;
     private static int[] primesList;
     private static int MAX = 10000000;
-    private static int[] resultsEulerFunction;
+    private static int[] eulerTotientFunctionResults;
 
     static {
 
         primes = new PrimesSet(MAX);
         primesList = new int[MAX];
-        resultsEulerFunction = new int[MAX];
+        eulerTotientFunctionResults = new int[MAX];
 
         int ix = 0;
         for (Integer i : primes.getSet()) {
@@ -42,13 +39,13 @@ public class Solution {
 
         for (int i = 2; i < MAX; i++) {
 
-            fi = resultsEulerFunction[i];
+            fi = eulerTotientFunctionResults[i];
 
             if ((temp = (double) i / (double) fi) < val) {
                 if (StringHelper.isPermutation(Integer.toString(fi), Integer.toString(i))) {
                     store = i;
                     val = temp;
-                    System.out.println("Found permuted min = " + val + " is for n=" + store);
+//                    System.out.println("Found permuted min = " + val + " is for n=" + store);
                 }
             }
         }
@@ -61,20 +58,10 @@ public class Solution {
         System.out.println("start calculate ");
         for (int i = 2; i < MAX; i++) {
 
-            if(resultsEulerFunction[i] == 0) {
-
-                if (primes.getSet().contains(i)) {
-                    resultsEulerFunction[i] = i - 1;
-                    //use other primes to generate results
-                }
-                else
-                    resultsEulerFunction[i] = eulersTotientFunction(i, primesList);
-                if (i % 1000 == 0)
-                    System.out.println((double) i / MAX);
-            }
-            else {
-                // do skip
-            }
+            if (primes.getSet().contains(i)) {
+                eulerTotientFunctionResults[i] = i - 1;
+            } else
+                eulerTotientFunctionResults[i] = eulersTotientFunction(i, primesList);
         }
         System.out.println("stop calculate");
     }

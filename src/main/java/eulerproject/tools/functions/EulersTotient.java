@@ -1,7 +1,5 @@
 package eulerproject.tools.functions;
 
-import java.util.List;
-
 /**
  * Created by Lukasz on 2016-11-12.
  */
@@ -35,14 +33,26 @@ public class EulersTotient {
      */
     public static int eulersTotientFunction(int k, int[] primes) {
         double result = k;
+        int temp = k;
         int i = 0;
+        int p = primes[0];
 
-        do {
-            if (k % primes[i] == 0)
-                result *= (1 - 1 / (double) primes[i]);
+        while (p*p <= temp) {
+
+            if (temp % primes[i] == 0)        {
+
+                while(temp % p == 0)
+                    temp/=p;
+
+                    result *= (1 - 1 / (double) p);
+
+            }
             i++;
+            p  = primes[i];
         }
-        while (i < primes.length && primes[i] <= k);
+
+        if (temp > 1)
+            result *= (1.0 - (1.0 / (float) temp));
 
         return (int) result;
 
