@@ -45,7 +45,6 @@ public class Solution {
                 if (StringHelper.isPermutation(Integer.toString(fi), Integer.toString(i))) {
                     store = i;
                     val = temp;
-//                    System.out.println("Found permuted min = " + val + " is for n=" + store);
                 }
             }
         }
@@ -57,10 +56,6 @@ public class Solution {
     public static void calculateResults() {
         System.out.println("start calculate ");
         for (int i = 2; i < MAX; i++) {
-
-            if (primes.getSet().contains(i)) {
-                eulerTotientFunctionResults[i] = i - 1;
-            } else
                 eulerTotientFunctionResults[i] = eulersTotientFunction(i, primesList);
         }
         System.out.println("stop calculate");
