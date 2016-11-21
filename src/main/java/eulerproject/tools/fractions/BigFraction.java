@@ -1,8 +1,11 @@
 package eulerproject.tools.fractions;
 
+import eulerproject.tools.functions.EulersTotient;
 import eulerproject.tools.primes.Primes;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 /**
  * Created by grzesikl on 15/09/2016.
@@ -85,8 +88,8 @@ public class BigFraction implements Comparable {
     }
 
     public BigFraction simplifyFraction() {
-        BigInteger zero = new BigInteger("0");
-        BigInteger one = new BigInteger("1");
+        BigInteger zero = BigInteger.ZERO;
+        BigInteger one = BigInteger.ONE;
         BigFraction result = new BigFraction(this);
         BigInteger bigI = new BigInteger("2");
         int i = 2;
@@ -111,7 +114,7 @@ public class BigFraction implements Comparable {
     }
 
     public boolean isResilent() {
-        BigInteger zero = new BigInteger("0");
+        BigInteger zero = BigInteger.ZERO;
         BigFraction result = new BigFraction(this);
         BigInteger bigI = new BigInteger("2");
         int i = 2;
@@ -153,24 +156,17 @@ public class BigFraction implements Comparable {
     }
 
 
-//    public boolean isResilent() {
-//        if(!this.equals(this.simplifyFraction()))
-//            return false;
-//        return true;
-//    }
+    public BigFraction getResilenceFactor(int[] primes) {
 
-    public BigFraction getResilenceFactor() {
-        BigInteger counter = new BigInteger("0");
+        BigInteger i = BigInteger.ONE;
 
-        BigInteger i = new BigInteger("1");
+        long den = this.denominator.intValue();
+        int phi = EulersTotient.eulersTotientFunction((int)den,primes);  //TODO: I dont like this casting
+
         BigInteger d = denominator.subtract(i);
+        BigInteger counter = new BigInteger(Integer.toString(phi));
 
-        while (i.compareTo(denominator) < 0) {
-            if (new BigFraction(i, denominator).isResilent())
-                counter = counter.add(new BigInteger("1"));
-            i = i.add(new BigInteger("1"));
 
-        }
 
         return new BigFraction(counter, d).simplifyFraction();
 
@@ -178,6 +174,22 @@ public class BigFraction implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return this.sub((BigFraction) o).getNominator().intValue();
+        return this.simplifyFraction().sub((BigFraction) o).getNominator().intValue();
+    }
+
+
+    public BigDecimal asDecimal() {
+        BigDecimal bigNomin = new BigDecimal(nominator);
+        BigDecimal bigDenomin = new BigDecimal(denominator);
+
+        if(bigDenomin.equals(new BigDecimal("0")))
+            throw new IllegalArgumentException("Denominator is zero.");
+
+        return bigNomin.divide(bigDenomin,30, RoundingMode.HALF_UP);
+
+
+
     }
 }
+
+

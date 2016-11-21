@@ -1,7 +1,7 @@
 package eulerproject.level3.problem70;
 
 import eulerproject.tools.StringHelper;
-import eulerproject.tools.primes.PrimesSet;
+import eulerproject.tools.primes.Primes;
 
 import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
 
@@ -10,22 +10,17 @@ import static eulerproject.tools.functions.EulersTotient.eulersTotientFunction;
  */
 public class Solution {
 
-    private static PrimesSet primes;
+    private static Primes primes;
     private static int[] primesList;
     private static int MAX = 10000000;
     private static int[] eulerTotientFunctionResults;
 
     static {
 
-        primes = new PrimesSet(MAX);
-        primesList = new int[MAX];
+        primes = new Primes(MAX);
+        primes.generatePrimes();
+        primesList = primes.asList();
         eulerTotientFunctionResults = new int[MAX];
-
-        int ix = 0;
-        for (Integer i : primes.getSet()) {
-            primesList[ix++] = i;
-
-        }
 
         System.out.println("got primes");
     }

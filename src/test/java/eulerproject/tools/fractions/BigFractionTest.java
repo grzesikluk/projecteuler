@@ -1,5 +1,6 @@
 package eulerproject.tools.fractions;
 
+import eulerproject.tools.primes.Primes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import java.math.BigInteger;
 public class BigFractionTest {
     @Before
     public void init() {
-        BigFraction bf = new BigFraction(new BigInteger("1"), new BigInteger("3"));
+        BigFraction bf = new BigFraction(BigInteger.ONE, new BigInteger("3"));
     }
 
     @Test
@@ -39,7 +40,7 @@ public class BigFractionTest {
 
     @Test
     public void testCompareTo1() {
-        Assert.assertTrue(new BigFraction(new BigInteger("1"), new BigInteger("2")).compareTo(new BigFraction(new BigInteger("2"), new BigInteger("3"))) < 0);
+        Assert.assertTrue(new BigFraction(BigInteger.ONE, new BigInteger("2")).compareTo(new BigFraction(new BigInteger("2"), new BigInteger("3"))) < 0);
     }
 
     @Test
@@ -49,23 +50,33 @@ public class BigFractionTest {
 
     @Test
     public void testCompareTo3() {
-        Assert.assertTrue(new BigFraction(new BigInteger("1"), new BigInteger("2")).compareTo(new BigFraction(new BigInteger("1"), new BigInteger("2"))) == 0);
+        Assert.assertTrue(new BigFraction(BigInteger.ONE, new BigInteger("2")).compareTo(new BigFraction(BigInteger.ONE, new BigInteger("2"))) == 0);
     }
 
     @Test
     public void testCompareTo4() {
-        Assert.assertTrue(new BigFraction(new BigInteger("1"), new BigInteger("4")).compareTo(new BigFraction(new BigInteger("2"), new BigInteger("8"))) == 0);
+        Assert.assertTrue(new BigFraction(BigInteger.ONE, new BigInteger("4")).compareTo(new BigFraction(new BigInteger("2"), new BigInteger("8"))) == 0);
     }
 
     @Test
     public void testCompareTo5() {
-        Assert.assertTrue(new BigFraction(new BigInteger("51"), new BigInteger("50")).compareTo(new BigFraction(new BigInteger("1"), new BigInteger("1"))) > 0);
+        Assert.assertTrue(new BigFraction(new BigInteger("51"), new BigInteger("50")).compareTo(new BigFraction(BigInteger.ONE, BigInteger.ONE)) > 0);
     }
 
     @Test
-    public void testGetResilenceFactor() throws Exception {
+    public void testGetResilenceFactor1() throws Exception {
+        Primes primes = new Primes(100);
+
         Assert.assertEquals(new BigFraction(new BigInteger("4"), new BigInteger("11")),
-                new BigFraction(new BigInteger("1"), new BigInteger("12")).getResilenceFactor());
+                new BigFraction(BigInteger.ONE, new BigInteger("12")).getResilenceFactor(primes.asList()));
+    }
+
+    @Test
+    public void testGetResilenceFactor2() throws Exception {
+        Primes primes = new Primes(100);
+
+        Assert.assertEquals(new BigFraction(BigInteger.ONE, BigInteger.ONE),
+                new BigFraction(BigInteger.ONE, new BigInteger("2")).getResilenceFactor(primes.asList()));
     }
 }
 

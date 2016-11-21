@@ -44,4 +44,15 @@ public class Primes {
     }
 
 
+    public int[] asList() {
+        int[] list = new int[max_value];
+        int k=0;
+
+        for(int i=2;i<primes.length;i++)
+            if (primes[i])
+                list[k++]=i;
+
+        return list;
+    }
+
 }

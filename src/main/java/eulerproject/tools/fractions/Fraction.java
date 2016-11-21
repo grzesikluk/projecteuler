@@ -1,5 +1,6 @@
 package eulerproject.tools.fractions;
 
+import eulerproject.tools.functions.EulersTotient;
 import eulerproject.tools.primes.Primes;
 
 /**
@@ -127,22 +128,19 @@ public class Fraction implements Comparable {
 
     }
 
-    public Fraction getResilenceFactor() {
-        int counter = 0;
+    public Fraction getResilenceFactor(int[] primes) {
 
-        int i = 0;
-        while (i < denominator) {
-            if (new Fraction(i, denominator).isResilent())
-                counter++;
-            i++;
+        int counter = EulersTotient.eulersTotientFunction((int)denominator,primes);  //TODO: I dont like this casting
 
-        }
         return new Fraction(counter, denominator - 1);
     }
 
+
+
+
     @Override
     public int compareTo(Object o) {
-        return (int) this.sub((Fraction)o).getNominator();
+        return (int) this.simplifyFraction().sub((Fraction)o).getNominator();
     }
 
 

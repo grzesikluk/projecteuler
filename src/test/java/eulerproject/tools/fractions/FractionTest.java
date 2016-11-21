@@ -1,15 +1,25 @@
 package eulerproject.tools.fractions;
 
+import eulerproject.tools.primes.Primes;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Created by grzesikl on 10/11/2016.
  */
 public class FractionTest {
+    Primes primes;
+
+    @Before
+    public void init() {
+        primes = new Primes(1000);
+        primes.generatePrimes();
+    }
+
     @Test
     public void testGetResilentFactor() throws Exception {
-        Assert.assertEquals(new Fraction(4,11),new Fraction(1,12).getResilenceFactor());
+        Assert.assertEquals(new Fraction(4,11),new Fraction(1,12).getResilenceFactor(primes.asList()));
 
     }
 
@@ -33,7 +43,8 @@ public class FractionTest {
         Assert.assertTrue(new Fraction(1,2).compareTo(new Fraction(1,3))>0);
         Assert.assertTrue(new Fraction(1,4).compareTo(new Fraction(2,8))==0);
         Assert.assertTrue(new Fraction(51,50).compareTo(new Fraction(1,1))>0);
-
+        Assert.assertTrue(new Fraction(27102,27102).compareTo(new Fraction(15499, 94744))>0);
+        Assert.assertTrue(new Fraction(54432,55030).compareTo(new Fraction(15499, 94744))<0);
     }
 
 }
