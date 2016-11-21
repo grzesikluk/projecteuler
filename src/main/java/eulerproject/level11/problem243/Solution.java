@@ -1,7 +1,6 @@
 package eulerproject.level11.problem243;
 
 import eulerproject.tools.fractions.BigFraction;
-import eulerproject.tools.fractions.Fraction;
 import eulerproject.tools.primes.Primes;
 
 import java.math.BigInteger;
@@ -10,68 +9,36 @@ import java.math.BigInteger;
  * Created by grzesikl on 10/11/2016.
  */
 public class Solution {
-
+    private static final int MAX = 10000000;
     private static Primes primes;
 
     static {
-        primes = new Primes(1000000);
+        primes = new Primes(MAX);
         primes.generatePrimes();
     }
 
     public static void main(String[] args) {
-        getSoluton();
 
-    }
-
-    public static void getSolutionBig() {
-        BigInteger jump = new BigInteger("1");
-        BigInteger i = new BigInteger("1");
-        BigFraction thr = new BigFraction(new BigInteger("15499"), new BigInteger("94744"));
-
+        BigInteger i;
         BigFraction fraction;
         BigFraction factor;
 
-        do {
-            if (i.isProbablePrime(1)) {
-                i = i.add(jump);
-                continue;
-            } else {
-                fraction = new BigFraction(new BigInteger("1"), i);
-                factor = fraction.getResilenceFactor();
-                System.out.println(fraction + " " + factor);
-
-                if (factor.compareTo(thr) <= 0)
-                    break;
-                i = i.add(jump);
-            }
+        BigFraction thr = new BigFraction(new BigInteger("15499"), new BigInteger("94744")); //0,16358819555855779785527315713924
+        int[] primesList = primes.asList();
+        DenominatorGeneratorBig generatorBig = new DenominatorGeneratorBig();
 
 
-        } while (true);
+        while ((i = generatorBig.getNext()).compareTo(BigInteger.ZERO) > 0) {
 
-        System.out.println(fraction);
-    }
+            fraction = new BigFraction(BigInteger.ONE, i);
+            factor = fraction.getResilenceFactor(primesList);
 
-    public static void getSoluton() {
-        Fraction thr = new Fraction(15499, 94744);
-        Fraction fraction;
-        Fraction factor;
-
-        long i = DenominatorGenerator.getNext();
-
-        do {
-            fraction = new Fraction(1, i);
-            factor = fraction.getResilenceFactor();
-
-            System.out.println(fraction + " " + factor + " " + (factor.asDouble()- thr.asDouble()));
-
-            if (factor.compareTo(thr) <= 0) {
+            if (factor.asDecimal().compareTo(thr.asDecimal()) <= 0) {
+                System.out.println("Found : " + fraction + " " + factor.asDecimal());
                 break;
             }
-
-        } while ((i = DenominatorGenerator.getNext()) > 0);
-
+        }
 
     }
-
 
 }
