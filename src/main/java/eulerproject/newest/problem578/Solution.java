@@ -8,54 +8,31 @@ import eulerproject.tools.primes.Primes;
  */
 public class Solution {
 
-//    public static long MAX = 10000000000000L;
-    public static long MAX = 10000000L;
+    private static final long MAX = 10000000000000L;
+    private static final long MAX_PRIME = (long) Math.sqrt((double) MAX / 2);
+
     private static Primes primes;
 
     public static void main(String[] args) {
-        primes = new Primes((int)MAX/1000);
+        primes = new Primes((int) MAX_PRIME);
         System.out.println("Primes initiated");
 
-
-        System.out.println(countDecreasingFactorized(MAX,primes));
-
-    }
-
-
-    public static boolean isDecreasingFactorized(long k, Primes primes) {
-        Integer previous = null;
-
-        for(Integer key: PrimeFactorization.getPrimeFactorsWithPower(k,primes).values()) {
-
-            if(previous == null) {
-                previous = key;
-            }
-            else {
-                if (previous < key)
-                    return false;
-                else
-                    previous = key;
-            }
-        }
-
-        return true;
+        System.out.println(countIncreasingFactorsNumbers(MAX,primes));
 
     }
 
 
-    public static int countDecreasingFactorized(long k, Primes primes) {
+    public static int countIncreasingFactorsNumbers(long k, Primes primes) {
         int counter=0;
+        int[] primes_list = primes.asList();
 
         for(long i=0;i<k;i++)
-            if(isDecreasingFactorized(i,primes)) {
+            if(PrimeFactorization.isIncreasingFactorized(i,primes_list))
                 counter++;
-//                System.out.println(i);
-            };
 
         return counter;
-
-
     }
+
 
 
 }

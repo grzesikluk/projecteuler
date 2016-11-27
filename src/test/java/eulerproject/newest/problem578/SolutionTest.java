@@ -3,6 +3,7 @@ package eulerproject.newest.problem578;
 import eulerproject.tools.primes.Primes;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -12,37 +13,33 @@ public class SolutionTest {
 
     private static Primes primes;
 
+    private static final long MAX = 10000000L;
+    private static final long MAX_PRIME = (long) Math.sqrt((double) MAX / 2);
+
     @Before
     public void init() {
-        primes = new Primes(1000);
+        primes = new Primes((int) MAX_PRIME);
         primes.generatePrimes();
 
     }
 
     @Test
-    public void countDecreasingFactorized() throws Exception {
-        Assert.assertEquals(94, Solution.countDecreasingFactorized(100,primes));
-        Assert.assertEquals(922052, Solution.countDecreasingFactorized(1000000,primes));
+    @Ignore
+    public void countIncreasingFactorized_100() throws Exception {
+        Assert.assertEquals(94, Solution.countIncreasingFactorsNumbers(100L,primes));
+    }
+
+    @Test(timeout = 1000*6)
+    @Ignore
+    public void countIncreasingFactorized_10_6() throws Exception {
+        Assert.assertEquals(922052, Solution.countIncreasingFactorsNumbers(1000000,primes));
 
     }
 
-
-    @Test
-    public void isDecreasingFactorized() throws Exception {
-        Assert.assertTrue(Solution.isDecreasingFactorized(10, primes));
-        Assert.assertTrue(Solution.isDecreasingFactorized(91, primes));
-        Assert.assertTrue(Solution.isDecreasingFactorized(19, primes));
-        Assert.assertTrue(Solution.isDecreasingFactorized(60, primes));
-    }
-    @Test
-    public void isDecreasingFactorized2() throws Exception {
-        Assert.assertFalse(Solution.isDecreasingFactorized(18,primes));
-        Assert.assertFalse(Solution.isDecreasingFactorized(50,primes));
-        Assert.assertFalse(Solution.isDecreasingFactorized(54,primes));
-        Assert.assertFalse(Solution.isDecreasingFactorized(75,primes));
-        Assert.assertFalse(Solution.isDecreasingFactorized(90,primes));
-        Assert.assertFalse(Solution.isDecreasingFactorized(98,primes));
+    @Test(timeout = 1000*80)
+    @Ignore
+    public void countIncreasingFactorized_10_7() throws Exception {
+        Assert.assertEquals(9219784, Solution.countIncreasingFactorsNumbers(MAX,primes));
 
     }
-
 }
