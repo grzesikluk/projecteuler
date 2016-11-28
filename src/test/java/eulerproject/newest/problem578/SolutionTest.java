@@ -29,12 +29,21 @@ public class SolutionTest {
         Assert.assertEquals(94, Solution.countIncreasingFactorsNumbers(100L,primes));
     }
 
-    @Test(timeout = 1000*6)
+    @Test
+    @Ignore
+    public void countIncreasingFactorized_1000() throws Exception {
+        Assert.assertEquals(929, Solution.countIncreasingFactorsNumbers(1000L,primes));
+    }
+
+    @Test(timeout = 1000*160)
     @Ignore
     public void countIncreasingFactorized_10_6() throws Exception {
         Assert.assertEquals(922052, Solution.countIncreasingFactorsNumbers(1000000,primes));
 
     }
+
+
+
 
     @Test(timeout = 1000*80)
     @Ignore

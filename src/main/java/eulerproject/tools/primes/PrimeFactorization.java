@@ -131,6 +131,32 @@ public class PrimeFactorization {
 
     }
 
+    public static boolean isDecreasingFactorized(long k, int[] primes) {
+        Map<Integer,Integer> result = new LinkedHashMap<>();
+        long temp = k;
+        int primeix = 0;
+        int prime = primes[primeix];
+
+
+        while (prime > 1 && 2*prime <= k) {
+
+            while(temp % prime == 0) {
+                temp /= prime;
+                if(result.containsKey(prime))
+                    result.replace(prime,result.get(prime) + 1);
+                else
+                    result.put(prime,1);
+            }
+
+            if(!isIncreasingKeyMap(result))
+                return true;
+
+            prime = primes[primeix++];
+        }
+
+        return false;
+
+    }
 
     public static long getNumberFromFactorMap(Map<Integer,Integer> map) {
         long result = 1L;
