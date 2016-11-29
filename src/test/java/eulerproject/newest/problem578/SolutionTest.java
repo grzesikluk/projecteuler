@@ -20,13 +20,6 @@ public class SolutionTest {
     public void init() {
         primes = new Primes((int) MAX_PRIME);
         primes.generatePrimes();
-
-    }
-
-    @Test
-    @Ignore
-    public void countIncreasingFactorized_100() throws Exception {
-        Assert.assertEquals(94, Solution.countIncreasingFactorsNumbers(100L,primes));
     }
 
     @Test
@@ -42,13 +35,40 @@ public class SolutionTest {
 
     }
 
-
-
-
     @Test(timeout = 1000*80)
     @Ignore
     public void countIncreasingFactorized_10_7() throws Exception {
         Assert.assertEquals(9219784, Solution.countIncreasingFactorsNumbers(MAX,primes));
 
     }
+
+    @Test
+    public void countIncreasingFactorsNumbersFromSequence_100() throws Exception {
+        Assert.assertEquals(94, eulerproject.newest.problem578.Solution.countIncreasingFactorsNumbersFromSequence(100L,primes));
+    }
+
+    @Test
+    public void countIncreasingFactorsNumbersFromSequence_1000() throws Exception {
+        Assert.assertEquals(929, Solution.countIncreasingFactorsNumbersFromSequence(1000L,primes));
+    }
+
+    @Test(timeout = 4800)
+    public void countIncreasingFactorsNumbersFromSequence_10_6() throws Exception {
+        Assert.assertEquals(922052, Solution.countIncreasingFactorsNumbersFromSequence(1000000,primes));
+
+    }
+
+    @Test(timeout = 46*1000)
+    public void countIncreasingFactorsNumbersFromSequence_10_7() throws Exception {
+        Assert.assertEquals(9219784, Solution.countIncreasingFactorsNumbersFromSequence(10000000,primes));
+
+    }
+
+    @Test(timeout = 400*1000)
+    @Ignore
+    public void countIncreasingFactorsNumbersFromSequence_10_8() throws Exception {
+        Assert.assertEquals(92198782, Solution.countIncreasingFactorsNumbersFromSequence(100000000,primes));
+
+    }
+
 }

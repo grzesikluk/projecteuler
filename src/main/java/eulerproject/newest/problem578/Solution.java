@@ -2,6 +2,8 @@ package eulerproject.newest.problem578;
 
 import eulerproject.tools.primes.PrimeFactorization;
 import eulerproject.tools.primes.Primes;
+import eulerproject.tools.sequences.SequenceGenerator;
+import eulerproject.tools.sequences.SequenceGeneratorImplA071365;
 
 import java.util.*;
 
@@ -10,7 +12,7 @@ import java.util.*;
  */
 public class Solution {
 
-    private static final long MAX = 1000000000L;
+    private static final long MAX = 10_000_000_000_000L;
     private static final long MAX_PRIME = (long) Math.sqrt((double) MAX / 2);
 
     private static Primes primes;
@@ -20,9 +22,10 @@ public class Solution {
         System.out.println("Primes initiated");
 
         //testing purpose
-        for (long i = 1; i < MAX; i++) {
-            long k = countIncreasingFactorsNumbers(i * 1000000, primes);
-            System.out.println(i + " " + k + " " + (double) k / i);
+        for (long i = 1; i < 100; i++) {
+            long k = countIncreasingFactorsNumbersFromSequence(i * 1000, primes);
+            System.out.println(i + " " + k + " " + (double) k / (i*100));
+//            System.out.println(k);
         }
     }
 
@@ -36,18 +39,17 @@ public class Solution {
             if (PrimeFactorization.isDecreasingFactorized(i, primes_list)) {
                 addNextFoundNumber(result, i);
             }
-
-
-        System.out.println(result);
-        return result.size() - counter;
+        return k-result.size();
     }
 
     public static void addNextFoundNumber(Set<Long> set, long k) {
-        for (Long i : set)
-            if ((k % i) == 0)
-                return;
         set.add(k);
     }
 
+    public static long countIncreasingFactorsNumbersFromSequence(long k, Primes primes) {
+        SequenceGenerator sg = new SequenceGeneratorImplA071365();
+        sg.init(k,primes.asList());
 
+        return k-sg.getSize();
+    }
 }

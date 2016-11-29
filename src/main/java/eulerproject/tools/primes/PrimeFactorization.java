@@ -39,6 +39,11 @@ public class PrimeFactorization {
         long temp = k;
         int prime = 2;
 
+        if(k == 1) {
+            result.put(prime,0);
+            return result;
+        }
+
         while (prime > 1 && 2*prime <= k) {
 
             while(temp % prime == 0) {
@@ -51,6 +56,40 @@ public class PrimeFactorization {
 
 
             prime = primes.getNextPrime(prime);
+        }
+
+        if(temp == k)
+            result.put(prime,1);
+
+        return result;
+
+    }
+
+    public static Map<Integer,Integer> getPrimeFactorsWithPower(long k, int[] primes) {
+        Map<Integer,Integer> result = new LinkedHashMap<>();
+        long temp = k;
+        int primeix = 0;
+        int prime = primes[primeix++];
+
+        if(k == 1) {
+            result.put(prime,0);
+            return result;
+        }
+
+
+
+        while (prime > 1 && 2*prime <= k) {
+
+            while(temp % prime == 0) {
+                temp /= prime;
+                if(result.containsKey(prime))
+                    result.replace(prime,result.get(prime) + 1);
+                else
+                    result.put(prime,1);
+            }
+
+
+            prime = primes[primeix++];
         }
 
         if(temp == k)
