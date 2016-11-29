@@ -9,3 +9,6 @@ C(100) = 94 since all positive integers not exceeding 100 have decreasing prime 
 You are given C(10^6) = 922052.
 
 Find C(10^13).
+
+--- see
+https://oeis.org/A071365
