@@ -17,7 +17,7 @@ public class SequenceGeneratorImplA071365Test {
     public void init() {
         sg = new SequenceGeneratorImplA071365();
         Primes primes = new Primes((int)MAX_PRIME);
-        sg.init(1000000,primes.asList());
+        sg.init(100000,primes.asList());
     }
 
     @Test

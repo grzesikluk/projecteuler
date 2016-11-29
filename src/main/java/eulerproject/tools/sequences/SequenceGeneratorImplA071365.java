@@ -81,4 +81,5 @@ public class SequenceGeneratorImplA071365 implements SequenceGenerator {
     public long getSize() {
         return numbersInSeq.size();
     }
+
 }

@@ -22,9 +22,9 @@ public class Solution {
         System.out.println("Primes initiated");
 
         //testing purpose
-        for (long i = 1; i < 100; i++) {
-            long k = countIncreasingFactorsNumbersFromSequence(i * 1000, primes);
-            System.out.println(i + " " + k + " " + (double) k / (i*100));
+        for (long i = 1; i < MAX; i++) {
+//            long k = countIncreasingFactorsNumbersFromSequence(i * 1000, primes);
+//            System.out.println(i + " " + k + " " + (double) k / (i*100));
 //            System.out.println(k);
         }
     }
