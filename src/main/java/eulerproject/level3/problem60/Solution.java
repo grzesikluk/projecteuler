@@ -1,62 +1,53 @@
 package eulerproject.level3.problem60;
 
-import eulerproject.tools.primes.PrimesSet;
+import eulerproject.tools.primes.Primes;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lukasz on 2016-09-25.
  */
 public class Solution {
-
-    private static PrimesSet primes;
-    private static ArrayList<Integer> primesArray;
-    private static int MAX_PRIME = 300000000;
-    private static int MAX = 300;
-    private static int NUM_THREADS = 100;
+    private static int[] primesArray;
+    private static int MAX = 5000;
+    private static int MAX_PRIME = MAX*10000;
+    private static Primes primes;
 
 
     static {
-        primes = new PrimesSet(MAX_PRIME);
-        primesArray = new ArrayList<>(primes.getSet().stream().collect(Collectors.toList()));
+        primes = new Primes(MAX_PRIME);
+        primes.generatePrimes();
+        primesArray = primes.asList();
 
-        System.out.println("Primes initiated. " + primesArray.size() );
+        System.out.println("Primes initiated. " + primesArray.length );
     }
 
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
-        int chunkSize = MAX/NUM_THREADS;
+    public static void main(String[] args)  {
+        Map<Integer,Integer> pairs = new HashMap<>();
 
-        for(int i =0;i<NUM_THREADS;i++)
-            new Thread(new MyTask(chunkSize*i,chunkSize*(i+1),MAX)).start();
 
-        System.out.println("Threads started "+ LocalTime.now());
+        for(int i=0;i<MAX;i++)
+            for(int j=i;j<MAX;j++){
+
+                if(isPrimePair(i,j))
+                    System.out.println(i + " " + j);
+            }
+
 
     }
 
+    public static boolean isPrimePair(int a, int b) {
+        Integer ab = new Integer(Integer.toString(a)+Integer.toString(b));
+        Integer ba = new Integer(Integer.toString(b)+Integer.toString(a));
 
-    static class MyTask implements Runnable {
-        int min, max, size;
-
-
-        MyTask(int min, int max, int size) {
-            this.min = min;
-            this.max = max;
-            this.size = size;
-        }
-
-        @Override
-        public void run() {
-            ParralellFixedSubSetProblem60<Integer> fixedSubSet = new BruteForceSubsetImpl<>();
-            fixedSubSet.generate(primesArray ,new Problem60Listener(), min,max, size);
-
-        }
+        return  primes.isPrime(ab) && primes.isPrime(ba);
     }
+
+
+
+
+
 
 }
