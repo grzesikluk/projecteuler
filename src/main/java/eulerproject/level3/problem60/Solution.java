@@ -2,10 +2,7 @@ package eulerproject.level3.problem60;
 
 import eulerproject.tools.primes.Primes;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -13,8 +10,8 @@ import java.util.stream.Collectors;
  */
 public class Solution {
     private static int[] primesArray;
-    private static int MAX = 5000;
-    private static int MAX_PRIME = MAX * 10000;
+    private static int MAX = 1000;
+    private static int MAX_PRIME = MAX * MAX * 10;
     private static Primes primes;
 
 
@@ -28,13 +25,30 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        extractResult(createPrimesSet());
+        Set<Pair> initialPairSet = createInitialPrimePairSet();
+        List<Set<Pair>> listOfChains = findChains(initialPairSet, initChains(initialPairSet), 5);
+        Map<Integer,List<Integer>> resultMap = new LinkedHashMap<>();
+
+        for (Set<Pair> chainOfPairsSet : listOfChains) {
+            List<Integer> tempList = convertToIntegerList(chainOfPairsSet);
+
+            if (tempList.size() >= 4 && isPrimeList(tempList)) {
+                resultMap.put(getListSum(tempList),tempList);
+            }
+        }
+
+        for(Integer i:resultMap.keySet().stream().sorted().collect(Collectors.toList())) {
+
+            System.out.println(resultMap.get(i) + " " + i);
+        }
+
+
     }
 
-    private static Set<Pair> createPrimesSet() {
+    private static Set<Pair> createInitialPrimePairSet() {
         Set<Pair> result = new HashSet<>();
 
-        for (int i = 1; i < MAX; i++)
+        for (int i = 2; i < MAX; i++)
             for (int j = i + 1; j < MAX; j++) {
                 Pair p = new Pair(i, j);
 
@@ -45,28 +59,40 @@ public class Solution {
         return result;
     }
 
-    private static void extractResult(Set<Pair> input) {
+    public static List<Set<Pair>> initChains(Set<Pair> inputList) {
+        List<Set<Pair>> resultSet = new ArrayList<>();
 
-        List<Pair> listInput = input.stream().collect(Collectors.toList());
-
-        for (int i = 0; i < listInput.size(); i++) {
-            List<Pair> smallList = new ArrayList<>();
-            smallList.add(listInput.get(i));
-
-            for (int j = i + 1; j < listInput.size(); j++)
-                if (listInput.get(i).isOneDigitSame(listInput.get(j)))
-                    smallList.add(listInput.get(j));
-
-            List<Integer> tempList = convertToList(smallList);
-
-            if (countPrimeHits(tempList) == 10 && tempList.size() == 5) {
-                System.out.println(tempList + " " + getListSum(tempList));
-            }
-
-
+        for (Pair p : inputList) {
+            Set<Pair> firstElement = new HashSet<>();
+            firstElement.add(p);
+            resultSet.add(firstElement);
         }
+        return resultSet;
+
     }
 
+    public static List<Set<Pair>> findChains(Set<Pair> inputList, List<Set<Pair>> resultSet, int maxLength) {
+
+        for (Set<Pair> pairSet : resultSet) {
+            for (Pair p : inputList) {
+                if (!pairSet.contains(p) && canBeChained(pairSet, p) && pairSet.size() < maxLength) {
+                    pairSet.add(p);
+                }
+            }
+        }
+
+        return resultSet.stream().filter(s -> s.size() > 1).collect(Collectors.toList());
+
+    }
+
+    public static boolean canBeChained(Set<Pair> set, Pair p) {
+
+        for (Pair pair : set)
+            if (!isPrimePair(pair, p))
+                return false;
+
+        return true;
+    }
 
     public static boolean isPrimePair(Pair a) {
         return primes.isPrime(a.getConcatenatedFirstSecond()) && primes.isPrime(a.getConcatenatedSecondFirst());
@@ -85,7 +111,21 @@ public class Solution {
         return true;
     }
 
-    public static List<Integer> convertToList(List<Pair> inputList) {
+    public static List<Integer> convertToIntegerList(List<Pair> inputList) {
+
+        Set<Integer> list = new HashSet<>();
+
+        for (Pair p : inputList) {
+            list.add(p.getA());
+            list.add(p.getB());
+        }
+
+        List<Integer> returnList = list.stream().sorted().collect(Collectors.toList());
+
+        return returnList;
+    }
+
+    public static List<Integer> convertToIntegerList(Set<Pair> inputList) {
 
         Set<Integer> list = new HashSet<>();
 

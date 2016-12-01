@@ -53,12 +53,14 @@ public class SolutionTest {
     }
 
     @Test(timeout = 4800)
+    @Ignore
     public void countIncreasingFactorsNumbersFromSequence_10_6() throws Exception {
         Assert.assertEquals(922052, Solution.countIncreasingFactorsNumbersFromSequence(1_000_000,primes));
 
     }
 
     @Test(timeout = 46*1000)
+    @Ignore
     public void countIncreasingFactorsNumbersFromSequence_10_7() throws Exception {
         Assert.assertEquals(9219784, Solution.countIncreasingFactorsNumbersFromSequence(10_000_000,primes));
 
@@ -67,7 +69,7 @@ public class SolutionTest {
     @Test(timeout = 400*1000)
     @Ignore
     public void countIncreasingFactorsNumbersFromSequence_10_8() throws Exception {
-        Assert.assertEquals(92198782, Solution.countIncreasingFactorsNumbersFromSequence(100_000_000,primes));
+        Assert.assertEquals(92198782, Solution.countIncreasingFactorsNumbersFromSequence(100_000_000L,primes));
     }
 
     @Test(timeout = 400*1000)
@@ -77,6 +79,7 @@ public class SolutionTest {
     }
 
     @Test(timeout = 4800)
+    @Ignore
     public void countIncreasingFactorsNumbersFromSequence_10_5_print() throws Exception {
         System.out.println(Solution.countIncreasingFactorsNumbersFromSequence(1_00_000,primes));
 

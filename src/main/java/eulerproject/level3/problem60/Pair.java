@@ -63,9 +63,7 @@ public class Pair {
         if (o == null || getClass() != o.getClass()) return false;
 
         Pair pair = (Pair) o;
-
-        if (a != pair.a) return false;
-        return b == pair.b;
+        return (a == pair.a && b == pair.b) || (b == pair.a && a == pair.b);
 
     }
 
