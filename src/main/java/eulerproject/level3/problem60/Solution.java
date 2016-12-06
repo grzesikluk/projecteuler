@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  */
 public class Solution {
     private static int[] primesArray;
-    private static int MAX = 1000;
+    private static int MAX = 230;
     private static int MAX_PRIME = new Integer(Integer.toString(MAX)+Integer.toString(MAX));
     private static Primes primes;
     private static int primesMaxVal=MAX;
@@ -32,7 +32,7 @@ public class Solution {
         for (Set<Pair> chainOfPairsSet : listOfChains) {
             List<Integer> tempList = convertToIntegerList(chainOfPairsSet);
 
-            if (tempList.size() >= 4 && isPrimeList(tempList, primes)) {
+            if ((tempList.size() >= 4) && isPrimeList(tempList, primes)) {
                 resultMap.put(getListSum(tempList), tempList);
             }
         }
@@ -99,7 +99,9 @@ public class Solution {
         if (isPrimePair(a, primes) == false || isPrimePair(b, primes) == false)
             return false;
 
-        for (int i : a.getConcatenatedOfTwoPairs(b)) {
+        int[] list = a.getConcatenatedOfTwoPairs(b);
+
+        for (int i : list) {
             if (primes.isPrime(i) == false)
                 return false;
         }
