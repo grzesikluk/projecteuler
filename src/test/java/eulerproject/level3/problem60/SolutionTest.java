@@ -64,6 +64,11 @@ public class SolutionTest {
         Assert.assertFalse(Solution.isPrimeList(list, primes));
     }
 
+    @Test
+    public void isPrimePairList3() throws Exception {
+        List<Integer> list = Arrays.asList(7, 19, 97, 213) ;
+        Assert.assertTrue(Solution.isPrimeList(list, primes));
+    }
 
     @Test
     public void convertToList() throws Exception {
