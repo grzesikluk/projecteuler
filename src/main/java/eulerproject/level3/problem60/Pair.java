@@ -46,16 +46,17 @@ public class Pair {
     }
 
     public int[] getConcatenatedOfTwoPairs(Pair other) {
-        int[] result = new int[8];
 
-        result[0] = new Integer(Integer.toString(getA()) + Integer.toString(other.getA()));
-        result[1] = new Integer(Integer.toString(other.getA()) + Integer.toString(getA()));
-        result[2] = new Integer(Integer.toString(getB()) + Integer.toString(other.getB()));
-        result[3] = new Integer(Integer.toString(other.getB()) + Integer.toString(getB()));
-        result[4] = new Integer(Integer.toString(getA()) + Integer.toString(other.getB()));
-        result[5] = new Integer(Integer.toString(other.getA()) + Integer.toString(getB()));
-        result[6] = new Integer(Integer.toString(getB()) + Integer.toString(other.getA()));
-        result[7] = new Integer(Integer.toString(other.getB()) + Integer.toString(getA()));
+        int[] result = new int[]{
+                new Integer(Integer.toString(getA()) + Integer.toString(other.getA())),
+                new Integer(Integer.toString(other.getA()) + Integer.toString(getA())),
+                new Integer(Integer.toString(getB()) + Integer.toString(other.getB())),
+                new Integer(Integer.toString(other.getB()) + Integer.toString(getB())),
+                new Integer(Integer.toString(getA()) + Integer.toString(other.getB())),
+                new Integer(Integer.toString(other.getA()) + Integer.toString(getB())),
+                new Integer(Integer.toString(getB()) + Integer.toString(other.getA())),
+                new Integer(Integer.toString(other.getB()) + Integer.toString(getA()))
+        };
 
         return result;
 
@@ -78,7 +79,4 @@ public class Pair {
         return result;
     }
 
-    public boolean isOneDigitSame(Pair other) {
-        return other.getA() == getA() || other.getA() == getB() || other.getB() == getA() || other.getB() == getB();
-    }
 }

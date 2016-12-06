@@ -1,5 +1,8 @@
 package eulerproject.tools.primes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Lukasz on 2016-08-30.
  */
@@ -11,8 +14,8 @@ public class Primes {
         generatePrimes();
     }
 
-    private  int max_value;
-    private  boolean[] primes;
+    private int max_value;
+    private boolean[] primes;
 
     public void generatePrimes() {
         primes[0] = false;
@@ -30,13 +33,16 @@ public class Primes {
     }
 
     public boolean isPrime(int k) {
-        return primes[k];
+        if (k < max_value)
+            return primes[k];
+        else
+            throw new IllegalArgumentException("Value too big to be checked. Initiate instance with bigger max value.");
     }
 
 
     public int getNextPrime(int k) {
-        for(int i=k+1;i<max_value;i++) {
-            if(primes[i] == true)
+        for (int i = k + 1; i < max_value; i++) {
+            if (primes[i] == true)
                 return i;
         }
 
@@ -45,14 +51,14 @@ public class Primes {
 
 
     public int[] asList() {
-        int[] list = new int[max_value];
-        int k=0;
+        List<Integer> list = new ArrayList<>();
+        int k = 0;
 
-        for(int i=2;i<primes.length;i++)
+        for (int i = 2; i < primes.length; i++)
             if (primes[i])
-                list[k++]=i;
+                list.add(i);
 
-        return list;
+        return list.stream().mapToInt(s->s).toArray();
     }
 
 }
