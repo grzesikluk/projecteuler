@@ -145,7 +145,7 @@ public class Solution {
         return true;
     }
 
-    public static int countPrimeHits(List<Integer> list) {
+    public static int countPrimeHits(List<Integer> list, Primes primes) {
         int counter = 0;
 
         for (int i = 0; i < list.size(); i++)
