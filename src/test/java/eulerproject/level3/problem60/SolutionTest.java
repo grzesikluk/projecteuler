@@ -75,7 +75,7 @@ public class SolutionTest {
     @Test
     public void countPrimeHits() throws Exception {
         List<Integer> list = Arrays.asList(3,7,109,673) ;
-        Assert.assertEquals(6,Solution.countPrimeHits(list));
+        Assert.assertEquals(6,Solution.countPrimeHits(list, primes));
     }
 
     @Test
