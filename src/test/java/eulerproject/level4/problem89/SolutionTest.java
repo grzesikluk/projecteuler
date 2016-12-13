@@ -3,9 +3,6 @@ package eulerproject.level4.problem89;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static eulerproject.level4.problem89.Solution.*;
-import static eulerproject.level4.problem89.Solution.RomanNumbers.*;
-
 /**
  * Created by Lukasz on 2016-11-05.
  */
@@ -15,10 +12,10 @@ public class SolutionTest {
     @Test
     public void testOptimiseRomanNumber() throws Exception {
 
-        Assert.assertEquals("XXV",optimiseRomanNumber("XXIIIII"));
-        Assert.assertEquals("XXV",optimiseRomanNumber("XVVV"));
-        Assert.assertEquals("MCLX",optimiseRomanNumber("MCXXXXXX"));
-        Assert.assertEquals("MDLX",optimiseRomanNumber("MCCCCCXXXXXX"));
+        Assert.assertEquals("XXV", Solution.optimiseRomanNumber("XXIIIII"));
+        Assert.assertEquals("XXV", Solution.optimiseRomanNumber("XVVV"));
+        Assert.assertEquals("MCLX", Solution.optimiseRomanNumber("MCXXXXXX"));
+        Assert.assertEquals("MDLX", Solution.optimiseRomanNumber("MCCCCCXXXXXX"));
 //        Assert.assertEquals("IX",optimiseRomanNumber("VIIII"));
 
     }
@@ -26,34 +23,34 @@ public class SolutionTest {
 
     @Test
     public void testEqualsOnRomanNumber() throws Exception {
-        Assert.assertTrue(C.compareTo(D) < 0);
-        Assert.assertTrue(M.compareTo(D) > 0);
-        Assert.assertTrue(C.compareTo(C) == 0);
+        Assert.assertTrue(Solution.RomanNumbers.C.compareTo(Solution.RomanNumbers.D) < 0);
+        Assert.assertTrue(Solution.RomanNumbers.M.compareTo(Solution.RomanNumbers.D) > 0);
+        Assert.assertTrue(Solution.RomanNumbers.C.compareTo(Solution.RomanNumbers.C) == 0);
     }
 
     @Test
     public void testCheckRuleOne() throws Exception {
-        Assert.assertEquals(1,checkRuleOne("MXCI"));
-        Assert.assertEquals(3,checkRuleOne("MCVIC"));
-        Assert.assertEquals(-1,checkRuleOne("MCI"));
+        Assert.assertEquals(1, Solution.checkRuleOne("MXCI"));
+        Assert.assertEquals(3, Solution.checkRuleOne("MCVIC"));
+        Assert.assertEquals(-1, Solution.checkRuleOne("MCI"));
     }
 
     @Test
     public void testCheckRuleTwo() throws Exception {
-        Assert.assertEquals(-1,checkRuleTwo("XCI"));
-        Assert.assertEquals(0,checkRuleTwo("IIIIIIIIII"));
-        Assert.assertEquals(1,checkRuleTwo("MXXXXXXXXXXXI"));
-        Assert.assertEquals(1,checkRuleTwo("MCCCCCCI"));
-        Assert.assertEquals(0,checkRuleTwo("DDDXXXXI"));
-        Assert.assertEquals(2,checkRuleTwo("MCLLL"));
+        Assert.assertEquals(-1, Solution.checkRuleTwo("XCI"));
+        Assert.assertEquals(0, Solution.checkRuleTwo("IIIIIIIIII"));
+        Assert.assertEquals(1, Solution.checkRuleTwo("MXXXXXXXXXXXI"));
+        Assert.assertEquals(1, Solution.checkRuleTwo("MCCCCCCI"));
+        Assert.assertEquals(0, Solution.checkRuleTwo("DDDXXXXI"));
+        Assert.assertEquals(2, Solution.checkRuleTwo("MCLLL"));
     }
 
     @Test
     public void testCheckRuleThree() throws Exception {
-        Assert.assertEquals(1,checkRuleThree("XCDID"));
-        Assert.assertEquals(1,checkRuleThree("XVVVI"));
-        Assert.assertEquals(1,checkRuleThree("LLCI"));
-        Assert.assertEquals(-1,checkRuleThree("LCI"));
+        Assert.assertEquals(1, Solution.checkRuleThree("XCDID"));
+        Assert.assertEquals(1, Solution.checkRuleThree("XVVVI"));
+        Assert.assertEquals(1, Solution.checkRuleThree("LLCI"));
+        Assert.assertEquals(-1, Solution.checkRuleThree("LCI"));
     }
 
     /**
@@ -64,28 +61,28 @@ public class SolutionTest {
      */
     @Test
     public void testCheckRuleFour() throws Exception {
-        Assert.assertEquals(-1,checkRuleFour("XXIX"));
-        Assert.assertEquals(-1,checkRuleFour("XXIV"));
-        Assert.assertEquals(-1,checkRuleFour("MCXL"));
-        Assert.assertEquals(-1,checkRuleFour("MCXC"));
-        Assert.assertEquals(-1,checkRuleFour("MCDXX"));
-        Assert.assertEquals(-1,checkRuleFour("MCMCDXX"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("XXIX"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("XXIV"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("MCXL"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("MCXC"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("MCDXX"));
+        Assert.assertEquals(-1, Solution.checkRuleFour("MCMCDXX"));
 
-        Assert.assertEquals(1,checkRuleFour("XVXI"));
-        Assert.assertEquals(1,checkRuleFour("LIL"));
-        Assert.assertEquals(2,checkRuleFour("MCVC"));
-        Assert.assertEquals(2,checkRuleFour("MCIL"));
-        Assert.assertEquals(1,checkRuleFour("MLMCDXX"));
-        Assert.assertEquals(1,checkRuleFour("MDMCDXX"));
-        Assert.assertEquals(4,checkRuleFour("MMMMVMCDXX"));
+        Assert.assertEquals(1, Solution.checkRuleFour("XVXI"));
+        Assert.assertEquals(1, Solution.checkRuleFour("LIL"));
+        Assert.assertEquals(2, Solution.checkRuleFour("MCVC"));
+        Assert.assertEquals(2, Solution.checkRuleFour("MCIL"));
+        Assert.assertEquals(1, Solution.checkRuleFour("MLMCDXX"));
+        Assert.assertEquals(1, Solution.checkRuleFour("MDMCDXX"));
+        Assert.assertEquals(4, Solution.checkRuleFour("MMMMVMCDXX"));
     }
 
     @Test
     public void testCheckRuleFive() throws Exception {
-        Assert.assertEquals(2,checkRuleFive("MCVIIII"));
-        Assert.assertEquals(4,checkRuleFive("MMMMDCCCCVII"));
-        Assert.assertEquals(0,checkRuleFive("IIIIIIII"));
-        Assert.assertEquals(4,checkRuleFive("IIIIIIII"));
+        Assert.assertEquals(2, Solution.checkRuleFive("MCVIIII"));
+        Assert.assertEquals(4, Solution.checkRuleFive("MMMMDCCCCVII"));
+        Assert.assertEquals(0, Solution.checkRuleFive("IIIIIIII"));
+        Assert.assertEquals(4, Solution.checkRuleFive("IIIIIIII"));
 
 
     }

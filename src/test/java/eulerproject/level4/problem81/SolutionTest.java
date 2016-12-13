@@ -4,16 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static eulerproject.level4.problem81.Solution.getMinimalPath;
+import static eulerproject.level4.problem81.Solution.*;
 
 /**
  * Created by Lukasz on 2016-11-03.
  */
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import static eulerproject.level4.problem81.Solution.*;
 
 /**
  * Created by Lukasz on 2016-11-03.
