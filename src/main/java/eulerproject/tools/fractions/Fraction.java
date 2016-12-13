@@ -66,8 +66,6 @@ public class Fraction implements Comparable {
 
     }
 
-    ;
-
     public Fraction sub(Fraction oth) {
         Fraction othRev = new Fraction(-oth.getNominator(), oth.getDenominator());
         return this.add(othRev);
@@ -135,16 +133,27 @@ public class Fraction implements Comparable {
         return new Fraction(counter, denominator - 1);
     }
 
-
-
-
     @Override
     public int compareTo(Object o) {
         return (int) this.simplifyFraction().sub((Fraction)o).getNominator();
     }
 
-
     public double asDouble() {
         return (double)nominator/(double)denominator;
+    }
+
+    public long getHighestCommonFraction() {
+        long hcf;
+
+        if (nominator > denominator)
+            hcf = denominator;
+        else
+            hcf = nominator;
+
+        for (; hcf > 0; hcf--)
+            if ((nominator % hcf == 0) && (denominator % hcf == 0))
+                break;
+
+        return hcf;
     }
 }

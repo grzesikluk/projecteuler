@@ -9,6 +9,7 @@ import org.junit.Test;
  * Created by grzesikl on 10/11/2016.
  */
 public class FractionTest {
+
     Primes primes;
 
     @Before
@@ -47,4 +48,11 @@ public class FractionTest {
         Assert.assertTrue(new Fraction(54432,55030).compareTo(new Fraction(15499, 94744))<0);
     }
 
+    @Test
+    public void getHighestCommonFraction() throws Exception {
+
+        Assert.assertEquals(1,new Fraction(2,7).getHighestCommonFraction());
+        Assert.assertEquals(2,new Fraction(4,6).getHighestCommonFraction());
+        Assert.assertEquals(3,new Fraction(12,27).getHighestCommonFraction());
+    }
 }
