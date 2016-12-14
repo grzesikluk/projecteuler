@@ -21,7 +21,7 @@ public class PrimeFactorizationTest {
     @Before
     public void init() {
         primes = new Primes(MAX_PRIME);
-        primes.generatePrimes();
+        primes.init();
     }
 
     @Test

@@ -13,7 +13,7 @@ public class Solution {
 
     static {
         primes = new Primes(MAX);
-        primes.generatePrimes();
+        primes.init();
     }
 
 

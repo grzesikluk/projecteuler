@@ -11,13 +11,13 @@ public class Primes {
     public Primes(int max) {
         max_value = max;
         primes = new boolean[max_value];
-        generatePrimes();
+        init();
     }
 
     private int max_value;
     private boolean[] primes;
 
-    public void generatePrimes() {
+    public void init() {
         primes[0] = false;
         primes[1] = false;
         for (int i = 2; i < max_value; i++)

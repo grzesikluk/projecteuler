@@ -39,7 +39,7 @@ public class DenominatorGeneratorBig {
 
     public static void init() {
         primes = new Primes(MAX);
-        primes.generatePrimes();
+        primes.init();
 
         factor = new BigInteger("30");
         index = BigInteger.ZERO;

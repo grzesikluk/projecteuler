@@ -15,7 +15,7 @@ public class FractionTest {
     @Before
     public void init() {
         primes = new Primes(1000);
-        primes.generatePrimes();
+        primes.init();
     }
 
     @Test
@@ -51,8 +51,8 @@ public class FractionTest {
     @Test
     public void getHighestCommonFraction() throws Exception {
 
-        Assert.assertEquals(1,new Fraction(2,7).getHighestCommonFraction());
-        Assert.assertEquals(2,new Fraction(4,6).getHighestCommonFraction());
-        Assert.assertEquals(3,new Fraction(12,27).getHighestCommonFraction());
+        Assert.assertEquals(1,new Fraction(2,7).getHighestCommonFactor());
+        Assert.assertEquals(2,new Fraction(4,6).getHighestCommonFactor());
+        Assert.assertEquals(3,new Fraction(12,27).getHighestCommonFactor());
     }
 }

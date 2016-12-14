@@ -12,7 +12,7 @@ public class Fraction implements Comparable {
 
     static {
         primes = new Primes(1000000);
-        primes.generatePrimes();
+        primes.init();
     }
 
     public Fraction(long nominator, long denominator) {
@@ -76,18 +76,8 @@ public class Fraction implements Comparable {
     }
 
     public Fraction simplifyFraction() {
-        Fraction result = new Fraction(this);
-        int i = 2;
-
-        while (i > 0 && i <= result.getDenominator() && i <= result.getDenominator()) {
-
-            if (result.getNominator() % i == 0 && result.getDenominator() % i == 0) {
-                result = new Fraction(result.getNominator() / i, result.getDenominator() / i);
-            } else {
-                i = primes.getNextPrime(i);
-            }
-        }
-
+       long hcf = getHighestCommonFactor();
+        Fraction result = new Fraction(this.nominator/hcf,this.denominator/hcf);
         return result;
     }
 
@@ -142,7 +132,7 @@ public class Fraction implements Comparable {
         return (double)nominator/(double)denominator;
     }
 
-    public long getHighestCommonFraction() {
+    public long getHighestCommonFactor() {
         long hcf;
 
         if (nominator > denominator)
@@ -155,5 +145,9 @@ public class Fraction implements Comparable {
                 break;
 
         return hcf;
+    }
+
+    public boolean isReducedProperFraction() {
+        return getHighestCommonFactor() == 1;
     }
 }

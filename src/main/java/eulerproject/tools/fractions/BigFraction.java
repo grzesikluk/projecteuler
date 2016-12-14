@@ -17,7 +17,7 @@ public class BigFraction implements Comparable {
 
     static {
         primes = new Primes(10000000);
-        primes.generatePrimes();
+        primes.init();
     }
 
 

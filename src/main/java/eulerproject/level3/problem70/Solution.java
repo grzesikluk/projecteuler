@@ -18,7 +18,7 @@ public class Solution {
     static {
 
         primes = new Primes(MAX);
-        primes.generatePrimes();
+        primes.init();
         primesList = primes.asList();
         eulerTotientFunctionResults = new int[MAX];
 

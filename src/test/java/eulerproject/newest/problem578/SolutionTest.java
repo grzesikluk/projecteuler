@@ -19,7 +19,7 @@ public class SolutionTest {
     @Before
     public void init() {
         primes = new Primes((int) MAX_PRIME);
-        primes.generatePrimes();
+        primes.init();
     }
 
     @Test
