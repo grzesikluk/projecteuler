@@ -16,7 +16,7 @@ public class Solution {
 
     private static void initPrimes(int max) {
         primes = new Primes(max);
-        primes.generatePrimes();
+        primes.init();
         primesArray = primes.asList();
         System.out.println("Primes initiated. " + primesArray.length);
     }

@@ -28,12 +28,6 @@ public class Solution {
         System.out.println(fractions.size());
         System.out.println(getResult());
 
-
-//        for(int i=0;i<MAX;i++) {
-//            if(i%1000 == 0)
-//            System.out.println(i + " " + PrimeFactorization.getPrimeFactors(i,primes));
-//        }
-
     }
 
     public static void initFractionArray() {
@@ -42,7 +36,7 @@ public class Solution {
 
         for (int denominator = 2; denominator <= MAX; denominator++) {
 
-            for (int nominator = getNominatorMinValue(denominator); nominator < getNominatorMaxValue(denominator); nominator++) {
+            for (int nominator = getNominatorMinValue(denominator, lowerBoundaryFraction); nominator < getNominatorMaxValue(denominator, searchedFraction); nominator++) {
 
                 newFraction = new Fraction(nominator, denominator);
 
@@ -67,11 +61,11 @@ public class Solution {
     }
 
 
-    public static int getNominatorMinValue(int denominator) {
+    public static int getNominatorMinValue(int denominator, Fraction limit) {
         return 1;
     }
 
-    public static int getNominatorMaxValue(int denominator) {
+    public static int getNominatorMaxValue(int denominator, Fraction limit) {
         return denominator;
     }
 
