@@ -1,5 +1,6 @@
 package eulerproject.newest.problem583;
 
+
 /**
  * Created by Lukasz on 2016-12-24.
  */
@@ -20,7 +21,7 @@ public class HeronEnvelope {
 
 
     public boolean checkIfProperEnv() {
-        return flap*flap+(sideX*sideX)/4 <= sideY*sideY;
+        return (sideY*sideY+(sideX*sideX)/4) >= flap*flap;
     }
 
     public boolean checkIfAllDiagonalsIntegral() {
