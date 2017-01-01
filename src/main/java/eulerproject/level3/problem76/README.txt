@@ -3,3 +3,7 @@ How many different ways can one hundred be written as a sum of at least two posi
 
 https://en.wikipedia.org/wiki/Partition_%28number_theory%29
 http://stackoverflow.com/questions/8193438/find-the-no-of-ways-of-getting-a-sum-n-with-all-positive-integers-less-than-n
+
+
+http://www.math.clemson.edu/~jimlb/Teaching/Math573/Math573partitions1.pdf
+https://www.math.upenn.edu/~wilf/PIMS/PIMSLectures.pdf
