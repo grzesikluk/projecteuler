@@ -1,18 +1,21 @@
-package eulerproject.level3.problem71;
+package eulerproject.level3.problem73;
 
 import eulerproject.tools.fractions.Fraction;
 import eulerproject.tools.primes.Primes;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Lukasz on 2016-12-13.
  */
 public class Solution {
-    private static final int MAX = 1000000;
-    private static Fraction searchedFraction = new Fraction(3, 7);  //0,42857142857142857142857142857143
-    private static Fraction lowerBoundaryFraction = new Fraction(2, 7);
+    private static final int MAX = 12000;
+    private static Fraction searchedFraction = new Fraction(1, 2);  //0,42857142857142857142857142857143
+    private static Fraction lowerBoundaryFraction = new Fraction(1, 3);
     private static Primes primes;
+    private static Set<Fraction> fractionSet;
 
     static {
         primes = new Primes(MAX / 2);
@@ -29,22 +32,19 @@ public class Solution {
 
     public static void initFractionArray() {
         Fraction newFraction;
+        fractionSet = new HashSet<>();
 
-        for (int denominator = MAX - 1; denominator > MAX / 2; denominator--) {
+        for (int denominator = 2; denominator < MAX; denominator++) {
 
             int minNominator = getNominatorMinValue(denominator, lowerBoundaryFraction);
             int maxNominator = getNominatorMaxValue(denominator, searchedFraction);
 
-            for (int nominator = maxNominator; nominator >= minNominator; nominator--) {
+            for (int nominator = minNominator; nominator <= maxNominator; nominator++) {
 
                 newFraction = new Fraction(nominator, denominator);
 
-                if (newFraction.isReducedProperFraction()) {
-
-                    if (lowerBoundaryFraction.compareTo(newFraction) < 0)
-                        lowerBoundaryFraction = newFraction;
-
-                }
+                if (newFraction.isReducedProperFraction())
+                    fractionSet.add(newFraction);
 
             }
         }
@@ -52,7 +52,7 @@ public class Solution {
     }
 
     public static long getResult() {
-        return lowerBoundaryFraction.getNominator();
+        return fractionSet.size();
     }
 
 
