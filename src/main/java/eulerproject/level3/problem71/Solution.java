@@ -4,18 +4,13 @@ import eulerproject.tools.fractions.Fraction;
 import eulerproject.tools.primes.Primes;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * Created by Lukasz on 2016-12-13.
  */
 public class Solution {
-    private static final int MAX = 100;
-    private static Set<Fraction> fractions;
-    private static Fraction searchedFraction = new Fraction(3, 7);
+    private static final int MAX = 1000000;
+    private static Fraction searchedFraction = new Fraction(3, 7);  //0,42857142857142857142857142857143
     private static Fraction lowerBoundaryFraction = new Fraction(2, 7);
     private static Primes primes;
 
@@ -27,27 +22,29 @@ public class Solution {
     public static void main(String[] args) {
         System.out.println("Starting " + new Date());
         initFractionArray();
-        System.out.println(fractions.size());
         System.out.println(getResult());
         System.out.println("End " + new Date());
 
     }
 
     public static void initFractionArray() {
-        fractions = new TreeSet<>();
         Fraction newFraction;
 
-        for (int denominator = 2; denominator <= MAX; denominator++) {
+        for (int denominator = MAX-1; denominator > MAX/2; denominator--) {
+
             int minNominator = getNominatorMinValue(denominator, lowerBoundaryFraction);
             int maxNominator = getNominatorMaxValue(denominator, searchedFraction);
 
-            for (int nominator = minNominator; nominator <= maxNominator; nominator++) {
+            for (int nominator = maxNominator; nominator >= minNominator; nominator--) {
 
                 newFraction = new Fraction(nominator, denominator);
 
                 if (newFraction.isReducedProperFraction()) {
-                    fractions.add(new Fraction(nominator, denominator));
-                    lowerBoundaryFraction = newFraction;
+
+                    if(lowerBoundaryFraction.compareTo(newFraction) < 0) {
+                        lowerBoundaryFraction = newFraction;
+                        System.out.println(lowerBoundaryFraction + " " + (double) lowerBoundaryFraction.getNominator() / lowerBoundaryFraction.getDenominator());
+                    }
 
                 }
 
@@ -56,34 +53,30 @@ public class Solution {
 
     }
 
-    public static Fraction getResult() {
-        List<Fraction> fractionsList = fractions.stream().collect(Collectors.toList());
-        return fractionsList.get(fractionsList.size() - 2);
+    public static long getResult() {
+        return lowerBoundaryFraction.getNominator();
     }
 
 
     public static int getNominatorMinValue(int denominator, Fraction limit) {
         int res = 1;
 
-        if(denominator == limit.getDenominator())
-            return (int)limit.getNominator();
+        if (denominator == limit.getDenominator())
+            return (int) limit.getNominator() - 1;
 
-        while( res < limit.getNominator() * denominator / limit.getDenominator())
+        while (res * limit.getDenominator() < limit.getNominator() * denominator)
             res++;
 
-        return res+1;
+        return res - 1;
     }
 
     public static int getNominatorMaxValue(int denominator, Fraction limit) {
         int res = 1;
 
-        if(denominator == limit.getDenominator())
-            return (int)limit.getNominator();
-
-        while( res < limit.getNominator() * denominator / limit.getDenominator())
+        while (res * limit.getDenominator() < limit.getNominator() * denominator)
             res++;
 
-        return res;
+        return res-1;
     }
 
 
