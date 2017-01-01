@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class Solution {
     private static final int MAX = 12000;
-    private static Fraction searchedFraction = new Fraction(1, 2);  //0,42857142857142857142857142857143
+    private static Fraction searchedFraction = new Fraction(1, 2);
     private static Fraction lowerBoundaryFraction = new Fraction(1, 3);
     private static Primes primes;
     private static Set<Fraction> fractionSet;
@@ -34,19 +34,21 @@ public class Solution {
         Fraction newFraction;
         fractionSet = new HashSet<>();
 
-        for (int denominator = 2; denominator < MAX; denominator++) {
+        for (int denominator = 2; denominator <= MAX; denominator++) {
 
             int minNominator = getNominatorMinValue(denominator, lowerBoundaryFraction);
             int maxNominator = getNominatorMaxValue(denominator, searchedFraction);
 
-            for (int nominator = minNominator; nominator <= maxNominator; nominator++) {
+            if (minNominator > 0 && maxNominator > 0)
 
-                newFraction = new Fraction(nominator, denominator);
+                for (int nominator = minNominator; nominator <= maxNominator; nominator++) {
 
-                if (newFraction.isReducedProperFraction())
-                    fractionSet.add(newFraction);
+                    newFraction = new Fraction(nominator, denominator);
 
-            }
+                    if (newFraction.isReducedProperFraction())
+                        fractionSet.add(newFraction);
+
+                }
         }
 
     }
@@ -62,10 +64,10 @@ public class Solution {
         if (denominator == limit.getDenominator())
             return (int) limit.getNominator() - 1;
 
-        while (res * limit.getDenominator() < limit.getNominator() * denominator)
+        while (res * limit.getDenominator() <= limit.getNominator() * denominator)
             res++;
 
-        return res - 1;
+        return res;
     }
 
     public static int getNominatorMaxValue(int denominator, Fraction limit) {
