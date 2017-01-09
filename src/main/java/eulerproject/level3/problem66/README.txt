@@ -17,3 +17,7 @@ By finding minimal solutions in x for D = {2, 3, 5, 6, 7}, we obtain the followi
 Hence, by considering minimal solutions in x for D ≤ 7, the largest x is obtained when D=5.
 
 Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
+
+----
+https://pl.wikipedia.org/wiki/R%C3%B3wnanie_Pella
+https://www.researchgate.net/profile/Andrzej_Nowicki3/publication/271272583_Pell's_Equation/links/54c412000cf256ed5a9334da.pdf
