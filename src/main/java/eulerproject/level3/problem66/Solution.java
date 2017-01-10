@@ -21,8 +21,6 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-
-
         System.out.println(getSolution(MAX));
     }
 
@@ -42,7 +40,7 @@ public class Solution {
         BigInteger tempX = BigInteger.ZERO;
         int result = 1;
 
-        for (int i = 2; i <= maxD; i=primes.getNextPrime(i)) {
+        for (int i = 2; i <= maxD; i = primes.getNextPrime(i)) {
 
             if (!isSquare(new BigInteger(Integer.toString(i)))) {
 //                System.out.println("Checking no: " + i);
@@ -71,30 +69,21 @@ public class Solution {
         return i.equals(bigIntegerSqrt(i).pow(2));
     }
 
-
     public static Pair<BigInteger, BigInteger> getPellsEquationSolution(int D) {
-        final int limit = CONV_LIMIT;
+        List<Integer> convFractions = ContinuedFraction.getPartialQuotientsForQuadraticSurd(D, CONV_LIMIT);
 
-        List<Integer> convFractions = ContinuedFraction.getPartialQuotientsForQuadraticSurd(D,CONV_LIMIT);
+        int r = ContinuedFraction.getPeriodOfPartialQuotients(convFractions) - 1;
+        BigFraction convFraction;
 
-        int i = 1;
+        if (r % 2 == 0)
+            convFraction = ContinuedFraction.getConvergent(convFractions, 2 * r + 1);
+        else
+            convFraction = ContinuedFraction.getConvergent(convFractions, r);
 
-        while (i < limit) {
-            BigFraction convFraction = ContinuedFraction.getConvergent(convFractions, i);
-            Pair<BigInteger, BigInteger> pair = new Pair<>(convFraction.getNominator(), convFraction.getDenominator());
+        Pair<BigInteger, BigInteger> pair = new Pair<>(convFraction.getNominator(), convFraction.getDenominator());
 
-            if (isThisPairPellsEquationSolution(pair, D))
-                return pair;
-            i++;
-        }
+        return pair;
 
-        return null;
-
-    }
-
-    public static boolean isThisPairPellsEquationSolution(Pair<BigInteger, BigInteger> pair, int D) {
-        BigInteger result = pair.getKey().pow(2).subtract(new BigInteger(Integer.toString(D)).multiply(pair.getValue().pow(2)));
-        return result.equals(BigInteger.ONE);
     }
 
 }

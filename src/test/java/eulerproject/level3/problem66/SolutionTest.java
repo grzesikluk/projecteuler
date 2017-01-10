@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 
-import static eulerproject.level3.problem66.Solution.isThisPairPellsEquationSolution;
-
 /**
  * Created by grzesikl on 09/01/2017.
  */
@@ -21,17 +19,6 @@ public class SolutionTest {
         Assert.assertFalse(Solution.isSquare(new BigInteger("14210")));
         Assert.assertTrue(Solution.isSquare(new BigInteger("1522756")));
 
-
-    }
-
-
-    @Test
-    public void testIsThisPairPellsEquationSolution() throws Exception {
-        Assert.assertFalse(isThisPairPellsEquationSolution(new Pair<BigInteger, BigInteger>(new BigInteger("2"), new BigInteger("2")), 2));
-        Assert.assertTrue(isThisPairPellsEquationSolution(new Pair<BigInteger, BigInteger>(new BigInteger("3"), new BigInteger("2")), 2));
-        Assert.assertTrue(isThisPairPellsEquationSolution(new Pair<BigInteger, BigInteger>(new BigInteger("2"), new BigInteger("1")), 3));
-        Assert.assertTrue(isThisPairPellsEquationSolution(new Pair<BigInteger, BigInteger>(new BigInteger("24335"), new BigInteger("3588")), 46));
-        Assert.assertTrue(isThisPairPellsEquationSolution(new Pair<BigInteger, BigInteger>(new BigInteger("2535751"), new BigInteger("118230")), 460));
 
     }
 
