@@ -1,9 +1,12 @@
 package eulerproject.level3.problem64;
 
 import eulerproject.tools.StringHelper;
-import eulerproject.tools.fractions.SquareRootContinuedFraction;
+import eulerproject.tools.fractions.ContinuedFraction;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Lukasz on 2016-11-02.
@@ -30,7 +33,7 @@ public class Solution {
         for (int i = 1; i <= MAX; i++) {
 
             if (!cubes.contains(new Long(i))) {
-                List<Integer> factors = new SquareRootContinuedFraction(i).getFactors(FACTOR_LIMIT);
+                List<Integer> factors = ContinuedFraction.getConvergentsForNSqrt(i,FACTOR_LIMIT);
                 String factorsString = arrayListToString(factors);
 
                 List<String> period = Arrays.asList( StringHelper.findPeriodInSubstring(factorsString, 0).replace(" ","").split(","));

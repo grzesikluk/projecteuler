@@ -32,14 +32,7 @@ public class ContinuedFraction {
     }
 
 
-    /**
-     * Return 1/(conv + fraction)
-     *
-     * @param conv
-     * @param input
-     * @return
-     */
-    public static BigFraction getNextPart(Integer conv, BigFraction input) {
+    private static BigFraction getNextPart(Integer conv, BigFraction input) {
         BigFraction result = new BigFraction(new BigInteger(conv.toString()), new BigInteger("1"));
 
         result = result.add(input);
@@ -50,16 +43,59 @@ public class ContinuedFraction {
 
     }
 
-    /**
-     * Shall return list of convergents for sqrt(N)
-     *
-     * @param N
-     * @param limit - maximum number of digits (for infinite solutions)
-     * @return list of convergents
-     */
-    public static List<Integer> getConvergentsForNSqrt(int N, int limit) {
-        double nSqrt = Math.sqrt(N);
-        return getConvergents(nSqrt, limit);
+    public static List<Integer> getConvergentsForNSqrt(int S, int limit) {
+
+        int l = limit-1;
+        List<Integer> result = new ArrayList<>();
+
+        int m =0 ;
+        int d = 1;
+        int s = (int) Math.floor(Math.sqrt(S));
+
+        result.add(s);
+
+        int[] vector = new int[]{m,S,d,s};
+
+        while (l > 0) {
+            vector = getNextFractionFactorForNSqrt(vector);
+            if(vector!=null)
+                result.add(vector[3]);
+            else
+                break;
+
+            l--;
+        }
+
+        return result;
+
+    }
+
+
+    private static int[] getNextFractionFactorForNSqrt(int[] input) {
+        int m = input[0];
+        int S = input[1];
+        int d = input[2];
+        int a = input[3];
+
+        int[] result = new int[4];
+
+        int nextM = d * a - m;
+        int nextD = (S - nextM * nextM) / d;
+
+        if(nextD == 0)
+            return null; //finish
+
+        int floorS = (int) Math.floor(Math.sqrt(S));
+        int nextA = (int) Math.floor((floorS + nextM) / nextD);
+
+        //msda
+        result[0] = nextM;
+        result[1] = S;
+        result[2] = nextD;
+        result[3] = nextA;
+
+        return result;
+
     }
 
     public static List<Integer> getConvergents(double N, int limit) {
@@ -86,7 +122,7 @@ public class ContinuedFraction {
 
 
     public static BigFraction getConvergentValue(List<Integer> convs, int N) {
-        int i = N-1;
+        int i = N;
 
         BigFraction next = new BigFraction(new BigInteger("1"), new BigInteger(convs.get(i).toString()));
 
