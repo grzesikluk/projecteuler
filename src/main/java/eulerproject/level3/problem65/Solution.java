@@ -16,7 +16,7 @@ public class Solution {
 
         List<Integer> convs = getConvergentsListForEulerConstant(MAX);
 
-        BigFraction next = getConvergentValue(convs,100);
+        BigFraction next = getConvergentValue(convs,99);
 
         System.out.println(next);
         System.out.println(sumOfDigits(next.getNominator().toString()));
