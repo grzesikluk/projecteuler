@@ -33,7 +33,7 @@ public class Solution {
         for (int i = 1; i <= MAX; i++) {
 
             if (!cubes.contains(new Long(i))) {
-                List<Integer> factors = ContinuedFraction.getConvergentsForNSqrt(i,FACTOR_LIMIT);
+                List<Integer> factors = ContinuedFraction.getPartialQuotientsForQuadraticSurd(i,FACTOR_LIMIT);
                 String factorsString = arrayListToString(factors);
 
                 List<String> period = Arrays.asList( StringHelper.findPeriodInSubstring(factorsString, 0).replace(" ","").split(","));

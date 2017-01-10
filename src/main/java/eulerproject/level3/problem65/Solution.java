@@ -14,9 +14,9 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        List<Integer> convs = getConvergentsListForEulerConstant(MAX);
+        List<Integer> convs = getPartialQuotientsForEulerConstant(MAX);
 
-        BigFraction next = getConvergentValue(convs,99);
+        BigFraction next = getConvergent(convs,99);
 
         System.out.println(next);
         System.out.println(sumOfDigits(next.getNominator().toString()));

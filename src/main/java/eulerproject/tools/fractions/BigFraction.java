@@ -78,10 +78,8 @@ public class BigFraction implements Comparable {
     public BigFraction sub(BigFraction oth) {
         BigFraction othRev = new BigFraction(oth.getNominator().negate(), oth.getDenominator());
         return this.add(othRev);
-
     }
 
-    ;
 
     public boolean isCommonDenominator(BigFraction oth) {
         return oth.getDenominator() == getDenominator();
@@ -106,7 +104,6 @@ public class BigFraction implements Comparable {
             } catch (Exception e) {
                 System.out.println(i);
                 System.out.println(result);
-//                return result;
             }
         }
 

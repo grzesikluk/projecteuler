@@ -75,12 +75,12 @@ public class Solution {
     public static Pair<BigInteger, BigInteger> getPellsEquationSolution(int D) {
         final int limit = CONV_LIMIT;
 
-        List<Integer> convFractions = ContinuedFraction.getConvergentsForNSqrt(D,CONV_LIMIT);
+        List<Integer> convFractions = ContinuedFraction.getPartialQuotientsForQuadraticSurd(D,CONV_LIMIT);
 
         int i = 1;
 
         while (i < limit) {
-            BigFraction convFraction = ContinuedFraction.getConvergentValue(convFractions, i);
+            BigFraction convFraction = ContinuedFraction.getConvergent(convFractions, i);
             Pair<BigInteger, BigInteger> pair = new Pair<>(convFraction.getNominator(), convFraction.getDenominator());
 
             if (isThisPairPellsEquationSolution(pair, D))
