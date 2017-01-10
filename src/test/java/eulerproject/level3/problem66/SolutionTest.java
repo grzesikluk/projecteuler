@@ -67,4 +67,9 @@ public class SolutionTest {
                 new BigInteger("159395869721270110077187138775196900")), Solution.getPellsEquationSolution(541));
     }
 
+    @Test
+    public void testGetPellsEquationSolution_withContFraction_long661() throws Exception {
+        Assert.assertEquals(new Pair<BigInteger, BigInteger>(new BigInteger("16421658242965910275055840472270471049"),
+                new BigInteger("638728478116949861246791167518480580")), Solution.getPellsEquationSolution(661));
+    }
 }
