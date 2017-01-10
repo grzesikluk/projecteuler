@@ -3,6 +3,7 @@ package eulerproject.tools.functions;
 import eulerproject.tools.fractions.BigFraction;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,4 +51,38 @@ public class ContinuedFraction {
         return result;
 
     }
+
+    /**
+     * Shall return list of convergents for sqrt(N)
+     * @param N
+     * @param limit - maximum number of digits (for infinite solutions)
+     * @return list of convergents
+     */
+    public static List<Long> getConvergentsForNSqrt(int N, int limit) {
+        double nSqrt = Math.sqrt(N);
+        return getConvergents(nSqrt,limit);
+    }
+
+    public static List<Long> getConvergents(double N, int limit) {
+        List<Long> result = new ArrayList<>();
+
+        long tmp = 0;
+        int k = 0;
+        double tempN = N;
+
+        while(k<limit) {
+            tmp = (long)Math.floor(tempN);
+
+            result.add(new Long(tmp));
+            if((tempN-tmp) == 0)
+                break;
+
+            tempN = 1/(tempN-tmp);
+
+            k++;
+        }
+
+        return result;
+    }
+
 }
