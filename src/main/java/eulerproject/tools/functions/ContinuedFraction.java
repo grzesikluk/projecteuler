@@ -13,20 +13,20 @@ import java.util.List;
 public class ContinuedFraction {
 
 
-    public static List<Integer> getConvergentsListForEulerConstant(int max) {
-        List<Integer> result = new LinkedList<>();
+    public static List<Long> getConvergentsListForEulerConstant(int max) {
+        List<Long> result = new LinkedList<>();
 
-        result.add(new Integer(2));
+        result.add(new Long(2));
 
         int i = 1;
         int k = 1;
 
         while (i < max) {
             if ((i + 1) % 3 == 0) {
-                result.add(new Integer(2 * k));
+                result.add(new Long(2 * k));
                 k++;
             } else
-                result.add(new Integer(1));
+                result.add(new Long(1));
             i++;
         }
 
@@ -41,7 +41,7 @@ public class ContinuedFraction {
      * @param input
      * @return
      */
-    public static BigFraction getNextPart(Integer conv, BigFraction input) {
+    public static BigFraction getNextPart(Long conv, BigFraction input) {
         BigFraction result = new BigFraction(new BigInteger(conv.toString()), new BigInteger("1"));
 
         result = result.add(input);
@@ -54,13 +54,14 @@ public class ContinuedFraction {
 
     /**
      * Shall return list of convergents for sqrt(N)
+     *
      * @param N
      * @param limit - maximum number of digits (for infinite solutions)
      * @return list of convergents
      */
     public static List<Long> getConvergentsForNSqrt(int N, int limit) {
         double nSqrt = Math.sqrt(N);
-        return getConvergents(nSqrt,limit);
+        return getConvergents(nSqrt, limit);
     }
 
     public static List<Long> getConvergents(double N, int limit) {
@@ -70,19 +71,31 @@ public class ContinuedFraction {
         int k = 0;
         double tempN = N;
 
-        while(k<limit) {
-            tmp = (long)Math.floor(tempN);
+        while (k < limit) {
+            tmp = (long) Math.floor(tempN);
 
             result.add(new Long(tmp));
-            if((tempN-tmp) == 0)
+            if ((tempN - tmp) == 0)
                 break;
 
-            tempN = 1/(tempN-tmp);
+            tempN = 1 / (tempN - tmp);
 
             k++;
         }
 
         return result;
+    }
+
+
+    public static BigFraction getConvergentValue(List<Long> convs, int N) {
+        int i = N;
+
+        BigFraction next = new BigFraction(new BigInteger("1"), new BigInteger(convs.get(i).toString()));
+
+        while (i-- > 0)
+            next = getNextPart(convs.get(i), next);
+
+        return next.revertFraction();
     }
 
 }

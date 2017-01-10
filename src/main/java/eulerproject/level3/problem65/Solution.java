@@ -2,11 +2,9 @@ package eulerproject.level3.problem65;
 
 import eulerproject.tools.fractions.BigFraction;
 
-import java.math.BigInteger;
 import java.util.List;
 
-import static eulerproject.tools.functions.ContinuedFraction.getConvergentsListForEulerConstant;
-import static eulerproject.tools.functions.ContinuedFraction.getNextPart;
+import static eulerproject.tools.functions.ContinuedFraction.*;
 
 /**
  * Created by Lukasz on 2016-11-07.
@@ -16,18 +14,14 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        List<Integer> convs = getConvergentsListForEulerConstant(MAX);
+        List<Long> convs = getConvergentsListForEulerConstant(MAX);
 
         int i = convs.size() - 1;
 
-        BigFraction next = new BigFraction(new BigInteger("1"), new BigInteger(convs.get(i).toString()));
+        BigFraction next = getConvergentValue(convs,100);
 
-        while (i-- > 0) {
-            next = getNextPart(convs.get(i), next);
-//            System.out.println(next);
-        }
-        System.out.println(next.revertFraction());
-        System.out.println(sumOfDigits(next.revertFraction().getNominator().toString()));
+        System.out.println(next);
+        System.out.println(sumOfDigits(next.getNominator().toString()));
 
     }
 

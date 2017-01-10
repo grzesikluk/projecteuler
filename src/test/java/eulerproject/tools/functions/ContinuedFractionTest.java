@@ -18,36 +18,12 @@ import static eulerproject.tools.functions.ContinuedFraction.*;
 public class ContinuedFractionTest {
 
     @Test
-    public void testGetNextPart_sqrt_2_0() throws Exception {
-        Assert.assertEquals(new BigFraction(new BigInteger("3"),new BigInteger("2")).revertFraction(),
-                getNextPart(1,new BigFraction(new BigInteger("1"),new BigInteger("2"))));
-    }
-
-    @Test
-    public void testGetNextPart_sqrt_2_1() throws Exception {
-        Assert.assertEquals(new BigFraction(new BigInteger("7"),new BigInteger("5")).revertFraction(),
-                getNextPart(1,getNextPart(2,new BigFraction(new BigInteger("1"),new BigInteger("2")))));
-    }
-
-    @Test
-    public void testGetNextPart_sqrt_2_2() throws Exception {
-        Assert.assertEquals(new BigFraction(new BigInteger("17"),new BigInteger("12")).revertFraction(),
-                getNextPart(1,getNextPart(2,getNextPart(2,new BigFraction(new BigInteger("1"),new BigInteger("2"))))));
-    }
-
-    @Test
-    public void testGetNextPart_sqrt_2_3() throws Exception {
-        Assert.assertEquals(new BigFraction(new BigInteger("41"),new BigInteger("29")).revertFraction(),
-                getNextPart(1,getNextPart(2,getNextPart(2,getNextPart(2,new BigFraction(new BigInteger("1"),new BigInteger("2")))))));
-    }
-
-    @Test
     public void testGetConvergentsListForEulerConstant() throws Exception {
-        List<Integer> list = Arrays.asList(new Integer[]{
-                new Integer(2),new Integer(1),new Integer(2),new Integer(1),
-                new Integer(1),new Integer(4),new Integer(1),
-                new Integer(1),new Integer(6),new Integer(1),
-                new Integer(1),new Integer(8),new Integer(1)});
+        List<Long> list = Arrays.asList(new Long[]{
+                new Long(2),new Long(1),new Long(2),new Long(1),
+                new Long(1),new Long(4),new Long(1),
+                new Long(1),new Long(6),new Long(1),
+                new Long(1),new Long(8),new Long(1)});
 
         Assert.assertEquals(list,getConvergentsListForEulerConstant(list.size()));
 
@@ -145,5 +121,22 @@ public class ContinuedFractionTest {
         Assert.assertEquals(list, getConvergents(Math.PI,12));
 
     }
+
+
+    @Test
+    public void testGetConvergentValue() throws Exception {
+        List<Long> convs = getConvergentsForNSqrt(2,5000);
+
+        Assert.assertEquals(new BigFraction(new BigInteger("3"),new BigInteger("2")),getConvergentValue(convs,1));
+        Assert.assertEquals(new BigFraction(new BigInteger("7"),new BigInteger("5")),getConvergentValue(convs,2));
+        Assert.assertEquals(new BigFraction(new BigInteger("17"),new BigInteger("12")),getConvergentValue(convs,3));
+        Assert.assertEquals(new BigFraction(new BigInteger("41"),new BigInteger("29")),getConvergentValue(convs,4));
+
+
+    }
+
+
+
+
 
 }
