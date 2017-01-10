@@ -1,4 +1,4 @@
-package eulerproject.level3.problem65;
+package eulerproject.tools.functions;
 
 import eulerproject.tools.fractions.BigFraction;
 import org.junit.Assert;
@@ -8,14 +8,14 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
-import static eulerproject.level3.problem65.Solution.getConvergentsListForEulerConstant;
-import static eulerproject.level3.problem65.Solution.getNextPart;
+import static eulerproject.tools.functions.ContinuedFraction.getConvergentsListForEulerConstant;
+import static eulerproject.tools.functions.ContinuedFraction.getNextPart;
+
 
 /**
- * Created by grzesikl on 10/11/2016.
+ * Created by Lukasz on 2017-01-10.
  */
-public class SolutionTest {
-
+public class ContinuedFractionTest {
     @Test
     public void testGetNextPart0() throws Exception {
         Assert.assertEquals(new BigFraction(new BigInteger("3"),new BigInteger("2")).revertFraction(),getNextPart(1,new BigFraction(new BigInteger("1"),new BigInteger("2"))));
