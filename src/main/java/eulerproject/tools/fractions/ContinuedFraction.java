@@ -103,32 +103,4 @@ public class ContinuedFraction {
 
     }
 
-
-    private static int[] getNextFractionFactorForNSqrt(int[] input) {
-        int m = input[0];
-        int S = input[1];
-        int d = input[2];
-        int a = input[3];
-
-        int[] result = new int[4];
-
-        int nextM = d * a - m;
-        int nextD = (S - nextM * nextM) / d;
-
-        if(nextD == 0)
-            return null; //finish
-
-        int floorS = (int) Math.floor(Math.sqrt(S));
-        int nextA = (int) Math.floor((floorS + nextM) / nextD);
-
-        //msda
-        result[0] = nextM;
-        result[1] = S;
-        result[2] = nextD;
-        result[3] = nextA;
-
-        return result;
-
-    }
-
 }
