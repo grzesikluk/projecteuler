@@ -72,9 +72,6 @@ public class BigFraction implements Comparable {
 
     }
 
-    ;
-
-
     public BigFraction sub(BigFraction oth) {
         BigFraction othRev = new BigFraction(oth.getNominator().negate(), oth.getDenominator());
         return this.add(othRev);
@@ -86,17 +83,15 @@ public class BigFraction implements Comparable {
     }
 
     public BigFraction simplifyFraction() {
-        BigInteger zero = BigInteger.ZERO;
-        BigInteger one = BigInteger.ONE;
-        BigFraction result = new BigFraction(this);
-        BigInteger bigI = new BigInteger("2");
         int i = 2;
+        BigFraction result = new BigFraction(this);
+        BigInteger bigI = new BigInteger(new Integer(i).toString());
 
         while (i > 0 && bigI.compareTo(result.getDenominator()) <= 0 && bigI.compareTo(result.getNominator()) <= 0) {
             bigI = new BigInteger(new Integer(i).toString());
 
             try {
-                if (result.getNominator().mod(bigI).equals(zero) && result.getDenominator().mod(bigI).equals(zero)) {
+                if (result.getNominator().mod(bigI).equals(BigInteger.ZERO) && result.getDenominator().mod(bigI).equals(BigInteger.ZERO)) {
                     result = new BigFraction(result.getNominator().divide(bigI), result.getDenominator().divide(bigI));
                 } else {
                     i = primes.getNextPrime(i);
@@ -135,7 +130,6 @@ public class BigFraction implements Comparable {
         return true;
     }
 
-
     public BigFraction revertFraction() {
         return new BigFraction(getDenominator(), getNominator());
     }
@@ -151,7 +145,6 @@ public class BigFraction implements Comparable {
         return denominator.compareTo(fraction.denominator) == 0;
 
     }
-
 
     public BigFraction getResilenceFactor(int[] primes) {
 
@@ -173,7 +166,6 @@ public class BigFraction implements Comparable {
     public int compareTo(Object o) {
         return this.simplifyFraction().sub((BigFraction) o).getNominator().intValue();
     }
-
 
     public BigDecimal asDecimal() {
         BigDecimal bigNomin = new BigDecimal(nominator);

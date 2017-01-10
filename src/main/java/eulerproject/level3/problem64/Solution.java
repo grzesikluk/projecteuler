@@ -1,9 +1,7 @@
 package eulerproject.level3.problem64;
 
-import eulerproject.tools.StringHelper;
 import eulerproject.tools.fractions.ContinuedFraction;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,11 +32,9 @@ public class Solution {
 
             if (!cubes.contains(new Long(i))) {
                 List<Integer> factors = ContinuedFraction.getPartialQuotientsForQuadraticSurd(i,FACTOR_LIMIT);
-                String factorsString = arrayListToString(factors);
 
-                List<String> period = Arrays.asList( StringHelper.findPeriodInSubstring(factorsString, 0).replace(" ","").split(","));
-
-                if ((period.size()-1) % 2 != 0 )
+                int periodSize = ContinuedFraction.getPeriodOfPartialQuotients(factors);
+                if (periodSize % 2 != 0 )
                     counter++;
 
             }
@@ -59,6 +55,5 @@ public class Solution {
         return sb.toString();
 
     }
-
 
 }

@@ -2,7 +2,6 @@ package eulerproject.tools.fractions;
 
 import eulerproject.tools.primes.Primes;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -11,10 +10,6 @@ import java.math.BigInteger;
  * Created by grzesikl on 10/11/2016.
  */
 public class BigFractionTest {
-    @Before
-    public void init() {
-        BigFraction bf = new BigFraction(BigInteger.ONE, new BigInteger("3"));
-    }
 
     @Test
     public void testIsResilent1() throws Exception {
@@ -77,6 +72,14 @@ public class BigFractionTest {
 
         Assert.assertEquals(new BigFraction(BigInteger.ONE, BigInteger.ONE),
                 new BigFraction(BigInteger.ONE, new BigInteger("2")).getResilenceFactor(primes.asList()));
+    }
+
+
+    @Test
+    public void testSimplifyFraction_1() throws Exception {
+
+        Assert.assertEquals(new BigFraction(new BigInteger("123123412341166123412341234357"), new BigInteger("123123412341166123412341234357135125")),
+                new BigFraction(new BigInteger("123123412341166123412341234357"), new BigInteger("123123412341166123412341234357135125")).simplifyFraction());
     }
 }
 

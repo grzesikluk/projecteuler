@@ -131,9 +131,31 @@ public class ContinuedFractionTest {
         Assert.assertEquals(new BigFraction(new BigInteger("41"),new BigInteger("29")), getConvergent(convs,4));
     }
 
+    @Test
+    public void testGetPeriodOfPartialQuotients_test1() throws Exception {
+        List<Integer> inputList = Arrays.asList(4, 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2, 8);
+        Assert.assertEquals(6,getPeriodOfPartialQuotients(inputList));
+    }
+
+
+    @Test
+    public void testGetPeriodOfPartialQuotients_test2() throws Exception {
+        List<Integer> inputList = Arrays.asList(6, 12, 12, 12, 12);
+        Assert.assertEquals(1,getPeriodOfPartialQuotients(inputList));
+    }
+
+
+    @Test
+    public void testGetPeriodOfPartialQuotients_test3() throws Exception {
+        List<Integer> inputList = Arrays.asList(11, 1, 2, 2, 1, 1, 2, 2, 1, 22, 1, 2, 2, 1, 1, 2, 2, 1, 22, 1, 2, 2, 1, 1, 2, 2, 1, 22);
+        Assert.assertEquals(9,getPeriodOfPartialQuotients(inputList));
+    }
+
+
+
     @Test(timeout = 2000)
     public void testGetFactors_Integer() {
-        getPartialQuotientsForQuadraticSurd(13,1000000);
+        getPartialQuotientsForQuadraticSurd(137,10_000_000);
 
     }
 

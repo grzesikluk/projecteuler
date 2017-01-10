@@ -103,4 +103,18 @@ public class ContinuedFraction {
 
     }
 
+    public static int getPeriodOfPartialQuotients(List<Integer> factors) {
+        Integer searchedFactor = factors.get(0)*2;
+        int i=1;
+
+        while(i < factors.size())  {
+            if(factors.get(i).equals(searchedFactor))
+                break;
+            i++;
+        }
+        return i;
+    }
+
+
+
 }
