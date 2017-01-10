@@ -125,13 +125,10 @@ public class ContinuedFractionTest {
     @Test
     public void testGetConvergentValue() throws Exception {
         List<Integer> convs = getConvergentsForNSqrt(2,50);
-
         Assert.assertEquals(new BigFraction(new BigInteger("3"),new BigInteger("2")),getConvergentValue(convs,1));
         Assert.assertEquals(new BigFraction(new BigInteger("7"),new BigInteger("5")),getConvergentValue(convs,2));
         Assert.assertEquals(new BigFraction(new BigInteger("17"),new BigInteger("12")),getConvergentValue(convs,3));
         Assert.assertEquals(new BigFraction(new BigInteger("41"),new BigInteger("29")),getConvergentValue(convs,4));
-
-
     }
 
     @Test(timeout = 1000)
@@ -139,7 +136,6 @@ public class ContinuedFractionTest {
         System.out.println(getConvergentsForNSqrt(13,1000000));
 
     }
-
 
 
 

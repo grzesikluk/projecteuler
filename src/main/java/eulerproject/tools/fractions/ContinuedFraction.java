@@ -120,7 +120,6 @@ public class ContinuedFraction {
         return result;
     }
 
-
     public static BigFraction getConvergentValue(List<Integer> convs, int N) {
         int i = N;
 
