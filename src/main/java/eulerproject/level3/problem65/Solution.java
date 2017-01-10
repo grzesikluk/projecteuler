@@ -4,7 +4,7 @@ import eulerproject.tools.fractions.BigFraction;
 
 import java.util.List;
 
-import static eulerproject.tools.functions.ContinuedFraction.*;
+import static eulerproject.tools.fractions.ContinuedFraction.*;
 
 /**
  * Created by Lukasz on 2016-11-07.
@@ -14,9 +14,7 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        List<Long> convs = getConvergentsListForEulerConstant(MAX);
-
-        int i = convs.size() - 1;
+        List<Integer> convs = getConvergentsListForEulerConstant(MAX);
 
         BigFraction next = getConvergentValue(convs,100);
 

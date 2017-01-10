@@ -11,40 +11,6 @@ import java.util.List;
  */
 public class SquareRootContinuedFractionTest {
 
-    @Test
-    public void testGetNextFractionFactor0() throws Exception {
-
-        SquareRootContinuedFraction sFactor     = new SquareRootContinuedFraction(0,23,1,4);
-        SquareRootContinuedFraction sFactorNext = new SquareRootContinuedFraction(4,23,7,1);
-
-        Assert.assertEquals(sFactorNext,sFactor.getNextFractionFactor());
-    }
-
-    @Test
-    public void testGenerateFractionFactor() throws Exception {
-        int square = 23;
-        int s = (int)Math.floor(Math.sqrt(square));
-
-        SquareRootContinuedFraction sFactor     = new SquareRootContinuedFraction(0,square,1,s);
-
-        Assert.assertEquals(4,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(1,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(3,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(1,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(8,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(1,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(3,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(1,sFactor.getA());
-        sFactor = sFactor.getNextFractionFactor();
-        Assert.assertEquals(8,sFactor.getA());
-    }
 
     @Test
     public void testGetFactors1() {
@@ -57,7 +23,7 @@ public class SquareRootContinuedFractionTest {
         expectedResult.add(2);
         expectedResult.add(2);
 
-        Assert.assertEquals(expectedResult,new SquareRootContinuedFraction(0,square,1,s).getFactors(4));
+        Assert.assertEquals(expectedResult,new SquareRootContinuedFraction(2).getFactors(4));
 
     }
 
@@ -84,4 +50,16 @@ public class SquareRootContinuedFractionTest {
 
     }
 
+
+    @Test(timeout=2000)
+    public void testGetFactors_long() {
+        new SquareRootContinuedFraction(131234).getFactors(10000000);
+
+    }
+
+    @Test(timeout=1000)
+    public void testGetFactors_short() {
+        new SquareRootContinuedFraction(131234).getFactors(10000000);
+
+    }
 }

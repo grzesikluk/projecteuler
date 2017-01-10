@@ -1,6 +1,5 @@
-package eulerproject.tools.functions;
+package eulerproject.tools.fractions;
 
-import eulerproject.tools.fractions.BigFraction;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static eulerproject.tools.functions.ContinuedFraction.*;
+import static eulerproject.tools.fractions.ContinuedFraction.*;
 
 
 /**
@@ -125,7 +124,7 @@ public class ContinuedFractionTest {
 
     @Test
     public void testGetConvergentValue() throws Exception {
-        List<Long> convs = getConvergentsForNSqrt(2,5000);
+        List<Integer> convs = getConvergentsForNSqrt(2,5000);
 
         Assert.assertEquals(new BigFraction(new BigInteger("3"),new BigInteger("2")),getConvergentValue(convs,1));
         Assert.assertEquals(new BigFraction(new BigInteger("7"),new BigInteger("5")),getConvergentValue(convs,2));
@@ -135,6 +134,14 @@ public class ContinuedFractionTest {
 
     }
 
+    @Test(timeout = 150)
+    public void testGetFactors_long() {
+        int square = 13;
+        int s = (int)Math.floor(Math.sqrt(square));
+
+        System.out.println(getConvergentsForNSqrt(13,1000000));
+
+    }
 
 
 
