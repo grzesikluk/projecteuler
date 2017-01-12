@@ -25,4 +25,14 @@ public class PrimesSetTest {
         Assert.assertNull(primes.getNextPrime(99));
     }
 
+
+    @Test
+    public void isPrimeValue() throws Exception {
+        Assert.assertTrue(Primes.isPrimeValue(11L));
+        Assert.assertTrue(Primes.isPrimeValue(37L));
+        Assert.assertTrue(Primes.isPrimeValue(102643L));
+        Assert.assertTrue(Primes.isPrimeValue(104729L));
+
+    }
+
 }
