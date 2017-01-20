@@ -61,4 +61,14 @@ public class Primes {
         return list.stream().mapToInt(s->s).toArray();
     }
 
+    public static boolean isPrimeValue(long k) {
+
+        for(long i=2;i<k/2;i++)
+            if(k%i == 0)
+                return false;
+        return true;
+
+
+    }
+
 }

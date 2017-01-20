@@ -10,11 +10,15 @@ import java.util.stream.Collectors;
  */
 public class Solution {
     private static int[] primesArray;
-    private static int MAX = 10000;
-    private static int MAX_PRIME = new Integer(Integer.toString(MAX) + Integer.toString(MAX));
+
+    /*let's judge the sizes*/
+    private static int MAX = 1000;
+    private static int NUMBER_PRIMES = 4;
     private static Primes primes;
 
-    private static void initPrimes(int max) {
+    private static void initPrimes() {
+        int max = MAX;
+
         primes = new Primes(max);
         primes.init();
         primesArray = primes.asList();
@@ -22,34 +26,28 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        initPrimes(MAX_PRIME);
-        Set<Pair> initialPairSet = createInitialPrimePairSet(primesArray, MAX);
-        List<Set<Pair>> firsSetOfPairs = copyToListOfSet(initialPairSet);
+        initPrimes();
 
-        List<Set<Pair>> listOfChains = findChains(initialPairSet, firsSetOfPairs, 10, primes);
-
-        Map<Integer, List<Integer>> resultMap = new LinkedHashMap<>();
-
-        for (Set<Pair> chainOfPairsSet : listOfChains) {
-            List<Integer> tempList = convertToIntegerList(chainOfPairsSet);
-
-            if ((tempList.size() >= 5) && isPrimeList(tempList, primes))
-                resultMap.put(getListSum(tempList), tempList);
-        }
-
-        for (Integer i : resultMap.keySet().stream().sorted().collect(Collectors.toList()))
-            System.out.println(resultMap.get(i) + " " + i);
+        /**
+         * need to rethink:
+         *
+         * 1) do not create pairs,
+         * 2) try to create chains of primes one by one
+         *
+         */
 
 
     }
 
-    public static Set<Pair> createInitialPrimePairSet(int[] primesList, int maxPrimeVal) {
+    public static Set<Pair> createInitialPrimePairSet(int[] primesList) {
         Set<Pair> result = new HashSet<>();
 
-        for (int i = 0; primesList[i] < maxPrimeVal; i++)
-            for (int j = i + 1; primesList[j] < maxPrimeVal; j++) {
+        for (int i = 0; i < primesList.length - 1; i++)
+            for (int j = i + 1; j < primesList.length; j++) {
+
                 Pair p = new Pair(primesList[i], primesList[j]);
-                if (isPrimePair(p, primes))
+
+                if (isPrimePair(p))//, primes))
                     result.add(p);
             }
 
@@ -68,46 +66,17 @@ public class Solution {
 
     }
 
-    public static List<Set<Pair>> findChains(Set<Pair> inputList, List<Set<Pair>> resultSet, int maxLength, Primes primes) {
 
-        for (Set<Pair> pairSet : resultSet) {
-            inputList.stream().filter(p -> !pairSet.contains(p) && canBeChained(pairSet, p, primes) && pairSet.size() < maxLength).forEach(pairSet::add);
-        }
 
-        return resultSet.stream().filter(s -> s.size() > 1).collect(Collectors.toList());
 
+    public static boolean isPrimePair(Pair a) {
+        return Primes.isPrimeValue(a.getConcatenatedFirstSecond()) &&
+                Primes.isPrimeValue(a.getConcatenatedSecondFirst()) &&
+                Primes.isPrimeValue(a.getA()) &&
+                Primes.isPrimeValue(a.getB());
     }
 
-    public static boolean canBeChained(Set<Pair> set, Pair p, Primes primes) {
 
-        for (Pair pair : set)
-            if (!isPrimePair(pair, p, primes))
-                return false;
-
-        return true;
-    }
-
-    public static boolean isPrimePair(Pair a, Primes primes) {
-        return primes.isPrime(a.getConcatenatedFirstSecond()) &&
-                primes.isPrime(a.getConcatenatedSecondFirst()) &&
-                primes.isPrime(a.getA()) &&
-                primes.isPrime(a.getB());
-    }
-
-    public static boolean isPrimePair(Pair a, Pair b, Primes primes) {
-
-        if (isPrimePair(a, primes) == false || isPrimePair(b, primes) == false)
-            return false;
-
-        int[] list = a.getConcatenatedOfTwoPairs(b);
-
-        for (int i : list) {
-            if (primes.isPrime(i) == false)
-                return false;
-        }
-
-        return true;
-    }
 
     public static List<Integer> convertToIntegerList(List<Pair> inputList) {
 
@@ -137,22 +106,22 @@ public class Solution {
         return returnList;
     }
 
-    public static boolean isPrimeList(List<Integer> list, Primes primes) {
+    public static boolean isPrimeList(List<Integer> list) {
 
         for (int i = 0; i < list.size(); i++)
             for (int j = i + 1; j < list.size(); j++)
-                if (!isPrimePair(new Pair(list.get(i), list.get(j)), primes))
+                if (!isPrimePair(new Pair(list.get(i), list.get(j))))
                     return false;
 
         return true;
     }
 
-    public static int countPrimeHits(List<Integer> list, Primes primes) {
+    public static int countPrimeHits(List<Integer> list) {
         int counter = 0;
 
         for (int i = 0; i < list.size(); i++)
             for (int j = i + 1; j < list.size(); j++)
-                if (isPrimePair(new Pair(list.get(i), list.get(j)), primes))
+                if (isPrimePair(new Pair(list.get(i), list.get(j))))
                     counter++;
 
 
