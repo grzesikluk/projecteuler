@@ -1,4 +1,4 @@
-package net.euler.problems.sol.pr32;
+package eulerproject.level2.problem32;
  /*
  * Pandigital products
 Problem 32

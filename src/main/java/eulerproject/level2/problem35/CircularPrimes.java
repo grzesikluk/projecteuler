@@ -1,5 +1,5 @@
-package net.euler.problems.sol.pr35;
-import net.euler.problems.sol.pr32.Number;
+package eulerproject.level2.problem35;
+import  eulerproject.level2.problem32.Number;
 /**
  Circular primes
  Problem 35

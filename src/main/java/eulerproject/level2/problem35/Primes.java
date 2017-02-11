@@ -1,4 +1,4 @@
-package net.euler.problems.sol.pr35;
+package eulerproject.level2.problem35;
 
 import java.util.ArrayList;
 

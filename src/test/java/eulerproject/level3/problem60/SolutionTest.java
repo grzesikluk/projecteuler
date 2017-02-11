@@ -27,30 +27,24 @@ public class SolutionTest {
 
     @Test
     public void isPrimePair_one() throws Exception {
-        Assert.assertTrue(Solution.isPrimePair(new Pair(3, 7), primes));
-        Assert.assertTrue(Solution.isPrimePair(new Pair(109, 673), primes));
-        Assert.assertTrue(Solution.isPrimePair(new Pair(3, 109), primes));
-        Assert.assertTrue(Solution.isPrimePair(new Pair(673, 7), primes));
+        Assert.assertTrue(Solution.isPrimePair(new Pair(3, 7)));
+        Assert.assertTrue(Solution.isPrimePair(new Pair(109, 673)));
+        Assert.assertTrue(Solution.isPrimePair(new Pair(3, 109)));
+        Assert.assertTrue(Solution.isPrimePair(new Pair(673, 7)));
 
-    }
-
-    @Test
-    public void isPrimePair_two() throws Exception {
-        Assert.assertTrue(Solution.isPrimePair(new Pair(3, 7), new Pair(109, 673), primes));
-        Assert.assertTrue(Solution.isPrimePair(new Pair(673, 3), new Pair(109, 7), primes));
     }
 
 
     @Test
     public void isPrimePairList_true() throws Exception {
         List<Integer> list = Arrays.asList(3, 7, 109, 673);
-        Assert.assertTrue(Solution.isPrimeList(list, primes));
+        Assert.assertTrue(Solution.isPrimeList(list));
     }
 
     @Test
     public void isPrimePairList_false() throws Exception {
         List<Integer> list = Arrays.asList(3, 8, 109, 673);
-        Assert.assertFalse(Solution.isPrimeList(list, primes));
+        Assert.assertFalse(Solution.isPrimeList(list));
     }
 
 
@@ -64,7 +58,17 @@ public class SolutionTest {
     @Test
     public void countPrimeHits() throws Exception {
         List<Integer> list = Arrays.asList(3, 7, 109, 673);
-        Assert.assertEquals(6, Solution.countPrimeHits(list, primes));
+        Assert.assertEquals(6, Solution.countPrimeHits(list));
     }
+
+
+    @Test(timeout = 100000)
+    public void testCreateInitialPrimePairSet1() throws Exception {
+        Primes primes = new Primes(100);
+        primes.init();
+
+        Solution.createInitialPrimePairSet(primes.asList());
+    }
+
 
 }
