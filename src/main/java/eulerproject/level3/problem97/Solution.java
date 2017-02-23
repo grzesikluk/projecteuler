@@ -1,15 +1,16 @@
 package eulerproject.level3.problem97;
 
+import eulerproject.tools.functions.ModularNumber;
+
 public class Solution {
     public static final long MAX = 10000000000L;
 
     public static void main(String[] args) {
-        //28433×2^7830457+1.
-        long p = powerModular(MAX, 2, 7830457);
-        long r = multiplyModular(MAX, 28433, p);
 
+        ModularNumber p = new ModularNumber(MAX,2);
+        p = p.powerModular(7830457).multiplyModular(28433).addModular(1);
 
-        System.out.println(addModular(MAX,r, 1));
+        System.out.println(p.getValue());
     }
 
     public static long addModular(long modulo, long a, long b) {
