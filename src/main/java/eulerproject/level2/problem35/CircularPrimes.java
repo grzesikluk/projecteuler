@@ -1,5 +1,8 @@
 package eulerproject.level2.problem35;
-import  eulerproject.level2.problem32.Number;
+
+import eulerproject.level2.problem32.Number;
+import eulerproject.tools.primes.Primes;
+
 /**
  Circular primes
  Problem 35
