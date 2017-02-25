@@ -1,4 +1,4 @@
-package eulerproject.level3.problem85;
+package eulerproject.level4.problem85;
 
 import org.junit.Assert;
 import org.junit.Test;

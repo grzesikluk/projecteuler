@@ -1,4 +1,4 @@
-package eulerproject.level3.problem85;
+package eulerproject.level4.problem85;
 
 /**
  * Created by grzesikl on 23/02/2017.

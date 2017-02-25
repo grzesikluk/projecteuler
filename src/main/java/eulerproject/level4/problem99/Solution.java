@@ -1,4 +1,4 @@
-package eulerproject.level3.problem99;
+package eulerproject.level4.problem99;
 
 import java.io.IOException;
 import java.nio.file.Files;

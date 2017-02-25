@@ -1,4 +1,4 @@
-package eulerproject.level3.problem97;
+package eulerproject.level4.problem97;
 
 import eulerproject.tools.functions.ModularNumber;
 

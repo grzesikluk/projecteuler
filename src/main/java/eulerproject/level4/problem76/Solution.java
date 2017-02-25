@@ -1,4 +1,4 @@
-package eulerproject.level3.problem76;
+package eulerproject.level4.problem76;
 
 import eulerproject.tools.generators.PartitionsNumbersImpl;
 
