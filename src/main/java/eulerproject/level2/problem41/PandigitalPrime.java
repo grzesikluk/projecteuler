@@ -1,7 +1,7 @@
 package eulerproject.level2.problem41;
 
 import eulerproject.level2.problem32.Number;
-import eulerproject.level2.problem35.Primes;
+import eulerproject.tools.primes.Primes;
 
 /*Pandigital prime
 Problem 41
