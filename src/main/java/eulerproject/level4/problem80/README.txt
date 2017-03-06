@@ -9,3 +9,4 @@ for all the irrational square roots.
 ---------
 https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
 http://math.stackexchange.com/questions/512358/calculating-a-sqrt-digit-by-digit
+http://www.homeschoolmath.net/teaching/sqr-algorithm-why-works.php
