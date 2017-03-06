@@ -21,52 +21,70 @@ public class Solution {
      * @param maxLength
      * @return
      */
-    public static Pair<List<Integer>, List<Integer>> getSquareRoot(int k, int maxLength) {
+    public static Pair<List<Long>, List<Long>> getSquareRoot(long k, int maxLength) {
 
-        List<Pair<Integer, Integer>> dubles = getDublesFromNumber(k);
-        int prefix = 0;
-        int temp = 0;
-        int result = 0;
-        int value = 0;
-        int counter = 0;
+        List<Pair<Long, Long>> dubles = getDublesFromNumber(k);
+        long prefix = 0;
+        long temp = 0;
+        long result = 0;
+        long value = 0;
+        long counter = 0;
+        boolean digit = false;
 
-        for (Pair<Integer, Integer> duble : dubles) {
-            value = value * 100 + dubleToInt(duble);
+        Pair<List<Long>,List<Long>> resultPair = new Pair<>(new LinkedList<>(), new LinkedList<>());
+
+        for (Pair<Long, Long> duble : dubles) {
+            value = value * 100 + dubleToLong(duble);
             temp = findDigitValue(prefix, value);
             value -= getValueForDigit(prefix, temp);
             result = result * 10 + temp;
             prefix = result * 2;
 
             counter++;
-            if (counter > maxLength)
+            if (counter >= maxLength)
                 break;
+
+            if(result*result <= k && digit == false)
+                resultPair.getKey().add(temp);
+            else {
+                resultPair.getValue().add(temp);
+                digit = true;
+            }
+
 
         }
 
-        while (value != 0 && counter <= maxLength) {
+        while (value != 0 && counter < maxLength) {
             value = value * 100;
             temp = findDigitValue(prefix, value);
             value -= getValueForDigit(prefix, temp);
             result = result * 10 + temp;
             prefix = result * 2;
+            counter++;
 
+            if(result*result <= k && digit == false)
+                resultPair.getKey().add(temp);
+            else {
+                resultPair.getValue().add(temp);
+                digit = true;
+            }
         }
 
 
-        return null;
+        return resultPair;
     }
 
-    public static List<Pair<Integer, Integer>> getDublesFromNumber(int k) {
-        String strK = Integer.toString(k);
-        List<Pair<Integer, Integer>> result = new LinkedList<>();
+    public static List<Pair<Long, Long>> getDublesFromNumber(long k) {
+        String strK = Long.toString(k);
+        List<Pair<Long, Long>> result = new LinkedList<>();
 
         for (int i = strK.length() - 1; i >= 0; i -= 2) {
 
             if (i - 1 < 0) {
-                result.add(new Pair<>(0, strK.charAt(i) - 48));
+                result.add(new Pair<Long,Long>(0L, strK.charAt(i) - 48L));
 
             } else {
-                result.add(new Pair<>(strK.charAt(i - 1) - 48, strK.charAt(i) - 48));
+                result.add(new Pair<Long,Long>(strK.charAt(i - 1) - 48L, strK.charAt(i) - 48L));
             }
         }
         Collections.reverse(result);
@@ -74,7 +92,7 @@ public class Solution {
         return result;
     }
 
-    public static int findDigitValue(int prefix, int value) {
+    public static long findDigitValue(long prefix, long value) {
         int i = 0;
 
         while (getNumberFromPrefix(i, prefix) * i <= value)
@@ -83,15 +101,15 @@ public class Solution {
         return --i;
     }
 
-    public static int getValueForDigit(int prefix, int k) {
+    public static long getValueForDigit(long prefix, long k) {
         return getNumberFromPrefix(k, prefix) * k;
     }
 
-    private static int getNumberFromPrefix(int postfix, int prefix) {
-        return Integer.valueOf(Integer.toString(prefix) + Integer.toString(postfix));
+    private static long getNumberFromPrefix(long postfix, long prefix) {
+        return Long.valueOf(Long.toString(prefix) + Long.toString(postfix));
     }
 
-    private static int dubleToInt(Pair<Integer, Integer> input) {
+    private static long dubleToLong(Pair<Long, Long> input) {
         return input.getKey() * 10 + input.getValue();
     }
 }

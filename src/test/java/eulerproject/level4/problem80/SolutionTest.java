@@ -20,11 +20,17 @@ public class SolutionTest {
         List<Integer> afterDigit = new LinkedList<>();
         afterDigit.add(1);
         afterDigit.add(2);
+        afterDigit.add(4);
+        afterDigit.add(8);
+        afterDigit.add(6);
+        afterDigit.add(0);
+        afterDigit.add(8);
+        afterDigit.add(0);
 
         Pair<List<Integer>, List<Integer>> expected = new Pair<>(beforeDigit,afterDigit);
 
-        Assert.assertEquals(expected,Solution.getSquareRoot(3150,10));
-
+        Assert.assertEquals(expected.getKey(),Solution.getSquareRoot(3150,10).getKey());
+        Assert.assertEquals(expected.getValue(),Solution.getSquareRoot(3150,10).getValue());
     }
 
     @Test
