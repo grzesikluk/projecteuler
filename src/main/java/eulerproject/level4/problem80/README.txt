@@ -10,3 +10,5 @@ for all the irrational square roots.
 https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
 http://math.stackexchange.com/questions/512358/calculating-a-sqrt-digit-by-digit
 http://www.homeschoolmath.net/teaching/sqr-algorithm-why-works.php
+https://betterexplained.com/articles/understanding-quakes-fast-inverse-square-root/
+http://web.archive.org/web/20100330183043/http://nlindblad.org/2007/04/04/write-your-own-square-root-function
