@@ -38,12 +38,13 @@ public class ModularNumber {
     }
 
     public ModularNumber powerModular(long power) {
-        ModularNumber result = new ModularNumber(modulo, value);
 
-        for (int i = 1; i < power; i++)
-            result = result.multiplyModular(getValue());
+        long resultValue = value;
 
-        return result;
+        for (long i = 1; i < power; i++)
+            resultValue = (resultValue * value) % modulo;
+
+        return new ModularNumber(modulo, resultValue);
 
     }
 
