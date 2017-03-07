@@ -2,20 +2,21 @@ package eulerproject.level3.problem72;
 
 
 import eulerproject.tools.fractions.Fraction;
+import eulerproject.tools.functions.EulersTotient;
+import eulerproject.tools.primes.Primes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Lukasz on 2016-12-13.
- */
 public class Solution {
-    private static final int MAX = 100;
+    private static final int MAX = 1000000;
 
     public static void main(String[] args) {
 
-        for(int i=1;i<MAX;i++)
-            System.out.println(initFractionArray(i).size());
+        int[] primes = new Primes(MAX).asList();
+        System.out.println(EulersTotient.sumOfEulersTotientFunction(MAX +1,primes)-1);
+
+//        System.out.println(initFractionArray(MAX).size()); -- that will take forever
 
     }
 

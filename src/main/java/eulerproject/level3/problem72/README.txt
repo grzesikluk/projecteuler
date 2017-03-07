@@ -8,5 +8,7 @@ How many elements would be contained in the set of reduced proper fractions for 
 
 -------
 https://projecteuler.net/problem=72
-The result is:
+
+After calculating it by generating set of fractions it could be determined that the result is related to this sequence
+of numbers
 https://oeis.org/A015614

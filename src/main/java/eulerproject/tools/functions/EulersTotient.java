@@ -58,5 +58,14 @@ public class EulersTotient {
 
     }
 
+    /*A002088*/
+    public static long sumOfEulersTotientFunction(int k, int[] primes) {
+        long result = 0;
+        for(int i=0;i<k;i++)
+            result += eulersTotientFunction(i,primes);
+
+        return result;
+    }
+
 
 }
