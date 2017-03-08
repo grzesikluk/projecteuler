@@ -16,7 +16,7 @@ public class SolutionTest {
 
     @Before
     public void init() {
-        primes = new Primes(10_000_000).asList();
+        primes = new Primes(100_000_000).asList();
     }
 
     @Test
