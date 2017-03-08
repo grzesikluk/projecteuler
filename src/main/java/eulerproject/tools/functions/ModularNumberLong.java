@@ -1,20 +1,20 @@
 package eulerproject.tools.functions;
 
-public class ModularNumber {
+public class ModularNumberLong {
     private long modulo;
     private long value;
 
-    public ModularNumber(long modulo, long value) {
+    public ModularNumberLong(long modulo, long value) {
         this.modulo = modulo;
         this.value = value % modulo;
     }
 
-    public ModularNumber addModular(long a) {
-        return new ModularNumber(modulo, a + value);
+    public ModularNumberLong addModular(long a) {
+        return new ModularNumberLong(modulo, a + value);
     }
 
-    public ModularNumber multiplyModular(long a) {
-        return new ModularNumber(modulo, a * value);
+    public ModularNumberLong multiplyModular(long a) {
+        return new ModularNumberLong(modulo, a * value);
     }
 
     @Override
@@ -25,9 +25,9 @@ public class ModularNumber {
     }
 
     public boolean equals(Object o) {
-        if (o instanceof ModularNumber) {
+        if (o instanceof ModularNumberLong) {
 
-            ModularNumber other = (ModularNumber) o;
+            ModularNumberLong other = (ModularNumberLong) o;
             if (modulo != other.modulo)
                 return false;
 
@@ -37,14 +37,14 @@ public class ModularNumber {
         }
     }
 
-    public ModularNumber powerModular(long power) {
+    public ModularNumberLong powerModular(long power) {
 
         long resultValue = value;
 
         for (long i = 1; i < power; i++)
             resultValue = (resultValue * value) % modulo;
 
-        return new ModularNumber(modulo, resultValue);
+        return new ModularNumberLong(modulo, resultValue);
 
     }
 

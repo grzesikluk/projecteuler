@@ -1,13 +1,13 @@
 package eulerproject.level4.problem97;
 
-import eulerproject.tools.functions.ModularNumber;
+import eulerproject.tools.functions.ModularNumberLong;
 
 public class Solution {
     public static final long MAX = 10000000000L;
 
     public static void main(String[] args) {
 
-        ModularNumber p = new ModularNumber(MAX,2);
+        ModularNumberLong p = new ModularNumberLong(MAX,2);
         p = p.powerModular(7830457).multiplyModular(28433).addModular(1);
 
         System.out.println(p.getValue());

@@ -3,12 +3,14 @@ package eulerproject.newest.problem593;
 import eulerproject.tools.primes.Primes;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * Created by Lukasz on 2017-03-07.
  */
 public class SolutionTest {
+
 
     private int[] primes;
 
@@ -18,15 +20,32 @@ public class SolutionTest {
     }
 
     @Test
+    @Ignore
     public void testGetFValue_100() throws Exception {
         Assert.assertEquals(463628.5, Solution.getFValue(100, 10, primes), 0.01);
     }
 
     @Test(timeout = 2*60*1000+30*1000)
+    @Ignore
     public void testGetFValue_10000() throws Exception {
         Assert.assertEquals(675348207.5, Solution.getFValue(100000, 10000, primes), 0.01);
     }
 
+
+    @Test
+    public void getFValueNew_100() throws Exception {
+        Assert.assertEquals(463628.5, Solution.getFValueNew(100, 10, primes), 0.01);
+    }
+
+    @Test(timeout = 45*1000)
+    public void testGetFValueNew_100000() throws Exception {
+        Assert.assertEquals(675348207.5, Solution.getFValueNew(100000, 10000, primes), 0.01);
+    }
+
+    @Test
+    public void testGetFValueNew_1000000() throws Exception {
+        Assert.assertEquals(0, Solution.getFValueNew(1000000, 100000, primes), 0.01);
+    }
 
     @Test
     public void testMedianOfS2Value() throws Exception {

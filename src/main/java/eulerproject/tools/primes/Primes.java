@@ -52,7 +52,6 @@ public class Primes {
 
     public int[] asList() {
         List<Integer> list = new ArrayList<>();
-        int k = 0;
 
         for (int i = 2; i < primes.length; i++)
             if (primes[i])

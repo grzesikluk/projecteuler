@@ -6,15 +6,15 @@ import java.util.Arrays;
  * Created by grzesikl on 08/03/2017.
  */
 public class MedianArray {
-    private double[] array;
+    private int[] array;
     private int lastIx;
 
     MedianArray(int size) {
-        array = new double[size];
+        array = new int[size];
         lastIx = 0;
     }
 
-    MedianArray(double[] initArray) {
+    MedianArray(int[] initArray) {
         array = Arrays.copyOf(initArray,initArray.length);
         Arrays.sort(array);
         lastIx = initArray.length;
@@ -24,16 +24,16 @@ public class MedianArray {
         Arrays.sort(array);
     }
 
-    public double get(int i) {
+    public int get(int i) {
         return array[i];
     }
 
-    public void add(int i, double value) {
+    public void add(int i, int value) {
         array[i] = value;
     }
 
     /*Add with pre sorting*/
-    public void add(double value) {
+    public void add(int value) {
         int i = 0;
 
         while (array[i] <= value && i < lastIx)
@@ -54,7 +54,7 @@ public class MedianArray {
         }
     }
 
-    public void remove(double value) {
+    public void remove(int value) {
         int j = 0;
         while (array[j] != value && j < lastIx) {
             j++;
@@ -69,6 +69,7 @@ public class MedianArray {
                 i++;
             }
 
+            array[lastIx-1]=0;
             lastIx--;
         }
     }

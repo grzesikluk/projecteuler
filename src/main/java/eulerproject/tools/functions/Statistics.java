@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class Statistics {
 
-    public static double median(long[] m) {
+    public static double median(int[] m) {
         Arrays.sort(m); //make sure this happens
 
         int middle = m.length/2;

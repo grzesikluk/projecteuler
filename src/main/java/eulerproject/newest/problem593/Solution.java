@@ -1,9 +1,10 @@
 package eulerproject.newest.problem593;
 
-import eulerproject.tools.functions.ModularNumber;
+import eulerproject.tools.functions.ModularNumberInt;
 import eulerproject.tools.functions.Statistics;
 import eulerproject.tools.primes.Primes;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,16 +14,13 @@ import java.util.Map;
 public class Solution {
     private static int MAX = 10_000_000;
     private static int MODULO = 10007;
-    private static long[] median;
-
-    private static Map<Integer, Long> cachedSValues;
-    private static Map<Integer, Long> cachedS2Values;
+    private static Map<Integer, Integer> cachedSValues;
+    private static Map<Integer, Integer> cachedS2Values;
 
     static {
-        cachedSValues = new HashMap<>();
-        cachedS2Values = new HashMap<>();
-        median = new long[MAX];
-
+        //pre-allocate for faster
+        cachedSValues = new HashMap<>(MAX);
+        cachedS2Values = new HashMap<>(MAX);
     }
 
     public static void main(String[] args) {
@@ -32,18 +30,18 @@ public class Solution {
 
     }
 
-    public static long getSValue(int k, int[] primesArray) {
+    public static int getSValue(int k, int[] primesArray) {
 
         if (k > primesArray.length || k < 1)
             throw new IllegalArgumentException("Wrong input value " + k);
 
-        ModularNumber number = new ModularNumber(MODULO, primesArray[k - 1]);
+        ModularNumberInt number = new ModularNumberInt(MODULO, primesArray[k - 1]);
         number = number.powerModular(k);
 
         return number.getValue();
     }
 
-    public static long getSValueCached(int k, int[] primesArray) {
+    public static int getSValueCached(int k, int[] primesArray) {
 
         if (!cachedSValues.containsKey(k)) {
             cachedSValues.put(k, getSValue(k, primesArray));
@@ -53,11 +51,11 @@ public class Solution {
 
     }
 
-    public static long getS2Value(int k, int[] primes) {
+    public static int getS2Value(int k, int[] primes) {
         return getSValueCached(k, primes) + getSValueCached((int) Math.floor(k / 10000) + 1, primes);
     }
 
-    public static long getS2ValueCached(int k, int[] primes) {
+    public static int getS2ValueCached(int k, int[] primes) {
         if (!cachedS2Values.containsKey(k)) {
             cachedS2Values.put(k, getS2Value(k, primes));
         }
@@ -66,13 +64,23 @@ public class Solution {
     }
 
     public static double medianOfS2Value(int i, int j, int[] primes) {
-        long[] s2Values = new long[j - i + 1];
+        int[] s2Values = new int[j - i + 1];
 
         for (int k = i; k <= j; k++)
             s2Values[k - i] = getS2ValueCached(k, primes);
 
-
         return Statistics.median(s2Values);
+    }
+
+    public static int[] getMedianOfS2ValueInitArray(int i, int j, int[] primes) {
+        int[] s2Values = new int[j - i + 1];
+
+        for (int k = i; k <= j; k++)
+            s2Values[k - i] = getS2ValueCached(k, primes);
+
+        Arrays.sort(s2Values);
+
+        return s2Values;
     }
 
     public static double getFValue(int n, int k, int[] primes) {
@@ -84,5 +92,25 @@ public class Solution {
         return result;
     }
 
+    public static double getFValueNew(int n, int k, int[] primes) {
 
+        MedianArray medianArray = new MedianArray(getMedianOfS2ValueInitArray(1, k, primes));
+        double result = medianArray.median();
+
+        int i = 1;
+        while (i <= n - k ) {
+            //move array, remove first, add next
+            int first = getS2ValueCached(i, primes);
+            int last = getS2ValueCached(i + k, primes);
+
+            medianArray.remove(first);
+            medianArray.add(last);
+
+            result += medianArray.median();
+
+            i++;
+        }
+
+        return result;
+    }
 }
