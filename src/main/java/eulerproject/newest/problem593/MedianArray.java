@@ -14,6 +14,12 @@ public class MedianArray {
         lastIx = 0;
     }
 
+    MedianArray(double[] initArray) {
+        array = Arrays.copyOf(initArray,initArray.length);
+        Arrays.sort(array);
+        lastIx = initArray.length;
+    }
+
     public void sort() {
         Arrays.sort(array);
     }
@@ -69,8 +75,9 @@ public class MedianArray {
 
     public double median() {
 
-        int middle = array.length / 2;
-        if (array.length % 2 == 1) {
+        int middle = lastIx / 2;
+
+        if (lastIx % 2 == 1) {
             return array[middle];
         } else {
             return (array[middle - 1] + array[middle]) / 2.0;

@@ -144,18 +144,17 @@ public class MedianArrayTest {
     }
 
     @Test
-    public void testRemove_Median() throws Exception {
-        MedianArray medianArray = new MedianArray(10);
-
-        medianArray.add(4.0);
-        medianArray.add(3.0);
-        medianArray.add(1.0);
-        medianArray.add(2.0);
-
-        System.out.println(medianArray.median());
+    public void testMedian() throws Exception {
+        MedianArray medianArray = new MedianArray(new double[]{4.0, 3.0, 1.0, 2.0, 5.0});
+        Assert.assertEquals(3.0, medianArray.median(), 0.0);
 
 
     }
 
+    @Test
+    public void testMedian2() throws Exception {
+        MedianArray medianArray = new MedianArray(new double[]{1.0, 2.0, 50.0, 50.0, 3.0, 4.0, 5.0});
+        Assert.assertEquals(4.0, medianArray.median(), 0.0);
+    }
 
 }
