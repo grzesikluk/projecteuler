@@ -1,6 +1,5 @@
 package eulerproject.newest.problem593;
 
-import eulerproject.tools.functions.ModularNumberInt;
 import eulerproject.tools.functions.Statistics;
 import eulerproject.tools.primes.Primes;
 
@@ -12,21 +11,26 @@ import java.util.Map;
  * Created by Lukasz on 2017-03-07.
  */
 public class Solution {
-    private static int MAX = 10_000_000;
+    private static int MAX_PRIME = 200_000_000; //well tuned
+    private static int MAX  = 10_000_000;
+    private static int MIN  = 100_000;
     private static int MODULO = 10007;
     private static Map<Integer, Integer> cachedSValues;
     private static Map<Integer, Integer> cachedS2Values;
 
     static {
         //pre-allocate for faster
-        cachedSValues = new HashMap<>(MAX);
-        cachedS2Values = new HashMap<>(MAX);
+        cachedSValues = new HashMap<>(MAX_PRIME);
+        cachedS2Values = new HashMap<>(MAX_PRIME);
     }
 
     public static void main(String[] args) {
-        int[] primes = new Primes(MAX).asList();
-        assert (primes.length > 10_010_000); //make sure it's big enough
-        System.out.println(getFValue(10_000_000, 100_000, primes));
+        int[] primes = new Primes(MAX_PRIME).asList();
+        if (!(primes.length > MAX))
+            throw new AssertionError("Primes too small"); //make sure it's big enough
+
+        System.out.println(primes.length + " " + primes[primes.length-1]);
+//        System.out.println(getFValue(MAX, MIN, primes));
 
     }
 
@@ -35,10 +39,14 @@ public class Solution {
         if (k > primesArray.length || k < 1)
             throw new IllegalArgumentException("Wrong input value " + k);
 
-        ModularNumberInt number = new ModularNumberInt(MODULO, primesArray[k - 1]);
-        number = number.powerModular(k);
+        int value = primesArray[k-1] % MODULO;
+        int resultVal = value;
 
-        return number.getValue();
+        for(int i=1;i<k;i++)
+            resultVal = (resultVal * value) % MODULO;
+
+
+        return resultVal;
     }
 
     public static int getSValueCached(int k, int[] primesArray) {
@@ -84,15 +92,8 @@ public class Solution {
     }
 
     public static double getFValue(int n, int k, int[] primes) {
-        double result = 0;
 
-        for (int i = 1; i <= n - k + 1; i++) {
-            result += medianOfS2Value(i, i + k - 1, primes);
-        }
-        return result;
-    }
-
-    public static double getFValueNew(int n, int k, int[] primes) {
+        assert(primes.length >= n);
 
         MedianArray medianArray = new MedianArray(getMedianOfS2ValueInitArray(1, k, primes));
         double result = medianArray.median();
