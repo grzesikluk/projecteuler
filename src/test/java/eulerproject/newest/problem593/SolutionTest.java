@@ -13,7 +13,7 @@ public class SolutionTest {
 
     @BeforeClass
     public static void init() {
-        primes = new Primes(1000_000).asList();
+        primes = new Primes(200_000_000).asList();
     }
 
     @Test
@@ -21,15 +21,24 @@ public class SolutionTest {
         Assert.assertEquals(463628.5, Solution.getFValue(100, 10, primes), 0.01);
     }
 
-    @Test(timeout = 60 * 1000)
+    @Test
+    public void getFValue_10000() throws Exception {
+        Assert.assertEquals(44975488.5, Solution.getFValue(10000, 1000, primes), 0.01);
+    }
+
+    @Test(timeout = 45 * 1000) //45s
     public void testGetFValue_100000() throws Exception {
         Assert.assertEquals(675348207.5, Solution.getFValue(100000, 10000, primes), 0.01);
     }
 
-    @Test
-    @Ignore
+    @Test(timeout = 45* 102 * 1000) //1h12m
     public void testGetFValue_1000000() throws Exception {
-        Assert.assertEquals(0, Solution.getFValue(1000000, 100000, primes), 0.01);
+        Assert.assertEquals(8.956402482E9, Solution.getFValue(1000000, 100000, primes), 0.01);
+    }
+
+    @Test(timeout = 50* 102 * 102 * 1000) //130h
+    public void testGetFValue_10000000() throws Exception {
+        Assert.assertEquals(0, Solution.getFValue(10000000, 1000000, primes), 0.01);
     }
 
     @Test
@@ -63,8 +72,8 @@ public class SolutionTest {
     @Test
     public void testGetSValueCached() throws Exception {
 
-        for (int i = 0; i < 100; i++) {
-            double k = Solution.getFValue(100, 100 - i, primes);
+        for (int i = 0; i < 10000; i++) {
+            double k = Solution.getFValue(10000, 10000 - i, primes);
             System.out.println(k);
         }
     }
