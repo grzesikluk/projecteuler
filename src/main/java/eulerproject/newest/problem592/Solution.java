@@ -5,48 +5,47 @@ public class Solution {
 
 
     public static void main(String[] args) {
-
         System.out.println(getFactorialHexValue(factorial(20L)));
-
     }
 
     public static long factorialModuloRecursive(long s) {
 
-        if(s == 0)
+        if (s == 0)
             return 1;
 
-        return multiplyModulo(s, factorialModuloRecursive(s-1));
+        return multiplyModulo(s, factorialModuloRecursive(s - 1));
 
     }
 
-
     public static long factorialModulo(long s) {
 
-        if(s == 0)
+        if (s == 0)
             return 1;
 
         long result = 1;
-        for(long i=1;i<=s;i++)
-            result = multiplyModulo(result,i);
+        for (long i = 1; i <= s; i++) {
+            System.out.println((double) i / s);
+            if ((i % MODULO) != 0)
+                result = multiplyModulo(result, i);
+        }
 
         return result;
     }
 
-
     public static long factorial(long s) {
-
-        if(s == 0)
+        if (s == 0)
             return 1;
 
-        return s * factorial(s-1);
+        return s * factorial(s - 1);
 
     }
 
 
+    //TODO: Add caching?
     public static long multiplyModulo(long a, long b) {
         long c = a * b;
 
-        while ((c % MODULO) == 0)
+        while ((c % MODULO) == 0 && c != 0)
             c /= MODULO;
 
         return c;
