@@ -10,6 +10,16 @@ public class Solution {
 
     }
 
+    public static long factorialModuloRecursive(long s) {
+
+        if(s == 0)
+            return 1;
+
+        return multiplyModulo(s, factorialModuloRecursive(s-1));
+
+    }
+
+
     public static long factorialModulo(long s) {
 
         if(s == 0)
@@ -18,6 +28,7 @@ public class Solution {
         return multiplyModulo(s, factorialModulo(s-1));
 
     }
+
 
     public static long factorial(long s) {
 
@@ -39,7 +50,7 @@ public class Solution {
     }
 
     public static String getFactorialHexValue(long k) {
-        return Long.toHexString(factorialModulo(20L)).toUpperCase();
+        return Long.toHexString(factorialModuloRecursive(k)).toUpperCase();
     }
 
 
