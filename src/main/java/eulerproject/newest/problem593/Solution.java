@@ -2,6 +2,7 @@ package eulerproject.newest.problem593;
 
 import eulerproject.tools.functions.Statistics;
 import eulerproject.tools.primes.Primes;
+import eulerproject.tools.statistics.FleetingMedianArray;
 
 import java.util.*;
 
@@ -112,8 +113,8 @@ public class Solution {
 
         assert (primes.length >= n);
 
-        MedianArray medianArray = new MedianArray(getMedianOfS2ValueInitArray(1, k, primes));
-        double result = medianArray.median();
+        FleetingMedianArray fleetingMedianArray = new FleetingMedianArray(getMedianOfS2ValueInitArray(1, k, primes));
+        double result = fleetingMedianArray.median();
 
         int i = 1;
         while (i <= n - k) {
@@ -121,10 +122,10 @@ public class Solution {
             int first = getS2Value(i, primes);
             int last = getS2Value(i + k, primes);
 
-            medianArray.remove(first);
-            medianArray.add(last);
+            fleetingMedianArray.remove(first);
+            fleetingMedianArray.add(last);
 
-            result += medianArray.median();
+            result += fleetingMedianArray.median();
 
             i++;
         }

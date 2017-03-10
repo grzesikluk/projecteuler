@@ -1,20 +1,20 @@
-package eulerproject.newest.problem593;
+package eulerproject.tools.statistics;
 
 import java.util.Arrays;
 
 /**
  * Created by grzesikl on 08/03/2017.
  */
-public class MedianArray {
+public class FleetingMedianArray {
     private int[] array;
     private int lastIx;
 
-    MedianArray(int size) {
+    FleetingMedianArray(int size) {
         array = new int[size];
         lastIx = 0;
     }
 
-    MedianArray(int[] initArray) {
+    FleetingMedianArray(int[] initArray) {
         array = Arrays.copyOf(initArray,initArray.length);
         Arrays.sort(array);
         lastIx = initArray.length;
