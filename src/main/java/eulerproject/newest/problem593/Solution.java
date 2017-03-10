@@ -1,5 +1,6 @@
 package eulerproject.newest.problem593;
 
+import eulerproject.tools.functions.ModularNumberInt;
 import eulerproject.tools.functions.Statistics;
 import eulerproject.tools.primes.Primes;
 import eulerproject.tools.statistics.FleetingMedianArray;
@@ -15,12 +16,9 @@ public class Solution {
     private static int MIN = 100_000;
     private static int MODULO = 10007;
     private static Map<Integer, Integer> cachedSValues;
-    private static Map<Integer, Integer> cachedS2Values;
 
     static {
-        //pre-allocate for faster
         cachedSValues = new HashMap<>(MAX_PRIME);
-        cachedS2Values = new HashMap<>(MAX_PRIME);
     }
 
     public static void main(String[] args) {
@@ -29,56 +27,21 @@ public class Solution {
 
     }
 
-    public static int getSValue(int k, int[] primesArray) {
 
-        if (k > primesArray.length || k < 1)
-            throw new IllegalArgumentException("Wrong input value " + k);
-
-        int value = primesArray[k - 1] % MODULO;
-        int resultVal = value;
-
-        for (int i = 1; i < k; i++)
-            resultVal = (resultVal * value) % MODULO;
-
-
-        return resultVal;
-    }
-
-    public static int getSValueNew(int k, int[] primesArray, int modulo) {
+    public static int getSValue(int k, int[] primesArray, int modulo) {
 
         if (k > primesArray.length || k < 1)
             throw new IllegalArgumentException("Wrong input value " + k);
 
         int value = primesArray[k - 1] % modulo;
-        int resultVal = 1;
-
-
-        Set<Integer> list = new LinkedHashSet<>();
-
-        int p = -1;
-
-        for (int i = 1; i <= k; i++) {
-            resultVal = (resultVal * value) % modulo;
-
-            if (list.contains(resultVal)) {
-                p = (k - i) % list.size();
-                break;
-            } else
-                list.add(resultVal);
-
-        }
-
-        if (p < 0)
-            return resultVal;
-        else
-            return (int) list.toArray()[p];
+        return new ModularNumberInt(modulo,value).powerModularOptimised(k).getValue();
 
     }
 
     public static int getSValueCached(int k, int[] primesArray) {
 
         if (!cachedSValues.containsKey(k)) {
-            cachedSValues.put(k, getSValueNew(k, primesArray, MODULO));
+            cachedSValues.put(k, getSValue(k, primesArray, MODULO));
         }
 
         return cachedSValues.get(k);

@@ -1,5 +1,8 @@
 package eulerproject.tools.functions;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class ModularNumberInt {
     private int modulo;
     private int value;
@@ -47,6 +50,32 @@ public class ModularNumberInt {
         return new ModularNumberInt(modulo, resultValue);
 
     }
+
+    public ModularNumberInt powerModularOptimised(int k) {
+
+        int resultVal = 1;
+
+        Set<Integer> list = new LinkedHashSet<>();
+
+        int p = -1;
+
+        for (int i = 1; i <= k; i++) {
+            resultVal = (resultVal * value) % modulo;
+
+            if (list.contains(resultVal)) {
+                p = (k - i) % list.size();
+                break;
+            } else
+                list.add(resultVal);
+
+        }
+
+        resultVal =  (p < 0)?resultVal:(int) list.toArray()[p];
+
+        return new ModularNumberInt(modulo, resultVal);
+
+    }
+
 
     public int getValue() {
         return value;

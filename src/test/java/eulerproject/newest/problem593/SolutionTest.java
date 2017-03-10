@@ -41,6 +41,7 @@ public class SolutionTest {
     }
 
     @Test(timeout = 85 * 60 * 60 * 1000) //1h 19m
+    @Ignore
     public void testGetFValue_10e7_e5() throws Exception {
         Assert.assertEquals(9.6632320042E10, Solution.getFValue(10_000_000, 100_000, primes), 0.01);
     }
@@ -53,30 +54,11 @@ public class SolutionTest {
     }
 
     @Test
-    public void testGetSValue() throws Exception {
-
-        Assert.assertEquals(2, Solution.getSValue(1, primes));
-        Assert.assertEquals(9, Solution.getSValue(2, primes));
-        Assert.assertEquals(125, Solution.getSValue(3, primes));
-        Assert.assertEquals(2401, Solution.getSValue(4, primes));
-        Assert.assertEquals(939, Solution.getSValue(5, primes));
-        Assert.assertEquals(1461, Solution.getSValue(44, primes));
-        Assert.assertEquals(9949, Solution.getSValue(44000, primes));
-        Assert.assertEquals(128, Solution.getSValue(90000, primes));
-        Assert.assertEquals(1, Solution.getSValue(6062, primes));
-
-    }
-
-    @Test
     public void testGetSValueNew() throws Exception {
-        Assert.assertEquals(2, Solution.getSValueNew(1, primes, 11));
-        Assert.assertEquals(9, Solution.getSValueNew(2, primes, 11));
-        Assert.assertEquals(1, Solution.getSValueNew(6062, primes,10007));
-        Assert.assertEquals(8621, Solution.getSValueNew(5004, primes,10007));
-
-
-        for(int i=1;i<100000;i++)
-            Assert.assertEquals(" Failed on " + i,Solution.getSValue(i,primes), Solution.getSValueNew(i,primes,10007));
+        Assert.assertEquals(2, Solution.getSValue(1, primes, 11));
+        Assert.assertEquals(9, Solution.getSValue(2, primes, 11));
+        Assert.assertEquals(1, Solution.getSValue(6062, primes,10007));
+        Assert.assertEquals(8621, Solution.getSValue(5004, primes,10007));
 
     }
 
