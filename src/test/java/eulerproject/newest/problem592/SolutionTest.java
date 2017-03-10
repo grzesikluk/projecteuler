@@ -18,6 +18,12 @@ public class SolutionTest {
     }
 
     @Test
+    public void testFactorialModulo() {
+        Assert.assertEquals(Solution.factorialModuloRecursive(20L),Solution.factorialModulo(20L));
+        Assert.assertEquals(Solution.factorialModuloRecursive(200L),Solution.factorialModulo(200L));
+    }
+
+    @Test
     public void getFactorialHexValue() throws Exception {
         Assert.assertEquals("21C3677C82B4",Solution.getFactorialHexValue(20L));
     }
