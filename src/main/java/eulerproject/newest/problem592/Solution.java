@@ -25,8 +25,11 @@ public class Solution {
         if(s == 0)
             return 1;
 
-        return multiplyModulo(s, factorialModulo(s-1));
+        long result = 1;
+        for(long i=1;i<=s;i++)
+            result = multiplyModulo(result,i);
 
+        return result;
     }
 
 
@@ -50,7 +53,7 @@ public class Solution {
     }
 
     public static String getFactorialHexValue(long k) {
-        return Long.toHexString(factorialModuloRecursive(k)).toUpperCase();
+        return Long.toHexString(factorialModulo(k)).toUpperCase();
     }
 
 
