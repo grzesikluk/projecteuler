@@ -9,12 +9,12 @@ public class FleetingMedianArray {
     private int[] array;
     private int lastIx;
 
-    FleetingMedianArray(int size) {
+    public FleetingMedianArray(int size) {
         array = new int[size];
         lastIx = 0;
     }
 
-    FleetingMedianArray(int[] initArray) {
+    public FleetingMedianArray(int[] initArray) {
         array = Arrays.copyOf(initArray,initArray.length);
         Arrays.sort(array);
         lastIx = initArray.length;
