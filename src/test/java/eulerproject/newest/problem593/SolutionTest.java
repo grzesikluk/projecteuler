@@ -17,31 +17,36 @@ public class SolutionTest {
     }
 
     @Test
+    @Ignore
     public void getFValue_100() throws Exception {
         Assert.assertEquals(463628.5, Solution.getFValue(100, 10, primes), 0.01);
     }
 
     @Test
-    public void getFValue_10000() throws Exception {
+    @Ignore
+    public void getFValue_10e4() throws Exception {
         Assert.assertEquals(44975488.5, Solution.getFValue(10000, 1000, primes), 0.01);
     }
 
-    @Test(timeout = 45 * 1000) //45s
-    public void testGetFValue_100000() throws Exception {
+    @Test //45s
+    @Ignore
+    public void testGetFValue_10e5_e4() throws Exception {
         Assert.assertEquals(675348207.5, Solution.getFValue(100000, 10000, primes), 0.01);
     }
 
-    @Test(timeout = 45* 102 * 1000) //1h12m
-    public void testGetFValue_1000000() throws Exception {
-        Assert.assertEquals(8.956402482E9, Solution.getFValue(1000000, 100000, primes), 0.01);
+    @Test(timeout = 60* 8 * 1000) //8m 9*10^5
+    @Ignore
+    public void testGetFValue_10e6_e5() throws Exception {
+        Assert.assertEquals(8.956402482E9, Solution.getFValue(1_000_000, 100_000, primes), 0.01);
     }
 
-    @Test(timeout = 50* 102 * 102 * 1000) //130h
-    public void testGetFValue_10000000() throws Exception {
-        Assert.assertEquals(0, Solution.getFValue(10000000, 1000000, primes), 0.01);
+    @Test(timeout = 85 * 60 * 60 * 1000) //1h 19m
+    public void testGetFValue_10e7_e5() throws Exception {
+        Assert.assertEquals(9.6632320042E10, Solution.getFValue(10_000_000, 100_000, primes), 0.01);
     }
 
     @Test
+    @Ignore
     public void testMedianOfS2Value() throws Exception {
         Assert.assertEquals(2021.5, Solution.medianOfS2Value(1, 10, primes), 0.1);
         Assert.assertEquals(4715.0, Solution.medianOfS2Value(100, 1000, primes), 0.1);
@@ -55,7 +60,24 @@ public class SolutionTest {
         Assert.assertEquals(125, Solution.getSValue(3, primes));
         Assert.assertEquals(2401, Solution.getSValue(4, primes));
         Assert.assertEquals(939, Solution.getSValue(5, primes));
-        Assert.assertEquals(3435, Solution.getSValue(6, primes));
+        Assert.assertEquals(1461, Solution.getSValue(44, primes));
+        Assert.assertEquals(9949, Solution.getSValue(44000, primes));
+        Assert.assertEquals(128, Solution.getSValue(90000, primes));
+        Assert.assertEquals(1, Solution.getSValue(6062, primes));
+
+    }
+
+    @Test
+    public void testGetSValueNew() throws Exception {
+        Assert.assertEquals(2, Solution.getSValueNew(1, primes, 11));
+        Assert.assertEquals(9, Solution.getSValueNew(2, primes, 11));
+        Assert.assertEquals(1, Solution.getSValueNew(6062, primes,10007));
+        Assert.assertEquals(8621, Solution.getSValueNew(5004, primes,10007));
+
+
+        for(int i=1;i<100000;i++)
+            Assert.assertEquals(" Failed on " + i,Solution.getSValue(i,primes), Solution.getSValueNew(i,primes,10007));
+
     }
 
     @Test
@@ -70,6 +92,7 @@ public class SolutionTest {
     }
 
     @Test
+    @Ignore
     public void testGetSValueCached() throws Exception {
 
         for (int i = 0; i < 10000; i++) {
