@@ -19,8 +19,8 @@ public class SolutionTest {
 
     @Test
     public void testFactorialModulo() {
-        Assert.assertEquals(Solution.factorialModuloRecursive(20L),Solution.factorialModulo(20L));
-        Assert.assertEquals(Solution.factorialModuloRecursive(200L),Solution.factorialModulo(200L));
+        Assert.assertEquals(37123138552500L,Solution.factorialModulo(20L));
+        Assert.assertEquals(2979460112426118488L,Solution.factorialModulo(200L));
     }
 
     @Test
