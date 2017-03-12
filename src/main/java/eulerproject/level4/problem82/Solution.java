@@ -12,12 +12,13 @@ import java.util.stream.Stream;
 public class Solution {
     private static final int MAX = 80;
     private static int[][] array = new int[MAX][MAX];
+    private static boolean[][] updated = new boolean[MAX][MAX];
 
     private static String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem82\\matrix.txt";
 
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
-        System.out.println(getMinimalPath(array));
+
     }
 
     private static void loadContents(String fileName) throws IOException {
@@ -33,39 +34,27 @@ public class Solution {
                 j++;
             }
             i++;
-
         }
         lines.close();
     }
 
-    public static void printArray() {
-        for (int i = 0; i < MAX; i++) {
-            for (int j = 0; j < MAX; j++) {
-                System.out.print("[" + array[i][j] + "]");
-            }
-            System.out.println("\n");
-        }
+    private static void clearUpdated() {
+        for (int i = 0; i < MAX; i++)
+            for (int j = 0; j < MAX; j++)
+                updated[i][j] = false;
     }
 
-    public static int getMinimalPath(final int[][] tab) {
-        int[][] convArray = createConvertArray(tab, tab.length-1, tab.length-1);
-        return convArray[0][0];
-    }
+    public static int[][] createConvertArrayForLastPosition(final int[][] inputArray, int x, int y) {
+        int[][] convArray = new int[inputArray.length][inputArray.length];
 
-    /**
-     * create converted array for solving problem
-     */
-    public static int[][] createConvertArray(final int[][] tab, int startX, int startY) {
-        int[][] convArray = new int[tab.length][tab.length];
-        tab[0][0] = 1;
+        /*
+            Starting from last position of possible solutions we are tracing back updating
+            the copy of initial array. The solution is minimum in first column.
+        * */
 
-        copyArray(tab, convArray);
-
-        for (int y = convArray.length - 1; y >= 0; y--)
-            for (int x = convArray.length - 1; x >= 0; x--) {
-                updateField(x,y,convArray);
-            }
-
+        copyArray(inputArray, convArray);
+        clearUpdated();
+        updateField(x, y, convArray);
 
         return convArray;
     }
@@ -81,33 +70,10 @@ public class Solution {
 
     }
 
-    public static void updateField(int x, int y,  int[][] convArray) {
+    public static void updateField(int x, int y, int[][] convArray) {
         int range = convArray.length - 1;
 
-        //normal case
-        if ((x + 1) <= range && (y + 1) <= range) {
-            convArray[x][y] += (convArray[x][y + 1] < convArray[x + 1][y]) ? convArray[x][y + 1] : convArray[x + 1][y];
-            return;
-        }
-
-        //y axis out of range
-        if ((x + 1) <= range && !((y + 1) <= range)) {
-            convArray[x][y] += convArray[x + 1][y];
-            return;
-        }
-
-        //x axis out of range
-        if (!((x + 1) <= range) && ((y + 1) <= range)) {
-            convArray[x][y] += convArray[x][y + 1];
-            return;
-        }
-
-
-        //last field
-        if (!((x + 1) <= range) && !((y + 1) <= range)) {
-            //do not update
-            return;
-        }
+        //TODO: implement
 
 
     }

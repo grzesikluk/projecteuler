@@ -9,4 +9,5 @@ in the right column, and only moving up, down, and right, is indicated in red an
   537 699 497 121 956
   805 732 524 37  331 ]
 
-Find the minimal path sum, in matrix.txt (right click and "Save Link/Target As..."), a 31K text file containing a 80 by 80 matrix, from the left column to the right column.
+Find the minimal path sum, in matrix.txt (right click and "Save Link/Target As..."), a 31K text file containing a 80 by
+80 matrix, from the left column to the right column.
