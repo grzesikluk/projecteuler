@@ -20,12 +20,14 @@ public class SolutionTest {
     @Test
     public void testFactorialModulo() {
         Assert.assertEquals(37123138552500L,Solution.factorialModulo(20L));
-        Assert.assertEquals(2979460112426118488L,Solution.factorialModulo(200L));
     }
 
     @Test
     public void getFactorialHexValue() throws Exception {
         Assert.assertEquals("21C3677C82B4",Solution.getFactorialHexValue(20L));
+        Assert.assertEquals("2C5077D36B8C4",Solution.getFactorialHexValue(21L));
+        Assert.assertEquals("3CEEA4C2B3E0D8",Solution.getFactorialHexValue(22L));
+
     }
 
 }
