@@ -12,8 +12,6 @@ import java.util.stream.Stream;
 public class Solution {
     private static final int MAX = 80;
     private static int[][] array = new int[MAX][MAX];
-    private static boolean[][] updated = new boolean[MAX][MAX];
-
     private static String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem82\\matrix.txt";
 
     public static void main(String[] args) throws IOException {
@@ -38,26 +36,6 @@ public class Solution {
         lines.close();
     }
 
-    private static void clearUpdated() {
-        for (int i = 0; i < MAX; i++)
-            for (int j = 0; j < MAX; j++)
-                updated[i][j] = false;
-    }
-
-    public static int[][] createConvertArrayForLastPosition(final int[][] inputArray, int x, int y) {
-        int[][] convArray = new int[inputArray.length][inputArray.length];
-
-        /*
-            Starting from last position of possible solutions we are tracing back updating
-            the copy of initial array. The solution is minimum in first column.
-        * */
-
-        copyArray(inputArray, convArray);
-        clearUpdated();
-        updateField(x, y, convArray);
-
-        return convArray;
-    }
 
     public static void copyArray(int[][] source, int[][] dest) {
         if (source.length != dest.length)
@@ -70,12 +48,30 @@ public class Solution {
 
     }
 
-    public static void updateField(int x, int y, int[][] convArray) {
-        int range = convArray.length - 1;
 
-        //TODO: implement
+    public static void convertColumnTopDown(int[][] array, int k) {
 
+        if (k > array.length || k < 0)
+            throw new IllegalArgumentException("Wrong value of k " + k);
 
+        if (k < array.length - 1) {
+            array[0][k] += array[0][k + 1]; //right
+
+            for (int i = 1; i < array.length; i++)
+                array[i][k] += (array[i][k + 1] > array[i - 1][k]) ? array[i - 1][k] : array[i][k + 1];
+        }
+    }
+
+    public static void convertColumnBottomUp(int[][] array, int k) {
+        if (k > array.length || k < 0)
+            throw new IllegalArgumentException("Wrong value of k " + k);
+
+        if (k < array.length - 1) {
+            array[array.length - 1][k] += array[array.length - 1][k + 1]; //right
+
+            for (int i = array.length - 2; i >=0 ; i--)
+                array[i][k] += (array[i][k + 1] > array[i + 1][k]) ? array[i + 1][k] : array[i][k + 1];
+        }
     }
 
 }

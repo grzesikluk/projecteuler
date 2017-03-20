@@ -33,9 +33,9 @@ public class SolutionTest {
     }
 
     @Test
-    public void testUpdateField_lastField() {
+    public void testConvertColumnTopDown_col4() {
         copyArray(array, convArray);
-        updateField(convArray.length - 1, convArray.length - 1, convArray);
+        convertColumnTopDown(convArray, 4);
 
         Assert.assertArrayEquals(new int[]{131, 673, 234, 103, 18}, convArray[0]);
         Assert.assertArrayEquals(new int[]{201, 96, 342, 965, 150}, convArray[1]);
@@ -45,12 +45,63 @@ public class SolutionTest {
 
     }
 
+    @Test
+    public void testConvertColumnTopDown_col3() {
+        copyArray(array, convArray);
+        convertColumnTopDown(convArray, 3);
 
+        Assert.assertArrayEquals(new int[]{131, 673, 234,  121, 18}, convArray[0]);
+        Assert.assertArrayEquals(new int[]{201, 96, 342,  1086, 150}, convArray[1]);
+        Assert.assertArrayEquals(new int[]{630, 803, 746,  533, 111}, convArray[2]);
+        Assert.assertArrayEquals(new int[]{537, 699, 497,  654, 956}, convArray[3]);
+        Assert.assertArrayEquals(new int[]{805, 732, 524,  368, 331}, convArray[4]);
+
+    }
+
+    @Test
+    public void testConvertColumnTopDown_col2() {
+        copyArray(array, convArray);
+        convertColumnTopDown(convArray, 2);
+
+        Assert.assertArrayEquals(new int[]{131, 673,  337, 103, 18}, convArray[0]);
+        Assert.assertArrayEquals(new int[]{201, 96,   679, 965, 150}, convArray[1]);
+        Assert.assertArrayEquals(new int[]{630, 803, 1168, 422, 111}, convArray[2]);
+        Assert.assertArrayEquals(new int[]{537, 699,  618, 121, 956}, convArray[3]);
+        Assert.assertArrayEquals(new int[]{805, 732,  561, 37, 331}, convArray[4]);
+
+    }
+
+
+    @Test
+    public void testConvertColumnBottomUp_col4() {
+        copyArray(array, convArray);
+        convertColumnBottomUp(convArray, 4);
+
+        Assert.assertArrayEquals(new int[]{131, 673, 234, 103, 18}, convArray[0]);
+        Assert.assertArrayEquals(new int[]{201, 96, 342, 965, 150}, convArray[1]);
+        Assert.assertArrayEquals(new int[]{630, 803, 746, 422, 111}, convArray[2]);
+        Assert.assertArrayEquals(new int[]{537, 699, 497, 121, 956}, convArray[3]);
+        Assert.assertArrayEquals(new int[]{805, 732, 524, 37, 331}, convArray[4]);
+
+    }
+
+    @Test
+    public void testConvertColumnBottomUp_col3() {
+        copyArray(array, convArray);
+        convertColumnBottomUp(convArray, 3);
+
+        Assert.assertArrayEquals(new int[]{131, 673, 234, 121, 18}, convArray[0]);
+        Assert.assertArrayEquals(new int[]{201, 96, 342,  1115, 150}, convArray[1]);
+        Assert.assertArrayEquals(new int[]{630, 803, 746, 533, 111}, convArray[2]);
+        Assert.assertArrayEquals(new int[]{537, 699, 497, 489, 956}, convArray[3]);
+        Assert.assertArrayEquals(new int[]{805, 732, 524, 368, 331}, convArray[4]);
+
+    }
 
     @Test
     public void testGetMinimalPath() throws Exception {
 
-        Assert.assertEquals(994, getMinimalPath(array));
+//        Assert.assertEquals(994, getMinimalPath(array));
     }
 
 }
