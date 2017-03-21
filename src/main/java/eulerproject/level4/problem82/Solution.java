@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -16,7 +17,7 @@ public class Solution {
 
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
-
+        System.out.println(getMinimumPath(array));
     }
 
     private static void loadContents(String fileName) throws IOException {
@@ -49,29 +50,24 @@ public class Solution {
     }
 
 
-    public static void convertColumnTopDown(int[][] array, int k) {
+    public static int getMinimumPath(int[][] array) {
+        int[] solution = new int[array.length];
+        int max = array.length - 1;
 
-        if (k > array.length || k < 0)
-            throw new IllegalArgumentException("Wrong value of k " + k);
+        for (int i = 0; i <= max; i++)
+            solution[i] = array[i][max];
 
-        if (k < array.length - 1) {
-            array[0][k] += array[0][k + 1]; //right
+        for (int i = max - 1; i >= 0; i--) {
+            solution[0] += array[0][i];
 
-            for (int i = 1; i < array.length; i++)
-                array[i][k] += (array[i][k + 1] > array[i - 1][k]) ? array[i - 1][k] : array[i][k + 1];
+            for (int j = 1; j <= max; j++)
+                solution[j] = Math.min(solution[j - 1] + array[j][i], solution[j] + array[j][i]);
+
+            for (int j = max-1; j >=0; j--)
+                solution[j] = Math.min(solution[j], solution[j+1] + array[j][i]);
         }
-    }
 
-    public static void convertColumnBottomUp(int[][] array, int k) {
-        if (k > array.length || k < 0)
-            throw new IllegalArgumentException("Wrong value of k " + k);
-
-        if (k < array.length - 1) {
-            array[array.length - 1][k] += array[array.length - 1][k + 1]; //right
-
-            for (int i = array.length - 2; i >=0 ; i--)
-                array[i][k] += (array[i][k + 1] > array[i + 1][k]) ? array[i + 1][k] : array[i][k + 1];
-        }
+        return IntStream.of(solution).min().getAsInt();
     }
 
 }
