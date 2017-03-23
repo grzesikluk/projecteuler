@@ -16,3 +16,6 @@ different integer sided right angle triangles.
 
 Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle
 triangle be formed?
+
+------
+https://en.wikipedia.org/wiki/Pythagorean_triple
