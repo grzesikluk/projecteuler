@@ -7,9 +7,9 @@ import java.util.List;
  * Created by Lukasz on 2017-03-23.
  */
 public class PythagoreanTriple {
-    private int a, b, c;
+    private long a, b, c;
 
-    public PythagoreanTriple(int a, int b, int c) {
+    public PythagoreanTriple(long a, long b, long c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -17,12 +17,15 @@ public class PythagoreanTriple {
     }
 
     public PythagoreanTriple(int m, int n) {
-        int generated_a = m * m - n * n;
-        int generated_b = 2 * m * n;
-        int generated_c = m * m + n * n;
+        long generated_a = m * m - n * n;
+        long generated_b = 2 * m * n;
+        long generated_c = m * m + n * n;
 
-        List<Integer> list = Arrays.asList(generated_a, generated_b, generated_c);
-        list.sort(Integer::compareTo);
+        if (generated_a <= 0 || generated_b <= 0 || generated_c <= 0)
+            throw new IllegalArgumentException("m = " + m + " or n =  " + n + " wrong");
+
+        List<Long> list = Arrays.asList(generated_a, generated_b, generated_c);
+        list.sort(Long::compareTo);
 
         a = list.get(0);
         b = list.get(1);
@@ -30,7 +33,7 @@ public class PythagoreanTriple {
 
     }
 
-    public int length() {
+    public long length() {
         return a + b + c;
     }
 
@@ -52,9 +55,9 @@ public class PythagoreanTriple {
 
     @Override
     public int hashCode() {
-        int result = a;
-        result = 31 * result + b;
-        result = 31 * result + c;
+        int result = (int)a;
+        result = 31 * result + (int)b;
+        result = 31 * result + (int)c;
         return result;
     }
 
