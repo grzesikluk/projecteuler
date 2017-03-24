@@ -1,7 +1,6 @@
 package eulerproject.level3.problem75;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Lukasz on 2017-03-23.
@@ -11,36 +10,39 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        Set<PythagoreanTriple>[] tabOfCounts = new HashSet[MAX_LEN];
+        Map<Long,Set<PythagoreanTriple>> tabOfCounts = new HashMap<>();
 
-        for (int n = 1; n < MAX_LEN; n++) {
-            for (int m = n + 1; 2 * m * n + 2 * m * m < MAX_LEN; m++) {
+
+        for (int n = 1; n <= MAX_LEN; n++) {
+            for (int m = n + 1; 2 * m * n + 2 * m * m <= MAX_LEN; m++) {
 
                 PythagoreanTriple triple = new PythagoreanTriple(m, n);
 
                 int k = 1;
                 PythagoreanTriple next = triple.getNext(k);
 
-                while (next.length() > 0 && next.length() < MAX_LEN) {
+                while (next.length() > 0 && next.length() <= MAX_LEN ) {
 
-                    if (tabOfCounts[next.length()] == null)
-                        tabOfCounts[next.length()] = new HashSet<>();
-
-                    tabOfCounts[next.length()].add(next);
+                    if(!tabOfCounts.containsValue(next.length())) {
+                        tabOfCounts.put(next.length(),new HashSet<>(Arrays.asList(next)));
+                    }
+                    else {
+                        tabOfCounts.get(next.length()).add(next);
+                    }
 
                     ++k;
                     next = triple.getNext(k);
-
                 }
 
             }
         }
 
         int counter = 0;
-        for (int i = 1; i < tabOfCounts.length; i++) {
-            if (tabOfCounts[i] != null && tabOfCounts[i].size() == 1) {
+
+        for(Set sets:tabOfCounts.values()) {
+            if(sets.size() == 1)
                 counter++;
-            }
+
         }
 
         System.out.println(counter);
