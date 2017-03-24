@@ -16,7 +16,7 @@ public class PythagoreanTriple {
 
     }
 
-    public PythagoreanTriple(int m, int n) {
+    public PythagoreanTriple(long m, long n) {
         long generated_a = m * m - n * n;
         long generated_b = 2 * m * n;
         long generated_c = m * m + n * n;

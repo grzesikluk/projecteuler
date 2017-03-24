@@ -9,19 +9,23 @@ public class Solution {
     private static final int MAX_LEN = 1_500_000;
 
     public static void main(String[] args) {
+        System.out.println(getNumberOfEuclides(MAX_LEN,1));
+    }
+
+    public static int getNumberOfEuclides(int max, int number) {
 
         Map<Long,Set<PythagoreanTriple>> tabOfCounts = new HashMap<>();
 
 
-        for (int n = 1; n <= MAX_LEN; n++) {
-            for (int m = n + 1; 2 * m * n + 2 * m * m <= MAX_LEN; m++) {
+        for (long n = 1; n <= max; n++) {
+            for (long m = n + 1; 2 * m * n + 2 * m * m <= max; m++) {
 
                 PythagoreanTriple triple = new PythagoreanTriple(m, n);
 
                 int k = 1;
                 PythagoreanTriple next = triple.getNext(k);
 
-                while (next.length() > 0 && next.length() <= MAX_LEN ) {
+                while (next.length() > 0 && next.length() <= max ) {
 
                     if(!tabOfCounts.containsValue(next.length())) {
                         tabOfCounts.put(next.length(),new HashSet<>(Arrays.asList(next)));
@@ -40,13 +44,11 @@ public class Solution {
         int counter = 0;
 
         for(Set sets:tabOfCounts.values()) {
-            if(sets.size() == 1)
+            if(sets.size() == number)
                 counter++;
 
         }
-
-        System.out.println(counter);
-
+        return counter;
     }
 
 }
