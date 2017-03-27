@@ -1,6 +1,7 @@
 package eulerproject.level3.problem75;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Lukasz on 2017-03-23.
@@ -10,43 +11,86 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        Map<Long,Set<PythagoreanTriple>> tabOfCounts = new HashMap<>();
 
+    }
 
-        for (int n = 1; n <= MAX_LEN; n++) {
-            for (int m = n + 1; 2 * m * n + 2 * m * m <= MAX_LEN; m++) {
+    public static boolean checkIfIsPythLengh(long length) {
+        // l = 2*k*m*(m+n)
+        Set<PythagoreanTriple> tripleList = new HashSet<>();
 
-                PythagoreanTriple triple = new PythagoreanTriple(m, n);
+        long k = 1;
 
-                int k = 1;
-                PythagoreanTriple next = triple.getNext(k);
+        while ((length % (2 * k)) == 0) {
 
-                while (next.length() > 0 && next.length() <= MAX_LEN ) {
+            for (long n = 1; n <= (length / (2 * k)); n++)
 
-                    if(!tabOfCounts.containsValue(next.length())) {
-                        tabOfCounts.put(next.length(),new HashSet<>(Arrays.asList(next)));
+                for (long m = n + 1; length >= (2 * k * m * (m + n)); m++) {
+                    PythagoreanTriple triple = new PythagoreanTriple(m, n).getNext(k);
+
+                    if (length == triple.length()) {
+                        tripleList.add(triple);
+
+                        if (tripleList.size() > 1)
+                            return false;
                     }
-                    else {
-                        tabOfCounts.get(next.length()).add(next);
-                    }
+                }
+            k++;
 
-                    ++k;
-                    next = triple.getNext(k);
+        }
+
+        if (tripleList.size() == 1)
+            return true;
+        else
+            return false;
+
+    }
+
+    public static boolean checkIfIsPythLengh_new(long length) {
+        // l = 2*k*m*(m+n)
+        Set<PythagoreanTriple> tripleList = new HashSet<>();
+
+        long k = 1;
+
+        while ((length % (2 * k)) == 0) {
+
+            for (long n = 1; n <= (length / (2 * k)); n++) {
+                long m = 0;
+                double m1 = ((double) -n + Math.sqrt(n * n + 2 * length / k)) / 2;
+
+                if ((Math.floor(m1) == m1) && !Double.isInfinite(m1))
+                    m = (long) m1;
+
+                if (m > n) {
+                    PythagoreanTriple triple = new PythagoreanTriple((long) m, n).getNext(k);
+
+                    if (length == triple.length()) {
+                        tripleList.add(triple);
+
+                        if (tripleList.size() > 1)
+                            return false;
+                    }
                 }
 
             }
-        }
-
-        int counter = 0;
-
-        for(Set sets:tabOfCounts.values()) {
-            if(sets.size() == 1)
-                counter++;
+            k++;
 
         }
 
-        System.out.println(counter);
+        if (tripleList.size() == 1)
+            return true;
+        else
+            return false;
 
+    }
+
+    public static long countNumberOfUniqPythLength(long maxLength) {
+        long count = 0;
+        for (long i = 1; i <= maxLength; i++) {
+            if (checkIfIsPythLengh_new(i))
+                count++;
+        }
+
+        return count;
     }
 
 }
