@@ -13,10 +13,9 @@ public class PythagoreanTriple {
         this.a = a;
         this.b = b;
         this.c = c;
-
     }
 
-    public PythagoreanTriple(int m, int n) {
+    public PythagoreanTriple(long m, long n) {
         long generated_a = m * m - n * n;
         long generated_b = 2 * m * n;
         long generated_c = m * m + n * n;
@@ -37,7 +36,7 @@ public class PythagoreanTriple {
         return a + b + c;
     }
 
-    public PythagoreanTriple getNext(int k) {
+    public PythagoreanTriple getNext(long k) {
         return new PythagoreanTriple(a * k, b * k, c * k);
     }
 
