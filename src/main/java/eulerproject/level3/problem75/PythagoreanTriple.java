@@ -13,7 +13,6 @@ public class PythagoreanTriple {
         this.a = a;
         this.b = b;
         this.c = c;
-
     }
 
     public PythagoreanTriple(long m, long n) {
@@ -37,7 +36,7 @@ public class PythagoreanTriple {
         return a + b + c;
     }
 
-    public PythagoreanTriple getNext(int k) {
+    public PythagoreanTriple getNext(long k) {
         return new PythagoreanTriple(a * k, b * k, c * k);
     }
 
