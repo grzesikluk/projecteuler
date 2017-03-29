@@ -56,9 +56,12 @@ public class Solution {
             for (long n = 1; n <= (length / (2 * k)); n++) {
                 long m = 0;
                 double m1 = ((double) -n + Math.sqrt(n * n + 2 * length / k)) / 2;
+                double m2 = ((double) -n - Math.sqrt(n * n + 2 * length / k)) / 2;
 
                 if ((Math.floor(m1) == m1) && !Double.isInfinite(m1))
                     m = (long) m1;
+                else if ((Math.floor(m2) == m1) && !Double.isInfinite(m2))
+                    m = (long) m2;
 
                 if (m > n) {
                     PythagoreanTriple triple = new PythagoreanTriple((long) m, n).getNext(k);
@@ -85,9 +88,11 @@ public class Solution {
 
     public static long countNumberOfUniqPythLength(long maxLength) {
         long count = 0;
-        for (long i = 1; i <= maxLength; i++) {
-            if (checkIfIsPythLengh_new(i))
+        for (long i = 3; i <= maxLength; i++) {
+            if (checkIfIsPythLengh_new(i)) {
+                System.out.println(i);
                 count++;
+            }
         }
 
         return count;
