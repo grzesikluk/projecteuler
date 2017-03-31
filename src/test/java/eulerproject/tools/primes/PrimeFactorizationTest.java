@@ -11,8 +11,6 @@ import java.util.Map;
  * Created by Lukasz on 2016-11-21.
  */
 public class PrimeFactorizationTest {
-
-
     private Primes primes;
     public static long MAX = 1000000L;
     public static int MAX_PRIME = 1000000;
@@ -26,7 +24,6 @@ public class PrimeFactorizationTest {
 
     @Test
     public void getPrimeFactors1() throws Exception {
-
         Assert.assertArrayEquals(new long[]{3, 5}, PrimeFactorization.getPrimeFactors(15, primes));
     }
 
@@ -37,17 +34,12 @@ public class PrimeFactorizationTest {
 
     @Test
     public void getPrimeFactors3() throws Exception {
-
         Assert.assertArrayEquals(new long[]{2, 2, 2, 5, 5, 5}, PrimeFactorization.getPrimeFactors(1000, primes));
-
     }
-
 
     @Test
     public void getPrimeFactors4() throws Exception {
-
         Assert.assertArrayEquals(new long[]{17}, PrimeFactorization.getPrimeFactors(17, primes));
-
     }
 
     @Test
@@ -68,10 +60,17 @@ public class PrimeFactorizationTest {
         map.put(3, 2);
         map.put(5, 1);
 
-
         Assert.assertEquals(map, PrimeFactorization.getPrimeFactorsWithPower(360, primes));
-
     }
+
+    @Test
+    public void getPrimeFactorsWithPower3() throws Exception {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(3, 1);
+
+        Assert.assertEquals(map, PrimeFactorization.getPrimeFactorsWithPower(3, primes));
+    }
+
 
     @Test
     public void getNumberFromFactorMap1() throws Exception {
