@@ -1,68 +1,43 @@
 package eulerproject.level3.problem75;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by Lukasz on 2017-03-23.
  */
 public class Solution {
     private static final int MAX_LEN = 1_500_000;
+    private static int[] array = new int[MAX_LEN + 1];
 
     public static void main(String[] args) {
-
-
-    }
-
-
-    public static boolean checkIfIsPythLengh(long length) {
-        // l = 2*k*m*(m+n)
-        Set<PythagoreanTriple> tripleList = new HashSet<>();
-
-        long k = 1;
-
-        while (k < length / 4) {
-
-            if ((length % (2 * k)) == 0) {
-
-                for (long n = 1; n <= (length / (2 * k)); n++) {
-                    long m = 0;
-                    double m1 = ((double) -n + Math.sqrt(n * n + 2 * length / k)) / 2;
-
-                    if ((Math.floor(m1) == m1) && !Double.isInfinite(m1))
-                        m = (long) m1;
-
-                    if (m > n) {
-                        PythagoreanTriple triple = new PythagoreanTriple((long) m, n).getNext(k);
-
-                        if (length == triple.length()) {
-                            tripleList.add(triple);
-
-                            if (tripleList.size() > 1)
-                                return false;
-                        }
-                    }
-
-                }
-            }
-            k++;
-
-        }
-
-        if (tripleList.size() == 1)
-            return true;
-        else
-            return false;
+        System.out.println(countNumberOfUniqPythLength(MAX_LEN));
 
     }
 
-    public static long countNumberOfUniqPythLength(long maxLength) {
-        long count = 0;
-        for (long i = 3; i <= maxLength; i++) {
-            if (checkIfIsPythLengh(i)) {
-//                System.out.println(i);
+    public static void transform(int a, int b, int c, int[] countArray) {
+        int len = a + b + c;
+        if (len > MAX_LEN) return;
+
+        for (int l = len; l <= MAX_LEN; l += len) countArray[l]++;
+
+        transform(a - 2 * b + 2 * c, 2 * a - b + 2 * c, 2 * a - 2 * b + 3 * c, countArray);
+        transform(a + 2 * b + 2 * c, 2 * a + b + 2 * c, 2 * a + 2 * b + 3 * c, countArray);
+        transform(-a + 2 * b + 2 * c, -2 * a + b + 2 * c, -2 * a + 2 * b + 3 * c, countArray);
+
+    }
+
+    private static void clearArray() {
+        for (int i=0;i<MAX_LEN;i++)
+            array[i]=0;
+    }
+
+    public static int countNumberOfUniqPythLength(long maxLength) {
+        int count = 0;
+        clearArray();
+        transform(3, 4, 5, array);
+
+        for (int i = 1; i <= maxLength; i++) {
+            if (array[i] == 1)
                 count++;
-            }
+
         }
 
         return count;
