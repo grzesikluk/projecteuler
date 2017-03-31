@@ -19,3 +19,4 @@ triangle be formed?
 
 ------
 https://en.wikipedia.org/wiki/Pythagorean_triple
+http://mathworld.wolfram.com/PythagoreanTriple.html
