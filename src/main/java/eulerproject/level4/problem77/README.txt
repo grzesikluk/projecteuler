@@ -11,3 +11,6 @@ What is the first value which can be written as the sum of primes in over five t
 https://projecteuler.net/problem=77
 https://en.wikipedia.org/wiki/Composition_(combinatorics)
 http://mathworld.wolfram.com/Composition.html
+http://web.iitd.ac.in/~atripath/publications/integer_compositions.pdf
+http://www.math.utk.edu/~wagner/papers/comb.pdf
+http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Shawn-Combinatorics101.pdf
