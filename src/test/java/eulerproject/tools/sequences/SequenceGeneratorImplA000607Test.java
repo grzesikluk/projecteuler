@@ -51,4 +51,23 @@ public class SequenceGeneratorImplA000607Test {
         Assert.assertEquals(3344, sg.getNumber(66));
     }
 
+    @Test
+    public void getNumber_68() {
+        Assert.assertEquals(0, sg.getNumber(68));
+    }
+
+    @Test
+    public void getNumber_69() {
+        Assert.assertEquals(0, sg.getNumber(69));
+    }
+
+    @Test
+    public void getNumber_70() {
+        Assert.assertEquals(0, sg.getNumber(70));
+    }
+
+    @Test
+    public void getNumber_71() {
+        Assert.assertEquals(0, sg.getNumber(71));
+    }
 }
