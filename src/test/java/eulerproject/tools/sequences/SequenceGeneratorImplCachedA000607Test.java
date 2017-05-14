@@ -7,14 +7,14 @@ import org.junit.Test;
 /**
  * Created by Lukasz on 2017-03-31.
  */
-public class SequenceGeneratorImplA000607Test {
+public class SequenceGeneratorImplCachedA000607Test {
 
     public final long MAX = 10000L;
     SequenceGenerator sg;
 
     @Before
     public void init() {
-        sg = new SequenceGeneratorImplA000607();
+        sg = new SequenceGeneratorImplCachedA000607();
         sg.init(MAX);
     }
 
@@ -36,7 +36,8 @@ public class SequenceGeneratorImplA000607Test {
         Assert.assertEquals(52, sg.getNumber(25));
     }
 
-    @Test(timeout =  50 * 1000)
+
+    @Test(timeout = 50 * 1000)
     public void getNumber_30() {
         Assert.assertEquals(98, sg.getNumber(30));
     }
@@ -46,28 +47,4 @@ public class SequenceGeneratorImplA000607Test {
         Assert.assertEquals(302, sg.getNumber(40));
     }
 
-    @Test
-    public void getNumber_66() {
-        Assert.assertEquals(3344, sg.getNumber(66));
-    }
-
-    @Test
-    public void getNumber_68() {
-        Assert.assertEquals(0, sg.getNumber(68));
-    }
-
-    @Test
-    public void getNumber_69() {
-        Assert.assertEquals(0, sg.getNumber(69));
-    }
-
-    @Test
-    public void getNumber_70() {
-        Assert.assertEquals(0, sg.getNumber(70));
-    }
-
-    @Test
-    public void getNumber_71() {
-        Assert.assertEquals(0, sg.getNumber(71));
-    }
 }

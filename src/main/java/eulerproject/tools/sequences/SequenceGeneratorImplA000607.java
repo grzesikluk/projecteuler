@@ -7,11 +7,11 @@ public class SequenceGeneratorImplA000607 implements SequenceGenerator {
     *
     * */
     private long max;
-    private SequenceGenerator sequenceGeneratorA008472;
+    protected SequenceGenerator sequenceGeneratorA008472;
     private long sum;
 
     public SequenceGeneratorImplA000607() {
-        sequenceGeneratorA008472 = new SequenceGeneratorImplA008472();
+        sequenceGeneratorA008472 = new SequenceGeneratorImplCachedA008472();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class SequenceGeneratorImplA000607 implements SequenceGenerator {
         return getNumberRecursion(n);
     }
 
-    private long getNumberRecursion(long n) {
+    protected long getNumberRecursion(long n) {
         // a(n) = (1/n)*Sum_{k=1..n} A008472(k)*a(n-k)
         int sum = 0;
 
@@ -56,5 +56,14 @@ public class SequenceGeneratorImplA000607 implements SequenceGenerator {
     @Override
     public long getSize() {
         return max;
+    }
+
+    public long getNumberEstimated(long n) {
+        //a(n) ~ exp(2 Pi sqrt(n/log n) / sqrt(3))
+        //Asymptotically a(n) ~ exp(2 Pi sqrt(n/log n) / sqrt(3)) (Ayoub).
+
+        return (long)Math.exp(2*Math.PI * Math.sqrt((double)n/Math.log(n)) / Math.sqrt(3.0));
+
+
     }
 }

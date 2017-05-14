@@ -9,6 +9,8 @@ It is possible to write ten as the sum of primes in exactly five different ways:
 What is the first value which can be written as the sum of primes in over five thousand different ways?
 ----------
 https://projecteuler.net/problem=77
+http://mathworld.wolfram.com/EulerTransform.html
+
 http://mathworld.wolfram.com/PrimePartition.html
 https://en.wikipedia.org/wiki/Composition_(combinatorics)
 http://mathworld.wolfram.com/Composition.html
