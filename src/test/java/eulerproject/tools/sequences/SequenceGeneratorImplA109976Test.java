@@ -1,5 +1,6 @@
 package eulerproject.tools.sequences;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +23,10 @@ public class SequenceGeneratorImplA109976Test {
     @Test
     public void getNumber() throws Exception {
 
-        List<Long> checkValues = Arrays.asList(1L, 2L, 3L, 6L, 7L, 16L, 19L, 46L, 66L, 159L, 274L, 667L);
+        List<Long> checkValues = Arrays.asList(0L, 1L, 2L, 3L, 6L, 7L, 16L, 19L, 46L, 66L, 159L, 274L, 667L);
 
-        for (int i = 0; i < checkValues.size(); i++) {
-//            Assert.assertEquals(checkValues.get(i), new Long(sequenceGenerator.getNumber(i)));
-            System.out.println(sequenceGenerator.getNumber(i));
-        }
+        for (int i = 1; i < checkValues.size(); i++)
+            Assert.assertEquals(checkValues.get(i), new Long(sequenceGenerator.getNumber(i)));
 
 
     }
