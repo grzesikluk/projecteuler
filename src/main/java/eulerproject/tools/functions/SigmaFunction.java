@@ -28,7 +28,8 @@ public class SigmaFunction {
         List<Long> arrayList = new ArrayList<>();
 
         arrayList.add(1L);
-        arrayList.add(k);
+        if(k != 1L)
+            arrayList.add(k);
 
         for (long i = 2; i * 2 <= k; i++)
             if (k % i == 0)
