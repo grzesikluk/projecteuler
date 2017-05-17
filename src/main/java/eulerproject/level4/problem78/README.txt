@@ -13,3 +13,8 @@ OO   O   O   O
 O   O   O   O   O
 
 Find the least value of n for which p(n) is divisible by one million.
+
+-------
+1) A109976: https://oeis.org/A109976
+2) sigma function: http://mathworld.wolfram.com/DivisorFunction.html
+3) must use limit to calculate, no need to have full number to check x%10^6
