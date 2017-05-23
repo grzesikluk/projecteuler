@@ -6,6 +6,11 @@ import eulerproject.tools.functions.SigmaFunction;
 
 public class SequenceGeneratorImplA109976 implements SequenceGenerator {
     private long modulo;
+    SigmaFunction sigmaFunction;
+
+    public SequenceGeneratorImplA109976(SigmaFunction sigmaFunction) {
+        this.sigmaFunction = sigmaFunction;
+    }
 
     @Override
     public void init(long modulo) {
@@ -21,11 +26,10 @@ public class SequenceGeneratorImplA109976 implements SequenceGenerator {
     @Override
     public long getNumber(long n) {
 
-        SigmaFunction sigmaFunction = new SigmaFunction();
         ModularNumberLong result = new ModularNumberLong(modulo, 0);
 
-        for (long k = 1; k <= Math.floorDiv((n + 1) , 2); k++) {
-            result = result.addModular(sigmaFunction.getValueModular(modulo,k - 1, n - 2 * k + 2));
+        for (long k = 1; k <= Math.floorDiv((n + 1), 2); k++) {
+            result = result.addModular(sigmaFunction.getValueModular(n - 2 * k + 2, k - 1, modulo));
         }
 
         return result.getValue();

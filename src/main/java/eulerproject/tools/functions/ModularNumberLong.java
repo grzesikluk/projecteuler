@@ -17,6 +17,14 @@ public class ModularNumberLong {
         return new ModularNumberLong(modulo, a * value);
     }
 
+    public ModularNumberLong addModular(ModularNumberLong a) {
+        return new ModularNumberLong(modulo, a.getValue() + value);
+    }
+
+    public ModularNumberLong multiplyModular(ModularNumberLong a) {
+        return new ModularNumberLong(modulo, a.getValue() * value);
+    }
+
     @Override
     public int hashCode() {
         int result = (int) (modulo ^ (modulo >>> 32));

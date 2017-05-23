@@ -1,5 +1,6 @@
 package eulerproject.tools.sequences;
 
+import eulerproject.tools.functions.SigmaFunctionImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +16,8 @@ public class SequenceGeneratorImplA109976Test {
 
     @Before
     public void init() {
-        sequenceGenerator = new SequenceGeneratorImplA109976();
-        sequenceGenerator.init(10000L);
+        sequenceGenerator = new SequenceGeneratorImplA109976(new SigmaFunctionImpl());
+        sequenceGenerator.init(1000L);
 
     }
 
