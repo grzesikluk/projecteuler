@@ -1,6 +1,6 @@
 package eulerproject.level4.problem78;
 
-import eulerproject.tools.functions.SigmaFunctionBerndtCachedImpl;
+import eulerproject.tools.functions.SigmaFunctionBerndtImpl;
 import eulerproject.tools.primes.Primes;
 import eulerproject.tools.sequences.SequenceGenerator;
 import eulerproject.tools.sequences.SequenceGeneratorImplA109976;
@@ -21,7 +21,7 @@ public class Solution {
         primes.init();
 
         for (long modulo : MAX_ARRAY) {
-            SequenceGenerator sequenceGenerator = new SequenceGeneratorImplA109976(new SigmaFunctionBerndtCachedImpl(primes));
+            SequenceGenerator sequenceGenerator = new SequenceGeneratorImplA109976(new SigmaFunctionBerndtImpl(primes));
 
             System.out.println("Doing modulo = " + modulo);
             sequenceGenerator.init(modulo);
