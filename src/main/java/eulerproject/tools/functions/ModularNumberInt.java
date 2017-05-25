@@ -16,6 +16,11 @@ public class ModularNumberInt {
         return new ModularNumberInt(modulo, a + value);
     }
 
+    public ModularNumberInt addModular(ModularNumberInt a) {
+        return new ModularNumberInt(modulo, a.getValue() + value);
+    }
+
+
     public ModularNumberInt multiplyModular(int a) {
         return new ModularNumberInt(modulo, a * value);
     }
