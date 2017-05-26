@@ -26,5 +26,10 @@ public class Cards {
             Collections.shuffle(cardList);
     }
 
+   public String getNextCard() {
+        String next = cardList.get(nextCardsIx);
+        nextCardsIx = (nextCardsIx + 1) % max;
+        return next;
+    }
 
 }
