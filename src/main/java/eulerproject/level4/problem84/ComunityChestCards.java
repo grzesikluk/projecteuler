@@ -23,7 +23,9 @@ public class ComunityChestCards {
         cards.addCard("");
         cards.addCard("");
         cards.addCard("");
-
+        cards.addCard("");
+        cards.addCard("");
+        
         cards.shuffleCards();
     }
 
