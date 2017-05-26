@@ -1,3 +1,5 @@
+import eulerproject.tools.generators.PolygonalNumbers;
+
 public class Solution {
 
     public static final int MAX = 10000000;

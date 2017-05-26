@@ -7,6 +7,9 @@ public class Board {
     private BoardField[] fieldList = new BoardField[FIELDS_COUNT];
     private int currentPos = 0;
 
+    private static final int GO_POS = 0;
+    private static final int JAIL_POS = 10;
+
     public Board() {
 
         fieldList[0] = new BoardField("GO", 0);
@@ -62,15 +65,73 @@ public class Board {
     }
 
 
-    public BoardField move(int step) {
+    public BoardField move(int s) {
+        int step = s;
+
+        if (step < 0) {
+            step = step % FIELDS_COUNT + FIELDS_COUNT;
+
+        }
+
         currentPos = (currentPos + step) % FIELDS_COUNT;
         return currentField();
+    }
+
+
+    public BoardField moveToNextByCard(String fieldName) {
+
+        switch (fieldName) {
+            case "GO":
+                currentPos = GO_POS;
+                break;
+            case "JAIL":
+                currentPos = JAIL_POS;
+                break;
+            case "C1":
+                currentPos = 11;
+                break;
+            case "E3":
+                currentPos = 24;
+                break;
+            case "H2":
+                currentPos = 39;
+                break;
+            case "R1":
+                currentPos = 5;
+                break;
+
+            case "U":
+            case "R":
+                moveByFirstLetter(fieldName);
+                break;
+
+            case "-3":
+                move(-3);
+                break;
+
+            default:
+                //nothing happens
+
+        }
+
+        return currentField();
+
+
+    }
+
+    private void moveByFirstLetter(String fieldName) {
+
+        do {
+            move(1);
+        }
+        while (!currentField().name.substring(0, 1).equals(fieldName.substring(0, 1)));
+
+
     }
 
     public BoardField currentField() {
         return fieldList[currentPos];
     }
-
 
 
 }

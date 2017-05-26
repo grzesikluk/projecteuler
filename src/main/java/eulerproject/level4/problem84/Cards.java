@@ -10,6 +10,7 @@ import java.util.List;
 public class Cards {
     private int max;
     List<String> cardList;
+    private int nextCardsIx = 0;
 
     public Cards(int amount) {
         max = amount;
@@ -26,7 +27,8 @@ public class Cards {
             Collections.shuffle(cardList);
     }
 
-   public String getNextCard() {
+    public String getNextCard() {
+
         String next = cardList.get(nextCardsIx);
         nextCardsIx = (nextCardsIx + 1) % max;
         return next;
