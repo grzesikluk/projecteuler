@@ -21,6 +21,8 @@ public class ChanceCards {
         cards.addCard("");
         cards.addCard("");
         cards.addCard("");
+        cards.addCard("");
+        cards.addCard("");
 
         cards.shuffleCards();
     }
