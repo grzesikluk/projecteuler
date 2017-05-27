@@ -11,7 +11,7 @@ public class ChanceCards {
         cards.addCard("JAIL");
         cards.addCard("C1");
         cards.addCard("E3");
-        cards.addCard("H3");
+        cards.addCard("H2");
         cards.addCard("R1");
         cards.addCard("R");
         cards.addCard("R");

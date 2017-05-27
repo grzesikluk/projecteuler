@@ -21,6 +21,7 @@ public class DicePairImpl implements DicePair {
     @Override
     public int throwIt() {
         int k = throwDices();
+        threeDoubles = false;
 
         if (k == 2 * sidesNumber) {
             doublesInRow++;

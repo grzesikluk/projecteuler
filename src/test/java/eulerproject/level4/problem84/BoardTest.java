@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Lukasz on 2017-05-26.
  */
@@ -33,15 +31,15 @@ public class BoardTest {
 
     @Test
     public void moveToNextByCard() throws Exception {
-        Assert.assertEquals("GO", board.moveToNextByCard("GO").name); //reset position
-        Assert.assertEquals("GO", board.moveToNextByCard("").name);
-        Assert.assertEquals("U1", board.moveToNextByCard("U").name);
-        Assert.assertEquals("R2", board.moveToNextByCard("R").name);
-        Assert.assertEquals("R3", board.moveToNextByCard("R").name);
-        Assert.assertEquals("R4", board.moveToNextByCard("R").name);
-        Assert.assertEquals("R1", board.moveToNextByCard("R").name);
-        Assert.assertEquals("CC1", board.moveToNextByCard("-3").name);
-        Assert.assertEquals("H2", board.moveToNextByCard("-3").name);
+        Assert.assertEquals("GO", board.moveToNextByName("GO").name); //reset position
+        Assert.assertEquals("GO", board.moveToNextByName("").name);
+        Assert.assertEquals("U1", board.moveToNextByName("U").name);
+        Assert.assertEquals("R2", board.moveToNextByName("R").name);
+        Assert.assertEquals("R3", board.moveToNextByName("R").name);
+        Assert.assertEquals("R4", board.moveToNextByName("R").name);
+        Assert.assertEquals("R1", board.moveToNextByName("R").name);
+        Assert.assertEquals("CC1", board.moveToNextByName("-3").name);
+        Assert.assertEquals("H2", board.moveToNextByName("-3").name);
 
     }
 
