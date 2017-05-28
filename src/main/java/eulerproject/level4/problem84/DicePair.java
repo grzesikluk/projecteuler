@@ -13,4 +13,8 @@ public interface DicePair {
 
     public int howManyDoubleDiceInRow();
 
+    public int getLastFirst();
+
+    public int getLastSecond();
+
 }

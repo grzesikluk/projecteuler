@@ -58,7 +58,7 @@ public class Solution {
             sortMap.put(statistics[i], i);
 
         for (Long l : sortMap.keySet().stream().sorted().collect(Collectors.toList())) {
-            System.out.println(l + " " + sortMap.get(l));
+            System.out.println((double)l*100/MAX + " " + sortMap.get(l));
         }
 
 
