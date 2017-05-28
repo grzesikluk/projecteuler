@@ -17,4 +17,6 @@ public interface DicePair {
 
     public int getLastSecond();
 
+    public boolean isLastDouble();
+
 }

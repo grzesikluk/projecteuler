@@ -21,6 +21,11 @@ public class DicePairImpl implements DicePair {
         return lastSecond;
     }
 
+    @Override
+    public boolean isLastDouble() {
+        return !(lastDouble == 0);
+    }
+
     DicePairImpl(int sides) {
         if (sides < 2)
             throw new IllegalArgumentException("Amount of sides is to small");

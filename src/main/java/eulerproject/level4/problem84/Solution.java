@@ -16,7 +16,7 @@ public class Solution {
         Board monopolyBoard = new Board();
         ChanceCards chanceCards = new ChanceCards();
         ComunityChestCards comunityChestCards = new ComunityChestCards();
-        DicePair dicePair = new DicePairImpl(6);
+        DicePair dicePair = new DicePairImpl(4);
 
         for (long i = 0; i < MAX; i++) {
 
@@ -24,27 +24,31 @@ public class Solution {
 
             if (dicePair.isDoubleDiceThreeTimes()) {
                 monopolyBoard.moveToNextByName("JAIL");
-            }
-            else {
-                monopolyBoard.move(k);
+            } else {
 
-                switch (monopolyBoard.currentField().name) {
-                    case "G2J":
-                        monopolyBoard.moveToNextByName("JAIL");
-                        break;
-                    case "CC1":
-                    case "CC2":
-                        monopolyBoard.moveToNextByName(comunityChestCards.getNext());
-                        break;
-                    case "CH1":
-                    case "CH2":
-                    case "CH3":
-                        monopolyBoard.moveToNextByName(chanceCards.getNext());
-                        break;
+                if (dicePair.isLastDouble()) {
+                    monopolyBoard.move(k);
+                    continue;
+                } else {
+                    monopolyBoard.move(k);
 
-                    default:
+                    switch (monopolyBoard.currentField().name) {
+                        case "G2J":
+                            monopolyBoard.moveToNextByName("JAIL");
+                            break;
+                        case "CC1":
+                        case "CC2":
+                            monopolyBoard.moveToNextByName(comunityChestCards.getNext());
+                            break;
+                        case "CH1":
+                        case "CH2":
+                        case "CH3":
+                            monopolyBoard.moveToNextByName(chanceCards.getNext());
+                            break;
 
+                        default:
 
+                    }
                 }
             }
 
@@ -58,7 +62,7 @@ public class Solution {
             sortMap.put(statistics[i], i);
 
         for (Long l : sortMap.keySet().stream().sorted().collect(Collectors.toList())) {
-            System.out.println((double)l*100/MAX + " " + sortMap.get(l));
+            System.out.println((double) l * 100 / MAX + " " + sortMap.get(l));
         }
 
 
