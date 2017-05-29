@@ -60,7 +60,7 @@ public class Primes {
 
     public boolean isPrimeValueBig(long k) {
 
-        for (long i = 2; i <= (int) Math.sqrt(k); i++)
+        for (long i = 2; i*i <= k; i++)
             if (k % i == 0)
                 return false;
 

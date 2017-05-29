@@ -9,7 +9,8 @@ import java.util.List;
 public class Solution {
     private static int[] primesArray;
 
-    private static int MAX = 50000;
+    private static int MAX = 100000;
+    private static int NO_NUMBERS = 5;
     private static Primes setOfPrimes;
 
 
@@ -30,15 +31,21 @@ public class Solution {
 
         while (startPrime < MAX) {
 
-            List<Integer> result = solution.searchForChain(setOfPrimes, 5, startPrime, maxSum);
-            maxSum = result.stream().mapToInt(s -> s).sum();
-            System.out.println(maxSum + " " + result);
-            startPrime = result.stream().mapToInt(s -> s).min().orElse(MAX);
+            List<Integer> result = solution.searchForChain(setOfPrimes, NO_NUMBERS, startPrime, maxSum);
 
+            if (result != null) {
+                maxSum = result.stream().mapToInt(s -> s).sum();
+                System.out.println(maxSum + " " + result);
+                startPrime = result.stream().mapToInt(s -> s).min().orElse(MAX);
+            }
+
+            if(startPrime == 0)
+                break;
+
+            if (startPrime * NO_NUMBERS > maxSum)
+                break;
 
         }
-
-
     }
 
 
@@ -49,17 +56,24 @@ public class Solution {
 
         while ((primeI = primes.getNextPrime(primeI)) != 0) {
 
+            if (maxSum != 0 && (NO_NUMBERS * primeI > maxSum))
+                break;
+
             int primeJ = primeI;
 
             resultList.add(primeI);
 
-            while ((primeJ = primes.getNextPrime(primeJ)) != 0) {
+            while ((primeJ = primes.getNextPrime(primeJ)) != 0){
+
+                if (maxSum != 0 && (NO_NUMBERS * primeJ > maxSum))
+                    break;
 
                 if (isChainedPrime(primeJ, resultList)) {
                     resultList.add(primeJ);
 
-                    if (maxSum != 0 && resultList.stream().mapToInt(s -> s).sum() > maxSum) {
-                        break;
+                    if (maxSum != 0 &&
+                            ((resultList.stream().mapToInt(s -> s).sum() > maxSum) )) {
+                        return null;
 
                     } else if (resultList.size() == size)
                         break;
