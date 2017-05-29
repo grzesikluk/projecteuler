@@ -28,10 +28,19 @@ public class PrimesSetTest {
 
     @Test
     public void isPrimeValue() throws Exception {
-        Assert.assertTrue(Primes.isPrimeValue(11L));
-        Assert.assertTrue(Primes.isPrimeValue(37L));
-        Assert.assertTrue(Primes.isPrimeValue(102643L));
-        Assert.assertTrue(Primes.isPrimeValue(104729L));
+        Assert.assertTrue(primes.isPrime(11));
+        Assert.assertTrue(primes.isPrime(37));
+        Assert.assertTrue(primes.isPrime(102643));
+        Assert.assertTrue(primes.isPrime(104729));
+
+    }
+
+    @Test
+    public void isPrimeValueBig() throws Exception {
+        Assert.assertTrue(primes.isPrime(11));
+        Assert.assertTrue(primes.isPrime(37));
+        Assert.assertTrue(primes.isPrime(102643));
+        Assert.assertTrue(primes.isPrime(104729));
 
     }
 
