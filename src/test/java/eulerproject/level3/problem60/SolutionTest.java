@@ -38,9 +38,9 @@ public class SolutionTest {
     public void testSearchForChain() {
         Solution solution = new Solution();
 
-        Assert.assertEquals(10, solution.searchForChain(primes, 2, 2).stream().mapToInt( s->s).sum());
-        Assert.assertEquals(119, solution.searchForChain(primes, 3, 2).stream().mapToInt( s->s).sum());
-        Assert.assertEquals(792, solution.searchForChain(primes, 4, 2 ).stream().mapToInt( s->s).sum());
+        Assert.assertEquals(10, solution.searchForChain(primes, 2, 2, 0).stream().mapToInt( s->s).sum());
+        Assert.assertEquals(119, solution.searchForChain(primes, 3, 2, 0).stream().mapToInt( s->s).sum());
+        Assert.assertEquals(792, solution.searchForChain(primes, 4, 2, 0 ).stream().mapToInt( s->s).sum());
 
     }
 
