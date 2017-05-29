@@ -37,29 +37,12 @@ public class Pair {
         this.b = b;
     }
 
-    public int getConcatenatedFirstSecond() {
-        return new Integer(Integer.toString(getA()) + Integer.toString(getB()));
+    public long getConcatenatedFirstSecond() {
+        return new Long(Long.toString(getA()) + Long.toString(getB()));
     }
 
-    public int getConcatenatedSecondFirst() {
-        return new Integer(Integer.toString(getB()) + Integer.toString(getA()));
-    }
-
-    public int[] getConcatenatedOfTwoPairs(Pair other) {
-
-        int[] result = new int[]{
-                new Integer(Integer.toString(getA()) + Integer.toString(other.getA())),
-                new Integer(Integer.toString(other.getA()) + Integer.toString(getA())),
-                new Integer(Integer.toString(getB()) + Integer.toString(other.getB())),
-                new Integer(Integer.toString(other.getB()) + Integer.toString(getB())),
-                new Integer(Integer.toString(getA()) + Integer.toString(other.getB())),
-                new Integer(Integer.toString(other.getA()) + Integer.toString(getB())),
-                new Integer(Integer.toString(getB()) + Integer.toString(other.getA())),
-                new Integer(Integer.toString(other.getB()) + Integer.toString(getA()))
-        };
-
-        return result;
-
+    public long getConcatenatedSecondFirst() {
+        return new Long(Long.toString(getB()) + Long.toString(getA()));
     }
 
     @Override
@@ -67,8 +50,8 @@ public class Pair {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Pair pair = (Pair) o;
-        return (a == pair.a && b == pair.b) || (b == pair.a && a == pair.b);
+        Pair other = (Pair) o;
+        return (a == other.a && b == other.b) || (b == other.a && a == other.b);
 
     }
 
