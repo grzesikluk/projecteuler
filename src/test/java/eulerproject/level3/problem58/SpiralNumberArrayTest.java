@@ -1,12 +1,10 @@
 package eulerproject.level3.problem58;
 
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by grzesikl on 20/09/2016.
- */
 public class SpiralNumberArrayTest {
     int[][] testIntArray1;
     int[][] testIntArray2;
@@ -43,6 +41,7 @@ public class SpiralNumberArrayTest {
         };
 
     }
+
     @Test
     public void getFirstDiagonal2() throws Exception {
         SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray1);
@@ -62,29 +61,7 @@ public class SpiralNumberArrayTest {
         Assert.assertArrayEquals(new int[]{31,13,3,1,7,21,43},testSpiralArray.getSecondDiagonal(7));
     }
 
-    @Test
-    public void testGetPrimeRatioOnDiagonals() throws Exception {
 
-        SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray2);
-        Assert.assertEquals(1.423,testSpiralArray.getPrimeRatioOnDiagonals(7));
-
-    }
-
-    @Test
-    public void testInitArray() {
-
-        SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray1);
-        Assert.assertEquals(testSpiralArray, new SpiralNumberArray(3));
-
-    }
-
-
-    @Test
-    public void testInitArray2() {
-        SpiralNumberArray testSpiralArray = new SpiralNumberArray(testIntArray2);
-        Assert.assertEquals(testSpiralArray, new SpiralNumberArray(7));
-
-    }
 
 
 }
