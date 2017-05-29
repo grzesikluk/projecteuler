@@ -9,7 +9,7 @@ import java.util.List;
 public class Solution {
     private static int[] primesArray;
 
-    private static int MAX = 150000;
+    private static int MAX = 50000;
     private static Primes setOfPrimes;
 
 
@@ -26,14 +26,14 @@ public class Solution {
         Solution solution = new Solution();
 
         int startPrime = 2;
+        int maxSum = 0;
 
-        while(startPrime < MAX) {
+        while (startPrime < MAX) {
 
-            List<Integer> result =solution.searchForChain(setOfPrimes, 5, startPrime);
-            System.out.println(result.stream().mapToInt( s->s).sum());
-
-
-            startPrime = result.stream().mapToInt(s->s).min().orElse(MAX);
+            List<Integer> result = solution.searchForChain(setOfPrimes, 5, startPrime, maxSum);
+            maxSum = result.stream().mapToInt(s -> s).sum();
+            System.out.println(maxSum + " " + result);
+            startPrime = result.stream().mapToInt(s -> s).min().orElse(MAX);
 
 
         }
@@ -42,7 +42,7 @@ public class Solution {
     }
 
 
-    public static List<Integer> searchForChain(Primes primes, int size, int startPrime) {
+    public static List<Integer> searchForChain(Primes primes, int size, int startPrime, int maxSum) {
         List<Integer> resultList = new ArrayList<>();
 
         int primeI = startPrime;
@@ -53,11 +53,15 @@ public class Solution {
 
             resultList.add(primeI);
 
-            while((primeJ = primes.getNextPrime(primeJ)) != 0) {
+            while ((primeJ = primes.getNextPrime(primeJ)) != 0) {
 
                 if (isChainedPrime(primeJ, resultList)) {
                     resultList.add(primeJ);
-                    if (resultList.size() == size)
+
+                    if (maxSum != 0 && resultList.stream().mapToInt(s -> s).sum() > maxSum) {
+                        break;
+
+                    } else if (resultList.size() == size)
                         break;
                 }
             }
@@ -83,7 +87,7 @@ public class Solution {
     }
 
     public static boolean isPrimePair(Pair a) {
-        return  setOfPrimes.isPrimeValueBig(a.getConcatenatedFirstSecond()) &&
+        return setOfPrimes.isPrimeValueBig(a.getConcatenatedFirstSecond()) &&
                 setOfPrimes.isPrimeValueBig(a.getConcatenatedSecondFirst()) &&
                 setOfPrimes.isPrime(a.getA()) &&
                 setOfPrimes.isPrime(a.getB());
