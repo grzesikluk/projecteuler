@@ -1,6 +1,6 @@
 package eulerproject.level2.problem43;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
