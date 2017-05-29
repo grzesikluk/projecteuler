@@ -36,9 +36,8 @@ public class Primes {
         if (k < max_value)
             return primes[k];
         else
-            throw new IllegalArgumentException("Value too big to be checked. Initiate instance with bigger max value.");
+            throw new IllegalArgumentException("Value too big " + k + " to be checked. Initiate instance with bigger max value.");
     }
-
 
     public int getNextPrime(int k) {
         for (int i = k + 1; i < max_value; i++) {
@@ -49,7 +48,6 @@ public class Primes {
         return 0;
     }
 
-
     public int[] asList() {
         List<Integer> list = new ArrayList<>();
 
@@ -57,14 +55,15 @@ public class Primes {
             if (primes[i])
                 list.add(i);
 
-        return list.stream().mapToInt(s->s).toArray();
+        return list.stream().mapToInt(s -> s).toArray();
     }
 
-    public static boolean isPrimeValue(long k) {
+    public boolean isPrimeValueBig(long k) {
 
-        for(long i=2;i<k/2;i++)
-            if(k%i == 0)
+        for (long i = 2; i <= (int) Math.sqrt(k); i++)
+            if (k % i == 0)
                 return false;
+
         return true;
 
 
