@@ -11,7 +11,7 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        System.out.println(countSolutions(6));
+        System.out.println(countSolutions(10));
 
 
     }
@@ -27,61 +27,67 @@ public class Solution {
             for (int m = n + 1; ; m++) {
                 PythagoreanTriple pythagoreanTriple = new PythagoreanTriple(m, n);
 
-                long a = pythagoreanTriple.getA();
-                long b = pythagoreanTriple.getB();
-                long c = pythagoreanTriple.getC();
-
-                if (c > 5 * M * M) {   //end conditions
+                if (pythagoreanTriple.getC() * pythagoreanTriple.getC() > 5 * M * M) {   //end conditions
                     System.out.println(resultSet);
                     return resultSet.size();
                 }
 
-                if (a <= M && b <= M) {
-                    for (int i = 1; i <= a / 2; i++) {
-                        LongTriple triple = new LongTriple(i, a - i, b);
 
-                        if (check(triple))
-                            resultSet.add(triple);
-                    }
-                    for (int i = 1; i <= b / 2; i++) {
-                        LongTriple triple = new LongTriple(i, b - i, a);
+                int j = 2;
 
-                        if (check(triple))
-                            resultSet.add(triple);
-                    }
+                while (pythagoreanTriple.getC() * pythagoreanTriple.getC() <= 5 * M * M) {
+                    long a = pythagoreanTriple.getA();
+                    long b = pythagoreanTriple.getB();
 
-
-                } else if (a <= M && (b > M && b <= 2 * M)) {
-
-                    for (int i = 1; i <= b / 2; i++) {
-
-                        if ((i <= M) && (b - i) <= M) {
-                            LongTriple triple = new LongTriple(i, b - i, a);
-
-                            if (check(triple))
-                                resultSet.add(triple);
-                        }
-                    }
-                } else if (b <= M && (a > M && b <= 2 * M)) {
-
-                    for (int i = 1; i <= a / 2; i++) {
-                        if ((i <= M) && (a - i) <= M) {
+                    if (a <= M && b <= M) {
+                        for (int i = 1; i <= a / 2; i++) {
                             LongTriple triple = new LongTriple(i, a - i, b);
 
                             if (check(triple))
                                 resultSet.add(triple);
                         }
+                        for (int i = 1; i <= b / 2; i++) {
+                            LongTriple triple = new LongTriple(i, b - i, a);
+
+                            if (check(triple))
+                                resultSet.add(triple);
+                        }
 
 
+                    } else if (a <= M && (b > M && b <= 2 * M)) {
+
+                        for (int i = 1; i <= b / 2; i++) {
+
+                            if ((i <= M) && (b - i) <= M) {
+                                LongTriple triple = new LongTriple(i, b - i, a);
+
+                                if (check(triple))
+                                    resultSet.add(triple);
+                            }
+                        }
+                    } else if (b <= M && (a > M && b <= 2 * M)) {
+
+                        for (int i = 1; i <= a / 2; i++) {
+                            if ((i <= M) && (a - i) <= M) {
+                                LongTriple triple = new LongTriple(i, a - i, b);
+
+                                if (check(triple))
+                                    resultSet.add(triple);
+                            }
+
+
+                        }
+                    } else {
+                        break;
                     }
-                } else {
-                    break;
+
+
+                    pythagoreanTriple = pythagoreanTriple.getNext(j++);
                 }
 
 
+                n++;
             }
-
-            n++;
 
 
         }
@@ -98,7 +104,7 @@ public class Solution {
         array[2] = c * c + (a + b) * (a + b);
 
         Arrays.sort(array);
-        return isIntegerSqrt(array[0]);
+        return isIntegerSqrt(array[0]);   //shortest
 
     }
 
