@@ -7,6 +7,18 @@ import java.util.List;
  * Created by Lukasz on 2017-03-23.
  */
 public class PythagoreanTriple {
+    public long getA() {
+        return a;
+    }
+
+    public long getB() {
+        return b;
+    }
+
+    public long getC() {
+        return c;
+    }
+
     private long a, b, c;
 
     public PythagoreanTriple(long a, long b, long c) {
