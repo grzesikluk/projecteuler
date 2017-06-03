@@ -7,93 +7,133 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Solution {
+    public static int MAX = 1_000_000;
 
 
     public static void main(String[] args) {
 
-        System.out.println(countSolutions(10));
+        int step = 1;
+        int position = 1;
+        while (step != 0) {
+            step = getNextStep(step, countSolutions(position) > MAX);
+            position += step;
+            System.out.println(position);
+        }
+        System.out.println(position);
+
+
+    }
+
+    //progress forward to exceed the condition
+
+    public static int getNextStep(int previousStep, boolean condition) {
+
+        int nextStep = previousStep;
+
+        if (previousStep > 0) {
+            if (!condition) {
+                nextStep = 2 * previousStep;
+            } else {
+                nextStep = -previousStep / 2;
+            }
+
+        } else {
+
+            if (!condition) {
+                nextStep = -previousStep / 2;
+            } else {
+                nextStep = previousStep / 2;
+            }
+
+        }
+
+        return nextStep;
 
 
     }
 
 
+    private static boolean isPythTriangleEligible(PythagoreanTriple triple, int M) {
+        return (triple.getC() * triple.getC() <= 5 * M * M);
+    }
+
     public static int countSolutions(int M) {
+
         Set<LongTriple> resultSet = new HashSet<>();
+        boolean previousNotEligible = false;
 
-        int n = 1;
-
-        while (true) { //endless loop? no!
+        for (int n = 1; ; n++) {
 
             for (int m = n + 1; ; m++) {
                 PythagoreanTriple pythagoreanTriple = new PythagoreanTriple(m, n);
 
-                if (pythagoreanTriple.getC() * pythagoreanTriple.getC() > 5 * M * M) {   //end conditions
-                    System.out.println(resultSet);
-                    return resultSet.size();
+                if (!isPythTriangleEligible(pythagoreanTriple, M)) {
+
+                    if (!previousNotEligible) {
+                        previousNotEligible = true;
+                        break; //skip to next n
+
+                    } else {
+                        return resultSet.size();
+                    }
+
+                } else {
+                    previousNotEligible = false;
+
                 }
 
+                PythagoreanTriple pythagoreanTripleNext = pythagoreanTriple.getNext(1);
 
-                int j = 2;
+                int j = 1;
 
-                while (pythagoreanTriple.getC() * pythagoreanTriple.getC() <= 5 * M * M) {
-                    long a = pythagoreanTriple.getA();
-                    long b = pythagoreanTriple.getB();
+                while (isPythTriangleEligible(pythagoreanTripleNext, M)) { //loop through all pyth next triangles
+
+                    long a = pythagoreanTripleNext.getA();
+                    long b = pythagoreanTripleNext.getB();
 
                     if (a <= M && b <= M) {
-                        for (int i = 1; i <= a / 2; i++) {
-                            LongTriple triple = new LongTriple(i, a - i, b);
 
-                            if (check(triple))
-                                resultSet.add(triple);
-                        }
-                        for (int i = 1; i <= b / 2; i++) {
-                            LongTriple triple = new LongTriple(i, b - i, a);
-
-                            if (check(triple))
-                                resultSet.add(triple);
-                        }
+                        updateResultSet(resultSet, a, b, M);
+                        updateResultSet(resultSet, b, a, M);
 
 
                     } else if (a <= M && (b > M && b <= 2 * M)) {
+                        updateResultSet(resultSet, b, a, M);
 
-                        for (int i = 1; i <= b / 2; i++) {
-
-                            if ((i <= M) && (b - i) <= M) {
-                                LongTriple triple = new LongTriple(i, b - i, a);
-
-                                if (check(triple))
-                                    resultSet.add(triple);
-                            }
-                        }
                     } else if (b <= M && (a > M && b <= 2 * M)) {
+                        updateResultSet(resultSet, a, b, M);
 
-                        for (int i = 1; i <= a / 2; i++) {
-                            if ((i <= M) && (a - i) <= M) {
-                                LongTriple triple = new LongTriple(i, a - i, b);
-
-                                if (check(triple))
-                                    resultSet.add(triple);
-                            }
-
-
-                        }
                     } else {
                         break;
                     }
 
 
-                    pythagoreanTriple = pythagoreanTriple.getNext(j++);
+                    j++;
+                    pythagoreanTripleNext = pythagoreanTriple.getNext(j);
                 }
 
 
-                n++;
+            }
+
+        }
+
+    }
+
+    private static void updateResultSet(Set<LongTriple> resultSet, long x, long y, long M) {
+
+        for (int i = 1; i <= x / 2; i++) {
+            if ((i <= M) && (x - i) <= M) {
+                LongTriple triple = new LongTriple(i, x - i, y);
+
+                if (check(triple))
+                    resultSet.add(triple);
             }
 
 
         }
 
-
     }
+
 
     public static boolean check(long a, long b, long c) {
 
@@ -112,7 +152,7 @@ public class Solution {
         return check(triple.getA(), triple.getB(), triple.getC());
     }
 
-    private static boolean isIntegerSqrt(long k) {
+    public static boolean isIntegerSqrt(long k) {
         long i = 1;
 
         while (i * i < k)
