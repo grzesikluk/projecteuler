@@ -19,6 +19,16 @@ In fact, as the complete set of minimal product-sum numbers for 2≤k≤12 is {4
 What is the sum of all the minimal product-sum numbers for 2≤k≤12000?
 
 -----
+General idea:
+1) Generate bounded composition of sum with limits <1...N/2> in lexographic order (first small)
+2) check the product after
+3) if equal - result is found
+
+
+----- Reading
+Algorithm of generating bounded compositions is well described here: https://arxiv.org/abs/1302.6558
+http://www.mathworks.com/matlabcentral/fileexchange/44186-restricted-integer-compositions-with-fixed-number-of-parts?focused=3801971&tab=function
+-----
 
 
 https://en.wikipedia.org/wiki/Partition_(number_theory)
