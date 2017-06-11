@@ -1,35 +1,10 @@
 package eulerproject.tools.generators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class BoundedCompositions {
-
-    private int n, k;
-    private int[] c;
-    private int[] b;
-
-    private List<List<Integer>> result;
-
-
-    public BoundedCompositions(int n, int k) {
-        this.n = n;
-        this.k = k;
-
-        result = new ArrayList<>();
-
-        c = new int[k];
-        b = new int[k];
-
-        for (int i = 0; i < k; i++) {
-            c[i] = 0;
-            b[i] = 0;
-        }
-    }
 
     /**
      * Generate all integer compositions of n with k parts each between a and b.
@@ -40,8 +15,8 @@ public class BoundedCompositions {
      * @param b - maximum value
      * @return - List of compositions.
      */
-    public List<List<Integer>> generate(int n, int k, int a, int b) {
-        List<List<Integer>> resultList = new ArrayList<>();
+    public Set<List<Integer>> generate(int n, int k, int a, int b) {
+        List<List<Integer>> resultList ;
 
         //sanity check
         if (k * a > n || k * b < n || n < 0 || k < 0)
@@ -49,18 +24,34 @@ public class BoundedCompositions {
 
         int[] minimum = generateMin(n - k * a, k, b - a);
 
+        int[] c = new int[k + 1];
+
+        for (int i = 0; i <= k; i++)
+            c[i] = 0;
+
         if (minimum != null) {
 
-            resultList = generateColex(n - k * a, k, k, b - a, c, minimum, new ArrayList<>());
-            //todo implement X = X+a;
+            resultList = generateColex(n - k * a, k, b - a, c, minimum, new ArrayList<>());
+
+            Set<List<Integer>> updatedResult = new HashSet<>();
+
+            for (List<Integer> inputList : resultList) {
+
+                inputList.remove(0);
+                List<Integer> updatedList = inputList.stream().map(s -> s + a).sorted().collect(Collectors.toList());
+                updatedResult.add(updatedList);
+
+            }
+            return updatedResult;
+
 
         }
 
-        return resultList;
+        return null;
     }
 
 
-    public List<List<Integer>> generateColex(int n, int r, int k, int b, int[] c, int[] min, List<List<Integer>> X) {
+    private List<List<Integer>> generateColex(int n, int r, int b, int[] c, int[] min, List<List<Integer>> X) {
 
         if (n == 0) {
             List<Integer> newList = Arrays.stream(c).boxed().collect(Collectors.toList());
@@ -82,7 +73,7 @@ public class BoundedCompositions {
                     e = 1;
 
                 c[i] += e;
-                X = generateColex(n - e, i, k, b, c, min, X);
+                X = generateColex(n - e, i, b, c, min, X);
                 c[i] -= e;
             }
 
