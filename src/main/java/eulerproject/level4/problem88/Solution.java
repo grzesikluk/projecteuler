@@ -11,30 +11,36 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        System.out.println(getAccumulatedMinimumProductSum(60));
+//        for(int i=3;i<100; i++)
+        System.out.println(getAccumulatedMinimumProductSum(5));
 
     }
 
 
     public static int getAccumulatedMinimumProductSum(int max) {
-        Set<Integer>  result = new HashSet<>();
+        Set<Integer> result = new HashSet<>();
 
 
-        for(int i=2;i<=max;i++)
+        for (int i = 2; i <= max; i++)
             result.add(getMinimumProductSum(i));
 
-        return result.stream().mapToInt(s->s).sum();
+        return result.stream().mapToInt(s -> s).sum();
     }
 
     public static int getMinimumProductSum(int k) {
 
-        BoundedCompositions boundedCompositions = new BoundedCompositions();
 
         int i = k + 1;
         int result;
 
-        while ((result = checkComposition(boundedCompositions.generate(i, k, 1, i))) == 0)
+        //todo: this might be optimised no need to generate all compositions
+        Set<List<Integer>> listOfCompositions;
+
+        do {
+            listOfCompositions = new BoundedCompositions(i, k, 1, i/2+1).generate();
             i++;
+        }
+        while ((result = checkComposition(listOfCompositions)) == 0);
 
         return result;
     }

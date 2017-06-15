@@ -6,17 +6,21 @@ import java.util.stream.Collectors;
 
 public class BoundedCompositions {
 
-    /**
-     * Generate all integer compositions of n with k parts each between a and b.
-     *
-     * @param n - integer to which we need to calculate compositions
-     * @param k - number of parts
-     * @param a - minimum value
-     * @param b - maximum value
-     * @return - List of compositions.
-     */
-    public Set<List<Integer>> generate(int n, int k, int a, int b) {
-        List<List<Integer>> resultList ;
+    private int n;
+    private int k;
+    private int a;
+    private int b;
+
+    public BoundedCompositions(int n, int k, int a, int b) {
+        this.n = n;
+        this.k = k;
+        this.a = a;
+        this.b = b;
+    }
+
+
+    public Set<List<Integer>> generate() {
+        List<List<Integer>> resultList;
 
         //sanity check
         if (k * a > n || k * b < n || n < 0 || k < 0)
@@ -35,29 +39,38 @@ public class BoundedCompositions {
 
             Set<List<Integer>> updatedResult = new HashSet<>();
 
-            for (List<Integer> inputList : resultList) {
+            for (List<Integer> inputList : resultList)
+                updatedResult.add(convertResultList(inputList));
 
-                inputList.remove(0);
-                List<Integer> updatedList = inputList.stream().map(s -> s + a).sorted().collect(Collectors.toList());
-                updatedResult.add(updatedList);
-
-            }
             return updatedResult;
-
-
         }
-
         return null;
     }
 
+    protected List<Integer> convertResultList(List<Integer> inputList) {
+        inputList.remove(0);
+        return inputList.stream().map(s -> s + a).sorted().collect(Collectors.toList());
+    }
 
-    private List<List<Integer>> generateColex(int n, int r, int b, int[] c, int[] min, List<List<Integer>> X) {
+    /**
+     * This method needs rethinking and implementation that will result in returning first result.
+     *
+     * @param n
+     * @param r
+     * @param b
+     * @param c
+     * @param min
+     * @param X
+     * @return
+     */
+    protected List<List<Integer>> generateColex(int n, int r, int b, int[] c, int[] min, List<List<Integer>> X) {
 
         if (n == 0) {
             List<Integer> newList = Arrays.stream(c).boxed().collect(Collectors.toList());
+
+            //here is the possible condition to be added and cut the recursion.
             X.add(newList);
         } else {
-            //todo implement
 
             if (c[r] == b) {
                 r--;
@@ -73,7 +86,7 @@ public class BoundedCompositions {
                     e = 1;
 
                 c[i] += e;
-                X = generateColex(n - e, i, b, c, min, X);
+                generateColex(n - e, i, b, c, min, X);
                 c[i] -= e;
             }
 

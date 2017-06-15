@@ -25,14 +25,15 @@ public class SolutionTest {
 
     }
 
-    @Test(timeout = 2000)
+    @Test(timeout = 4000)
     public void testGetAccumulatedMinimumProductSum_medium2() throws Exception {
 
         Assert.assertEquals(123, Solution.getAccumulatedMinimumProductSum(15));
 
     }
 
-    @Test(timeout = 10000)
+    @Test(timeout = 20000)
+//    @Ignore
     public void testGetAccumulatedMinimumProductSum_large() throws Exception {
 
         Assert.assertEquals(151, Solution.getAccumulatedMinimumProductSum(20));
@@ -42,13 +43,13 @@ public class SolutionTest {
     @Test
     public void testCheckComposition() throws Exception {
 
-        BoundedCompositions boundedCompositions = new BoundedCompositions();
+        BoundedCompositions boundedCompositions = new BoundedCompositions(4, 2, 1, 2);
 
-        Assert.assertEquals(4, Solution.checkComposition(boundedCompositions.generate(4, 2, 1, 2)));
-        Assert.assertEquals(6, Solution.checkComposition(boundedCompositions.generate(6, 3, 1, 3)));
-        Assert.assertEquals(8, Solution.checkComposition(boundedCompositions.generate(8, 4, 1, 4)));
-        Assert.assertEquals(8, Solution.checkComposition(boundedCompositions.generate(8, 5, 1, 4)));
-        Assert.assertEquals(12, Solution.checkComposition(boundedCompositions.generate(12, 6, 1, 6)));
+        Assert.assertEquals(4, Solution.checkComposition(new BoundedCompositions(4, 2, 1, 2).generate()));
+        Assert.assertEquals(6, Solution.checkComposition(new BoundedCompositions(6, 3, 1, 3).generate()));
+        Assert.assertEquals(8, Solution.checkComposition(new BoundedCompositions(8, 4, 1, 4).generate()));
+        Assert.assertEquals(8, Solution.checkComposition(new BoundedCompositions(8, 5, 1, 4).generate()));
+        Assert.assertEquals(12, Solution.checkComposition(new BoundedCompositions(12, 6, 1, 6).generate()));
 
     }
 
