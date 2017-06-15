@@ -18,6 +18,27 @@ public class SolutionTest {
 
     }
 
+    @Test(timeout = 1000)
+    public void testGetAccumulatedMinimumProductSum_medium() throws Exception {
+
+        Assert.assertEquals(61, Solution.getAccumulatedMinimumProductSum(10));
+
+    }
+
+    @Test(timeout = 2000)
+    public void testGetAccumulatedMinimumProductSum_medium2() throws Exception {
+
+        Assert.assertEquals(123, Solution.getAccumulatedMinimumProductSum(15));
+
+    }
+
+    @Test(timeout = 10000)
+    public void testGetAccumulatedMinimumProductSum_large() throws Exception {
+
+        Assert.assertEquals(151, Solution.getAccumulatedMinimumProductSum(20));
+
+    }
+
     @Test
     public void testCheckComposition() throws Exception {
 
