@@ -10,12 +10,21 @@ import java.util.Arrays;
  * Created by Lukasz on 2017-06-12.
  */
 public class SolutionTest {
+
+
     @Test
     public void testGetAccumulatedMinimumProductSum() throws Exception {
 
         Assert.assertEquals(30, Solution.getAccumulatedMinimumProductSum(6));
         Assert.assertEquals(61, Solution.getAccumulatedMinimumProductSum(12));
 
+    }
+
+    @Test
+    public void getAccumulatedMinimumProductSumRecursive() throws Exception {
+
+        Assert.assertEquals(30, Solution.getAccumulatedMinimumProductSumRecursive(6).stream().mapToInt(s->s).sum());
+        Assert.assertEquals(61, Solution.getAccumulatedMinimumProductSumRecursive(12).stream().mapToInt(s->s).sum());
     }
 
     @Test(timeout = 1000)
@@ -33,7 +42,6 @@ public class SolutionTest {
     }
 
     @Test(timeout = 20000)
-//    @Ignore
     public void testGetAccumulatedMinimumProductSum_large() throws Exception {
 
         Assert.assertEquals(151, Solution.getAccumulatedMinimumProductSum(20));

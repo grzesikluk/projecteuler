@@ -1,19 +1,18 @@
 package eulerproject.level4.problem88;
 
 
-import eulerproject.tools.generators.BoundedCompositions;
+import eulerproject.tools.generators.ListenedBoundedCompositions;
+import eulerproject.tools.permutation.Listener;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class Solution {
 
     public static void main(String[] args) {
-
-//        for(int i=3;i<100; i++)
-        System.out.println(getAccumulatedMinimumProductSum(5));
-
+        System.out.println( getAccumulatedMinimumProductSumRecursive(15).stream().mapToInt(s->s).sum());
     }
 
 
@@ -27,17 +26,48 @@ public class Solution {
         return result.stream().mapToInt(s -> s).sum();
     }
 
+    public static Set<Integer> getAccumulatedMinimumProductSumRecursive(int max) {
+        Set<Integer> set;
+
+        if (max == 2) {
+            set = new HashSet<>();
+            set.add(4);
+            return set;
+        } else {
+            set = getAccumulatedMinimumProductSumRecursive(max - 1);
+            set.add(getMinimumProductSum(max));
+
+            return set;
+        }
+
+    }
+
+
     public static int getMinimumProductSum(int k) {
 
 
         int i = k + 1;
         int result;
 
-        //todo: this might be optimised no need to generate all compositions
         Set<List<Integer>> listOfCompositions;
 
         do {
-            listOfCompositions = new BoundedCompositions(i, k, 1, i/2+1).generate();
+            Listener<Integer> listener = new Listener<Integer>() {
+                @Override
+                public void activate(List<Integer> list) {
+                    //do nothing;
+                }
+            };
+
+            Predicate<List<Integer>> predicate = new Predicate<List<Integer>>() {
+                @Override
+                public boolean test(List<Integer> integers) {
+                    return checkOneComposition(integers) != 0;
+                }
+            };
+
+            ListenedBoundedCompositions listenedBoundedCompositions = new ListenedBoundedCompositions(i, k, 1, i / 2 + 1, listener, predicate);
+            listOfCompositions = listenedBoundedCompositions.generate();
             i++;
         }
         while ((result = checkComposition(listOfCompositions)) == 0);

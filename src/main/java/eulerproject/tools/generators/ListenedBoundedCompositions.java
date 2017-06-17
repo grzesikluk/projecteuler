@@ -12,25 +12,15 @@ public class ListenedBoundedCompositions extends BoundedCompositions {
     Listener<Integer> listener;
     Predicate<List<Integer>> predicate;
     boolean recursionCutoff = false;
+    List<List<Integer>> resultList;
 
     public ListenedBoundedCompositions(int n, int k, int a, int b, Listener<Integer> listener, Predicate<List<Integer>> predicate) {
         super(n,k,a,b);
         this.listener = listener;
         this.predicate = predicate;
+        resultList = new ArrayList<>();
     }
 
-
-    /**
-     * This method needs rethinking and implementation that will result in returning first result.
-     *
-     * @param n
-     * @param r
-     * @param b
-     * @param c
-     * @param min
-     * @param X
-     * @return
-     */
     protected List<List<Integer>> generateColex(int n, int r, int b, int[] c, int[] min, List<List<Integer>> X) {
 
         if (!recursionCutoff) {
@@ -42,9 +32,11 @@ public class ListenedBoundedCompositions extends BoundedCompositions {
                 if(predicate.test(newList)) {
                     listener.activate(newList);
                     recursionCutoff = true; //end recursion
+                    resultList.add(newList);
                 }
                 
                 X.add(newList);
+                
             } else {
 
                 if (c[r] == b) {
@@ -53,7 +45,7 @@ public class ListenedBoundedCompositions extends BoundedCompositions {
                 int l = min[n];
 
                 for (int i = l; i <= r; i++) {
-                    int e = 0;
+                    int e;
 
                     if (i == l)
                         e = n - (l - 1) * b;
@@ -66,9 +58,45 @@ public class ListenedBoundedCompositions extends BoundedCompositions {
                 }
 
             }
+            return resultList;
         }
-        return X;
+        else {
+            return resultList;
+        }
 
+    }
+
+
+    /**
+     * todo: make recursive generation for this so that having solution for k-1 we can easy generate solution for k.
+     * @return
+     */
+    public Set<List<Integer>> generate() {
+        List<List<Integer>> resultList;
+
+        //sanity check
+        if (k * a > n || k * b < n || n < 0 || k < 0)
+            throw new IllegalArgumentException("Wrong argument passed to function.");
+
+        int[] minimum = generateMin(n - k * a, k, b - a);
+
+        int[] c = new int[k + 1];
+
+        for (int i = 0; i <= k; i++)
+            c[i] = 0;
+
+        if (minimum != null) {
+
+            resultList = generateColex(n - k * a, k, b - a, c, minimum, new ArrayList<>());
+
+            Set<List<Integer>> updatedResult = new HashSet<>();
+
+            for (List<Integer> inputList : resultList)
+                updatedResult.add(inputList);
+
+            return updatedResult;
+        }
+        return null;
     }
 
 }
