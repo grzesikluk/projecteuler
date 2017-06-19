@@ -36,3 +36,5 @@ http://mathworld.wolfram.com/Partition.html
 
 -----
 https://www.math.upenn.edu/~wilf/website/CombinatorialAlgorithms.pdf
+http://www3.cs.stonybrook.edu/~algorith/files/generating-partitions.shtml
+http://jeromekelleher.net/downloads/k06.pdf
