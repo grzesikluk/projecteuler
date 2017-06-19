@@ -33,3 +33,6 @@ http://www.mathworks.com/matlabcentral/fileexchange/44186-restricted-integer-com
 
 https://en.wikipedia.org/wiki/Partition_(number_theory)
 http://mathworld.wolfram.com/Partition.html
+
+-----
+https://www.math.upenn.edu/~wilf/website/CombinatorialAlgorithms.pdf
