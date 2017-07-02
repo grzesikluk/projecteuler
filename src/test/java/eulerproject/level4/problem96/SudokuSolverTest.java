@@ -113,15 +113,48 @@ public class SudokuSolverTest {
 
 
     @Test
-    public void testGetSolution() {
+    public void testGetSolution() throws InterruptedException {
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix3);
         Assert.assertEquals(15, sudokuSolver.getSolution());
     }
 
     @Test
 //    @Ignore
-    public void testGetSolution2() {
+    public void testGetSolution2() throws InterruptedException {
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
-        Assert.assertEquals(15, sudokuSolver.getSolution());
+        Assert.assertEquals(11, sudokuSolver.getSolution());
     }
+
+
+    @Test
+    public void getRemainingPositionsForColumn() throws Exception {
+
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
+
+        Set<Integer> expected = new HashSet<>();
+        expected.addAll(Arrays.asList(4));
+
+        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForColumn(0,1,sudokuSolver.getAllMissing()));
+    }
+
+//    @Test
+//    public void getRemainingPositionsForRow() throws Exception {
+//        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
+//
+//        Set<Integer> expected = new HashSet<>();
+//        expected.addAll(Arrays.asList(4));
+//
+//        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForColumn(0,5,sudokuSolver.getAllMissing()));
+//    }
+
+    @Test
+    public void getRemainingPositionsForSquare() throws Exception {
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
+
+        Set<Integer> expected = new HashSet<>();
+        expected.addAll(Arrays.asList(4));
+
+        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForSquare(0,7,sudokuSolver.getAllMissing()));
+    }
+
 }

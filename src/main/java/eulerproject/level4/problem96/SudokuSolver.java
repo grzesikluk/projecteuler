@@ -25,26 +25,51 @@ public class SudokuSolver {
         input = new SudokuMatrix(matrix);
     }
 
-    public SudokuMatrix solveMatrix() {
+    public SudokuMatrix solveMatrix() throws InterruptedException {
 
         int watchdog = 0;
 
-        
+
         while (!isSolved()) {
-            
             Set<Integer>[][] allMissing = getAllMissing();
 
+            outerloop:
             for (int i = 0; i < allMissing.length; i++)
                 for (int j = 0; j < allMissing.length; j++) {
 
                     if (allMissing[i][j] != null) {
+
                         if (allMissing[i][j].size() == 1) {
+                            //first case - trivial to solve
+                            System.out.println("TRIV: Updating [" + i + " " + j + "] " + (int) allMissing[i][j].toArray()[0] );
                             input.setSudokuArray(i, j, (int) allMissing[i][j].toArray()[0]);
-                            allMissing[i][j] = null;
+                            break outerloop;
+
                         } else {
 
-                            //todo implement second part of algo
+                            Set<Integer> remaining = getRemainingPositionsForColumn(i, j, allMissing);
 
+                            if (remaining.size() == 1) {
+                                System.out.println("COL: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
+                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
+                                break outerloop;
+                            }
+
+                            remaining = getRemainingPositionsForRow(i, j, allMissing);
+
+                            if (remaining.size() == 1) {
+                                System.out.println("ROW: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
+                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
+                                break outerloop;
+                            }
+                            
+                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
+
+                            if (remaining.size() == 1) {
+                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
+                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
+                                break outerloop;
+                            }
 
                         }
 
@@ -75,7 +100,7 @@ public class SudokuSolver {
     }
 
 
-    public int getSolution() {
+    public int getSolution() throws InterruptedException {
         SudokuMatrix matrix = solveMatrix();
         return matrix.getRow(0)[0] + matrix.getRow(0)[1] + matrix.getRow(0)[2];
     }
@@ -110,7 +135,6 @@ public class SudokuSolver {
 
     public Set<Integer> missingNumbers(int[][] square) {
         Set<Integer> copyAll = new HashSet<>(allNumbers);
-        Set<Integer> existing = new HashSet<>();
 
         for (int i = 0; i < square.length; i++) {
             for (int j = 0; j < square.length; j++)
@@ -197,5 +221,67 @@ public class SudokuSolver {
         return true;
     }
 
+    public Set<Integer> getRemainingPositionsForColumn(int a, int b, Set<Integer>[][] allMissing) {
+        if (allMissing[a][b] == null)
+            return null;
 
+        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
+
+        for (int i = 0; i < allMissing.length; i++) {
+            if (i != a && allMissing[i][b] != null)
+                missingForField.removeAll(allMissing[i][b]);
+
+            if (missingForField.size() == 0 )
+                break;
+        }
+
+        return missingForField;
+
+    }
+
+    public Set<Integer> getRemainingPositionsForRow(int a, int b, Set<Integer>[][] allMissing) {
+
+        if (allMissing[a][b] == null)
+            return null;
+
+        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
+
+        for (int i = 0; i < allMissing.length; i++) {
+            if (i != b && allMissing[a][i] != null)
+                missingForField.removeAll(allMissing[a][i]);
+
+            if (missingForField.size() == 0 )
+                break;
+        }
+
+        return missingForField;
+
+    }
+
+    public Set<Integer> getRemainingPositionsForSquare(int a, int b, Set<Integer>[][] allMissing) {
+
+        if (allMissing[a][b] == null)
+            return null;
+        
+        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
+
+        int start_y = a / 3;
+        int start_x = b / 3;
+
+        for (int x = 0; x < 3; x++)
+            for (int y = 0; y < 3; y++) {
+
+                if ((x + start_x) != a && (y + start_y) != b && allMissing[y + start_y*3][x + start_x*3] != null) {
+
+                    missingForField.removeAll(allMissing[y + start_y*3][x + start_x*3]);
+
+                    if (missingForField.size() == 0 )
+                        return missingForField;
+                }
+
+            }
+
+        return missingForField;
+
+    }
 }
