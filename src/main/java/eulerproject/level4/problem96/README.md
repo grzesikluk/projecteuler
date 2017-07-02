@@ -29,8 +29,22 @@ Matrix that allows easily to do following actions:
 * return number that is the most numberous (**DONE**)
 
 ##### Algorithm
+
+###### Intro
 The algo should try to find some starting point. Propose:
 * The col/row/square with many numbers in it,
 * The number that occurs many times 
 * algo will be iterative/recursive with unknown numbers of run, 
 
+###### Algorithm "naive" - first approach    
+1. pick next "zero" location
+1a. if end of table - go to first zero location otherwise goto #5
+2. for this location pick set of possible values basing on column/row/square
+3. if set of missing values for this position is 1 element, place this value
+4. go to 1
+5. END - solved
+
+
+#####Todo
+The algo is not working properly. For some matrixes it is stuck with no 1 element missing
+array.

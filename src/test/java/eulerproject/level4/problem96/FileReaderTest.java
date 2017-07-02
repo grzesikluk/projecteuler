@@ -23,6 +23,7 @@ public class FileReaderTest {
         fr.read();
 
         Assert.assertNotEquals(fr.getNext(), fr.getNext() );
+        Assert.assertNotEquals(fr.getNext(), fr.getNext() );
         Assert.assertNull(fr.getNext());
 
     }

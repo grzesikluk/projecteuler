@@ -14,9 +14,12 @@ import java.util.Set;
  */
 public class SudokuSolverTest {
 
+
     private static String FILE = "src\\test\\java\\eulerproject\\level4\\problem96\\testfile.txt";
     private SudokuMatrix sudokuMatrix1;
     private SudokuMatrix sudokuMatrix2;
+    private SudokuMatrix sudokuMatrix3;
+    private SudokuMatrix sudokuMatrix4;
 
     @Before
     public void init() throws IOException {
@@ -24,7 +27,8 @@ public class SudokuSolverTest {
         fr.read();
         sudokuMatrix1 = fr.getNext();
         sudokuMatrix2 = fr.getNext();
-
+        sudokuMatrix3 = fr.getNext();
+        sudokuMatrix4 = fr.getNext();
     }
 
     @Test
@@ -91,4 +95,32 @@ public class SudokuSolverTest {
 
     }
 
+    @Test
+    public void testGetMissingForPosition() throws Exception {
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix1);
+        Set<Integer> expected = new HashSet<>();
+
+        expected.addAll(Arrays.asList(4,5));
+        Assert.assertEquals(expected,sudokuSolver.getMissingForPosition(0,0));
+
+        Assert.assertNull(sudokuSolver.getMissingForPosition(2,2));
+
+        expected.clear();
+        expected.addAll(Arrays.asList(5,7));
+        Assert.assertEquals(expected,sudokuSolver.getMissingForPosition(0,8));
+
+    }
+
+
+    @Test
+    public void testGetSolution() {
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix3);
+        Assert.assertEquals(15, sudokuSolver.getSolution());
+    }
+
+    @Test
+    public void testGetSolution2() {
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
+        Assert.assertEquals(15, sudokuSolver.getSolution());
+    }
 }

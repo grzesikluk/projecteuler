@@ -6,8 +6,15 @@ import java.util.*;
  * Created by Lukasz on 2017-07-02.
  */
 public class SudokuSolver {
+
     private static Set<Integer> allNumbers;
+
+    public SudokuMatrix getInput() {
+        return input;
+    }
+
     private SudokuMatrix input;
+    private static final int MAX_COUNT = 10000000;
 
 
     static {
@@ -19,13 +26,33 @@ public class SudokuSolver {
         input = new SudokuMatrix(matrix);
     }
 
+    public SudokuMatrix solveMatrix() {
 
-    public SudokuMatrix solve() {
+        int k = 0;
+        while (!isSolved()) {
 
+            int a = k % 9;
+            int b = (k / 9) % 9;
 
-        return null;
+            Set<Integer> missing = getMissingForPosition(a, b);
+
+            if (missing != null && missing.size() == 1)
+                input.setSudokuArray(a, b, (int) missing.toArray()[0]);
+
+            k++;
+
+            if(k == MAX_COUNT)
+                throw new ArithmeticException("Matrix is not solvable");
+
+        }
+
+        return input;
     }
 
+    public int getSolution() {
+        SudokuMatrix matrix = solveMatrix();
+        return matrix.getRow(0)[0] + matrix.getRow(0)[1] + matrix.getRow(0)[2];
+    }
 
     public int countZeroes(int[] row) {
         int result = 0;
@@ -114,5 +141,35 @@ public class SudokuSolver {
 
         return key;
     }
+
+    public Set<Integer> getMissingForPosition(int a, int b) {
+
+        if (input.getRow(a)[b] != 0)
+            return null;
+
+        Set<Integer> missingRows = missingNumbers(input.getRow(a));
+        Set<Integer> missingCols = missingNumbers(input.getCol(b));
+
+        int square_a = b / 3;
+        int square_b = a / 3;
+
+        Set<Integer> missingSquare = missingNumbers(input.getSquare(square_a, square_b));
+
+        missingRows.retainAll(missingCols);
+        missingRows.retainAll(missingSquare);
+
+        return missingRows;
+    }
+
+    public boolean isSolved() {
+
+        for (int i = 0; i < input.getCol(0).length; i++) {
+            if (Arrays.stream(input.getRow(i)).filter(s -> s == 0).count() != 0)
+                return false;
+        }
+
+        return true;
+    }
+
 
 }
