@@ -14,8 +14,7 @@ public class SudokuSolver {
     }
 
     private SudokuMatrix input;
-    private static final int MAX_COUNT = 10000000;
-
+    private static final int MAX_COUNT = 10000;
 
     static {
         allNumbers = new HashSet<>();
@@ -28,26 +27,53 @@ public class SudokuSolver {
 
     public SudokuMatrix solveMatrix() {
 
-        int k = 0;
+        int watchdog = 0;
+
+        
         while (!isSolved()) {
+            
+            Set<Integer>[][] allMissing = getAllMissing();
 
-            int colIx = k % 9;
-            int rowIx = (k / 9) % 9;
+            for (int i = 0; i < allMissing.length; i++)
+                for (int j = 0; j < allMissing.length; j++) {
 
-            Set<Integer> missing = getMissingForPosition(rowIx, colIx);
+                    if (allMissing[i][j] != null) {
+                        if (allMissing[i][j].size() == 1) {
+                            input.setSudokuArray(i, j, (int) allMissing[i][j].toArray()[0]);
+                            allMissing[i][j] = null;
+                        } else {
 
-            if (missing != null && missing.size() == 1)
-                input.setSudokuArray(rowIx, colIx, (int) missing.toArray()[0]);
+                            //todo implement second part of algo
 
-            k++;
 
-            if(k == MAX_COUNT)
+                        }
+
+                    }
+
+                }
+
+            watchdog++;
+
+            if (watchdog == MAX_COUNT)
                 throw new ArithmeticException("Matrix is not solvable");
 
         }
 
         return input;
     }
+
+    public Set<Integer>[][] getAllMissing() {
+        Set[][] result = new Set[input.getRow(0).length][input.getCol(0).length];
+
+        for (int i = 0; i < input.getRow(0).length; i++) {
+            for (int j = 0; j < input.getRow(0).length; j++)
+                result[i][j] = getMissingForPosition(i, j);
+        }
+
+        return result;
+
+    }
+
 
     public int getSolution() {
         SudokuMatrix matrix = solveMatrix();
