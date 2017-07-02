@@ -119,6 +119,7 @@ public class SudokuSolverTest {
     }
 
     @Test
+//    @Ignore
     public void testGetSolution2() {
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
         Assert.assertEquals(15, sudokuSolver.getSolution());

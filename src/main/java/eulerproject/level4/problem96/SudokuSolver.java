@@ -31,13 +31,13 @@ public class SudokuSolver {
         int k = 0;
         while (!isSolved()) {
 
-            int a = k % 9;
-            int b = (k / 9) % 9;
+            int colIx = k % 9;
+            int rowIx = (k / 9) % 9;
 
-            Set<Integer> missing = getMissingForPosition(a, b);
+            Set<Integer> missing = getMissingForPosition(rowIx, colIx);
 
             if (missing != null && missing.size() == 1)
-                input.setSudokuArray(a, b, (int) missing.toArray()[0]);
+                input.setSudokuArray(rowIx, colIx, (int) missing.toArray()[0]);
 
             k++;
 

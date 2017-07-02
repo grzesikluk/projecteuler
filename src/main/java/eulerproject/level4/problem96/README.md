@@ -44,6 +44,11 @@ The algo should try to find some starting point. Propose:
 4. go to 1
 5. END - solved
 
+##### Addition to the algorithm  - addition to #3 above
+1. if the field is only remaining in square row/col, entire col/row 
+2. for all missing positions check if it is the only possible position to be filled
+3. if #2 is yes place the value and goto #4
+4. go to next field
 
 #####Todo
 The algo is not working properly. For some matrixes it is stuck with no 1 element missing
