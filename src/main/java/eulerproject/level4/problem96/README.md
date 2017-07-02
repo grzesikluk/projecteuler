@@ -16,16 +16,17 @@ By solving all fifty puzzles find the sum of the 3-digit numbers found in the to
 #### Ideas
  
 ##### Todo:
-* reading of matrix from file
-* creating structures
+* reading of matrix from file (**DONE**)
+* creating structures   (**DONE**)      
 * solving
 * accumulating result
  
 ##### Data structures
 Matrix that allows easily to do following actions:
-* check zeros in row/cols/squares 
-* find set of missing numbers for row/column/square
-* access and address squares
+* check zeros in row/cols/squares  (**DONE**)
+* find set of missing numbers for row/column/square  (**DONE**)
+* access and address squares  (**DONE**)
+* return number that is the most numberous (**DONE**)
 
 ##### Algorithm
 The algo should try to find some starting point. Propose:
