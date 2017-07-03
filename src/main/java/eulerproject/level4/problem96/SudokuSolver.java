@@ -1,5 +1,7 @@
 package eulerproject.level4.problem96;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 /**
@@ -27,60 +29,30 @@ public class SudokuSolver {
 
     public SudokuMatrix solveMatrix() throws InterruptedException {
 
-        int watchdog = 0;
+        int watchdog = input.sum();
 
+        while (!input.isSolved()) {
 
-        while (!isSolved()) {
-            Set<Integer>[][] allMissing = getAllPossible();
+            for (int number = 1; number <= 9; number++) {
+                Set<Integer>[][] allPossible = getAllPossible();
 
-            outerloop:
-            for (int i = 0; i < allMissing.length; i++)
-                for (int j = 0; j < allMissing.length; j++) {
+                SudokuMatrix numberMatrix = getAllPossibleForNumber(number, allPossible);
 
-                    if (allMissing[i][j] != null) {
+                if (numberMatrix.sum() != 0) {
+                    //need to check
+                    Set<Pair<Integer,Integer>>  pairs = getPositionsToUpdate(numberMatrix);
 
-//                        if (allMissing[i][j].size() == 1) {
-//                            //first case - trivial to solve
-//                            System.out.println("TRIV: Updating [" + i + " " + j + "] " + (int) allMissing[i][j].toArray()[0] );
-//                            input.setSudokuArray(i, j, (int) allMissing[i][j].toArray()[0]);
-//                            break outerloop;
-//
-//                        } else {
-
-                            Set<Integer> remaining = getRemainingPositionsForColumn(i, j, allMissing);
-
-                            if (remaining.size() == 1) {
-                                System.out.println("COL: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
-                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
-                                break outerloop;
-                            }
-
-                            remaining = getRemainingPositionsForRow(i, j, allMissing);
-
-                            if (remaining.size() == 1) {
-                                System.out.println("ROW: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
-                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
-                                break outerloop;
-                            }
-                            
-                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
-
-                            if (remaining.size() == 1) {
-                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
-                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
-                                break outerloop;
-                            }
-
-//                        }
-
-                    }
+                    for(Pair<Integer,Integer> p: pairs)
+                        input.setSudokuArray(p.getValue(),p.getKey(),  number);
 
                 }
 
-            watchdog++;
+            }
 
-            if (watchdog == MAX_COUNT)
-                throw new ArithmeticException("Matrix is not solvable" + input  );
+            if (watchdog == input.sum())
+                throw new ArithmeticException("Matrix is not solvable" + input);
+            else
+                watchdog = input.sum();
 
         }
 
@@ -99,29 +71,30 @@ public class SudokuSolver {
 
     }
 
+    public SudokuMatrix getAllPossibleForNumber(int number, Set<Integer>[][] allPossible) {
+        String[] arrayAsString = new String[10];
+        arrayAsString[0] = "Table with possible numbers for " + number;
+
+        for (int i = 0; i < allPossible.length; i++) {
+
+            StringBuilder line = new StringBuilder();
+            for (int j = 0; j < allPossible.length; j++)
+
+                if (allPossible[i][j] != null && allPossible[i][j].contains(number))
+                    line.append(number);
+                else
+                    line.append("0");
+
+            arrayAsString[i + 1] = line.toString();
+        }
+
+        return new SudokuMatrix(Arrays.asList(arrayAsString));
+
+    }
 
     public int getSolution() throws InterruptedException {
         SudokuMatrix matrix = solveMatrix();
-        return matrix.getRow(0)[0] + matrix.getRow(0)[1] + matrix.getRow(0)[2];
-    }
-
-    public int countZeroes(int[] row) {
-        int result = 0;
-
-        for (int i = 0; i < row.length; i++)
-            if (row[i] == 0)
-                result++;
-
-        return result;
-    }
-
-    public int countZeroes(int[][] square) {
-        int result = 0;
-
-        for (int i = 0; i < square.length; i++)
-            result += countZeroes(square[i]);
-
-        return result;
+        return matrix.getRow(0)[0] * 100 + matrix.getRow(0)[1] * 10 + matrix.getRow(0)[2];
     }
 
     public Set<Integer> missingNumbers(int[] row) {
@@ -214,78 +187,34 @@ public class SudokuSolver {
         return missing;
     }
 
-    public boolean isSolved() {
+    public Set<Pair<Integer, Integer>> getPositionsToUpdate(SudokuMatrix positionsForNumber) {
 
-        for (int i = 0; i < input.getCol(0).length; i++) {
-            if (Arrays.stream(input.getRow(i)).filter(s -> s == 0).count() != 0)
-                return false;
-        }
+        Set<Pair<Integer,Integer>> result = new HashSet<>();
 
-        return true;
-    }
-
-    public Set<Integer> getRemainingPositionsForColumn(int a, int b, Set<Integer>[][] allMissing) {
-        if (allMissing[a][b] == null)
-            return null;
-
-        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
-
-        for (int i = 0; i < allMissing.length; i++) {
-            if (i != a && allMissing[i][b] != null)
-                missingForField.removeAll(allMissing[i][b]);
-
-            if (missingForField.size() == 0 )
-                break;
-        }
-
-        return missingForField;
-
-    }
-
-    public Set<Integer> getRemainingPositionsForRow(int a, int b, Set<Integer>[][] allMissing) {
-
-        if (allMissing[a][b] == null)
-            return null;
-
-        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
-
-        for (int i = 0; i < allMissing.length; i++) {
-            if (i != b && allMissing[a][i] != null)
-                missingForField.removeAll(allMissing[a][i]);
-
-            if (missingForField.size() == 0 )
-                break;
-        }
-
-        return missingForField;
-
-    }
-
-    public Set<Integer> getRemainingPositionsForSquare(int a, int b, Set<Integer>[][] allMissing) {
-
-        if (allMissing[a][b] == null)
-            return null;
-        
-        Set<Integer> missingForField = new HashSet<>(allMissing[a][b]);
-
-        int start_y = a / 3;
-        int start_x = b / 3;
-
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 3; x++)
+        if (positionsForNumber.sum() != 0) {
 
 
-                if (!((x + start_x) == a && (y + start_y) == b) && allMissing[y + start_y*3][x + start_x*3] != null) {
+            for (int i = 0; i < 9; i++) {
 
-                    missingForField.removeAll(allMissing[y + start_y*3][x + start_x*3]);
+                int k = positionsForNumber.getUniqueRowIx(i);
 
-                    if (missingForField.size() == 0 )
-                        return missingForField;
-                }
+                if(k!=-1)
+                    result.add(new Pair<>(k,i));
+
+                k = positionsForNumber.getUniqueColIx(i);
+
+                if(k!=-1)
+                    result.add(new Pair<>(i,k));
+
 
             }
 
-        return missingForField;
+
+        }
+        return result;
+
 
     }
+
+
 }

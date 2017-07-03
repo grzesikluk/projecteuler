@@ -44,10 +44,13 @@ The algo should try to find some starting point. Propose:
 4. go to 1
 5. END - solved
 
-##### Addition to the algorithm  - addition to #3 above
+###### Addition to the algorithm  - addition to #3 above
 1. get all possible positions for field S1
 2. from S1 remove all Sn possible positions for the same row/column/square
 3. if S1 len is 1 set this position for field
+
+###### Guessing
+1. Need to add the algorithm to make "guessing".
 
 #####Todo/Bugs
 1. getRemainingPositionsForSquare - is not working properly, for some sudoku we need this
@@ -62,3 +65,5 @@ functionality.   (**SOLVED**)
 >[0 6 0 0 0 9 0 1 0 ]
 >[0 0 1 0 3 0 9 4 5 ]
 >[0 4 0 0 7 1 0 2 6 ]
+
+After some analysis it seems that the problem is caused by the difficulty of this matrix. We didn't implement the "guess and test method".

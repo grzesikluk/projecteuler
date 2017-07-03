@@ -33,8 +33,8 @@ public class SudokuMatrix {
         name = matrix.name;
         sudokuArray = new int[MAX][MAX];
 
-        for(int i=0;i<MAX;i++)
-            for(int j =0; j<MAX; j++)
+        for (int i = 0; i < MAX; i++)
+            for (int j = 0; j < MAX; j++)
                 sudokuArray[i][j] = matrix.sudokuArray[i][j];
 
     }
@@ -78,6 +78,21 @@ public class SudokuMatrix {
             }
 
         return result;
+    }
+
+    public int getSquareSum(int a, int b) {
+        return getArraySum(getSquare(a, b));
+    }
+
+    private int getArraySum(int[][] array) {
+        int result = 0;
+
+        for (int i = 0; i < array.length; i++)
+            for (int j = 0; j < array.length; j++)
+                result += array[i][j];
+
+        return result;
+
     }
 
     public int[] getCol(int a) {
@@ -145,4 +160,53 @@ public class SudokuMatrix {
 
         sudokuArray[a][b] = val;
     }
+
+
+    public int sum() {
+        return getArraySum(sudokuArray);
+    }
+
+    public boolean isSolved() {
+
+        for (int i = 0; i < getCol(0).length; i++) {
+            if (Arrays.stream(getRow(i)).filter(s -> s == 0).count() != 0)
+                return false;
+        }
+
+        return true;
+    }
+
+
+    private int getUniqueArrayIx(int[] array) {
+        int val = 0;
+        int ix  = -1;
+
+        for (int i = 0; i < MAX; i++) {
+            if (array[i] != 0) {
+
+                if (val == 0) {
+                    ix = i;
+                    val = array[i];
+
+                }
+                else {
+                    return -1;
+                }
+
+            }
+
+        }
+
+        return ix;
+    }
+
+    public int getUniqueRowIx(int a) {
+        return getUniqueArrayIx(getRow(a));
+    }
+
+    public int getUniqueColIx(int a) {
+        return getUniqueArrayIx(getCol(a));
+    }
+
+
 }
