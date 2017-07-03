@@ -31,7 +31,7 @@ public class SudokuSolver {
 
 
         while (!isSolved()) {
-            Set<Integer>[][] allMissing = getAllMissing();
+            Set<Integer>[][] allMissing = getAllPossible();
 
             outerloop:
             for (int i = 0; i < allMissing.length; i++)
@@ -63,13 +63,13 @@ public class SudokuSolver {
                                 break outerloop;
                             }
                             
-                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
-
-                            if (remaining.size() == 1) {
-                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
-                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
-                                break outerloop;
-                            }
+//                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
+//
+//                            if (remaining.size() == 1) {
+//                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
+//                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
+//                                break outerloop;
+//                            }
 
                         }
 
@@ -87,12 +87,12 @@ public class SudokuSolver {
         return input;
     }
 
-    public Set<Integer>[][] getAllMissing() {
+    public Set<Integer>[][] getAllPossible() {
         Set[][] result = new Set[input.getRow(0).length][input.getCol(0).length];
 
         for (int i = 0; i < input.getRow(0).length; i++) {
             for (int j = 0; j < input.getRow(0).length; j++)
-                result[i][j] = getMissingForPosition(i, j);
+                result[i][j] = getPossibleForPosition(i, j);
         }
 
         return result;
@@ -192,7 +192,7 @@ public class SudokuSolver {
         return key;
     }
 
-    public Set<Integer> getMissingForPosition(int a, int b) {
+    public Set<Integer> getPossibleForPosition(int a, int b) {
 
         if (input.getRow(a)[b] != 0)
             return null;

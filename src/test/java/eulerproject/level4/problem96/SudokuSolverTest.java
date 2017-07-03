@@ -101,13 +101,13 @@ public class SudokuSolverTest {
         Set<Integer> expected = new HashSet<>();
 
         expected.addAll(Arrays.asList(4,5));
-        Assert.assertEquals(expected,sudokuSolver.getMissingForPosition(0,0));
+        Assert.assertEquals(expected,sudokuSolver.getPossibleForPosition(0,0));
 
-        Assert.assertNull(sudokuSolver.getMissingForPosition(2,2));
+        Assert.assertNull(sudokuSolver.getPossibleForPosition(2,2));
 
         expected.clear();
         expected.addAll(Arrays.asList(5,7));
-        Assert.assertEquals(expected,sudokuSolver.getMissingForPosition(0,8));
+        Assert.assertEquals(expected,sudokuSolver.getPossibleForPosition(0,8));
 
     }
 
@@ -134,18 +134,9 @@ public class SudokuSolverTest {
         Set<Integer> expected = new HashSet<>();
         expected.addAll(Arrays.asList(4));
 
-        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForColumn(0,1,sudokuSolver.getAllMissing()));
+        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForColumn(0,1,sudokuSolver.getAllPossible()));
     }
 
-//    @Test
-//    public void getRemainingPositionsForRow() throws Exception {
-//        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix4);
-//
-//        Set<Integer> expected = new HashSet<>();
-//        expected.addAll(Arrays.asList(4));
-//
-//        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForColumn(0,5,sudokuSolver.getAllMissing()));
-//    }
 
     @Test
     public void getRemainingPositionsForSquare() throws Exception {
@@ -154,7 +145,7 @@ public class SudokuSolverTest {
         Set<Integer> expected = new HashSet<>();
         expected.addAll(Arrays.asList(4));
 
-        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForSquare(0,7,sudokuSolver.getAllMissing()));
+        Assert.assertEquals(expected, sudokuSolver.getRemainingPositionsForSquare(0,7,sudokuSolver.getAllPossible()));
     }
 
 }

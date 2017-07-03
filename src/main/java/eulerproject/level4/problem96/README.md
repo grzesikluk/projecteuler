@@ -49,6 +49,6 @@ The algo should try to find some starting point. Propose:
 2. from S1 remove all Sn possible positions for the same row/column/square
 3. if S1 len is 1 set this position for field
 
-#####Todo
-The algo is not working properly. For some matrixes it is stuck with no 1 element missing
-array.
+#####Todo/Bugs
+1. getRemainingPositionsForSquare - is not working properly, for some sudoku we need this
+functionality.
