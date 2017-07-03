@@ -53,3 +53,12 @@ The algo should try to find some starting point. Propose:
 1. getRemainingPositionsForSquare - is not working properly, for some sudoku we need this
 functionality.   (**SOLVED**)
 2. testBug2 - matrix "Grid 06" stuck at some point of computation.
+>[1 0 0 9 2 0 0 0 0 ]
+>[5 2 4 0 1 7 0 0 9 ]
+>[0 0 0 0 0 0 2 7 1 ]
+>[0 5 0 0 0 8 1 0 2 ]
+>[0 0 0 1 0 2 0 0 0 ]
+>[4 1 2 7 0 0 0 9 0 ]
+>[0 6 0 0 0 9 0 1 0 ]
+>[0 0 1 0 3 0 9 4 5 ]
+>[0 4 0 0 7 1 0 2 6 ]
