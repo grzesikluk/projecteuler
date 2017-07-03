@@ -39,13 +39,13 @@ public class SudokuSolver {
 
                     if (allMissing[i][j] != null) {
 
-                        if (allMissing[i][j].size() == 1) {
-                            //first case - trivial to solve
-                            System.out.println("TRIV: Updating [" + i + " " + j + "] " + (int) allMissing[i][j].toArray()[0] );
-                            input.setSudokuArray(i, j, (int) allMissing[i][j].toArray()[0]);
-                            break outerloop;
-
-                        } else {
+//                        if (allMissing[i][j].size() == 1) {
+//                            //first case - trivial to solve
+//                            System.out.println("TRIV: Updating [" + i + " " + j + "] " + (int) allMissing[i][j].toArray()[0] );
+//                            input.setSudokuArray(i, j, (int) allMissing[i][j].toArray()[0]);
+//                            break outerloop;
+//
+//                        } else {
 
                             Set<Integer> remaining = getRemainingPositionsForColumn(i, j, allMissing);
 
@@ -63,15 +63,15 @@ public class SudokuSolver {
                                 break outerloop;
                             }
                             
-//                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
-//
-//                            if (remaining.size() == 1) {
-//                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
-//                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
-//                                break outerloop;
-//                            }
+                            remaining = getRemainingPositionsForSquare(i, j, allMissing);
 
-                        }
+                            if (remaining.size() == 1) {
+                                System.out.println("SQR: Updating [" + i + " " + j + "] " + (int) remaining.toArray()[0] );
+                                input.setSudokuArray(i, j, (int) remaining.toArray()[0]);
+                                break outerloop;
+                            }
+
+//                        }
 
                     }
 
@@ -80,7 +80,7 @@ public class SudokuSolver {
             watchdog++;
 
             if (watchdog == MAX_COUNT)
-                throw new ArithmeticException("Matrix is not solvable");
+                throw new ArithmeticException("Matrix is not solvable" + input  );
 
         }
 
@@ -192,23 +192,26 @@ public class SudokuSolver {
         return key;
     }
 
-    public Set<Integer> getPossibleForPosition(int a, int b) {
+    public Set<Integer> getPossibleForPosition(int y, int x) {
+        Set<Integer> missing = new HashSet<>();
 
-        if (input.getRow(a)[b] != 0)
+        if (input.getRow(y)[x] != 0)
             return null;
 
-        Set<Integer> missingRows = missingNumbers(input.getRow(a));
-        Set<Integer> missingCols = missingNumbers(input.getCol(b));
+        Set<Integer> missingRows = missingNumbers(input.getRow(y));
+        Set<Integer> missingCols = missingNumbers(input.getCol(x));
 
-        int square_a = b / 3;
-        int square_b = a / 3;
+        int square_x = x / 3;
+        int square_y = y / 3;
 
-        Set<Integer> missingSquare = missingNumbers(input.getSquare(square_a, square_b));
+        Set<Integer> missingSquare = missingNumbers(input.getSquare(square_x, square_y));
 
-        missingRows.retainAll(missingCols);
-        missingRows.retainAll(missingSquare);
 
-        return missingRows;
+        missing.addAll(missingRows);
+        missing.retainAll(missingCols);
+        missing.retainAll(missingSquare);
+
+        return missing;
     }
 
     public boolean isSolved() {
@@ -268,10 +271,11 @@ public class SudokuSolver {
         int start_y = a / 3;
         int start_x = b / 3;
 
-        for (int x = 0; x < 3; x++)
-            for (int y = 0; y < 3; y++) {
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++)
 
-                if ((x + start_x) != a && (y + start_y) != b && allMissing[y + start_y*3][x + start_x*3] != null) {
+
+                if (!((x + start_x) == a && (y + start_y) == b) && allMissing[y + start_y*3][x + start_x*3] != null) {
 
                     missingForField.removeAll(allMissing[y + start_y*3][x + start_x*3]);
 

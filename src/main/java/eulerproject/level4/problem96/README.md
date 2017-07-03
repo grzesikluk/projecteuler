@@ -51,4 +51,5 @@ The algo should try to find some starting point. Propose:
 
 #####Todo/Bugs
 1. getRemainingPositionsForSquare - is not working properly, for some sudoku we need this
-functionality.
+functionality.   (**SOLVED**)
+2. testBug2 - matrix "Grid 06" stuck at some point of computation.
