@@ -1,6 +1,7 @@
 package eulerproject.level4.problem96;
 
 import com.sun.org.glassfish.gmbal.Description;
+import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -15,6 +16,7 @@ import java.util.Set;
  * Created by Lukasz on 2017-07-02.
  */
 public class SudokuSolverTest {
+
 
 
     private static String FILE = "src\\test\\java\\eulerproject\\level4\\problem96\\testfile.txt";
@@ -116,6 +118,18 @@ public class SudokuSolverTest {
 
         System.out.println(sudokuSolver.getAllPossibleForNumber(4,sudokuSolver.getAllPossible()));
 
+    }
+
+
+    @Test
+    public void testGetPositionsToSupress() throws Exception {
+        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix[1]);
+
+        Set<Pair<Integer, Integer>> expected = new HashSet<>();
+        expected.add(new Pair<>(5,0));
+        expected.add(new Pair<>(4,4));
+
+        Assert.assertEquals(expected, sudokuSolver.getPositionsToSupress(sudokuSolver.getAllPossibleForNumber(4,sudokuSolver.getAllPossible())));
     }
 
 

@@ -34,15 +34,23 @@ public class SudokuSolver {
         while (!input.isSolved()) {
 
             for (int number = 1; number <= 9; number++) {
+                
                 Set<Integer>[][] allPossible = getAllPossible();
 
                 SudokuMatrix numberMatrix = getAllPossibleForNumber(number, allPossible);
 
+                System.out.println(numberMatrix);
+                
                 if (numberMatrix.sum() != 0) {
-                    //need to check
-                    Set<Pair<Integer,Integer>>  pairs = getPositionsToUpdate(numberMatrix);
 
-                    for(Pair<Integer,Integer> p: pairs)
+                    Set<Pair<Integer,Integer>>  pairsToSuppress = getPositionsToSupress(numberMatrix);
+
+                    for(Pair<Integer,Integer> p: pairsToSuppress)
+                        numberMatrix.setSudokuArray(p.getValue(),p.getKey(),  0);
+
+                    Set<Pair<Integer,Integer>>  pairsToUpdate = getPositionsToUpdate(numberMatrix);
+
+                    for(Pair<Integer,Integer> p: pairsToUpdate)
                         input.setSudokuArray(p.getValue(),p.getKey(),  number);
 
                 }
@@ -216,5 +224,21 @@ public class SudokuSolver {
 
     }
 
+
+    public Set<Pair<Integer, Integer>> getPositionsToSupress(SudokuMatrix positionsForNumber) {
+
+
+        //supress numbers that have no influence on processing
+
+        Set<Pair<Integer,Integer>> result = new HashSet<>();
+
+        if (positionsForNumber.sum() != 0) {
+
+
+        }
+        return result;
+
+
+    }
 
 }
