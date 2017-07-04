@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Solution {
     private static final String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem96\\p096_sudoku.txt";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         FileReader fileReader = new FileReader(FILENAME);
         fileReader.read();
@@ -17,17 +17,11 @@ public class Solution {
 
         int result = 0;
 
-        while((sudokuMatrix = fileReader.getNext()) != null) {
+        while ((sudokuMatrix = fileReader.getNext()) != null) {
             SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix);
 
-            try {
-                result += sudokuSolver.getSolution();
-            }
-            catch (Exception e) {
-                System.out.println(sudokuMatrix);
-                System.out.println(sudokuSolver.getInput());
-                break;
-            }
+
+            result += sudokuSolver.getSolution();
 
         }
         System.out.println(result);

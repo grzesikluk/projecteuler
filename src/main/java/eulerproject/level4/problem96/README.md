@@ -66,4 +66,6 @@ functionality.   (**SOLVED**)
 >[0 0 1 0 3 0 9 4 5 ]
 >[0 4 0 0 7 1 0 2 6 ]
 
-After some analysis it seems that the problem is caused by the difficulty of this matrix. We didn't implement the "guess and test method".
+After some analysis it seems that the problem is caused by the difficulty of this matrix. We didn't implement the "guess and test method".   (**SOLVED**)
+
+3. testBug3 - matrix "Grid 07" not solvable.

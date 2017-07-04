@@ -30,28 +30,33 @@ public class SudokuSolver {
     public SudokuMatrix solveMatrix() throws InterruptedException {
 
         int watchdog = input.sum();
+        System.out.println(input);
 
         while (!input.isSolved()) {
 
             for (int number = 1; number <= 9; number++) {
-                
+
                 Set<Integer>[][] allPossible = getAllPossible();
 
                 SudokuMatrix numberMatrix = getAllPossibleForNumber(number, allPossible);
 
-                System.out.println(numberMatrix);
-                
                 if (numberMatrix.sum() != 0) {
 
-                    Set<Pair<Integer,Integer>>  pairsToSuppress = getPositionsToSupress(numberMatrix);
+                    Set<Pair<Integer, Integer>> pairsToSuppress = getPositionsToSupress(numberMatrix);
 
-                    for(Pair<Integer,Integer> p: pairsToSuppress)
-                        numberMatrix.setSudokuArray(p.getValue(),p.getKey(),  0);
+                    System.out.println(numberMatrix);
 
-                    Set<Pair<Integer,Integer>>  pairsToUpdate = getPositionsToUpdate(numberMatrix);
+                    for (Pair<Integer, Integer> p : pairsToSuppress)
+                        numberMatrix.setSudokuArray(p.getValue(), p.getKey(), 0);
 
-                    for(Pair<Integer,Integer> p: pairsToUpdate)
-                        input.setSudokuArray(p.getValue(),p.getKey(),  number);
+                    System.out.println(numberMatrix);
+
+                    Set<Pair<Integer, Integer>> pairsToUpdate = getPositionsToUpdate(numberMatrix);
+
+                    for (Pair<Integer, Integer> p : pairsToUpdate) {
+                        input.setSudokuArray(p.getValue(), p.getKey(), number);
+                        System.out.println("Setting x="+p.getKey()+" y="+p.getValue()+"  val="+number);
+                    }
 
                 }
 
@@ -59,8 +64,10 @@ public class SudokuSolver {
 
             if (watchdog == input.sum())
                 throw new ArithmeticException("Matrix is not solvable" + input);
-            else
+            else {
                 watchdog = input.sum();
+                System.out.println(input);
+            }
 
         }
 
@@ -197,7 +204,7 @@ public class SudokuSolver {
 
     public Set<Pair<Integer, Integer>> getPositionsToUpdate(SudokuMatrix positionsForNumber) {
 
-        Set<Pair<Integer,Integer>> result = new HashSet<>();
+        Set<Pair<Integer, Integer>> result = new HashSet<>();
 
         if (positionsForNumber.sum() != 0) {
 
@@ -206,13 +213,13 @@ public class SudokuSolver {
 
                 int k = positionsForNumber.getUniqueRowIx(i);
 
-                if(k!=-1)
-                    result.add(new Pair<>(k,i));
+                if (k != -1)
+                    result.add(new Pair<>(k, i));
 
                 k = positionsForNumber.getUniqueColIx(i);
 
-                if(k!=-1)
-                    result.add(new Pair<>(i,k));
+                if (k != -1)
+                    result.add(new Pair<>(i, k));
 
 
             }
@@ -226,18 +233,95 @@ public class SudokuSolver {
 
 
     public Set<Pair<Integer, Integer>> getPositionsToSupress(SudokuMatrix positionsForNumber) {
-
-
-        //supress numbers that have no influence on processing
-
-        Set<Pair<Integer,Integer>> result = new HashSet<>();
+        Set<Pair<Integer, Integer>> result = new HashSet<>();
 
         if (positionsForNumber.sum() != 0) {
+
+            for (int x = 0; x < 3; x++)
+                for (int y = 0; y < 3; y++) {
+                    //for each square
+                    int col = getColWithOnlyValues(positionsForNumber.getSquare(x, y));
+                    int row = getRowWithOnlyValues(positionsForNumber.getSquare(x, y));
+
+                    if (col != -1) {
+                        col = x * 3 + col;
+
+                        for (int r = 0; r < positionsForNumber.getRow(0).length; r++) {
+                            if ((r < y * 3 || r >= (y + 1) * 3) && positionsForNumber.getCol(col)[r] != 0)
+                                result.add(new Pair<>(col, r));
+                        }
+
+
+                    }
+
+                    if (row != -1) {
+                        row = y * 3 + row;
+
+                        for (int c = 0; c < positionsForNumber.getRow(0).length; c++) {
+                            if (((c < x * 3 || c >= (x + 1) * 3)) && positionsForNumber.getRow(row)[c] != 0)
+                                result.add(new Pair<>(c, row));
+                        }
+
+                    }
+
+
+                }
 
 
         }
         return result;
+    }
 
+    private int getColWithOnlyValues(int[][] square) {
+        int arraySum = getArraySum(square);
+
+        if (arraySum != 0)
+            for (int i = 0; i < square.length; i++)
+                if (arraySum == getColSum(i, square))
+                    return i;
+
+        return -1;
+    }
+
+    private int getRowWithOnlyValues(int[][] square) {
+        int arraySum = getArraySum(square);
+
+        if (arraySum != 0)
+            for (int i = 0; i < square.length; i++)
+                if (arraySum == getRowSum(i, square))
+                    return i;
+
+        return -1;
+    }
+
+    private int getArraySum(int[][] array) {
+        int result = 0;
+
+        for (int i = 0; i < array.length; i++)
+            for (int j = 0; j < array.length; j++)
+                result += array[i][j];
+
+        return result;
+
+    }
+
+    private int getRowSum(int row, int[][] array) {
+        int result = 0;
+
+        for (int j = 0; j < array.length; j++)
+            result += array[row][j];
+
+        return result;
+
+    }
+
+    private int getColSum(int col, int[][] array) {
+        int result = 0;
+
+        for (int i = 0; i < array.length; i++)
+            result += array[i][col];
+
+        return result;
 
     }
 

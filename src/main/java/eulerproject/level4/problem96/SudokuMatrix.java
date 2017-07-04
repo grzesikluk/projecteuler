@@ -155,12 +155,11 @@ public class SudokuMatrix {
     }
 
     public void setSudokuArray(int a, int b, int val) {
-        if (val < 1 || val > MAX || a < 0 || b < 0 || a >= MAX || b >= MAX)
-            throw new IllegalArgumentException("Wrong indexes or value");
+        if (val < 0 || val > MAX || a < 0 || b < 0 || a >= MAX || b >= MAX)
+            throw new IllegalArgumentException("Wrong indexes or value a= " +a+ " b= "+b+" val ="+val);
 
         sudokuArray[a][b] = val;
     }
-
 
     public int sum() {
         return getArraySum(sudokuArray);
@@ -175,7 +174,6 @@ public class SudokuMatrix {
 
         return true;
     }
-
 
     private int getUniqueArrayIx(int[] array) {
         int val = 0;

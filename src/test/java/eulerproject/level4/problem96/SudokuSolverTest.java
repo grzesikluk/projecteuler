@@ -1,10 +1,8 @@
 package eulerproject.level4.problem96;
 
-import com.sun.org.glassfish.gmbal.Description;
 import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -127,7 +125,7 @@ public class SudokuSolverTest {
 
         Set<Pair<Integer, Integer>> expected = new HashSet<>();
         expected.add(new Pair<>(5,0));
-        expected.add(new Pair<>(4,4));
+        expected.add(new Pair<>(3,0));
 
         Assert.assertEquals(expected, sudokuSolver.getPositionsToSupress(sudokuSolver.getAllPossibleForNumber(4,sudokuSolver.getAllPossible())));
     }
@@ -139,11 +137,16 @@ public class SudokuSolverTest {
     }
 
     @Test
-    @Description("this test fails because of guessing method of solving is not implemented.")
-    @Ignore
     public void testBug2() throws Exception {
 
         System.out.println(new SudokuSolver(sudokuMatrix[4]).solveMatrix());
+
+    }
+
+    @Test
+    public void testBug3() throws Exception {
+
+        System.out.println(new SudokuSolver(sudokuMatrix[5]).solveMatrix());
 
     }
 }
