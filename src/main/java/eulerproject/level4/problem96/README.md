@@ -50,7 +50,6 @@ The algo should try to find some starting point. Propose:
 3. if S1 len is 1 set this position for field
 
 ###### "Guessing" algorithm
-
 1. get all possible tables for number 1-9.
 2. get the table with smallest amount of values T#N.
 3. pick the square with highest number of values in T#N = S#M
@@ -73,5 +72,4 @@ functionality.   (**SOLVED**)
 >[0 4 0 0 7 1 0 2 6 ]
 
 After some analysis it seems that the problem is caused by the difficulty of this matrix. We didn't implement the "guess and test method".   (**SOLVED**)
-
-3. testBug3 - matrix "Grid 07" not solvable. Need to add the algorithm to make "guessing". 
+3. testBug3 - matrix "Grid 07" not solvable. Need to add the algorithm to make "guessing". (**SOLVED**)

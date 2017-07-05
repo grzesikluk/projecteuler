@@ -10,13 +10,7 @@ import java.util.*;
 public class SudokuSolver {
 
     private static Set<Integer> allNumbers;
-
-    public SudokuMatrix getInput() {
-        return input;
-    }
-
     private SudokuMatrix input;
-    private static final int MAX_COUNT = 10000;
 
     static {
         allNumbers = new HashSet<>();
@@ -27,46 +21,67 @@ public class SudokuSolver {
         input = new SudokuMatrix(matrix);
     }
 
-    public SudokuMatrix solveMatrix() throws InterruptedException {
+    public SudokuMatrix solveMatrix() {
 
         int watchdog = input.sum();
-        System.out.println(input);
+        Set<Integer>[][] allPossible;
 
         while (!input.isSolved()) {
 
-            for (int number = 1; number <= 9; number++) {
+            for (Integer number : allNumbers) {
 
-                Set<Integer>[][] allPossible = getAllPossible();
-
+                allPossible = getAllPossible();
                 SudokuMatrix numberMatrix = getAllPossibleForNumber(number, allPossible);
 
                 if (numberMatrix.sum() != 0) {
 
                     Set<Pair<Integer, Integer>> pairsToSuppress = getPositionsToSupress(numberMatrix);
 
-                    System.out.println(numberMatrix);
-
                     for (Pair<Integer, Integer> p : pairsToSuppress)
                         numberMatrix.setSudokuArray(p.getValue(), p.getKey(), 0);
 
-                    System.out.println(numberMatrix);
-
                     Set<Pair<Integer, Integer>> pairsToUpdate = getPositionsToUpdate(numberMatrix);
 
-                    for (Pair<Integer, Integer> p : pairsToUpdate) {
+                    for (Pair<Integer, Integer> p : pairsToUpdate)
                         input.setSudokuArray(p.getValue(), p.getKey(), number);
-                        System.out.println("Setting x="+p.getKey()+" y="+p.getValue()+"  val="+number);
-                    }
 
                 }
 
             }
 
-            if (watchdog == input.sum())
-                throw new ArithmeticException("Matrix is not solvable" + input);
-            else {
+            if (watchdog == input.sum()) {
+
+                /*This means that array wasn't solvable without guessing, we must start to branch calculation here*/
+
+                allPossible = getAllPossible();
+                int numberToGuess = getAllPossibleNumberToGuess(allPossible);
+                SudokuMatrix  possiblePositionsForNumberToGuess = getAllPossibleForNumber(numberToGuess, allPossible);
+                Pair<Integer, Integer> squareToGuess = getSquareCoordToGuess(numberToGuess, possiblePositionsForNumberToGuess);
+                List<Pair<Integer, Integer>> positionsToGuess = getNonZeroPositions(possiblePositionsForNumberToGuess.getSquare(squareToGuess.getKey(), squareToGuess.getValue()));
+
+                /*Do one level recursion here*/
+                for(Pair<Integer, Integer> posInSquare:positionsToGuess) {
+
+                    Pair<Integer, Integer> posInSudoku = transformSquareCoordToSudokuCoord(squareToGuess.getKey(), squareToGuess.getValue(), posInSquare.getKey(), posInSquare.getValue());
+
+                    SudokuMatrix guessedSudoku = new SudokuMatrix(input);
+                    guessedSudoku.setSudokuArray(posInSudoku.getKey(), posInSudoku.getValue(), numberToGuess);
+
+                    try {
+                        SudokuMatrix guessedResult = new SudokuSolver(guessedSudoku).solveMatrix();
+                        return guessedResult;
+                    }
+                    catch (Exception ex) {
+                        //didnt manage to solve, try next
+                    }
+
+
+                }
+
+                throw new IllegalStateException("Matrix is not solvable !!!!" + input);
+
+            } else {
                 watchdog = input.sum();
-                System.out.println(input);
             }
 
         }
@@ -107,6 +122,41 @@ public class SudokuSolver {
 
     }
 
+    private int getAllPossibleNumberToGuess(Set<Integer>[][] allPossible) {
+        int result = 1;
+        int val = Integer.MAX_VALUE;
+
+        for (Integer number : allNumbers) {
+            int sum = getAllPossibleForNumber(number, allPossible).sum();
+
+            if ((sum != 0) && (val > sum)) {
+                val = sum;
+                result = number;
+            }
+
+        }
+        return result;
+    }
+
+    private Pair<Integer, Integer> getSquareCoordToGuess(int number, SudokuMatrix numberMatrix) {
+        int guessX = 0;
+        int guessY = 0;
+        int sum = 0;
+
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++) {
+                int squareSum = numberMatrix.getSquareSum(i, j);
+                if (sum < squareSum) {
+                    sum = squareSum;
+                    guessX = j;
+                    guessY = i;
+                }
+
+            }
+
+        return new Pair<>(guessY, guessX);
+    }
+
     public int getSolution() throws InterruptedException {
         SudokuMatrix matrix = solveMatrix();
         return matrix.getRow(0)[0] * 100 + matrix.getRow(0)[1] * 10 + matrix.getRow(0)[2];
@@ -130,54 +180,6 @@ public class SudokuSolver {
         }
 
         return copyAll;
-    }
-
-    public Map<Integer, Integer> getHistogram() {
-
-        Map<Integer, Integer> histogram = new HashMap<>();
-
-        for (int i = 0; i < input.getCol(0).length; i++) {
-
-            for (int j = 0; j < input.getRow(i).length; j++) {
-
-                int[] row = input.getRow(i);
-
-                if (histogram.containsKey(row[j])) {
-                    histogram.replace(row[j], histogram.get(row[j]) + 1);
-
-                } else {
-                    histogram.put(row[j], 1);
-                }
-
-            }
-
-        }
-
-        histogram.remove(0);
-
-        return histogram;
-
-    }
-
-    public int getNumberToProcess() {
-
-        Map<Integer, Integer> histogram = getHistogram();
-
-        int val = 0;
-        int key = 0;
-
-        for (Integer i : histogram.keySet()) {
-            int number = histogram.get(i);
-
-            if (number != 9) {
-                if (val < number) {
-                    val = number;
-                    key = i;
-                }
-            }
-        }
-
-        return key;
     }
 
     public Set<Integer> getPossibleForPosition(int y, int x) {
@@ -230,7 +232,6 @@ public class SudokuSolver {
 
 
     }
-
 
     public Set<Pair<Integer, Integer>> getPositionsToSupress(SudokuMatrix positionsForNumber) {
         Set<Pair<Integer, Integer>> result = new HashSet<>();
@@ -325,4 +326,29 @@ public class SudokuSolver {
 
     }
 
+    private Pair<Integer, Integer> transformSquareCoordToSudokuCoord(int square_x, int square_y, int x, int y) {
+        return new Pair<Integer, Integer>(square_y * 3 + y, square_x * 3 + x);
+    }
+
+    private List<Pair<Integer, Integer>> transformSudokuCoordToSquareCoord(int square_x, int square_y, int x, int y) {
+        List<Pair<Integer, Integer>> result = new ArrayList<>();
+
+        result.add(new Pair<>(y / 3, x / 3)); //square coordinates Key = Col, Val = Row
+        result.add(new Pair<>(y % 3, x % 3)); //coordinates within square Key = Col, Val=Row
+
+        return result;
+    }
+
+    private List<Pair<Integer, Integer>> getNonZeroPositions(int[][] array) {
+        List<Pair<Integer, Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < array.length; i++)
+            for (int j = 0; j < array.length; j++) {
+                if(array[i][j] != 0 )
+                    result.add(new Pair<>(j,i));
+
+            }
+
+        return result;
+    }
 }

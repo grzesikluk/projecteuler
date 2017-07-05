@@ -20,8 +20,12 @@ public class Solution {
         while ((sudokuMatrix = fileReader.getNext()) != null) {
             SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix);
 
-
-            result += sudokuSolver.getSolution();
+            try {
+                result += sudokuSolver.getSolution();
+            }
+            catch (IllegalStateException ex) {
+                System.out.println(ex);
+            }
 
         }
         System.out.println(result);

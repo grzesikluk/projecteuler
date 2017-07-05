@@ -62,13 +62,13 @@ public class SudokuMatrix {
         sudokuArray[a] = getIntRow(line);
     }
 
-    public int[][] getSquare(int a, int b) {
+    public int[][] getSquare(int x_pos, int y_pos) {
 
-        if (a >= MAX_SQUARE || b >= MAX_SQUARE || a < 0 || b < 0)
+        if (x_pos >= MAX_SQUARE || y_pos >= MAX_SQUARE || x_pos < 0 || y_pos < 0)
             throw new IllegalArgumentException("Wrong input index value");
 
-        int start_x = a * MAX_SQUARE;
-        int start_y = b * MAX_SQUARE;
+        int start_x = x_pos * MAX_SQUARE;
+        int start_y = y_pos * MAX_SQUARE;
 
         int[][] result = new int[MAX_SQUARE][MAX_SQUARE];
 

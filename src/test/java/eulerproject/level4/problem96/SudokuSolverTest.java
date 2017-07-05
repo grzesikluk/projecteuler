@@ -6,17 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Lukasz on 2017-07-02.
  */
 public class SudokuSolverTest {
-
-
-
     private static String FILE = "src\\test\\java\\eulerproject\\level4\\problem96\\testfile.txt";
     private SudokuMatrix[] sudokuMatrix;
 
@@ -60,24 +55,6 @@ public class SudokuSolverTest {
     }
 
     @Test
-    public void testGetHistogram() throws Exception {
-        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix[0]);
-
-        System.out.println(sudokuSolver.getHistogram());
-
-
-    }
-
-    @Test
-    public void testGetNumberToProcess() throws Exception {
-        SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix[0]);
-
-        Assert.assertEquals(2, sudokuSolver.getNumberToProcess());
-
-
-    }
-
-    @Test
     public void testGetMissingForPosition() throws Exception {
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix[0]);
         Set<Integer> expected = new HashSet<>();
@@ -111,10 +88,21 @@ public class SudokuSolverTest {
     public void testGetPossibleForNumber() {
         SudokuSolver sudokuSolver = new SudokuSolver(sudokuMatrix[1]);
 
-        Set<Integer> expected = new HashSet<>();
-        expected.addAll(Arrays.asList(4));
+        List<String> expectedStrings = new ArrayList<>();
+        expectedStrings.add("Table with possible numbers for 4");
+        expectedStrings.add("040404000");
+        expectedStrings.add("000000000");
+        expectedStrings.add("000004000");
+        expectedStrings.add("000000000");
+        expectedStrings.add("000404000");
+        expectedStrings.add("000000000");
+        expectedStrings.add("000000000");
+        expectedStrings.add("000000000");
+        expectedStrings.add("000000000");
 
-        System.out.println(sudokuSolver.getAllPossibleForNumber(4,sudokuSolver.getAllPossible()));
+        SudokuMatrix expected = new SudokuMatrix(expectedStrings);
+
+        Assert.assertEquals(expected,sudokuSolver.getAllPossibleForNumber(4,sudokuSolver.getAllPossible()));
 
     }
 
@@ -133,20 +121,16 @@ public class SudokuSolverTest {
 
     @Test
     public void testBug_1() throws Exception {
-        System.out.println(new SudokuSolver(sudokuMatrix[2]).solveMatrix());
+        Assert.assertTrue(new SudokuSolver(sudokuMatrix[2]).solveMatrix().isSolved());
     }
 
     @Test
     public void testBug2() throws Exception {
-
-        System.out.println(new SudokuSolver(sudokuMatrix[4]).solveMatrix());
-
+        Assert.assertTrue(new SudokuSolver(sudokuMatrix[4]).solveMatrix().isSolved());
     }
 
     @Test
     public void testBug3() throws Exception {
-
-        System.out.println(new SudokuSolver(sudokuMatrix[5]).solveMatrix());
-
+        Assert.assertTrue(new SudokuSolver(sudokuMatrix[5]).solveMatrix().isSolved());
     }
 }
