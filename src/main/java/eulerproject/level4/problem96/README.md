@@ -49,8 +49,14 @@ The algo should try to find some starting point. Propose:
 2. from S1 remove all Sn possible positions for the same row/column/square
 3. if S1 len is 1 set this position for field
 
-###### Guessing
-1. Need to add the algorithm to make "guessing".
+###### "Guessing" algorithm
+
+1. get all possible tables for number 1-9.
+2. get the table with smallest amount of values T#N.
+3. pick the square with highest number of values in T#N = S#M
+4. for each value in T#N/S#M - V 1..k - assign it and try to process further basing on this
+asumption, branch computations
+5. for each computation 1..k only one shall finish with some result
 
 #####Todo/Bugs
 1. getRemainingPositionsForSquare - is not working properly, for some sudoku we need this
@@ -68,4 +74,4 @@ functionality.   (**SOLVED**)
 
 After some analysis it seems that the problem is caused by the difficulty of this matrix. We didn't implement the "guess and test method".   (**SOLVED**)
 
-3. testBug3 - matrix "Grid 07" not solvable.
+3. testBug3 - matrix "Grid 07" not solvable. Need to add the algorithm to make "guessing". 
