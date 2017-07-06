@@ -18,6 +18,10 @@ Given that 0 ≤ x1, y1, x2, y2 ≤ 50, how many right triangles can be formed?
 ### Solution
 
 #### Ideas
+
+1. First idea is to point by point - 50x50 = 2500 generate equation for line that is perpendicular
+to OQ and for this equation find all points that satisfy this equation and are integer points.
+2. Generate pythagorian triples (already implemented) and find which coordinates meet it.
  
 ##### Data structures
 
