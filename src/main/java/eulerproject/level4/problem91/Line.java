@@ -4,6 +4,14 @@ import java.awt.*;
 
 public class Line {
 
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
     private double a;
     private double b;
 
@@ -14,12 +22,9 @@ public class Line {
     }
 
     public Line(Point p1, Point p2) {
-
         a = (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
         b = p1.getY() - p1.getX() * (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
-
     }
-
 
     public double getY(double x) {
         return a * x + b;
@@ -43,7 +48,11 @@ public class Line {
 
         double b = p.getY() - a * p.getX();
         return new Line(a, b);
-
-
     }
+
+    public boolean isSolution(Point p) {
+        return (p.getY() == ((a * p.getX()) + b));
+    }
+
+
 }

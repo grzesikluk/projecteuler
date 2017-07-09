@@ -19,4 +19,30 @@ public class LineTest {
         Assert.assertEquals("y = 2.5x -6.5", new Line(new Point(5,6), new Point(7,11)).toString());
     }
 
+    @Test
+    public void testPerpLine() throws Exception {
+
+        Line perp = new Line(1,0).getPerpLine(new Point(1,1));
+
+
+        Assert.assertEquals(-1.0, perp.getA(), 0.0);
+        Assert.assertEquals(2.0, perp.getB(), 0.0);
+
+    }
+
+
+    @Test
+    public void testIsSolution() throws Exception {
+        Line line = new Line(-1.0,2);
+        Assert.assertTrue(line.isSolution(new Point(1,1)));
+        Assert.assertTrue(line.isSolution(new Point(2,0)));
+    }
+
+    @Test
+    public void testIsSolution2() throws Exception {
+        Line line = new Line( new Point(0,0), new Point(2,2));
+        Assert.assertTrue(line.isSolution(new Point(1,1)));
+        Assert.assertTrue(line.isSolution(new Point(3,3)));
+    }
+
 }
