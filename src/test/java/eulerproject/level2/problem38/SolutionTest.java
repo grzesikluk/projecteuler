@@ -3,9 +3,7 @@ package eulerproject.level2.problem38;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static eulerproject.level2.problem38.Solution.concatenateNumbers;
-import static eulerproject.level2.problem38.Solution.generateNumbers;
-import static eulerproject.level2.problem38.Solution.isPandigital;
+import static eulerproject.level2.problem38.Solution.*;
 
 /**
  * Created by grzesikl on 26/08/2016.
