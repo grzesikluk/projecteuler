@@ -1,30 +1,30 @@
 package eulerproject.level4.problem91;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
-/**
- * Created by lgrzesik on 06/07/17.
- */
 public class Solution {
 
-    private static int MAX = 3;
-    private static List<Point> allPoints;
+    private static int MAX = 2;
+    private static List<Point> points;
+    private static Set<Triangle> triangles;
 
     private static void getAllPoints() {
 
-        allPoints = new ArrayList<>((MAX + 1) * (MAX + 1));
+        points = new ArrayList<>((MAX + 1) * (MAX + 1));
         for (int i = 0; i <= MAX; i++)
             for (int j = 0; j <= MAX; j++)
                 if (!(isZeroPoint(i, j)))
-                    allPoints.add(new Point(i, j));
+                    points.add(new Point(i, j));
 
     }
 
     public static void main(String[] args) {
 
         getAllPoints();
+        triangles = new HashSet<>();
+        Point zeroPoint = new Point(0, 0);
 
         for (int i = 0; i <= MAX; i++) {
             for (int j = 0; j <= MAX; j++) {
@@ -35,12 +35,42 @@ public class Solution {
 
                     Line line = new Line(new Point(0, 0), chekPoint).getPerpLine(chekPoint);
 
-                    for (Point p : allPoints) {
+                    for (Point p : points) {
 
                         if (!p.equals(chekPoint)) {
 
                             if (line.isSolution(p)) {
-                                System.out.println(p + " " + chekPoint);
+
+                                Set<Point> trianglePoints = new HashSet<>();
+
+                                trianglePoints.add(chekPoint);
+                                trianglePoints.add(p);
+                                trianglePoints.add(zeroPoint);
+
+                                Triangle triangle = new Triangle(trianglePoints);
+                                if (triangle.valid())
+                                    triangles.add(triangle);
+
+                                Triangle symmetric = triangle.getSymmetric();
+                                if (symmetric.valid())
+                                    triangles.add(symmetric);
+
+                                Triangle yTransformed = triangle.getYAxisTransformedAndMoved();
+                                if (yTransformed != null && yTransformed.valid())
+                                    triangles.add(yTransformed);
+
+                                Triangle xTransformed = triangle.getXAxisTransformedAndMoved();
+                                if (xTransformed != null && xTransformed.valid())
+                                    triangles.add(xTransformed);
+
+
+                                Triangle symmetricYTransformed = triangle.getSymmetric().getYAxisTransformedAndMoved();
+                                if (symmetricYTransformed != null && symmetricYTransformed.valid())
+                                    triangles.add(symmetricYTransformed);
+
+                                Triangle symmetricXTransformed = triangle.getSymmetric().getXAxisTransformedAndMoved();
+                                if (symmetricXTransformed != null && symmetricXTransformed.valid())
+                                    triangles.add(symmetricXTransformed);
                             }
 
                         }
@@ -53,6 +83,7 @@ public class Solution {
             }
         }
 
+        System.out.println(triangles);
     }
 
     public static boolean isZeroPoint(int i, int j) {
