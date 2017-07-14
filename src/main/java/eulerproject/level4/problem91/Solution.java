@@ -1,16 +1,20 @@
 package eulerproject.level4.problem91;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class Solution {
+public class Solution
+{
 
-    private static int MAX = 2;
+    private static int MAX = 50;
     private static List<Point> points;
     private static Set<Triangle> triangles;
 
-    private static void getAllPoints() {
+    private static void getAllPoints()
+    {
 
         points = new ArrayList<>((MAX + 1) * (MAX + 1));
         for (int i = 0; i <= MAX; i++)
@@ -20,7 +24,8 @@ public class Solution {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         getAllPoints();
         triangles = new HashSet<>();
@@ -83,14 +88,16 @@ public class Solution {
             }
         }
 
-        System.out.println(triangles);
+        System.out.println(triangles.size());
     }
 
-    public static boolean isZeroPoint(int i, int j) {
+    public static boolean isZeroPoint(int i, int j)
+    {
         return i == 0 && j == 0;
     }
 
-    public static boolean isZeroPoint(Point p) {
+    public static boolean isZeroPoint(Point p)
+    {
         return p.getY() == 0 && p.getX() == 0;
     }
 }
