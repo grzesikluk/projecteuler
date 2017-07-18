@@ -1,27 +1,27 @@
 package eulerproject.level4.problem91;
 
-import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Solution
 {
 
     private static int MAX = 50;
-    private static List<Point> points;
+    private static List<TrianglePoint> points;
     private static Set<Triangle> triangles;
 
     private static void getAllPoints()
     {
-
         points = new ArrayList<>((MAX + 1) * (MAX + 1));
+
         for (int i = 0; i <= MAX; i++)
             for (int j = 0; j <= MAX; j++)
                 if (!(isZeroPoint(i, j)))
-                    points.add(new Point(i, j));
-
+                    points.add(new TrianglePoint(i, j));
     }
 
     public static void main(String[] args)
@@ -29,75 +29,34 @@ public class Solution
 
         getAllPoints();
         triangles = new HashSet<>();
-        Point zeroPoint = new Point(0, 0);
+        TrianglePoint zeroPoint = new TrianglePoint(0, 0);
 
         for (int i = 0; i <= MAX; i++) {
             for (int j = 0; j <= MAX; j++) {
 
-                Point chekPoint = new Point(i, j);
+                TrianglePoint checkPoint = new TrianglePoint(i, j);
 
-                if (!(isZeroPoint(chekPoint))) { //do not include center of xy axis
+                if (!checkPoint.equals(zeroPoint)) { //do not include center of xy axis
 
-                    Line line = new Line(new Point(0, 0), chekPoint).getPerpLine(chekPoint);
+                    for (TrianglePoint p : points) {
 
-                    for (Point p : points) {
+                        if (!p.equals(checkPoint)) {
 
-                        if (!p.equals(chekPoint)) {
+                            Triangle triangle = new Triangle(new HashSet<>(Arrays.asList(new TrianglePoint[]{p, checkPoint, zeroPoint})));
 
-                            if (line.isSolution(p)) {
-
-                                Set<Point> trianglePoints = new HashSet<>();
-
-                                trianglePoints.add(chekPoint);
-                                trianglePoints.add(p);
-                                trianglePoints.add(zeroPoint);
-
-                                Triangle triangle = new Triangle(trianglePoints);
-                                if (triangle.valid())
-                                    triangles.add(triangle);
-
-                                Triangle symmetric = triangle.getSymmetric();
-                                if (symmetric.valid())
-                                    triangles.add(symmetric);
-
-                                Triangle yTransformed = triangle.getYAxisTransformedAndMoved();
-                                if (yTransformed != null && yTransformed.valid())
-                                    triangles.add(yTransformed);
-
-                                Triangle xTransformed = triangle.getXAxisTransformedAndMoved();
-                                if (xTransformed != null && xTransformed.valid())
-                                    triangles.add(xTransformed);
-
-
-                                Triangle symmetricYTransformed = triangle.getSymmetric().getYAxisTransformedAndMoved();
-                                if (symmetricYTransformed != null && symmetricYTransformed.valid())
-                                    triangles.add(symmetricYTransformed);
-
-                                Triangle symmetricXTransformed = triangle.getSymmetric().getXAxisTransformedAndMoved();
-                                if (symmetricXTransformed != null && symmetricXTransformed.valid())
-                                    triangles.add(symmetricXTransformed);
-                            }
-
+                            if (triangle.valid())
+                                triangles.add(triangle);
                         }
-
                     }
-
-
                 }
-
             }
         }
 
-        System.out.println(triangles.size());
+        System.out.println(triangles.stream().sorted().collect(Collectors.toList()).size());
     }
 
     public static boolean isZeroPoint(int i, int j)
     {
         return i == 0 && j == 0;
-    }
-
-    public static boolean isZeroPoint(Point p)
-    {
-        return p.getY() == 0 && p.getX() == 0;
     }
 }
