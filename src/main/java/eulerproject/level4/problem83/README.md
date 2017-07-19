@@ -11,7 +11,20 @@ Find the minimal path sum, in matrix.txt (right click and "Save Link/Target As..
 
 Probably the solution is similar to Problem 81 - 82. Need to check.
 
+##### Possible approaches
+* Dijkstra's algo
+* A* algo
+
+##### First attempt
+We will try with Dijkstra.
+
+* reading of table,
+* convert table to graph,
+* implement algo
 
 #### Links
 [A* search](https://en.wikipedia.org/wiki/A*_search_algorithm)
-[Algorithms for Reliable Naviagtion and Wayfinding](http://www.cognitivegiscience.psu.edu/pdfs/haque2007algorithms.pdf)
+
+[Algorithms for Reliable Naviagtion and Wayfinding ](http://www.cognitivegiscience.psu.edu/pdfs/haque2007algorithms.pdf)
+
+[Dijkstra Algo](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
