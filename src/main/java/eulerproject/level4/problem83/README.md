@@ -18,8 +18,8 @@ Probably the solution is similar to Problem 81 - 82. Need to check.
 ##### First attempt
 We will try with Dijkstra.
 
-* reading of table,
-* convert table to graph,
+* reading of table, (**DONE**)
+* convert table to graph, (**DONE**)
 * implement algo
 
 #### Links
