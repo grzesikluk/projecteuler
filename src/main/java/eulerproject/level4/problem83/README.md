@@ -10,3 +10,8 @@ Find the minimal path sum, in matrix.txt (right click and "Save Link/Target As..
 #### Solution
 
 Probably the solution is similar to Problem 81 - 82. Need to check.
+
+
+#### Links
+[A* search](https://en.wikipedia.org/wiki/A*_search_algorithm)
+[Algorithms for Reliable Naviagtion and Wayfinding](http://www.cognitivegiscience.psu.edu/pdfs/haque2007algorithms.pdf)
