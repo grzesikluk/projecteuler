@@ -12,15 +12,15 @@ import java.util.stream.Stream;
  */
 public class Solution {
     private static final int MAX = 80;
-    private static int[][] array = new int[MAX][MAX];
-    private static String FILENAME = "src\\main\\resources\\eulerproject\\level4\\problem82\\matrix.txt";
+    protected static int[][] array = new int[MAX][MAX];
+    private static String FILENAME = "src/main/resources/eulerproject/level4/problem82/matrix.txt";
 
     public static void main(String[] args) throws IOException {
         loadContents(FILENAME);
         System.out.println(getMinimumPath(array));
     }
 
-    private static void loadContents(String fileName) throws IOException {
+    protected static void loadContents(String fileName) throws IOException {
         Stream<String> lines = Files.lines(Paths.get(fileName));
         int i = 0;
         int j;
@@ -38,7 +38,7 @@ public class Solution {
     }
 
 
-    public static void copyArray(int[][] source, int[][] dest) {
+    protected static void copyArray(int[][] source, int[][] dest) {
         if (source.length != dest.length)
             return;
 
