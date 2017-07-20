@@ -17,11 +17,8 @@ public class Solution extends eulerproject.level4.problem82.Solution
 
     public static void main(String[] args) throws IOException
     {
-
         loadContents(FILENAME);
-
         Graph<List<Integer>> graph = generateGraphFromArray(array);
-
         System.out.println(graph);
     }
 
@@ -72,4 +69,5 @@ public class Solution extends eulerproject.level4.problem82.Solution
         if (y < arrayOfVertexes.length - 1)
             vertex.addEdge(arrayOfVertexes[x][y + 1].getValue().get(2), arrayOfVertexes[x][y + 1]);
     }
+
 }

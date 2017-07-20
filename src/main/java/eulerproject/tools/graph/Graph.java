@@ -12,6 +12,11 @@ public class Graph<E>
         this.vertices = vertices;
     }
 
+    public List<Vertex<E>> getVertices()
+    {
+        return vertices;
+    }
+
     List<Vertex<E>> vertices;
 
     @Override
