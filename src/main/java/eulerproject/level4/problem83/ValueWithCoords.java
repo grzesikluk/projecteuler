@@ -53,4 +53,10 @@ public class ValueWithCoords implements Comparable
         }
         return -1;
     }
+
+    @Override
+    public String toString()
+    {
+        return "[x="+x+" y="+y+" v="+val + "]";
+    }
 }

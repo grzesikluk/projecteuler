@@ -15,7 +15,7 @@ public class Solution extends eulerproject.level4.problem82.Solution
     public static void main(String[] args) throws IOException
     {
         loadContents(FILENAME);
-        Graph<List<Integer>> graph = DataConverter.generateGraphFromArray(array);
+        Graph<ValueWithCoords> graph = DataConverter.generateGraphFromArray(array);
         System.out.println(graph);
     }
 

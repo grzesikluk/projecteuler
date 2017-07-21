@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DataConverter
 {
-    protected static Graph<List<Integer>> generateGraphFromArray(final int[][] array)
+    protected static Graph<ValueWithCoords> generateGraphFromArray(final int[][] array)
     {
         List<Vertex<ValueWithCoords>> vertices = new ArrayList<>();
 

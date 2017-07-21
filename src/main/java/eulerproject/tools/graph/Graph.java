@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by lgrzesik on 19/07/17.
  */
-public class Graph<E>
+public class Graph<E extends Comparable>
 {
     public Graph(final List<Vertex<E>> vertices)
     {
