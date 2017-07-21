@@ -11,16 +11,16 @@ import java.util.stream.Stream;
  * Created by Lukasz on 2017-03-07.
  */
 public class Solution {
-    private static final int MAX = 80;
+    protected static final int MAX = 80;
     protected static int[][] array = new int[MAX][MAX];
-    private static String FILENAME = "src/main/resources/eulerproject/level4/problem82/matrix.txt";
+    protected static String FILENAME = "src/main/resources/eulerproject/level4/problem82/matrix.txt";
 
     public static void main(String[] args) throws IOException {
-        loadContents(FILENAME);
+        loadContents(FILENAME, array);
         System.out.println(getMinimumPath(array));
     }
 
-    protected static void loadContents(String fileName) throws IOException {
+    public static void loadContents(String fileName, int[][] outputArray) throws IOException {
         Stream<String> lines = Files.lines(Paths.get(fileName));
         int i = 0;
         int j;
@@ -29,7 +29,7 @@ public class Solution {
             j = 0;
 
             for (String number : s.split(",")) {
-                array[i][j] = new Integer(number);
+                outputArray[i][j] = new Integer(number);
                 j++;
             }
             i++;
