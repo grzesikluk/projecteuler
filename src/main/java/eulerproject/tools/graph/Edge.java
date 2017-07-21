@@ -1,9 +1,6 @@
 package eulerproject.tools.graph;
 
-/**
- * Created by lgrzesik on 19/07/17.
- */
-public class Edge<E>
+public class Edge<E extends Comparable> implements Comparable
 {
     public Edge(final Vertex<E> nodeOne, final Vertex<E> nodeTwo, final int value)
     {
@@ -48,5 +45,16 @@ public class Edge<E>
     public String toString()
     {
         return "E=" + value + nodeOne + " " + nodeTwo;
+    }
+
+    @Override
+    public int compareTo(final Object o)
+    {
+        if(o instanceof Edge) {
+            Edge other = (Edge)o;
+
+            return getValue() - other.getValue();
+        }
+        return -1;
     }
 }

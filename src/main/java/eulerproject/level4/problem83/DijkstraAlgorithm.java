@@ -5,13 +5,12 @@ import eulerproject.tools.graph.Graph;
 import eulerproject.tools.graph.MinimalPathAlgorithm;
 import eulerproject.tools.graph.Vertex;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class DijkstraAlgorithm<E> implements MinimalPathAlgorithm<E>
+public class DijkstraAlgorithm<E extends Comparable> implements MinimalPathAlgorithm<E>
 {
     @Override
     public List<Edge> getMinimalPathByEdges(final Vertex source, final Vertex destination, final Graph graph)
@@ -41,7 +40,7 @@ public class DijkstraAlgorithm<E> implements MinimalPathAlgorithm<E>
     {
 
         //todo: implement me
-        return null
+        return null;
 
     }
 }

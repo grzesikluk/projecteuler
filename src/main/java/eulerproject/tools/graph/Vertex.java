@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by lgrzesik on 19/07/17.
- */
-public class Vertex<E>
+public class Vertex<E extends Comparable> implements Comparable
 {
     public List<Edge> getEdgeList()
     {
@@ -47,5 +44,18 @@ public class Vertex<E>
     public String toString()
     {
         return value.toString();
+    }
+
+    @Override
+    public int compareTo(final Object o)
+    {
+        if (o instanceof Vertex) {
+            Vertex other = (Vertex)o;
+
+            if(other.getValue() != null)
+                return getValue().compareTo((E) other.getValue());
+        }
+
+        return -1;
     }
 }
