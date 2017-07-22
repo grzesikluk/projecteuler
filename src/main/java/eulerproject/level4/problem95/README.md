@@ -16,6 +16,21 @@ Find the smallest member of the longest amicable chain with no element exceeding
 ### Solution
 
 ##### Ideas
+Searching for chains  Sum of proper divisors - SPD:
+* create search map with all values 1 - MAX
+* pick number to start i,
+* get SPD for i, 
+* go to next number i equal SPD
+* if chain is formed, add it to chain repo, and remove from search map, if chain ends with no
+further number (because it was removed) remove values from map
+* if no further numbers to process end
+* return longest chain
+    
+##### Problems
+Seems calculating SPD is very time consuming, for 100k it takes some minutes but for 1M it is very long. 
+For all values we must calculate to be sure we checked all chains possibilities. This will make this
+very long to calculate.
 
 
-??
+### Todo:
+* figure out optimising of SPD calculation
