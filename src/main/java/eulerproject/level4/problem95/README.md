@@ -31,6 +31,15 @@ Seems calculating SPD is very time consuming, for 100k it takes some minutes but
 For all values we must calculate to be sure we checked all chains possibilities. This will make this
 very long to calculate.
 
+Imagine that checking chain from value k1 -> .... -> kx -> ky -> kz -> ... (-> ky->). We must remove leading k1 to kx
+and rearrange the chain.
+
 
 ### Todo:
 * figure out optimising of SPD calculation
+* implement chaining **done**
+
+### Links
+[How to optimise hint](https://math.stackexchange
+.com/questions/22721/is-there-a-formula-to-calculate-the-sum-of-all-proper
+-divisors-of-a-number)
