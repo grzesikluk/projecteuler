@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -41,7 +42,7 @@ public class SolutionTest
     @Test
     public void testGetChain() throws Exception
     {
-        Solution.setValArray(new PriorityQueue<>(IntStream.range(2, 100_000).mapToObj(s -> s).collect(Collectors.toList())));
+        Solution.setValueSet(new HashSet<>(IntStream.range(2, 100_000).mapToObj(s -> s).collect(Collectors.toList())));
         Assert.assertEquals(Arrays.asList(220, 284), Solution.getChain(220,primes).getKey());
         Assert.assertEquals(Arrays.asList(284, 220), Solution.getChain(284, primes).getKey());
         Assert.assertEquals(Arrays.asList(28), Solution.getChain(28, primes).getKey());

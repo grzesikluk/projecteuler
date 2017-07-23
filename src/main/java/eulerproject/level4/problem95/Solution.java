@@ -4,23 +4,19 @@ import eulerproject.tools.primes.PrimeFactorization;
 import eulerproject.tools.primes.Primes;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution
 {
     private static int MAX = 1000_000;
+    private static Set<Integer> valueSet;
 
-    public static void setValArray(final PriorityQueue<Integer> valArray)
+    public static void setValueSet(final Set<Integer> valueSet)
     {
-        Solution.valArray = valArray;
+        Solution.valueSet = valueSet;
     }
-
-    private static PriorityQueue<Integer> valArray;
 
     public static void main(String[] args)
     {
@@ -28,38 +24,33 @@ public class Solution
         primes.init();
         int[] primesArray = primes.asList();
 
-        valArray = new PriorityQueue<>(IntStream.range(2, MAX + 1).mapToObj(s -> s).collect(Collectors.toList()));
+        valueSet = new HashSet<>(IntStream.range(2, MAX + 1).mapToObj(s -> s).collect(Collectors.toList()));
+
         int maxlen = 0;
         int maxK = 0;
+        int i = 0;
 
-        while (!valArray.isEmpty()) {
-            int k = valArray.peek();
+        while (!valueSet.isEmpty()) {
 
-            Pair<List<Integer>, List<Integer>> chain = getChain(k, primesArray);
+            if(valueSet.contains(i)) {
+                Pair<List<Integer>, List<Integer>> chain = getChain(i, primesArray);
 
-            if (chain.getKey().size() > maxlen) {
-                maxlen = chain.getKey().size();
-                maxK = chain.getKey().stream().min(Integer::compare).get();
+                if (chain.getKey().size() > maxlen) {
+                    maxlen = chain.getKey().size();
+                    maxK = chain.getKey().stream().min(Integer::compare).get();
+                }
+
+                chain.getValue().stream().forEach(s -> valueSet.remove(s));
             }
 
-            valArray.poll(); //remove
-            chain.getValue().stream().forEach(s -> valArray.remove(s));
+            i++;
 
-            if(valArray.size() % 1000 == 0) {
-                System.out.println(valArray.size());
+            if(valueSet.size() % 1000 == 0) {
+                System.out.println(valueSet.size());
             }
         }
 
         System.out.println(maxK + " " + maxlen);
-    }
-
-    public static int getSumOfProperDivisors(int k)
-    {
-        return IntStream
-                .range(1, k / 2 + 1)
-                .parallel()
-                .filter(s -> k % s == 0)
-                .sum();
     }
 
     public static int getSumOfProperDivisors(int k, int[] primes)
@@ -98,7 +89,7 @@ public class Solution
                 current = getSumOfProperDivisors(current, primes);
             }
 
-            if (current.equals(0) || !valArray.contains(current)) {
+            if (current.equals(0) || !valueSet.contains(current)) {
                 toRemove.addAll(result);
                 result.clear();
                 return new Pair<>(result, toRemove);
