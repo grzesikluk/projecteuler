@@ -40,6 +40,4 @@ and rearrange the chain.
 * implement chaining **done**
 
 ### Links
-[How to optimise hint](https://math.stackexchange
-.com/questions/22721/is-there-a-formula-to-calculate-the-sum-of-all-proper
--divisors-of-a-number)
+[How to optimise hint](https://math.stackexchange.com/questions/22721/is-there-a-formula-to-calculate-the-sum-of-all-proper-divisors-of-a-number)
