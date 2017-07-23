@@ -4,6 +4,25 @@ If a box contains twenty-one coloured discs, composed of fifteen blue discs and 
 
 The next such arrangement, for which there is exactly 50% chance of taking two blue discs at random, is a box containing eighty-five blue discs and thirty-five red discs.
 
-By finding the first arrangement to contain over 1012 = 1,000,000,000,000 discs in total, determine the number of blue discs that the box would contain.
+By finding the first arrangement to contain over 10^12 = 1,000,000,000,000 discs in total, determine the number of blue discs that the box would contain.
 
 ### Solution
+
+The equation describing the problem:
+
+>P(BB) = B/(B+R) * B-1/(B+R-1) = 1/2
+
+Or
+>2 * B * (B-1) = (B+R) * (B+R-1)
+
+Where: B - number of blue, R - number of reds
+
+#### Ideas
+* the 10^12 is huge and searching for solution will take long
+* equation can be simplified to: 2*B^2 = (B+R)^2, and (B+R) is around 10^12, and the right side of 
+equation will become something around 10^24!
+
+Algo idea - not sure?:
+* pick B+R one by one from 10^12 up
+* calculate right side of second equation
+* find B - it will be square equation for big numbers, if it is int - this is solution
