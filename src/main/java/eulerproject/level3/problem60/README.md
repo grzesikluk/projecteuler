@@ -20,6 +20,9 @@ Questions:
 Some ideas:
 * do not need to generate big concatenated primes, it is enough to evaluate if this is prime.
 * starting with sets of doublets might simplify things
+* can we ommit string operations when concatenating - just using normal values?
+* Integer.MAX_VALUE =  2147483647 or even Long.MAX_VALUE =  9223372036854775807 - is this enought to handle 2 
+concatenated primes?
 
 ##### Algorithm
 *
