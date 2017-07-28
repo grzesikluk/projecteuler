@@ -9,7 +9,7 @@ import java.util.List;
 public class Solution {
     private static int[] primesArray;
 
-    private static int MAX = 100000;
+    private static int MAX = 40000;
     private static int NO_NUMBERS = 5;
     private static Primes setOfPrimes;
 
