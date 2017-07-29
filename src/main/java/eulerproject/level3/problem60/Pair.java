@@ -38,12 +38,13 @@ public class Pair {
     }
 
     public long getConcatenatedFirstSecond() {
-        return new Long(Long.toString(getA()) + Long.toString(getB()));
+        return getA()*powerForNumber(getB())+getB();
     }
 
     public long getConcatenatedSecondFirst() {
-        return new Long(Long.toString(getB()) + Long.toString(getA()));
+        return getB()*powerForNumber(getA())+getA();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -60,6 +61,15 @@ public class Pair {
         int result = a;
         result = 31 * result + b;
         return result;
+    }
+
+    public static int powerForNumber(long s) {
+        int i = 1;
+
+        while(i<=s)
+            i *= 10;
+
+        return i;
     }
 
 }
