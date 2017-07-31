@@ -3,109 +3,82 @@ package eulerproject.level3.problem60;
 import eulerproject.tools.primes.Primes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-
-public class Solution {
-    private static int[] primesArray;
-
-    private static int MAX = 40000;
+public class Solution
+{
+    private static int MAX = 30000;
     private static int NO_NUMBERS = 5;
-    private static Primes setOfPrimes;
 
-
-    Solution() {
-        initPrimes();
+    public static void setSetOfPrimes(final Primes setOfPrimes)
+    {
+        Solution.setOfPrimes = setOfPrimes;
     }
 
-    private void initPrimes() {
+    private static Primes setOfPrimes;
+    private static Set<List<Integer>> result;
+
+    public static void main(String[] args)
+    {
+        result = new HashSet<>();
+
+        //primes
         setOfPrimes = new Primes(MAX);
         setOfPrimes.init();
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
 
         int startPrime = 2;
-        int maxSum = 0;
+        int maxSum = MAX;
 
-        while (startPrime < MAX) {
+        while (startPrime * NO_NUMBERS < MAX && startPrime != 0) {
+            searchForChain(Arrays.asList(startPrime), setOfPrimes, NO_NUMBERS, maxSum);
+            startPrime = setOfPrimes.getNextPrime(startPrime);
+        }
 
-            List<Integer> result = solution.searchForChain(setOfPrimes, NO_NUMBERS, startPrime, maxSum);
-
-            if (result != null) {
-                maxSum = result.stream().mapToInt(s -> s).sum();
-                System.out.println(maxSum + " " + result);
-                startPrime = result.stream().mapToInt(s -> s).min().orElse(MAX);
-            }
-
-            if(startPrime == 0)
-                break;
-
-            if (startPrime * NO_NUMBERS > maxSum)
-                break;
-
+        for (List<Integer> list : result) {
+            System.out.println(list.stream().mapToInt(s -> s).sum() + " " + list);
         }
     }
 
+    public static void searchForChain(final List<Integer> chain, final Primes primes, final int size, final int maxSum)
+    {
+        int sum = chain.stream().mapToInt(s -> s).sum();
+        int max = chain.stream().mapToInt(s -> s).max().orElse(maxSum);
+        int nextPrime = max;
 
-    public static List<Integer> searchForChain(Primes primes, int size, int startPrime, int maxSum) {
-        List<Integer> resultList = new ArrayList<>();
+        while (chain != null && (nextPrime = primes.getNextPrime(nextPrime)) != 0) {
 
-        int primeI = startPrime;
-
-        while ((primeI = primes.getNextPrime(primeI)) != 0) {
-
-            if (maxSum != 0 && (NO_NUMBERS * primeI > maxSum))
+            if ((nextPrime * (size - chain.size()) + sum) > maxSum)
                 break;
-
-            int primeJ = primeI;
-
-            resultList.add(primeI);
-
-            while ((primeJ = primes.getNextPrime(primeJ)) != 0){
-
-                if (maxSum != 0 && (NO_NUMBERS * primeJ > maxSum))
-                    break;
-
-                if (isChainedPrime(primeJ, resultList)) {
-                    resultList.add(primeJ);
-
-                    if (maxSum != 0 &&
-                            ((resultList.stream().mapToInt(s -> s).sum() > maxSum) )) {
-                        return null;
-
-                    } else if (resultList.size() == size)
-                        break;
-                }
+            else if (isChainedPrime(nextPrime, chain)) {
+                List<Integer> inputList = new ArrayList<>(chain);
+                inputList.add(nextPrime);
+                searchForChain(inputList, primes, size, maxSum);
             }
 
-            if (resultList.size() == size)
-                break;
-            else {
-                resultList.clear();
-            }
+            if (chain != null && chain.size() == size)
+                result.add(chain);
+            else continue;
         }
-
-        return resultList;
     }
 
-    public static boolean isChainedPrime(int prime, List<Integer> inputList) {
+    public static boolean isChainedPrime(final int prime, final List<Integer> inputList)
+    {
 
         for (Integer i : inputList) {
             if (!isPrimePair(new Pair(prime, i)))
                 return false;
-
         }
         return true;
     }
 
-    public static boolean isPrimePair(Pair a) {
+    public static boolean isPrimePair(final Pair a)
+    {
         return setOfPrimes.isPrimeValueBig(a.getConcatenatedFirstSecond()) &&
                 setOfPrimes.isPrimeValueBig(a.getConcatenatedSecondFirst()) &&
                 setOfPrimes.isPrime(a.getA()) &&
                 setOfPrimes.isPrime(a.getB());
     }
-
-
 }

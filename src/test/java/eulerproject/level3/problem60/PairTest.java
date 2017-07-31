@@ -3,8 +3,6 @@ package eulerproject.level3.problem60;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Lukasz on 2017-07-29.
  */
@@ -14,11 +12,13 @@ public class PairTest {
         Assert.assertEquals(123456, new Pair(123,456).getConcatenatedFirstSecond());
         Assert.assertEquals(102, new Pair(10,2).getConcatenatedFirstSecond());
         Assert.assertEquals(21, new Pair(2,1).getConcatenatedFirstSecond());
+        Assert.assertEquals(10001, new Pair(1000,1).getConcatenatedFirstSecond());
     }
 
     @Test
     public void testGetConcatenatedSecondFirst() throws Exception {
         Assert.assertEquals(456123, new Pair(123,456).getConcatenatedSecondFirst());
+        Assert.assertEquals(11000, new Pair(1000,1).getConcatenatedSecondFirst());
     }
 
     @Test
