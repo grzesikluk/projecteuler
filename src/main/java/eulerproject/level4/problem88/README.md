@@ -1,5 +1,7 @@
 
 ### Problem 88
+
+#### Description
 A natural number, N, that can be written as the sum and product of a given set of at least two natural numbers, {a1, a2, ... , ak} is called a product-sum number: N = a1 + a2 + ... + ak = a1 × a2 × ... × ak.
 
 For example, 6 = 1 + 2 + 3 = 1 × 2 × 3.
@@ -17,8 +19,6 @@ Hence for 2≤k≤6, the sum of all the minimal product-sum numbers is 4+6+8+12 
 In fact, as the complete set of minimal product-sum numbers for 2≤k≤12 is {4, 6, 8, 12, 15, 16}, the sum is 61.
 
 What is the sum of all the minimal product-sum numbers for 2≤k≤12000?
-#### Description
-This is a template file.
 
 #### Solution
 
@@ -26,11 +26,11 @@ This is a template file.
 
 General idea:
 1) Generate bounded composition of sum with limits <1...N/2> in lexographic order (first small)
-2) check the product after
-3) if equal - result is found
+2) check the product after renerating each of them,
+3) if equal - result is found - can be stored
 
 ##### Algorithm
-*
+
 
 ##### Links
 [Algorithm of generating bounded compositions is well described here](https://arxiv.org/abs/1302.6558)

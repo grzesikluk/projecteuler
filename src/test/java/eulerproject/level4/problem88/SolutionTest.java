@@ -73,12 +73,19 @@ public class SolutionTest {
     }
 
     @Test
-    public void testGetMinimumProductSum() throws Exception {
+    public void testGetMinimumProductSum() throws Exception
+    {
         Assert.assertEquals(4, Solution.getMinimumProductSum(2));
         Assert.assertEquals(6, Solution.getMinimumProductSum(3));
         Assert.assertEquals(8, Solution.getMinimumProductSum(4));
         Assert.assertEquals(8, Solution.getMinimumProductSum(5));
         Assert.assertEquals(12, Solution.getMinimumProductSum(6));
+    }
+
+    @Test(timeout = 40000)
+    public void testGetMinimumProductSum_big() throws Exception {
+        Assert.assertEquals(12, Solution.getMinimumProductSum(40));
+//        Assert.assertEquals(12, Solution.getMinimumProductSum(12000));
 
     }
 
