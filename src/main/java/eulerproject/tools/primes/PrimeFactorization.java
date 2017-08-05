@@ -1,9 +1,7 @@
 package eulerproject.tools.primes;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Created by Lukasz on 2016-11-21.
@@ -178,4 +176,49 @@ public class PrimeFactorization
 
         return result;
     }
+
+    /**
+     * @param n - this value will be input to n!
+     * @return
+     */
+    public static Map<Long, Long> getPAdicValuationPrimes(int n) {
+        Map<Long, Long> result = new HashMap<>();
+
+        Primes primes = new Primes(n+1);
+        primes.init();
+
+        int prime = 1;
+
+        while( (prime = primes.getNextPrime(prime)) !=0 ) {
+
+            int pow = 0;
+            long sum = 0;
+            long floor = 0;
+
+            do {
+                pow++;
+                floor = (long) Math.floor(n / Math.pow(prime, pow));
+                sum += floor;
+            }
+            while (0L != floor);
+
+            result.put((long)prime, sum);
+        }
+        return result;
+    }
+
+
+    public static int getSumOfProperDivisors(int k, int[] primes)
+    {
+        Map<Integer, Integer> primeFactors = PrimeFactorization.getPrimeFactorsWithPower(k, primes);
+
+        int result = 1;
+
+        for (Integer prime : primeFactors.keySet()) {
+            result *= IntStream.range(0, primeFactors.get(prime) + 1).map(s -> (int) Math.pow(prime, s)).sum();
+        }
+
+        return result - k;
+    }
+
 }

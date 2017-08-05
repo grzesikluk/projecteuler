@@ -53,18 +53,6 @@ public class Solution
         System.out.println(maxK + " " + maxlen);
     }
 
-    public static int getSumOfProperDivisors(int k, int[] primes)
-    {
-        Map<Integer, Integer> primeFactors = PrimeFactorization.getPrimeFactorsWithPower(k, primes);
-
-        int result = 1;
-
-        for (Integer prime : primeFactors.keySet()) {
-            result *= IntStream.range(0, primeFactors.get(prime) + 1).map(s -> (int) Math.pow(prime, s)).sum();
-        }
-
-        return result - k;
-    }
 
     public static Pair<List<Integer>, List<Integer>> getChain(int startNumber, int[] primes)
     {
@@ -86,7 +74,7 @@ public class Solution
                 }
             } else {
                 result.add(current);
-                current = getSumOfProperDivisors(current, primes);
+                current = PrimeFactorization.getSumOfProperDivisors(current, primes);
             }
 
             if (current.equals(0) || !valueSet.contains(current)) {

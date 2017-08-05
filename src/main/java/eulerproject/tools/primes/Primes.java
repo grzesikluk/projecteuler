@@ -23,7 +23,7 @@ public class Primes {
         for (int i = 2; i < max_value; i++)
             primes[i] = true;
 
-        for (int i = 2; i < max_value / 2; i++) {
+        for (int i = 2; i <= max_value / 2; i++) {
             for (int j = i + i; j < max_value; j += i) {
                 primes[j] = false;
             }
