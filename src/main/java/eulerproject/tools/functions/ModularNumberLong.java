@@ -60,4 +60,8 @@ public class ModularNumberLong {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return new Long(value).toString();
+    }
 }

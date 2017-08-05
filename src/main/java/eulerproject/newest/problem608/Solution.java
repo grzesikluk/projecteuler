@@ -23,7 +23,7 @@ public class Solution {
 
 
     public static final int M = 3; //M!
-    public static final int NDIV2 = (int) N * 25;
+    public static final int NDIV2 = (int) (2*N);
 
     private static Primes primes;
 
@@ -43,14 +43,12 @@ public class Solution {
 
         for (Long divisor : allMFactorialDivisors) {
             for (int i = 1; i <= N; i++) {
-                ModularNumberLong input = new ModularNumberLong(MODULO, divisor);
-                input = input.multiplyModular(i);
-                sum = sum.addModular(getNumberOfDivisorsWithModulo(PrimeFactorization.getPrimeFactorsWithPower(input.getValue(), primes), MODULO));
+                ModularNumberLong product = getNumberOfDivisorsWithModulo(getPrimeFactorizationForMultiplied(divisor, i, primes), MODULO);
+                sum = sum.addModular(product);
             }
         }
 
-        System.out.println(sum.getValue());
-
+        System.out.println(sum);
 
     }
 
@@ -64,5 +62,22 @@ public class Solution {
         return result;
     }
 
+    public static Map<Integer, Integer> getPrimeFactorizationForMultiplied(long a, long b, Primes primes) {
+        Map<Integer, Integer> aFactorizaton = PrimeFactorization.getPrimeFactorsWithPower(a, primes);
+        Map<Integer, Integer> bFactorizaton = PrimeFactorization.getPrimeFactorsWithPower(b, primes);
+        Map<Integer, Integer> result = new HashMap<>();
+
+        result.putAll(aFactorizaton);
+
+        for(Integer prime:bFactorizaton.keySet()) {
+
+            if(result.containsKey(prime))
+                result.replace(prime, bFactorizaton.get(prime) + result.get(prime)); //add values
+            else
+                result.put(prime, bFactorizaton.get(prime));
+        }
+
+        return result;
+    }
 
 }

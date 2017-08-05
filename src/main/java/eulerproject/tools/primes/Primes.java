@@ -29,8 +29,6 @@ public class Primes {
                 primes[j] = false;
             }
         }
-
-
     }
 
     public boolean isPrime(int k) {

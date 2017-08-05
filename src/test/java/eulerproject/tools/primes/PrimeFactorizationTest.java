@@ -12,9 +12,10 @@ import java.util.Map;
  */
 public class PrimeFactorizationTest {
 
+
     private Primes primes;
     public static long MAX = 1000000L;
-    public static int MAX_PRIME = 1000000;
+    public static int MAX_PRIME = 1000_000;
 
 
     @Before
@@ -64,12 +65,27 @@ public class PrimeFactorizationTest {
         Assert.assertEquals(map, PrimeFactorization.getPrimeFactorsWithPower(360, primes));
     }
 
+
     @Test
     public void getPrimeFactorsWithPower3() throws Exception {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(3, 1);
 
         Assert.assertEquals(map, PrimeFactorization.getPrimeFactorsWithPower(3, primes));
+    }
+
+
+
+    @Test
+    public void getPrimeFactorsWithPower4() throws Exception {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(2, 6);
+        map.put(5, 6);
+
+        Primes bigPrimes = new Primes(2000_000);
+        bigPrimes.init();
+
+        Assert.assertEquals(map, PrimeFactorization.getPrimeFactorsWithPower(1000_000, bigPrimes));
     }
 
 
@@ -188,6 +204,5 @@ public class PrimeFactorizationTest {
         Assert.assertEquals(4, PrimeFactorization.getNumberOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(6, primes)));
 
     }
-
 
 }
