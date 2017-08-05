@@ -11,12 +11,9 @@ import java.util.Map;
  * Created by Lukasz on 2016-11-21.
  */
 public class PrimeFactorizationTest {
-
-
     private Primes primes;
     public static long MAX = 1000000L;
     public static int MAX_PRIME = 1000_000;
-
 
     @Before
     public void init() {

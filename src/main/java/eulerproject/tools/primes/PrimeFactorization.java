@@ -34,6 +34,7 @@ public class PrimeFactorization {
         return getPrimeFactorsWithPower(k, primes.toArray());
     }
 
+
     public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, int[] primes) {
         Map<Integer, Integer> result = new LinkedHashMap<>();
 
@@ -41,27 +42,45 @@ public class PrimeFactorization {
         int primeIndex = 0;
         int prime = primes[primeIndex++];
 
+        int[] primeNumber = new int[primes.length];
+        int[] primePowers = new int[primes.length];
+
+        IntStream.range(0, primes.length - 1).forEach(s ->
+                {
+                    primeNumber[s] = 0;
+                    primePowers[s] = 0;
+                }
+        );
+
         if (k == 1) {
             result.put(prime, 0);
             return result;
         }
 
+        int i = 0;
         while (prime > 1 && prime <= k) {
+            primeNumber[i] = prime;
 
             while (temp % prime == 0) {
                 temp /= prime;
-                if (result.containsKey(prime))
-                    result.replace(prime, result.get(prime) + 1);
-                else
-                    result.put(prime, 1);
+                primePowers[i]++;
             }
 
             prime = primes[primeIndex++];
+            i++;
         }
 
-        if (temp == k)
-            result.put(prime, 1);
+        if (temp == k) {
+            primeNumber[i] = (int) k;
+            primeNumber[i] = 1;
+        }
 
+        IntStream.range(0, primeNumber.length - 1).forEach(
+                s -> {
+                    if (primePowers[s] != 0)
+                        result.put(primeNumber[s], primePowers[s]);
+                }
+        );
         return result;
     }
 
@@ -101,31 +120,6 @@ public class PrimeFactorization {
                 return false;
 
             prime = primes.getNextPrime(prime);
-        }
-
-        return true;
-    }
-
-    public static boolean isIncreasingFactorized(long k, int[] primes) {
-        Map<Integer, Integer> result = new LinkedHashMap<>();
-        long temp = k;
-        int primeix = 0;
-        int prime = primes[primeix];
-
-        while (prime > 1 && 2 * prime <= k) {
-
-            while (temp % prime == 0) {
-                temp /= prime;
-                if (result.containsKey(prime))
-                    result.replace(prime, result.get(prime) + 1);
-                else
-                    result.put(prime, 1);
-            }
-
-            if (!isIncreasingKeyMap(result))
-                return false;
-
-            prime = primes[primeix++];
         }
 
         return true;
