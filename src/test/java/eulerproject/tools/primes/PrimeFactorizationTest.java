@@ -173,10 +173,21 @@ public class PrimeFactorizationTest {
 
     @Test
     public void testGetSumOfDivisorsForFactorial() throws Exception {
-        Assert.assertEquals(3, PrimeFactorization.getSumOfDivisorsForFactorial(2));
-        Assert.assertEquals(12, PrimeFactorization.getSumOfDivisorsForFactorial(3));
-        Assert.assertEquals(360, PrimeFactorization.getSumOfDivisorsForFactorial(5));
+
+        Assert.assertEquals(3, PrimeFactorization.getSumOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(2, primes)));
+        Assert.assertEquals(12, PrimeFactorization.getSumOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(6, primes)));
+        Assert.assertEquals(360, PrimeFactorization.getSumOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(120, primes)));
 
     }
+
+    @Test
+    public void testGetNumberOfDivisors() throws Exception {
+
+        Assert.assertEquals(8, PrimeFactorization.getNumberOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(24, primes)));
+        Assert.assertEquals(2, PrimeFactorization.getNumberOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(5, primes)));
+        Assert.assertEquals(4, PrimeFactorization.getNumberOfDivisors(PrimeFactorization.getPrimeFactorsWithPower(6, primes)));
+
+    }
+
 
 }

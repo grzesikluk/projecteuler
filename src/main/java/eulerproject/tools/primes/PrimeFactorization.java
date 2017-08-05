@@ -7,11 +7,9 @@ import java.util.stream.LongStream;
 /**
  * Created by Lukasz on 2016-11-21.
  */
-public class PrimeFactorization
-{
+public class PrimeFactorization {
 
-    public static long[] getPrimeFactors(long k, Primes primes)
-    {
+    public static long[] getPrimeFactors(long k, Primes primes) {
         long temp = k;
         int prime = 2;
         List<Long> result = new LinkedList<>();
@@ -32,14 +30,13 @@ public class PrimeFactorization
         return result.stream().mapToLong(i -> i).toArray();
     }
 
-    public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, Primes primes)
-    {
+    public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, Primes primes) {
         return getPrimeFactorsWithPower(k, primes.toArray());
     }
 
-    public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, int[] primes)
-    {
+    public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, int[] primes) {
         Map<Integer, Integer> result = new LinkedHashMap<>();
+
         long temp = k;
         int primeIndex = 0;
         int prime = primes[primeIndex++];
@@ -68,8 +65,7 @@ public class PrimeFactorization
         return result;
     }
 
-    private static boolean isIncreasingKeyMap(Map<Integer, Integer> map)
-    {
+    private static boolean isIncreasingKeyMap(Map<Integer, Integer> map) {
         Integer previous = null;
         for (Integer key : map.values()) {
 
@@ -86,8 +82,7 @@ public class PrimeFactorization
         return true;
     }
 
-    public static boolean isIncreasingFactorized(long k, Primes primes)
-    {
+    public static boolean isIncreasingFactorized(long k, Primes primes) {
         Map<Integer, Integer> result = new LinkedHashMap<>();
         long temp = k;
         int prime = 2;
@@ -111,8 +106,7 @@ public class PrimeFactorization
         return true;
     }
 
-    public static boolean isIncreasingFactorized(long k, int[] primes)
-    {
+    public static boolean isIncreasingFactorized(long k, int[] primes) {
         Map<Integer, Integer> result = new LinkedHashMap<>();
         long temp = k;
         int primeix = 0;
@@ -137,8 +131,7 @@ public class PrimeFactorization
         return true;
     }
 
-    public static boolean isDecreasingFactorized(long k, int[] primes)
-    {
+    public static boolean isDecreasingFactorized(long k, int[] primes) {
         Map<Integer, Integer> result = new LinkedHashMap<>();
         long temp = k;
         int primeix = 0;
@@ -163,8 +156,7 @@ public class PrimeFactorization
         return false;
     }
 
-    public static long getNumberFromFactorMap(Map<Integer, Integer> map)
-    {
+    public static long getNumberFromFactorMap(Map<Integer, Integer> map) {
         long result = 1L;
 
         for (Integer factor : map.keySet()) {
@@ -185,12 +177,12 @@ public class PrimeFactorization
     public static Map<Long, Long> getPAdicValuationPrimes(int n) {
         Map<Long, Long> result = new HashMap<>();
 
-        Primes primes = new Primes(n+1);
+        Primes primes = new Primes(n + 1);
         primes.init();
 
         int prime = 1;
 
-        while( (prime = primes.getNextPrime(prime)) !=0 ) {
+        while ((prime = primes.getNextPrime(prime)) != 0) {
 
             int pow = 0;
             long sum = 0;
@@ -203,14 +195,13 @@ public class PrimeFactorization
             }
             while (0L != floor);
 
-            result.put((long)prime, sum);
+            result.put((long) prime, sum);
         }
         return result;
     }
 
 
-    public static int getSumOfProperDivisors(int k, int[] primes)
-    {
+    public static int getSumOfProperDivisors(int k, int[] primes) {
         Map<Integer, Integer> primeFactors = PrimeFactorization.getPrimeFactorsWithPower(k, primes);
 
         int result = 1;
@@ -223,17 +214,24 @@ public class PrimeFactorization
     }
 
 
-    public static long getSumOfDivisorsForFactorial(int k)
-    {
-        Map<Long, Long> primeFactors = PrimeFactorization.getPAdicValuationPrimes(k);
-
+    public static long getSumOfDivisors(Map<Integer, Integer> primeFactorialMap) {
         long result = 1L;
 
-        for (Long prime : primeFactors.keySet()) {
-            result *= LongStream.range(0, primeFactors.get(prime) + 1L).map(s -> (int) Math.pow(prime, s)).sum();
+        for (Integer prime : primeFactorialMap.keySet()) {
+            result *= LongStream.range(0, primeFactorialMap.get(prime) + 1L).map(s -> (int) Math.pow(prime, s)).sum();
         }
 
         return result;
     }
+
+    public static long getNumberOfDivisors(Map<Integer, Integer> primeFactorialMap) {
+        int result = 1;
+
+        for (Integer key : primeFactorialMap.keySet())
+            result *= (primeFactorialMap.get(key) + 1);
+
+        return result;
+    }
+
 
 }

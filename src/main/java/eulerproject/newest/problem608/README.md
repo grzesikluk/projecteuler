@@ -12,10 +12,15 @@ Find D(200!,10^12) mod (10^9+7)
 #### Solution
 
 ##### Ideas
-* 
+* Sum of divisors has this property: σ(a*b)=σ(a)*σ(b)
+* by this sums can be counted separately for σ(d|m) multiplied by σ(k)
+* finding of prime factorization for n! can be done by Legrandre's Theorem - "The prime factorization of Factorials" **DONE**
+* having prime-power factorization need 
+    * find all divisors ????
+    * sum of all divisors can be found in Mathworld (eq 14) - **DONE**
 
 ##### Algorithm
-*
+* 
 
 ##### Links
 [Project Euler](https://projecteuler.net/problem=608)
@@ -24,7 +29,7 @@ Find D(200!,10^12) mod (10^9+7)
 
 [Number Theory](http://www.math.cmu.edu/~mlavrov/arml/13-14/number-theory-09-29-13.pdf)
 
-[Legendres Theorem](http://www.cut-the-knot.org/blue/LegendresTheorem.shtml)
+[Legendre's Theorem](http://www.cut-the-knot.org/blue/LegendresTheorem.shtml)
 
 [Mathworld](http://mathworld.wolfram.com/DivisorFunction.html)
 

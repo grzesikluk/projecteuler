@@ -1,46 +1,68 @@
 package eulerproject.newest.problem608;
 
+import eulerproject.tools.functions.ModularNumberLong;
+import eulerproject.tools.primes.PrimeFactorization;
+import eulerproject.tools.primes.Primes;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * Created by lgrzesik on 03/08/2017.
  */
-public class Solution
-{
+public class Solution {
+    public static final long MODULO = 1_000_000_000L + 7L;
+    //    public static final long N = 1_000_000_000_000L;
+    public static final long N = 100;
+//    public static final int NDIV2 = 500_000_000;
 
-    public static void main(String[] args)
-    {
-//        System.out.println(getFactorial(200));
-        System.out.println(getDivisors(getFactorial(200)));
-    }
 
-    public static BigInteger getFactorial(final int k)
-    {
-        BigInteger result = BigInteger.ONE;
+    public static final int M = 3; //M!
+    public static final int NDIV2 = (int) N * 25;
 
-        for (int i = 1; i <= k; i++)
-            result = result.multiply(BigInteger.valueOf(i));
+    private static Primes primes;
 
-        return result;
-    }
+    public static void main(String[] args) {
 
-    public static List<BigInteger> getDivisors(BigInteger k)
-    {
-        BigInteger i = BigInteger.ONE;
-        BigInteger last = k.divide(BigInteger.valueOf(2));
-        List<BigInteger> result = new ArrayList<>();
+        primes = new Primes((int) NDIV2);
+        primes.init();
 
-        while (i.compareTo(last) < 0) {
+        System.out.println("Got primes");
 
-            if(k.mod(i).equals(BigInteger.ZERO))
-                result.add(i);
-            i = i.add(BigInteger.ONE);
+        FactorsFinder finder = new FactorsFinder(PrimeFactorization.getPAdicValuationPrimes(M));
+        System.out.println("Find factors");
+        finder.findFactors(0, 1L);
+        List<Long> allMFactorialDivisors = finder.getAllFactors();
+
+        ModularNumberLong sum = new ModularNumberLong(MODULO, 0);
+
+        for (Long divisor : allMFactorialDivisors) {
+            for (int i = 1; i <= N; i++) {
+                ModularNumberLong input = new ModularNumberLong(MODULO, divisor);
+                input = input.multiplyModular(i);
+                sum = sum.addModular(getNumberOfDivisorsWithModulo(PrimeFactorization.getPrimeFactorsWithPower(input.getValue(), primes), MODULO));
+            }
         }
-        result.add(k);
 
-        return result;
+        System.out.println(sum.getValue());
+
 
     }
+
+
+    public static ModularNumberLong getNumberOfDivisorsWithModulo(Map<Integer, Integer> primeFactorialMap, long modulo) {
+        ModularNumberLong result = new ModularNumberLong(modulo, 1L);
+
+        for (Integer key : primeFactorialMap.keySet())
+            result = result.multiplyModular(primeFactorialMap.get(key) + 1);
+
+        return result;
+    }
+
+
 }

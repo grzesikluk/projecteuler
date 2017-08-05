@@ -20,6 +20,7 @@ public class Primes {
     public void init() {
         primes[0] = false;
         primes[1] = false;
+
         for (int i = 2; i < max_value; i++)
             primes[i] = true;
 
