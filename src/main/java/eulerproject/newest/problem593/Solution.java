@@ -22,7 +22,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] primes = new Primes(MAX_PRIME).asList();
+        int[] primes = new Primes(MAX_PRIME).toArray();
         System.out.println(getFValue(MAX, MIN, primes));
 
     }

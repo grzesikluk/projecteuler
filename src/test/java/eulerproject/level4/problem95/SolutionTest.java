@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,22 +20,9 @@ public class SolutionTest
     public void init() {
         primesSeed = new Primes(MAX);
         primesSeed.init();
-        primes = primesSeed.asList();
+        primes = primesSeed.toArray();
         System.out.println("Init finished");
 
-    }
-    @Test
-    public void testGetDivisorsSum() throws Exception
-    {
-        Assert.assertEquals(28, Solution.getSumOfProperDivisors(28, primes));
-        Assert.assertEquals(284, Solution.getSumOfProperDivisors(220, primes));
-        Assert.assertEquals(220, Solution.getSumOfProperDivisors(284, primes));
-    }
-
-    @Test(timeout = 100)
-    public void testGetDivisorsSum_big() throws Exception
-    {
-        Assert.assertEquals(1480437, Solution.getSumOfProperDivisors(1000_000, primes));
     }
 
     @Test

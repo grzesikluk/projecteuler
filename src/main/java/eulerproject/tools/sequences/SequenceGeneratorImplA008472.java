@@ -18,7 +18,7 @@ public class SequenceGeneratorImplA008472 implements SequenceGenerator {
 
         Primes p = new Primes(primeSize);
         p.init();
-        primes = p.asList();
+        primes = p.toArray();
 
     }
 

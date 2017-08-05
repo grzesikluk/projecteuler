@@ -63,7 +63,7 @@ public class BigFractionTest {
         Primes primes = new Primes(100);
 
         Assert.assertEquals(new BigFraction(new BigInteger("4"), new BigInteger("11")),
-                new BigFraction(BigInteger.ONE, new BigInteger("12")).getResilenceFactor(primes.asList()));
+                new BigFraction(BigInteger.ONE, new BigInteger("12")).getResilenceFactor(primes.toArray()));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class BigFractionTest {
         Primes primes = new Primes(100);
 
         Assert.assertEquals(new BigFraction(BigInteger.ONE, BigInteger.ONE),
-                new BigFraction(BigInteger.ONE, new BigInteger("2")).getResilenceFactor(primes.asList()));
+                new BigFraction(BigInteger.ONE, new BigInteger("2")).getResilenceFactor(primes.toArray()));
     }
 
 

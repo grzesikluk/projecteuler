@@ -127,4 +127,54 @@ public class PrimeFactorizationTest {
 
     }
 
+
+    @Test
+    public void testGgetPAdicValuationPrimes() throws Exception {
+        Map<Long, Long> expected = new HashMap<>();
+
+        expected.put(2L, 1L);
+        Assert.assertEquals(expected, PrimeFactorization.getPAdicValuationPrimes(2));
+        expected.clear();
+
+        expected.put(2L, 1L);
+        expected.put(3L, 1L);
+        Assert.assertEquals(expected, PrimeFactorization.getPAdicValuationPrimes(3));
+        expected.clear();
+    }
+
+    @Test
+    public void testGgetPAdicValuationPrimes2() throws Exception {
+        Map<Long, Long> expected = new HashMap<>();
+        expected.put(2L, 3L);
+        expected.put(3L, 1L);
+        Assert.assertEquals(expected, PrimeFactorization.getPAdicValuationPrimes(4));
+        expected.clear();
+    }
+
+    @Test
+    public void testGgetPAdicValuationPrimes3() throws Exception {
+        Map<Long, Long> expected = new HashMap<>();
+
+        expected.put(2L, 3L);
+        expected.put(3L, 1L);
+        expected.put(5L, 1L);
+        Assert.assertEquals(expected, PrimeFactorization.getPAdicValuationPrimes(5));
+        expected.clear();
+    }
+    @Test
+    public void testGetDivisorsSum() throws Exception
+    {
+        Assert.assertEquals(28, PrimeFactorization.getSumOfProperDivisors(28, primes.toArray()));
+        Assert.assertEquals(284, PrimeFactorization.getSumOfProperDivisors(220, primes.toArray()));
+        Assert.assertEquals(220, PrimeFactorization.getSumOfProperDivisors(284, primes.toArray()));
+    }
+
+    @Test(timeout = 100)
+    public void testGetDivisorsSum_big() throws Exception
+    {
+        Assert.assertEquals(1480437, PrimeFactorization.getSumOfProperDivisors(1000_000, primes.toArray()));
+    }
+
+
+
 }

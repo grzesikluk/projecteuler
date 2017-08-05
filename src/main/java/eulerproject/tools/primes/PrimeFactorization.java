@@ -33,7 +33,7 @@ public class PrimeFactorization
 
     public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, Primes primes)
     {
-        return getPrimeFactorsWithPower(k, primes.asList());
+        return getPrimeFactorsWithPower(k, primes.toArray());
     }
 
     public static Map<Integer, Integer> getPrimeFactorsWithPower(long k, int[] primes)

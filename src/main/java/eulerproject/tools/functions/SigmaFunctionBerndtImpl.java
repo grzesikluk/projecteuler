@@ -14,7 +14,7 @@ public class SigmaFunctionBerndtImpl implements SigmaFunction {
 
     public SigmaFunctionBerndtImpl(Primes primes) {
         this.primes = primes;
-        primesArray = primes.asList();
+        primesArray = primes.toArray();
     }
 
     public long getValue(long N, long k) {

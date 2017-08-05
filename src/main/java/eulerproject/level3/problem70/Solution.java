@@ -19,7 +19,7 @@ public class Solution {
 
         primes = new Primes(MAX);
         primes.init();
-        primesList = primes.asList();
+        primesList = primes.toArray();
         eulerTotientFunctionResults = new int[MAX];
 
         System.out.println("got primes");

@@ -24,7 +24,7 @@ public class SequenceGeneratorImplA071365 implements SequenceGenerator {
         int primeSize = (int) (Math.sqrt((double) k / 2));
         Primes p = new Primes(primeSize);
         p.init();
-        primes = p.asList();
+        primes = p.toArray();
         max = k;
         generateNumbers();
 

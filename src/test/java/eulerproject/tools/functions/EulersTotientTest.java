@@ -14,7 +14,7 @@ public class EulersTotientTest {
 
     @Test
     public void testSumOfEulersTotientFunction_Big() throws Exception {
-        int[] primes = new Primes(1000000).asList();
+        int[] primes = new Primes(1000000).toArray();
 
         Assert.assertEquals(303963152392L,sumOfEulersTotientFunction(1000000, primes));
     }

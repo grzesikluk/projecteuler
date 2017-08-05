@@ -22,7 +22,7 @@ public class Solution
     {
         Primes primes = new Primes(MAX * 10);
         primes.init();
-        int[] primesArray = primes.asList();
+        int[] primesArray = primes.toArray();
 
         valueSet = new HashSet<>(IntStream.range(2, MAX + 1).mapToObj(s -> s).collect(Collectors.toList()));
 

@@ -48,7 +48,7 @@ public class Primes {
         return 0;
     }
 
-    public int[] asList() {
+    public int[] toArray() {
         List<Integer> list = new ArrayList<>();
 
         for (int i = 2; i < primes.length; i++)

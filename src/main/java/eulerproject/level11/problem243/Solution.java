@@ -24,7 +24,7 @@ public class Solution {
         BigFraction factor;
 
         BigFraction thr = new BigFraction(new BigInteger("15499"), new BigInteger("94744")); //0,16358819555855779785527315713924
-        int[] primesList = primes.asList();
+        int[] primesList = primes.toArray();
         DenominatorGeneratorBig generatorBig = new DenominatorGeneratorBig();
 
 

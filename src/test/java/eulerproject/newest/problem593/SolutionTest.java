@@ -13,7 +13,7 @@ public class SolutionTest {
 
     @BeforeClass
     public static void init() {
-        primes = new Primes(200_000_000).asList();
+        primes = new Primes(200_000_000).toArray();
     }
 
     @Test

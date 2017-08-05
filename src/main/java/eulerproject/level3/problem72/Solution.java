@@ -13,7 +13,7 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        int[] primes = new Primes(MAX).asList();
+        int[] primes = new Primes(MAX).toArray();
         System.out.println(EulersTotient.sumOfEulersTotientFunction(MAX +1,primes)-1);
 
 //        System.out.println(initFractionArray(MAX).size()); -- that will take forever

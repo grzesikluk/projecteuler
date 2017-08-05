@@ -20,7 +20,7 @@ public class FractionTest {
 
     @Test
     public void testGetResilentFactor() throws Exception {
-        Assert.assertEquals(new Fraction(4,11),new Fraction(1,12).getResilenceFactor(primes.asList()));
+        Assert.assertEquals(new Fraction(4,11),new Fraction(1,12).getResilenceFactor(primes.toArray()));
 
     }
 

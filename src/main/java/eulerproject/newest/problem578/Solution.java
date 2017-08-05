@@ -32,7 +32,7 @@ public class Solution {
 
     public static long countIncreasingFactorsNumbers(long k, Primes primes) {
         long counter = 0;
-        int[] primes_list = primes.asList();
+        int[] primes_list = primes.toArray();
         Set<Long> result = new LinkedHashSet<>();
 
         for (long i = 0; i < k; i++)
@@ -48,7 +48,7 @@ public class Solution {
 
     public static long countIncreasingFactorsNumbersFromSequence(long k, Primes primes) {
         SequenceGenerator sg = new SequenceGeneratorImplA071365();
-        sg.init(k,primes.asList());
+        sg.init(k,primes.toArray());
 
         return k-sg.getSize();
     }
