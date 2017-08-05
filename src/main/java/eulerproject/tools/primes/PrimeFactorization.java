@@ -2,6 +2,7 @@ package eulerproject.tools.primes;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * Created by Lukasz on 2016-11-21.
@@ -219,6 +220,20 @@ public class PrimeFactorization
         }
 
         return result - k;
+    }
+
+
+    public static long getSumOfDivisorsForFactorial(int k)
+    {
+        Map<Long, Long> primeFactors = PrimeFactorization.getPAdicValuationPrimes(k);
+
+        long result = 1L;
+
+        for (Long prime : primeFactors.keySet()) {
+            result *= LongStream.range(0, primeFactors.get(prime) + 1L).map(s -> (int) Math.pow(prime, s)).sum();
+        }
+
+        return result;
     }
 
 }

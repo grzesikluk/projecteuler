@@ -11,6 +11,7 @@ import java.util.Map;
  * Created by Lukasz on 2016-11-21.
  */
 public class PrimeFactorizationTest {
+
     private Primes primes;
     public static long MAX = 1000000L;
     public static int MAX_PRIME = 1000000;
@@ -169,12 +170,13 @@ public class PrimeFactorizationTest {
         Assert.assertEquals(220, PrimeFactorization.getSumOfProperDivisors(284, primes.toArray()));
     }
 
-    @Test(timeout = 100)
-    public void testGetDivisorsSum_big() throws Exception
-    {
-        Assert.assertEquals(1480437, PrimeFactorization.getSumOfProperDivisors(1000_000, primes.toArray()));
+
+    @Test
+    public void testGetSumOfDivisorsForFactorial() throws Exception {
+        Assert.assertEquals(3, PrimeFactorization.getSumOfDivisorsForFactorial(2));
+        Assert.assertEquals(12, PrimeFactorization.getSumOfDivisorsForFactorial(3));
+        Assert.assertEquals(360, PrimeFactorization.getSumOfDivisorsForFactorial(5));
+
     }
-
-
 
 }
