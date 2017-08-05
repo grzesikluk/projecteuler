@@ -18,8 +18,14 @@ Find D(200!,10^12) mod (10^9+7)
 *
 
 ##### Links
-https://projecteuler.net/problem=608
-https://math.stackexchange.com/questions/982488/how-to-sum-the-divisors-of-n-mod-k-if-all-i-have-is-n-mod-k
-http://www.math.cmu.edu/~mlavrov/arml/13-14/number-theory-09-29-13.pdf
+[Project Euler](https://projecteuler.net/problem=608)
+
+[Forum](https://math.stackexchange.com/questions/982488/how-to-sum-the-divisors-of-n-mod-k-if-all-i-have-is-n-mod-k)
+
+[Number Theory](http://www.math.cmu.edu/~mlavrov/arml/13-14/number-theory-09-29-13.pdf)
+
+[Legendres Theorem](http://www.cut-the-knot.org/blue/LegendresTheorem.shtml)
+
+[Mathworld](http://mathworld.wolfram.com/DivisorFunction.html)
 
 Created by lgrzesik 03/08/2017
