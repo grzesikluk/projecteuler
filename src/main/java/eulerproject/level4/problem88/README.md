@@ -56,6 +56,8 @@ General idea:
 
 [marmet.org](http://www.marmet.org/louis/sumprod/index.html)
 
+[Just math perplexus discussionk](http://perplexus.info/show.php?pid=10221&cid=56331)
+
 Created by lgrzesik 01/08/17
 
 
