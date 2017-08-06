@@ -168,8 +168,8 @@ public class PrimeFactorization {
      * @param n - this value will be input to n!
      * @return
      */
-    public static Map<Long, Long> getPAdicValuationPrimes(int n) {
-        Map<Long, Long> result = new HashMap<>();
+    public static Map<Integer, Integer> getPAdicValuationPrimes(int n) {
+        Map<Integer, Integer> result = new HashMap<>();
 
         Primes primes = new Primes(n + 1);
         primes.init();
@@ -179,7 +179,7 @@ public class PrimeFactorization {
         while ((prime = primes.getNextPrime(prime)) != 0) {
 
             int pow = 0;
-            long sum = 0;
+            int sum = 0;
             long floor = 0;
 
             do {
@@ -189,7 +189,7 @@ public class PrimeFactorization {
             }
             while (0L != floor);
 
-            result.put((long) prime, sum);
+            result.put( prime, sum);
         }
         return result;
     }

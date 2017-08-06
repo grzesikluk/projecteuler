@@ -14,13 +14,13 @@ public class FactorsFinder {
     private long[] multiplicity;
     private List<Long> allFactors;
 
-    public FactorsFinder(Map<Long, Long> primePowerFactorisationMap) {
+    public FactorsFinder(Map<Integer, Integer> primePowerFactorisationMap) {
         primeDivisors = new long[primePowerFactorisationMap.keySet().size()];
         multiplicity  = new long[primePowerFactorisationMap.keySet().size()];
         allFactors = new ArrayList<>();
 
         int i=0;
-        for(Long prime:primePowerFactorisationMap.keySet()) {
+        for(Integer prime:primePowerFactorisationMap.keySet()) {
             primeDivisors[i] = prime;
             multiplicity[i] = primePowerFactorisationMap.get(prime);
             i++;

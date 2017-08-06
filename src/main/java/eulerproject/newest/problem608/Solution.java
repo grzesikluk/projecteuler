@@ -18,11 +18,11 @@ import java.util.stream.LongStream;
 public class Solution {
     public static final long MODULO = 1_000_000_000L + 7L;
     //    public static final long N = 1_000_000_000_000L;
-    public static final long N = 100;
+    public static final long N = 1000_000;
 //    public static final int NDIV2 = 500_000_000;
 
 
-    public static final int M = 3; //M!
+    public static final int M = 4; //M!
     public static final int NDIV2 = (int) (2*N);
 
     private static Primes primes;
@@ -31,27 +31,37 @@ public class Solution {
 
         primes = new Primes((int) NDIV2);
         primes.init();
+        int[] primesArray = primes.toArray();
 
         System.out.println("Got primes");
+        Map<Integer, Integer> factorizationMap = PrimeFactorization.getPAdicValuationPrimes(M);
+        System.out.println("got factorizaton map");
+        FactorsFinder finder = new FactorsFinder(factorizationMap);
+        System.out.println("Find factors " + PrimeFactorization.getNumberOfDivisors(factorizationMap));
+        finder.findFactors(0, 1L); //todo:optimise
+        System.out.println("Got divisors");
 
-        FactorsFinder finder = new FactorsFinder(PrimeFactorization.getPAdicValuationPrimes(M));
-        System.out.println("Find factors");
-        finder.findFactors(0, 1L);
         List<Long> allMFactorialDivisors = finder.getAllFactors();
 
         ModularNumberLong sum = new ModularNumberLong(MODULO, 0);
 
         for (Long divisor : allMFactorialDivisors) {
+
+            Map<Integer, Integer> mapForDivisor = PrimeFactorization.getPrimeFactorsWithPower(divisor, primesArray);
+
             for (int i = 1; i <= N; i++) {
-                ModularNumberLong product = getNumberOfDivisorsWithModulo(getPrimeFactorizationForMultiplied(divisor, i, primes), MODULO);
+                Map<Integer, Integer> mapForI = PrimeFactorization.getPrimeFactorsWithPower(i, primesArray);
+                System.out.println(i);
+
+                ModularNumberLong product = getNumberOfDivisorsWithModulo(getPrimeFactorizationForMultiplied(mapForDivisor, mapForI), MODULO); //todo:optimise
                 sum = sum.addModular(product);
             }
+            System.out.println(divisor);
         }
 
         System.out.println(sum);
 
     }
-
 
     public static ModularNumberLong getNumberOfDivisorsWithModulo(Map<Integer, Integer> primeFactorialMap, long modulo) {
         ModularNumberLong result = new ModularNumberLong(modulo, 1L);
@@ -62,22 +72,27 @@ public class Solution {
         return result;
     }
 
-    public static Map<Integer, Integer> getPrimeFactorizationForMultiplied(long a, long b, Primes primes) {
+    public static Map<Integer, Integer> getPrimeFactorizationForMultiplied(long a, long b, int[] primes) {
         Map<Integer, Integer> aFactorizaton = PrimeFactorization.getPrimeFactorsWithPower(a, primes);
         Map<Integer, Integer> bFactorizaton = PrimeFactorization.getPrimeFactorsWithPower(b, primes);
+
+        return getPrimeFactorizationForMultiplied(aFactorizaton, bFactorizaton);
+    }
+
+
+    public static Map<Integer, Integer> getPrimeFactorizationForMultiplied(Map<Integer, Integer> a, Map<Integer, Integer> b) {
         Map<Integer, Integer> result = new HashMap<>();
 
-        result.putAll(aFactorizaton);
+        result.putAll(a);
 
-        for(Integer prime:bFactorizaton.keySet()) {
+        for (Integer prime : b.keySet()) {
 
-            if(result.containsKey(prime))
-                result.replace(prime, bFactorizaton.get(prime) + result.get(prime)); //add values
+            if (result.containsKey(prime))
+                result.replace(prime, b.get(prime) + result.get(prime)); //add values
             else
-                result.put(prime, bFactorizaton.get(prime));
+                result.put(prime, b.get(prime));
         }
 
         return result;
     }
-
 }
