@@ -13,7 +13,7 @@ public class Solution
 
     public static void main(String[] args)
     {
-        System.out.println(getAccumulatedMinimumProductSumRecursive(12).stream().mapToInt(s -> s).sum());
+        System.out.println(getAccumulatedMinimumProductSumRecursive(30).stream().mapToInt(s -> s).sum());
     }
 
     public static int getAccumulatedMinimumProductSum(int max)

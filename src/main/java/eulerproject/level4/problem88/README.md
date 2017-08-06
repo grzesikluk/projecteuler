@@ -28,6 +28,7 @@ General idea:
 1) Generate bounded composition of sum with limits <1...N/2> in lexographic order (first small)
 2) check the product after renerating each of them,
 3) if equal - result is found - can be stored
+4) look at A104173
 
 ##### Algorithm
 
@@ -46,6 +47,14 @@ General idea:
 [Generation of partitions](http://www3.cs.stonybrook.edu/~algorith/files/generating-partitions.shtml)
 
 [K06](http://jeromekelleher.net/downloads/k06.pdf)
+
+[COMPOSITIONS OF n WITH PARTS IN A SET  Silvia Heubach and Toufik Mansour](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.484.5148&rep=rep1&type=pdf)
+
+[Math article](http://www.math.ucsd.edu/~gptesler/184a/slides/184a_ch5slides_14-handout.pdf)
+
+[A104173](https://oeis.org/A104173)  
+
+[marmet.org](http://www.marmet.org/louis/sumprod/index.html)
 
 Created by lgrzesik 01/08/17
 
