@@ -30,6 +30,11 @@ General idea:
 3) if equal - result is found - can be stored
 4) look at A104173
 
+Another algo:
+1) generate values for all k - for p - positions of non "1". 
+2) This is k = product(p-positions) - sum(p-positions) + p 
+3) assign for this k value product(p-positions) - if not exists, otherwise if lower update.
+
 ##### Algorithm
 
 
