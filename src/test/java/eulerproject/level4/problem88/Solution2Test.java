@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
  * Created by Lukasz on 2017-08-06.
  */
 public class Solution2Test {
+
     @Test
     public void testGenerateMinimumFromCompositions() throws Exception {
 
@@ -22,6 +23,20 @@ public class Solution2Test {
         Assert.assertEquals(15, Solution2.generateMinimumFromCompositions(9));
 //        Assert.assertEquals(12, Solution2.generateMinimumFromCompositions(10));
 
+    }
+
+    @Test
+    public void testGenerateMinimum() throws Exception {
+
+        int[] expectedArray = new int[]{2147483647,4,6};
+        Assert.assertArrayEquals(expectedArray, Solution2.generateMinimum(3));
+    }
+
+    @Test
+    public void testGenerateMinimum2() throws Exception {
+
+        int[] expectedArray = new int[]{2147483647,4,6,8};
+        Assert.assertArrayEquals(expectedArray, Solution2.generateMinimum(4));
     }
 
 }
