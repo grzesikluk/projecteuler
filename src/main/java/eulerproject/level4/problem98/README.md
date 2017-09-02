@@ -12,10 +12,23 @@ NOTE: All anagrams formed must be contained in the given text file.
 #### Solution
 
 ##### Ideas
+* as a initial table - create square numbers of length between (min, max) of all words from file **DONE**
+* assign the values so the value of square number is created
+* one by one check words of the same length that contain all the letters in the same amount - create some comparator
+for that, - anagrams checking needed **DONE**
+* for all anagrams assing some values and check if square number is produced
+* note that letters must mach the same digit limiting possible variants
+* create data structure - sets of words that anagrams, remove sets with size 1
 * 
 
+
 ##### Algorithm
-*
+* read file **DONE**
+* get min max from words lengths **DONE**
+* create square numbers array of length min to max **DONE**
+* divide all words to sets of anagrams, removing it from main set when done
+* for each set do try to find if there is any square anagram pair, if yes store it (how to do this?)
+* return max number from all found pairs
 
 ##### Links
 
