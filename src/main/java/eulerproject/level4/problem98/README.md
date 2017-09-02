@@ -18,15 +18,14 @@ NOTE: All anagrams formed must be contained in the given text file.
 for that, - anagrams checking needed **DONE**
 * for all anagrams assing some values and check if square number is produced
 * note that letters must mach the same digit limiting possible variants
-* create data structure - sets of words that anagrams, remove sets with size 1
-* 
+* create data structure - sets of words that anagrams, remove sets with size 1 **DONE**
 
 
 ##### Algorithm
 * read file **DONE**
 * get min max from words lengths **DONE**
 * create square numbers array of length min to max **DONE**
-* divide all words to sets of anagrams, removing it from main set when done
+* divide all words to sets of anagrams, removing it from main set when done **DONE**
 * for each set do try to find if there is any square anagram pair, if yes store it (how to do this?)
 * return max number from all found pairs
 
