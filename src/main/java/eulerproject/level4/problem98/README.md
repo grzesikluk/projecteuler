@@ -16,9 +16,9 @@ NOTE: All anagrams formed must be contained in the given text file.
 * assign the values so the value of square number is created
 * one by one check words of the same length that contain all the letters in the same amount - create some comparator
 for that, - anagrams checking needed **DONE**
-* for all anagrams assing some values and check if square number is produced
-* note that letters must mach the same digit limiting possible variants
 * create data structure - sets of words that anagrams, remove sets with size 1 **DONE**
+* for all anagrams assign some values and check if square number is produced
+* note that letters must match the same digit limiting possible variants
 
 
 ##### Algorithm

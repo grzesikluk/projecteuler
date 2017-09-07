@@ -23,24 +23,13 @@ public class Solution
         Map<Character, Integer> hashMap = createHashMap();
 
         List<String> words = wordReader.read();
-        Set<Set<String>> anagramsSets= convertWordListToAnagramSet(words,hashMap);
+        Set<Set<String>> anagramsSets = convertWordListToAnagramSet(words, hashMap);
 
-        Set<Integer> sizes = anagramsSets.stream().map(set->set.toArray(new String[]{}).length).collect(Collectors.toSet());
+        Set<Integer> sizes = anagramsSets.stream().map(set -> set.toArray(new String[]{}).length).collect(Collectors.toSet());
 
         System.out.println(getSquareNumbers(sizes).size());
-//        System.out.println(anagramsSets.stream().flatMap(s->s.stream()).filter(s->s.length()==max).collect(Collectors.toList()));
+        System.out.println(anagramsSets);//.stream().flatMap(s->s.stream()).filter(s->s.length()==max).collect(Collectors.toList()));
         System.out.println(anagramsSets.size());
-    }
-
-    public static int getMaxLen(Set<Set<String>> anagrams)
-    {
-        return anagrams.stream().flatMap(set->set.stream()).mapToInt(s->s.length()).max().getAsInt();
-
-    }
-
-    public static int getMinLen(Set<Set<String>> anagrams)
-    {
-        return anagrams.stream().flatMap(set->set.stream()).mapToInt(s->s.length()).min().getAsInt();
     }
 
     public static List<String> getSquareNumbers(int min, int max)
@@ -63,7 +52,7 @@ public class Solution
         List<String> result = new ArrayList<>();
         long k = 1;
         String squareString;
-        int max = sizes.stream().mapToInt(s->s).max().getAsInt();
+        int max = sizes.stream().mapToInt(s -> s).max().getAsInt();
 
         while ((squareString = new Long(SquareNumbers.getNumber(k)).toString()).length() <= max) {
             if (sizes.contains(squareString.length())) {
@@ -145,4 +134,60 @@ public class Solution
 
         return allSetOfAnagrams.stream().filter(set -> set.size() > 1).collect(Collectors.toSet());
     }
+
+    public static int checkIfAnagramSetReflectsSquareNo(Set<String> anagramSet, Set<String> squares)
+    {
+        int lenAnagram = anagramSet.stream().collect(Collectors.toList()).get(0).length();
+        int lenSquares = squares.stream().collect(Collectors.toList()).get(0).length();
+
+        if (lenAnagram != lenSquares)
+            throw new IllegalArgumentException("Length is different");
+
+        //todo implement me
+        return 0;
+    }
+
+    /**
+     * A bit of explanation. The result is a set of lists of integers. The input string1 has order 1,2,3,4,..., string_len
+     * and the result for other string 2 - which is anagram is a an integer map of letters that match replacing in anagram.
+     * <p>
+     * For multi letters there might be ambiguity so one pair of anagram can generate many maps.
+     *
+     * @param string1
+     * @param string2
+     * @return
+     */
+    public static List<List<Integer>>  replacementMap(String string1, String string2)
+    {
+
+        List<List<Integer>> charSetCount = new ArrayList<>();
+
+        IntStream.range(0,string1.length()).forEach(i-> {
+                char k = string1.charAt(i);
+                charSetCount.add(getCharIndexes(k, string2));
+        });
+
+        return charSetCount;
+    }
+
+
+    public static List<Integer> getCharIndexes(final char k, final String input)
+    {
+        List<Integer> result = new ArrayList<>();
+
+        IntStream.range(0, input.length())
+                .forEach(i -> {
+                    if (input.charAt(i) == k) {
+                        result.add(i);
+                    }
+                });
+        return result;
+    }
+
+
+    public static List<String> anagramsFromReplacementMap(String input, List<List<Integer>> replacementMap) {
+
+        return null;
+    }
+
 }
