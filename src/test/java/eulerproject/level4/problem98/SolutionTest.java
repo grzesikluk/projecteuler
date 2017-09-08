@@ -3,8 +3,10 @@ package eulerproject.level4.problem98;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +14,18 @@ import static org.junit.Assert.assertTrue;
 
 public class SolutionTest
 {
+    @Test
+    public void testGetAnagramSquareList() throws Exception
+    {
+        List<String> squares = Solution.getSquareNumbers(3,12);
+        Set<String> anagrams = new HashSet<>();
+        anagrams.add("REDUCTION");
+        anagrams.add("INTRODUCE");
+
+        System.out.println(Solution.getAnagramSquareList(squares,anagrams));
+
+    }
+
     @Test
     public void testAnagramsFromReplacementMap() throws Exception
     {
@@ -33,6 +47,7 @@ public class SolutionTest
         );
 
         assertThat(Solution.anagramsFromReplacementMap("SHEET",replacementMap2)).isEqualTo("THESE");
+
     }
 
     @Test
@@ -60,6 +75,18 @@ public class SolutionTest
                         Arrays.asList(2, 3),
                         Arrays.asList(0),
                         Arrays.asList(2, 3)));
+
+        assertThat(Solution.replacementMap("REDUCTION", "INTRODUCE")).
+                isEqualTo(Arrays.asList(
+                        Arrays.asList(3),
+                        Arrays.asList(8),
+                        Arrays.asList(5),
+                        Arrays.asList(6),
+                        Arrays.asList(7),
+                        Arrays.asList(2),
+                        Arrays.asList(0),
+                        Arrays.asList(4),
+                        Arrays.asList(1)));
     }
 
     @Test

@@ -4,12 +4,19 @@ import eulerproject.tools.generators.SquareNumbers;
 import eulerproject.tools.primes.Primes;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Solution
 {
+    //    private static final String FILE = "src/main/java/eulerproject/level4/problem98/p098_words.txt";
     private static final String FILE = "src/main/java/eulerproject/level4/problem98/p098_words.txt";
 
     public static void main(String[] args) throws IOException
@@ -19,36 +26,63 @@ public class Solution
 
         List<String> words = wordReader.read();
         Set<Set<String>> anagramsSets = convertWordListToAnagramSet(words, hashMap);
+        System.out.println(anagramsSets);
 
         Set<Integer> sizes = anagramsSets.stream().map(set -> set.stream().collect(Collectors.toList()).get(0).length()).collect(Collectors.toSet());
 
         List<String> allSquares = getSquareNumbers(sizes);
-//        System.out.println(anagramsSets);//.stream().flatMap(s->s.stream()).filter(s->s.length()==max).collect(Collectors.toList()));
-//        System.out.println(anagramsSets.size());
-
         List<String> allFoundSquares = new ArrayList<>();
 
-        for(Set<String> anagramSet:anagramsSets) {
-            List<String> squares = allSquares.stream().filter(s->s.length() == anagramSet.stream().collect(Collectors.toList()).get(0).length()).collect(Collectors.toList());
-            allFoundSquares.addAll(getMaxSquareNumberForAnagramsSet(anagramSet, squares));
-        }
-
-        Integer maximum = allFoundSquares.stream().mapToInt(s-> new Integer(s)).max().getAsInt();
-
+        anagramsSets.stream().forEach(set -> allFoundSquares.addAll(getAnagramSquareList(allSquares, set)));
+        Integer maximum = allFoundSquares.stream().mapToInt(s -> new Integer(s)).max().getAsInt();
         System.out.println(maximum);
-
-
     }
 
+    public static boolean isCorrectlyMappedAnagram(String string, String anagram)
+    {
+        Map<Character, Set<Character>> characterListMap = new HashMap<>();
 
-    public static List<String> getMaxSquareNumberForAnagramsSet(final Set<String> anagramSet, final List<String> squares) {
+        IntStream.range(0, string.length()).forEach(i -> {
+            if (characterListMap.containsKey(string.charAt(i))) {
+                characterListMap.get(string.charAt(i)).add(anagram.charAt(i));
+            } else {
+                Set<Character> newSet = new HashSet<>();
+                newSet.add(anagram.charAt(i));
+                characterListMap.put(string.charAt(i), newSet);
+            }
+        });
+
+        return characterListMap.values().stream().mapToInt(l -> l.size()).filter(i -> i == 1).sum() == characterListMap.size();
+    }
+
+    public static List<String> getAnagramSquareList(List<String> allSquares, Set<String> anagramSet)
+    {
+        int size = getSizeOfSingleElement(anagramSet);
+        List<String> squares = getElementsWithLength(size, allSquares);
+        return getMaxSquareNumberForAnagramsSet(anagramSet, getElementsWithLength(getSizeOfSingleElement(anagramSet), squares));
+    }
+
+    public static List<String> getElementsWithLength(int len, List<String> input)
+    {
+        return input.stream().filter(s -> s.length() == len).collect(Collectors.toList());
+    }
+
+    public static int getSizeOfSingleElement(Collection<String> collection)
+    {
+        return collection.stream().collect(Collectors.toList()).get(0).length();
+    }
+
+    public static List<String> getMaxSquareNumberForAnagramsSet(final Set<String> anagramSet, final List<String> squares)
+    {
         final List<String> squaresFound = new ArrayList<>();
 
-        for(String squareNumber:squares) {
-            for(String first:anagramSet) {
+        for (String squareNumber : squares) {
+            for (String first : anagramSet) {
                 for (String second : anagramSet.stream().filter(s -> !s.equals(first)).collect(Collectors.toList())) {
                     String convertedNumber = anagramsFromReplacementMap(squareNumber, replacementMap(first, second));
-                    if (squares.contains(convertedNumber))
+                    if (isCorrectlyMappedAnagram(first, squareNumber) &&
+                            isCorrectlyMappedAnagram(second, convertedNumber) &&
+                            squares.contains(convertedNumber))
                         squaresFound.add(convertedNumber);
                 }
             }
@@ -159,30 +193,17 @@ public class Solution
         return allSetOfAnagrams.stream().filter(set -> set.size() > 1).collect(Collectors.toSet());
     }
 
-    public static int checkIfAnagramSetReflectsSquareNo(Set<String> anagramSet, Set<String> squares)
-    {
-        int lenAnagram = anagramSet.stream().collect(Collectors.toList()).get(0).length();
-        int lenSquares = squares.stream().collect(Collectors.toList()).get(0).length();
-
-        if (lenAnagram != lenSquares)
-            throw new IllegalArgumentException("Length is different");
-
-        //todo implement me
-        return 0;
-    }
-
-    public static List<List<Integer>>  replacementMap(String string1, String string2)
+    public static List<List<Integer>> replacementMap(String string1, String string2)
     {
         List<List<Integer>> charSetCount = new ArrayList<>();
 
-        IntStream.range(0,string1.length()).forEach(i-> {
-                char k = string1.charAt(i);
-                charSetCount.add(getCharIndexes(k, string2));
+        IntStream.range(0, string1.length()).forEach(i -> {
+            char k = string1.charAt(i);
+            charSetCount.add(getCharIndexes(k, string2));
         });
 
         return charSetCount;
     }
-
 
     public static List<Integer> getCharIndexes(final char k, final String input)
     {
@@ -197,25 +218,26 @@ public class Solution
         return result;
     }
 
-
-    public static String anagramsFromReplacementMap(String input, List<List<Integer>> replacementMap) {
+    public static String anagramsFromReplacementMap(String input, List<List<Integer>> replacementMap)
+    {
 
         char[] charArray = new char[replacementMap.size()];
 
-        IntStream.range(0, charArray.length).forEach(i-> {charArray[i]=0;});
+        IntStream.range(0, charArray.length).forEach(i -> {
+            charArray[i] = 0;
+        });
 
-        IntStream.range(0,replacementMap.size()).forEach( i -> {
+        IntStream.range(0, replacementMap.size()).forEach(i -> {
             if (charArray[i] == 0)
                 charArray[i] = input.charAt(replacementMap.get(i).get(0));
         });
 
         StringBuilder sb = new StringBuilder();
 
-        IntStream.range(0,charArray.length).forEach(i-> {
+        IntStream.range(0, charArray.length).forEach(i -> {
             sb.append(charArray[i]);
         });
 
-        return sb.toString() ;
+        return sb.toString();
     }
-
 }
