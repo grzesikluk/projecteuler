@@ -40,6 +40,12 @@ public class Solution
 
     public static boolean isCorrectlyMappedAnagram(String string, String anagram)
     {
+        return isCorrectlyMappedAnagramOneSide(string, anagram) &&
+                isCorrectlyMappedAnagramOneSide(anagram, string);
+    }
+
+    public static boolean isCorrectlyMappedAnagramOneSide(String string, String anagram)
+    {
         Map<Character, Set<Character>> characterListMap = new HashMap<>();
 
         IntStream.range(0, string.length()).forEach(i -> {

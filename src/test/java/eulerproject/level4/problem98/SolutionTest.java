@@ -15,6 +15,15 @@ import static org.junit.Assert.assertTrue;
 public class SolutionTest
 {
     @Test
+    public void testIsCorrectlyMappedAnagram() throws Exception
+    {
+        assertThat(Solution.isCorrectlyMappedAnagram("ABAC","1234")).isFalse();
+        assertThat(Solution.isCorrectlyMappedAnagram("ABAC","1214")).isTrue();
+        assertThat(Solution.isCorrectlyMappedAnagram("ABAC","1212")).isFalse();
+
+    }
+
+    @Test
     public void testGetAnagramSquareList() throws Exception
     {
         List<String> squares = Solution.getSquareNumbers(3,12);
