@@ -20,11 +20,40 @@ public class Solution
         List<String> words = wordReader.read();
         Set<Set<String>> anagramsSets = convertWordListToAnagramSet(words, hashMap);
 
-        Set<Integer> sizes = anagramsSets.stream().map(set -> set.toArray(new String[]{}).length).collect(Collectors.toSet());
+        Set<Integer> sizes = anagramsSets.stream().map(set -> set.stream().collect(Collectors.toList()).get(0).length()).collect(Collectors.toSet());
 
-        System.out.println(getSquareNumbers(sizes).size());
-        System.out.println(anagramsSets);//.stream().flatMap(s->s.stream()).filter(s->s.length()==max).collect(Collectors.toList()));
-        System.out.println(anagramsSets.size());
+        List<String> allSquares = getSquareNumbers(sizes);
+//        System.out.println(anagramsSets);//.stream().flatMap(s->s.stream()).filter(s->s.length()==max).collect(Collectors.toList()));
+//        System.out.println(anagramsSets.size());
+
+        List<String> allFoundSquares = new ArrayList<>();
+
+        for(Set<String> anagramSet:anagramsSets) {
+            List<String> squares = allSquares.stream().filter(s->s.length() == anagramSet.stream().collect(Collectors.toList()).get(0).length()).collect(Collectors.toList());
+            allFoundSquares.addAll(getMaxSquareNumberForAnagramsSet(anagramSet, squares));
+        }
+
+        Integer maximum = allFoundSquares.stream().mapToInt(s-> new Integer(s)).max().getAsInt();
+
+        System.out.println(maximum);
+
+
+    }
+
+
+    public static List<String> getMaxSquareNumberForAnagramsSet(final Set<String> anagramSet, final List<String> squares) {
+        final List<String> squaresFound = new ArrayList<>();
+
+        for(String squareNumber:squares) {
+            for(String first:anagramSet) {
+                for (String second : anagramSet.stream().filter(s -> !s.equals(first)).collect(Collectors.toList())) {
+                    String convertedNumber = anagramsFromReplacementMap(squareNumber, replacementMap(first, second));
+                    if (squares.contains(convertedNumber))
+                        squaresFound.add(convertedNumber);
+                }
+            }
+        }
+        return squaresFound;
     }
 
     public static List<String> getSquareNumbers(int min, int max)
