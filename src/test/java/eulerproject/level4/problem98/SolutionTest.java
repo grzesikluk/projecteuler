@@ -21,10 +21,18 @@ public class SolutionTest
                 Arrays.asList(3),
                 Arrays.asList(2)
                 );
-
-
          assertThat(Solution.anagramsFromReplacementMap("SURE",replacementMap)).isEqualTo("USER");
 
+
+        List<List<Integer>> replacementMap2 = Arrays.asList(
+                Arrays.asList(4),
+                Arrays.asList(1),
+                Arrays.asList(2, 3),
+                Arrays.asList(0),
+                Arrays.asList(2, 3)
+        );
+
+        assertThat(Solution.anagramsFromReplacementMap("SHEET",replacementMap2)).isEqualTo("THESE");
     }
 
     @Test

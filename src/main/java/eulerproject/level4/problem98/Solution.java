@@ -4,12 +4,7 @@ import eulerproject.tools.generators.SquareNumbers;
 import eulerproject.tools.primes.Primes;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -147,19 +142,8 @@ public class Solution
         return 0;
     }
 
-    /**
-     * A bit of explanation. The result is a set of lists of integers. The input string1 has order 1,2,3,4,..., string_len
-     * and the result for other string 2 - which is anagram is a an integer map of letters that match replacing in anagram.
-     * <p>
-     * For multi letters there might be ambiguity so one pair of anagram can generate many maps.
-     *
-     * @param string1
-     * @param string2
-     * @return
-     */
     public static List<List<Integer>>  replacementMap(String string1, String string2)
     {
-
         List<List<Integer>> charSetCount = new ArrayList<>();
 
         IntStream.range(0,string1.length()).forEach(i-> {
@@ -185,9 +169,24 @@ public class Solution
     }
 
 
-    public static List<String> anagramsFromReplacementMap(String input, List<List<Integer>> replacementMap) {
+    public static String anagramsFromReplacementMap(String input, List<List<Integer>> replacementMap) {
 
-        return null;
+        char[] charArray = new char[replacementMap.size()];
+
+        IntStream.range(0, charArray.length).forEach(i-> {charArray[i]=0;});
+
+        IntStream.range(0,replacementMap.size()).forEach( i -> {
+            if (charArray[i] == 0)
+                charArray[i] = input.charAt(replacementMap.get(i).get(0));
+        });
+
+        StringBuilder sb = new StringBuilder();
+
+        IntStream.range(0,charArray.length).forEach(i-> {
+            sb.append(charArray[i]);
+        });
+
+        return sb.toString() ;
     }
 
 }
