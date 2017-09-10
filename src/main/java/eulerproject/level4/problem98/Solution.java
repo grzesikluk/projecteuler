@@ -16,7 +16,6 @@ import java.util.stream.IntStream;
 
 public class Solution
 {
-    //    private static final String FILE = "src/main/java/eulerproject/level4/problem98/p098_words.txt";
     private static final String FILE = "src/main/java/eulerproject/level4/problem98/p098_words.txt";
 
     public static void main(String[] args) throws IOException
