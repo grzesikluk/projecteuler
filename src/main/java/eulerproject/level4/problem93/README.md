@@ -23,11 +23,16 @@ can be obtained, giving your answer as a string: abcd.
 #### Solution
 
 ##### Ideas
-* 
+* what if we use RPN to generate equations?
+* how to generate non random RPN systematically
+* using operators and abcd digits we can generate RPN equations
+* RPN calculator needs to be implemented
 
 ##### Algorithm
-*
+1. generate RPN from a b c d and operators (say random) - using letters
+2. replace the letters to get all values from RPN
+3. calculate it and store result for abcd vector go to 
+4. check map of results to obtain longest chain abcd vector
 
 ##### Links
-
-Created by lgrzesik 10/09/2017
+[RPN wiki](https://en.wikipedia.org/wiki/Reverse_Polish_notation)
