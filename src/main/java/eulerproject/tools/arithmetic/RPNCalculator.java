@@ -1,4 +1,4 @@
-package eulerproject.level4.problem93;
+package eulerproject.tools.arithmetic;
 
 import java.util.Stack;
 import java.util.stream.IntStream;
@@ -6,15 +6,15 @@ import java.util.stream.IntStream;
 public class RPNCalculator
 {
 
-    public static int calculateExpression(String expression)
-    {
+    public static int calculateExpression(String[] expression) {
+
         final Stack<String> stack = new Stack<>();
 
-        IntStream.range(0, expression.length()).forEach(
+        IntStream.range(0, expression.length).forEach(
                 i -> {
-                    char token = expression.charAt(i);
+                    String token = expression[i];
 
-                    if (isOperator(""+token)) {
+                    if (isOperator(token)) {
                         String operand2 = stack.pop();
                         String operand1 = stack.pop();
 
@@ -22,13 +22,19 @@ public class RPNCalculator
                             throw new ArithmeticException("Wrong expression");
 
                         stack.push(Integer.toString(evaluate(operand1, operand2, "" + token)));
-                    } else if (isOperand("" + token)) {
-                        stack.push("" + token);
+                    } else if (isOperand( token)) {
+                        stack.push(token);
                     } else
                         throw new ArithmeticException("Could not process");
                 });
 
         return Integer.parseInt(stack.pop());
+
+    }
+
+    public static int calculateExpression(String expression)
+    {
+        return calculateExpression(expression.split(" "));
     }
 
     public static boolean isOperand(String x)

@@ -1,4 +1,4 @@
-package eulerproject.level4.problem93;
+package eulerproject.tools.arithmetic;
 
 import org.junit.Test;
 
@@ -9,13 +9,14 @@ public class RPNCalculatorTest
     @Test
     public void testCalculateExpression() throws Exception
     {
-        assertThat(RPNCalculator.calculateExpression("22*")).isEqualTo(4);
-        assertThat(RPNCalculator.calculateExpression("22/")).isEqualTo(1);
-        assertThat(RPNCalculator.calculateExpression("22/3+")).isEqualTo(4);
-        assertThat(RPNCalculator.calculateExpression("33*3+")).isEqualTo(12);
-        assertThat(RPNCalculator.calculateExpression("34-5+")).isEqualTo(4);
-        assertThat(RPNCalculator.calculateExpression("345*-")).isEqualTo(-17);
-        assertThat(RPNCalculator.calculateExpression("532*+")).isEqualTo(11);
+        assertThat(RPNCalculator.calculateExpression("2 2 *")).isEqualTo(4);
+        assertThat(RPNCalculator.calculateExpression("2 2 /")).isEqualTo(1);
+        assertThat(RPNCalculator.calculateExpression("2 2 / 3 +")).isEqualTo(4);
+        assertThat(RPNCalculator.calculateExpression("3 3 * 3 +")).isEqualTo(12);
+        assertThat(RPNCalculator.calculateExpression("3 4 - 5 +")).isEqualTo(4);
+        assertThat(RPNCalculator.calculateExpression("3 4 5 * -")).isEqualTo(-17);
+        assertThat(RPNCalculator.calculateExpression("5 3 2 * +")).isEqualTo(11);
+        assertThat(RPNCalculator.calculateExpression("15 13 -")).isEqualTo(2);
     }
 
     @Test
