@@ -17,6 +17,13 @@ public class RPNCalculatorTest
         assertThat(RPNCalculator.calculateExpression("3 4 5 * -")).isEqualTo(-17);
         assertThat(RPNCalculator.calculateExpression("5 3 2 * +")).isEqualTo(11);
         assertThat(RPNCalculator.calculateExpression("15 13 -")).isEqualTo(2);
+
+        //sanity check
+        assertThat(RPNCalculator.calculateExpression("1 2 3 + - 4 -")).isEqualTo(-8);
+        assertThat(RPNCalculator.calculateExpression("1 2 3 + 4 - -")).isEqualTo(0);
+        assertThat(RPNCalculator.calculateExpression("1 2 + 3 + 4 -")).isEqualTo(2);
+        assertThat(RPNCalculator.calculateExpression("1 2 + 3 4 - +")).isEqualTo(2);
+        assertThat(RPNCalculator.calculateExpression("1 2 3 4 + + -")).isEqualTo(-8);
     }
 
     @Test

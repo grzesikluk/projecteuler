@@ -21,7 +21,16 @@ public class RPNCalculator
                         if (operand1 == null || operand2 == null)
                             throw new ArithmeticException("Wrong expression");
 
-                        stack.push(Integer.toString(evaluate(operand1, operand2, "" + token)));
+                        try {
+                            stack.push(Integer.toString(evaluate(operand1, operand2, "" + token)));
+                        }
+                        catch (ArithmeticException exc) {
+                            //skip
+                            stack.clear();
+                            stack.push("0");
+                        }
+
+
                     } else if (isOperand( token)) {
                         stack.push(token);
                     } else
@@ -71,8 +80,12 @@ public class RPNCalculator
             case "*":
                 return oper1 * oper2;
 
-            case "/":
-                return oper1 / oper2;
+            case "/": {
+                if(oper2 != 0)
+                    return oper1 / oper2;
+                else
+                    throw new ArithmeticException("Division by zero.");
+            }
         }
         return 0;
     }

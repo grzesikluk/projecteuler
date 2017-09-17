@@ -24,7 +24,21 @@ can be obtained, giving your answer as a string: abcd.
 
 ##### Ideas
 * what if we use RPN to generate equations?
-* how to generate non random RPN systematically
+* how to generate non random RPN systematically? what is the condition to get proper equation?
+    * Using four digits
+    * the number of operators must be 3
+    * order (left right) all together 7 tokens:
+        * first digit
+        * second digit
+        * last operator
+> Examples:
+> 1 2 3 + - 4 -; 
+> 1 2 3 + 4 - -; 
+> 1 2 + 3 + 4 -; 
+> 1 2 + 3 4 - +; 
+> 1 2 3 4 + + -; 
+> 4 3 1 2 + + +
+
 * using operators and abcd digits we can generate RPN equations
 * RPN calculator needs to be implemented
 
