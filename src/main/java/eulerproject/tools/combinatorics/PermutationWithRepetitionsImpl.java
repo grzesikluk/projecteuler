@@ -6,16 +6,28 @@ import java.util.stream.IntStream;
 
 public class PermutationWithRepetitionsImpl<T> implements Permutation<T>
 {
+    private int limit;
+
+    PermutationWithRepetitionsImpl(int limit)
+    {
+        this.limit = limit;
+    }
+
     @Override
     public void generate(final List<T> input, final Listener listener)
     {
+        if (input.size() < limit)
+            throw new IllegalArgumentException("Input array to small comparing to limit");
+
         int[] indexes = new int[input.size()];
-        int total = (int)Math.pow(indexes.length, indexes.length);
+        int total = (int) Math.pow(indexes.length, limit);
 
         while (total-- > 0) {
             List<T> temp = new LinkedList<>();
 
-            IntStream.range(0, indexes.length).forEach(i-> {temp.add(input.get(indexes[i]));});
+            IntStream.range(0, indexes.length - (indexes.length - limit)).forEach(i -> {
+                temp.add(input.get(indexes[i]));
+            });
 
             listener.activate(temp);
 
@@ -28,13 +40,5 @@ public class PermutationWithRepetitionsImpl<T> implements Permutation<T>
                 }
             }
         }
-
-
-
-
     }
-
-
-
-
 }

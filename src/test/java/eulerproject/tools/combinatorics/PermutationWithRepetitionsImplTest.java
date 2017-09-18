@@ -13,7 +13,7 @@ public class PermutationWithRepetitionsImplTest
     @Test
     public void testGenerate() throws Exception
     {
-        Permutation<Integer> permutation = new PermutationWithRepetitionsImpl<>();
+        Permutation<Integer> permutation = new PermutationWithRepetitionsImpl<>(5);
 
         permutation.generate(Arrays.asList(1,2,3,4,5),listener);
 
@@ -30,6 +30,30 @@ public class PermutationWithRepetitionsImplTest
                 .doesNotContain(Arrays.asList(1,1,1,1))
                 .doesNotContain(Arrays.asList())
                 .hasSize(3125)
+        ;
+
+    }
+
+    @Test
+    public void testGenerate2() throws Exception
+    {
+        Permutation<Integer> permutation = new PermutationWithRepetitionsImpl<>(3);
+
+        permutation.generate(Arrays.asList(1,2,3,4,5),listener);
+
+        assertThat(listener.getResults())
+                .contains(Arrays.asList(1,2,3))
+                .contains(Arrays.asList(1,2,4))
+                .contains(Arrays.asList(2,3,4))
+                .contains(Arrays.asList(1,2,3))
+                .contains(Arrays.asList(1,2,3))
+                .contains(Arrays.asList(1,2,3))
+                .contains(Arrays.asList(1,1,1))
+                .contains(Arrays.asList(1,1,1))
+                .contains(Arrays.asList(2,2,2))
+                .doesNotContain(Arrays.asList(1,1,1,1))
+                .doesNotContain(Arrays.asList())
+                .hasSize(125)
         ;
 
     }
