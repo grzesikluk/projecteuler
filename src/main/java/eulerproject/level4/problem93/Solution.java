@@ -1,7 +1,7 @@
 package eulerproject.level4.problem93;
 
 import eulerproject.tools.combinatorics.Permutation;
-import eulerproject.tools.combinatorics.PermutationImpl;
+import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -108,11 +108,11 @@ public class Solution
     public static Set<List<String>> generateAllOrders(List<String> input)
     {
 
-        Permutation<String> permutation = new PermutationImpl<>();
+        Permutation<String> permutation = new PermutationWithoutRepetitionsImpl<>();
         Problem93Listener listener = new Problem93Listener(new HashSet<>());
         List<String> linkedList = new LinkedList<>(input);
 
-        permutation.generate(input.size() - 1, linkedList, listener);
+        permutation.generate(linkedList, listener);
         return listener.getSetOfResults();
     }
 }

@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface Permutation <T>{
 
-    void generate(int k, List<T> input, Listener listener);
+    void generate(List<T> input, Listener listener);
 
 }

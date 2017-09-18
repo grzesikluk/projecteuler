@@ -1,6 +1,6 @@
 package eulerproject.tools.combinatorics;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,10 +11,10 @@ public class ListenerImpl<T> implements Listener<T> {
     List<List<T>> collectedResults;
 
     ListenerImpl() {
-        collectedResults = Collections.emptyList();
+        collectedResults = new LinkedList<>();
     }
     public void activate(List<T> list) {
-        collectedResults.add(list);
+        collectedResults.add(new LinkedList<>(list));
     }
 
     @Override

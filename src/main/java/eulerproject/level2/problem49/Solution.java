@@ -1,7 +1,7 @@
 package eulerproject.level2.problem49;
 
 import eulerproject.tools.combinatorics.Permutation;
-import eulerproject.tools.combinatorics.PermutationImpl;
+import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
 import eulerproject.tools.primes.Primes;
 
 import java.util.*;
@@ -74,12 +74,12 @@ public class Solution {
 
     public static boolean checkCondition(int k) {
         LinkedList<Character> numberListChar = convertInteger(k);
-        Permutation<Character> perm = new PermutationImpl<Character>();
+        Permutation<Character> perm = new PermutationWithoutRepetitionsImpl<Character>();
         ListenerImplCheckProblem49<Character> listener = new ListenerImplCheckProblem49<>();
         LinkedList<Integer> primeList = new LinkedList<>();
         Map<Integer, Doubles> primeListDifferences = new HashMap<>();
 
-        perm.generate(numberListChar.size() - 1, numberListChar, listener);
+        perm.generate(numberListChar, listener);
 
         for (Integer i : listener.getSetOfConvertedResults()) {
             if (i < MAX && i > MIN)

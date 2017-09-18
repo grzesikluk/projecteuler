@@ -2,7 +2,7 @@ package eulerproject.level2.problem43;
 
 import eulerproject.tools.combinatorics.Listener;
 import eulerproject.tools.combinatorics.Permutation;
-import eulerproject.tools.combinatorics.PermutationImpl;
+import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
 
 import java.util.LinkedList;
 
@@ -25,10 +25,10 @@ public class Solution {
         list.add('7'); //1
         list.add('8');
         list.add('9');
-        Permutation<Character> perm = new PermutationImpl<Character>();
+        Permutation<Character> perm = new PermutationWithoutRepetitionsImpl<Character>();
         Listener<Character> listener = new ListenerImplCheck<Character>();
 
-        perm.generate(list.size()-1,list,listener);
+        perm.generate(list,listener);
         
     }
 }
