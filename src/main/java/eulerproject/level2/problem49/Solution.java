@@ -81,7 +81,7 @@ public class Solution {
 
         perm.generate(numberListChar.size() - 1, numberListChar, listener);
 
-        for (Integer i : listener.getResults()) {
+        for (Integer i : listener.getSetOfConvertedResults()) {
             if (i < MAX && i > MIN)
                 if (primes.isPrime(i)) {
                     primeList.add(i);

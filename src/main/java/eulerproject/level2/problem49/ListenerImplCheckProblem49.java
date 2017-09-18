@@ -17,8 +17,13 @@ public class ListenerImplCheckProblem49<T> implements Listener<T> {
         setOfConvertedResults.add(toNumber((LinkedList<Character>) list));
     }
 
-    public Set<Integer> getResults() {
+    @Override
+    public List<List<T>> getResults()
+    {
+        return null;
+    }
 
+    public Set<Integer> getSetOfConvertedResults() {
         return setOfConvertedResults;
     }
 

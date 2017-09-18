@@ -57,6 +57,12 @@ public class Solution
                 {
                     //do nothing;
                 }
+
+                @Override
+                public List<List<Integer>> getResults()
+                {
+                    return null;
+                }
             };
 
             Predicate<List<Integer>> predicate = new Predicate<List<Integer>>()

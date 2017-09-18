@@ -5,6 +5,7 @@ import eulerproject.tools.combinatorics.Listener;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Problem93Listener<T> implements Listener<T>
 {
@@ -21,7 +22,13 @@ public class Problem93Listener<T> implements Listener<T>
         setToReturn.add(new LinkedList<>(list));
     }
 
-    public Set<List<T>> getResults() {
+    @Override
+    public List<List<T>> getResults()
+    {
+        return setToReturn.stream().collect(Collectors.toList());
+    }
+
+    public Set<List<T>> getSetOfResults() {
         return setToReturn;
     }
 }

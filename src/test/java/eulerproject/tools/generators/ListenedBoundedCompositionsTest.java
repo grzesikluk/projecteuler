@@ -18,6 +18,12 @@ public class ListenedBoundedCompositionsTest {
         public void activate(List<Integer> list) {
             //nothing;
         }
+
+        @Override
+        public List<List<Integer>> getResults()
+        {
+            return null;
+        }
     };
 
     private static Predicate<List<Integer>> predicate = new Predicate<List<Integer>>() {

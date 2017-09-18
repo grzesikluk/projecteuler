@@ -22,6 +22,12 @@ public class ListenerImplCheck<T> implements Listener<T> {
 
     }
 
+    @Override
+    public List<List<T>> getResults()
+    {
+        return null;
+    }
+
     public static boolean check(List<Character> list) {
 
 

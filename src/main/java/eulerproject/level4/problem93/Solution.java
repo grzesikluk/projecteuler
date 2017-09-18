@@ -1,6 +1,5 @@
 package eulerproject.level4.problem93;
 
-import eulerproject.tools.arithmetic.RPNCalculator;
 import eulerproject.tools.combinatorics.Permutation;
 import eulerproject.tools.combinatorics.PermutationImpl;
 
@@ -33,13 +32,13 @@ public class Solution
         for (List<String> list : allOrders) {
             int[] nums = list.stream().mapToInt(s -> Integer.parseInt(s)).toArray();
 
-            Set<Integer> set = IntStream.range(0, 5)
-                    .mapToObj(i -> createEquation(i, nums, ))
-                    .mapToInt(expression -> RPNCalculator.calculateExpression(expression))
-                    .filter(i -> i > 0)
-                    .mapToObj(Integer::new)
-                    .collect(Collectors.toSet());
-            result.addAll(set);
+//            Set<Integer> set = IntStream.range(0, 5)
+//                    .mapToObj(i -> createEquation(i, nums, ))
+//                    .mapToInt(expression -> RPNCalculator.calculateExpression(expression))
+//                    .filter(i -> i > 0)
+//                    .mapToObj(Integer::new)
+//                    .collect(Collectors.toSet());
+//            result.addAll(set);
 
         }
 
@@ -114,6 +113,6 @@ public class Solution
         List<String> linkedList = new LinkedList<>(input);
 
         permutation.generate(input.size() - 1, linkedList, listener);
-        return listener.getResults();
+        return listener.getSetOfResults();
     }
 }

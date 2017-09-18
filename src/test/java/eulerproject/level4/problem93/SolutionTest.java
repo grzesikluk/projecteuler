@@ -25,6 +25,6 @@ public class SolutionTest
     @Test
     public void testGetRandomRPNEquation() throws Exception
     {
-        System.out.println(Solution.createEquation(1,2,3,4));
+//        System.out.println(Solution.createEquation(1,2,3,4));
     }
 }
