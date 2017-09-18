@@ -8,7 +8,7 @@ public class PermutationWithRepetitionsImpl<T> implements Permutation<T>
 {
     private int limit;
 
-    PermutationWithRepetitionsImpl(int limit)
+    public PermutationWithRepetitionsImpl(int limit)
     {
         this.limit = limit;
     }

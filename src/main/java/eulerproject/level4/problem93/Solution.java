@@ -1,8 +1,10 @@
 package eulerproject.level4.problem93;
 
 import eulerproject.tools.combinatorics.Permutation;
+import eulerproject.tools.combinatorics.PermutationWithRepetitionsImpl;
 import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,20 +29,11 @@ public class Solution
     public static Set<Integer> getResultsForDigits(int... numbers)
     {
         Set<Integer> result = new HashSet<>();
-        Set<List<String>> allOrders = generateAllOrders(IntStream.of(numbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
+        Set<List<String>> numbersVariants = generateAllOrders(IntStream.of(numbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
+        Set<List<String>> operatorVariants = generateAllOrdersWithRepetitions(Arrays.asList("+","-","/","*"));
 
-        for (List<String> list : allOrders) {
-            int[] nums = list.stream().mapToInt(s -> Integer.parseInt(s)).toArray();
-
-//            Set<Integer> set = IntStream.range(0, 5)
-//                    .mapToObj(i -> createEquation(i, nums, ))
-//                    .mapToInt(expression -> RPNCalculator.calculateExpression(expression))
-//                    .filter(i -> i > 0)
-//                    .mapToObj(Integer::new)
-//                    .collect(Collectors.toSet());
-//            result.addAll(set);
-
-        }
+        //todo: we have all numbers variants, all operators variants
+        // of all of them we need to generate all equations (5 types)
 
         return result;
     }
@@ -109,6 +102,17 @@ public class Solution
     {
 
         Permutation<String> permutation = new PermutationWithoutRepetitionsImpl<>();
+        Problem93Listener listener = new Problem93Listener(new HashSet<>());
+        List<String> linkedList = new LinkedList<>(input);
+
+        permutation.generate(linkedList, listener);
+        return listener.getSetOfResults();
+    }
+
+    public static Set<List<String>> generateAllOrdersWithRepetitions(List<String> input)
+    {
+
+        Permutation<String> permutation = new PermutationWithRepetitionsImpl<>(3);
         Problem93Listener listener = new Problem93Listener(new HashSet<>());
         List<String> linkedList = new LinkedList<>(input);
 
