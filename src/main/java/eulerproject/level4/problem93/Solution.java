@@ -1,8 +1,8 @@
 package eulerproject.level4.problem93;
 
 import eulerproject.tools.arithmetic.RPNCalculator;
-import eulerproject.tools.permutation.Permutation;
-import eulerproject.tools.permutation.PermutationImpl;
+import eulerproject.tools.combinatorics.Permutation;
+import eulerproject.tools.combinatorics.PermutationImpl;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,16 +19,9 @@ public class Solution
         System.out.println(getResultsForDigits(1,2,3,4));
     }
 
-    public static String createEquation(final int equationType, final int... numbers)
+    public static String createEquation(final int equationType, List<String> operators,final int... numbers)
     {
         List<String> digits = IntStream.of(numbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList());
-        List<String> operators = new LinkedList<>();
-
-        IntStream.range(0, numbers.length - 1).forEach(i ->
-        {
-            operators.add(Operator.getRandom().toString());
-        });
-
         return getEquation(digits, operators, equationType).stream().reduce("", (a, b) -> a + b + " ");
     }
 
@@ -41,7 +34,7 @@ public class Solution
             int[] nums = list.stream().mapToInt(s -> Integer.parseInt(s)).toArray();
 
             Set<Integer> set = IntStream.range(0, 5)
-                    .mapToObj(i -> createEquation(i, nums))
+                    .mapToObj(i -> createEquation(i, nums, ))
                     .mapToInt(expression -> RPNCalculator.calculateExpression(expression))
                     .filter(i -> i > 0)
                     .mapToObj(Integer::new)

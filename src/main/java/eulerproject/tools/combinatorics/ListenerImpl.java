@@ -1,4 +1,4 @@
-package eulerproject.tools.permutation;
+package eulerproject.tools.combinatorics;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package eulerproject.tools.generators;
 
-import eulerproject.tools.permutation.Listener;
+import eulerproject.tools.combinatorics.Listener;
 
 import java.util.*;
 import java.util.function.Predicate;

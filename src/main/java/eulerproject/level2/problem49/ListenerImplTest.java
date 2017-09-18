@@ -1,6 +1,6 @@
 package eulerproject.level2.problem49;
 
-import eulerproject.tools.permutation.Listener;
+import eulerproject.tools.combinatorics.Listener;
 
 import java.util.List;
 

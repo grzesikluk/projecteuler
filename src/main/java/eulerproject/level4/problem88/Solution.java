@@ -1,7 +1,7 @@
 package eulerproject.level4.problem88;
 
 import eulerproject.tools.generators.ListenedBoundedCompositions;
-import eulerproject.tools.permutation.Listener;
+import eulerproject.tools.combinatorics.Listener;
 
 import java.util.HashSet;
 import java.util.List;

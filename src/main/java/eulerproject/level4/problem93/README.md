@@ -31,13 +31,18 @@ can be obtained, giving your answer as a string: abcd.
         * first digit
         * second digit
         * last operator
-> Examples:
-> 1 2 3 + - 4 -; 
-> 1 2 3 + 4 - -; 
-> 1 2 + 3 + 4 -; 
-> 1 2 + 3 4 - +; 
-> 1 2 3 4 + + -; 
-> 4 3 1 2 + + +
+        
+> Examples (D - digit, O - operator)
+
+> DDDOODO
+
+> DDDODOO
+
+> DDODODO
+
+> DDODDOO
+
+> DDDDOOO
 
 * using operators and abcd digits we can generate RPN equations
 * RPN calculator needs to be implemented
