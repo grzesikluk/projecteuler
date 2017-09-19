@@ -23,8 +23,8 @@ can be obtained, giving your answer as a string: abcd.
 #### Solution
 
 ##### Ideas
-* what if we use RPN to generate equations?
-* how to generate non random RPN systematically? what is the condition to get proper equation?
+* what if we use RPN to generate equations? **DONE**
+* how to generate non random RPN systematically? what is the condition to get proper equation? **DONE**
     * Using four digits
     * the number of operators must be 3
     * order (left right) all together 7 tokens:
@@ -44,8 +44,9 @@ can be obtained, giving your answer as a string: abcd.
 
 > DDDDOOO
 
-* using operators and abcd digits we can generate RPN equations
-* RPN calculator needs to be implemented
+* using operators and abcd digits we can generate RPN equations **DONE**
+* RPN calculator needs to be implemented **DONE**
+* checking of consecutive numbers
 
 ##### Algorithm
 1. generate RPN from a b c d and operators (say random) - using letters

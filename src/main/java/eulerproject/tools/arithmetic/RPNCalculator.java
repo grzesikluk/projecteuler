@@ -1,10 +1,12 @@
 package eulerproject.tools.arithmetic;
 
+import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class RPNCalculator
 {
+
 
     public static int calculateExpression(String[] expression) {
 
@@ -45,6 +47,11 @@ public class RPNCalculator
     {
         return calculateExpression(expression.split(" "));
     }
+
+    public static int calculateExpression(List<String> expression) {
+        return calculateExpression(expression.toArray(new String[expression.size()]));
+    }
+
 
     public static boolean isOperand(String x)
     {

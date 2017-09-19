@@ -1,9 +1,11 @@
 package eulerproject.level4.problem93;
 
+import eulerproject.tools.arithmetic.RPNCalculator;
 import eulerproject.tools.combinatorics.Permutation;
 import eulerproject.tools.combinatorics.PermutationWithRepetitionsImpl;
 import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -26,14 +28,30 @@ public class Solution
         return getEquation(digits, operators, equationType).stream().reduce("", (a, b) -> a + b + " ");
     }
 
-    public static Set<Integer> getResultsForDigits(int... numbers)
+    public static Set<Integer> getResultsForDigits(int... inputNumbers)
     {
         Set<Integer> result = new HashSet<>();
-        Set<List<String>> numbersVariants = generateAllOrders(IntStream.of(numbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
+        Set<List<String>> numbersVariants = generateAllOrders(IntStream.of(inputNumbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
         Set<List<String>> operatorVariants = generateAllOrdersWithRepetitions(Arrays.asList("+","-","/","*"));
 
-        //todo: we have all numbers variants, all operators variants
-        // of all of them we need to generate all equations (5 types)
+        List<List<String>> allEquations = new ArrayList<>();
+
+        for(List<String> numbers:numbersVariants) {
+            for(List<String> operators:operatorVariants) {
+                IntStream.range(0,5).forEach(equationType-> allEquations.add(getEquation(numbers,operators,equationType)));
+            }
+        }
+
+        for(List<String> equation:allEquations) {
+            try {
+                int res = RPNCalculator.calculateExpression(equation);
+                if (res > 0)
+                    result.add(res);
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
+        }
 
         return result;
     }
