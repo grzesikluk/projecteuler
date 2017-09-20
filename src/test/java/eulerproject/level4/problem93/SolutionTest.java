@@ -3,8 +3,8 @@ package eulerproject.level4.problem93;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,16 +13,18 @@ public class SolutionTest
     @Test
     public void testConsecutiveLengthOfIntegers() throws Exception
     {
-        Set<Integer> input = Arrays.asList(1,2,3,4,5,6,8).stream().collect(Collectors.toSet());
-        assertThat(Solution.consecutiveLengthOfIntegers(0,input)).isEqualTo(6);
+        Set<Double> input = new HashSet<>();
+        input.add(1.0);
+        input.add(2.0);
+        input.add(3.0);
+        input.add(4.0);
+        input.add(4.5);
+        input.add(5.0);
+
+        assertThat(Solution.consecutiveLengthOfIntegers(0,input)).isEqualTo(5);
     }
 
-    @Test
-    public void testConsecutiveLengthOfIntegers2() throws Exception
-    {
-        Set<Integer> input = Arrays.asList(1,2,3,5,6,8).stream().collect(Collectors.toSet());
-        assertThat(Solution.consecutiveLengthOfIntegers(0,input)).isEqualTo(2);
-    }
+
     @Test
     public void testGenerateAllOrders() throws Exception
     {
@@ -37,9 +39,4 @@ public class SolutionTest
 
     }
 
-    @Test
-    public void testGetRandomRPNEquation() throws Exception
-    {
-//        System.out.println(Solution.createEquation(1,2,3,4));
-    }
 }

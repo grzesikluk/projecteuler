@@ -10,7 +10,7 @@ public class ListenerImpl<T> implements Listener<T> {
 
     List<List<T>> collectedResults;
 
-    ListenerImpl() {
+    public ListenerImpl() {
         collectedResults = new LinkedList<>();
     }
     public void activate(final List<T> list) {

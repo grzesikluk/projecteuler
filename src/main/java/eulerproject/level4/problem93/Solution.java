@@ -1,6 +1,9 @@
 package eulerproject.level4.problem93;
 
 import eulerproject.tools.arithmetic.RPNCalculator;
+import eulerproject.tools.combinatorics.Combination;
+import eulerproject.tools.combinatorics.CombinationWithoutRepetitionImpl;
+import eulerproject.tools.combinatorics.Listener;
 import eulerproject.tools.combinatorics.Permutation;
 import eulerproject.tools.combinatorics.PermutationWithRepetitionsImpl;
 import eulerproject.tools.combinatorics.PermutationWithoutRepetitionsImpl;
@@ -19,16 +22,35 @@ public class Solution
 
     public static void main(String[] args)
     {
-        System.out.println(getResultsForDigits(1, 2, 3, 4));
+        final Combination<Integer> combination = new CombinationWithoutRepetitionImpl<>(4);
+        final Set<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9).stream().collect(Collectors.toSet());
+        final Set<List<Integer>> allNumbersVariants = new HashSet<>();
+        final Listener<Integer> listener = new Problem93Listener<>(allNumbersVariants);
+
+        combination.generate(numbers,listener);
+
+        int max = 0;
+        List<Integer> numbersFound = null;
+
+        for(List<Integer> numbersList:allNumbersVariants) {
+            int s = consecutiveLengthOfIntegers(0,getResultsForDigits(numbersList.stream().mapToInt(i->i).toArray()));
+
+            if(max < s) {
+                numbersFound = numbersList;
+                max = s;
+            }
+
+        }
+        System.out.println(numbersFound + " " + max);
     }
 
-    public static Set<Integer> getResultsForDigits(int... inputNumbers)
+    public static Set<Double> getResultsForDigits(final int... inputNumbers)
     {
-        Set<Integer> result = new HashSet<>();
-        Set<List<String>> numbersVariants = generateAllOrders(IntStream.of(inputNumbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
-        Set<List<String>> operatorVariants = generateAllOrdersWithRepetitions(Arrays.asList("+", "-", "/", "*"));
+        final Set<Double> result = new HashSet<>();
+        final Set<List<String>> numbersVariants = generateAllOrders(IntStream.of(inputNumbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList()));
+        final Set<List<String>> operatorVariants = generateAllOrdersWithRepetitions(Arrays.asList("+", "-", "/", "*"));
 
-        List<List<String>> allEquations = new ArrayList<>();
+        final List<List<String>> allEquations = new ArrayList<>();
 
         for (List<String> numbers : numbersVariants) {
             for (List<String> operators : operatorVariants) {
@@ -38,7 +60,7 @@ public class Solution
 
         for (List<String> equation : allEquations) {
             try {
-                int res = RPNCalculator.calculateExpression(equation);
+                double res = RPNCalculator.calculateExpression(equation);
                 if (res > 0)
                     result.add(res);
             } catch (Exception e) {
@@ -49,9 +71,9 @@ public class Solution
         return result;
     }
 
-    private static List<String> getEquation(List<String> digits, List<String> operators, int equationType)
+    private static List<String> getEquation(final List<String> digits, final List<String> operators, final int equationType)
     {
-        List<String> equation = new LinkedList<>();
+        final List<String> equation = new LinkedList<>();
 
         switch (equationType) {
             case 0: { //DDODODO
@@ -110,37 +132,41 @@ public class Solution
     }
 
 
-    public static Set<List<String>> generateAllOrders(List<String> input)
+    public static Set<List<String>> generateAllOrders(final List<String> input)
     {
 
-        Permutation<String> permutation = new PermutationWithoutRepetitionsImpl<>();
-        Problem93Listener listener = new Problem93Listener(new HashSet<>());
-        List<String> linkedList = new LinkedList<>(input);
+        final Permutation<String> permutation = new PermutationWithoutRepetitionsImpl<>();
+        final Problem93Listener listener = new Problem93Listener(new HashSet<>());
+        final List<String> linkedList = new LinkedList<>(input);
 
         permutation.generate(linkedList, listener);
         return listener.getSetOfResults();
     }
 
-    public static Set<List<String>> generateAllOrdersWithRepetitions(List<String> input)
+    public static Set<List<String>> generateAllOrdersWithRepetitions(final List<String> input)
     {
 
-        Permutation<String> permutation = new PermutationWithRepetitionsImpl<>(3);
-        Problem93Listener listener = new Problem93Listener(new HashSet<>());
-        List<String> linkedList = new LinkedList<>(input);
+        final Permutation<String> permutation = new PermutationWithRepetitionsImpl<>(3);
+        final Problem93Listener listener = new Problem93Listener(new HashSet<>());
+        final List<String> linkedList = new LinkedList<>(input);
 
         permutation.generate(linkedList, listener);
         return listener.getSetOfResults();
     }
 
-    public static int consecutiveLengthOfIntegers(int start, Set<Integer> inputSet)
+    public static int consecutiveLengthOfIntegers(final int start, final Set<Double> inputSet)
     {
         if (start > inputSet.size())
             throw new IllegalArgumentException("Start point wrong");
 
-        List<Integer> list = inputSet.stream().sorted().collect(Collectors.toList());
+        final double[] list = inputSet
+                .stream()
+                .mapToDouble(d->d)
+                .filter(d->d == (int)d)
+                .sorted().toArray();
 
         int k = start + 1;
-        while (k < list.size() && list.get(k).equals(list.get(k - 1) + 1))
+        while (k < list.length && list[k] == (list[k - 1] + 1))
             k++;
         return k;
     }

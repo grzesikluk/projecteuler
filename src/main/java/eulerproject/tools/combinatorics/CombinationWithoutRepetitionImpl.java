@@ -12,7 +12,7 @@ public class CombinationWithoutRepetitionImpl<T> implements Combination<T>
 {
     private int size;
 
-    CombinationWithoutRepetitionImpl(int size)
+    public CombinationWithoutRepetitionImpl(int size)
     {
         this.size = size;
     }

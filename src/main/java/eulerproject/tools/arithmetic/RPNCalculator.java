@@ -1,5 +1,7 @@
 package eulerproject.tools.arithmetic;
 
+import java.util.Arrays;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
@@ -8,7 +10,7 @@ public class RPNCalculator
 {
 
 
-    public static int calculateExpression(String[] expression) {
+    public static double calculateExpression(String[] expression) {
 
         final Stack<String> stack = new Stack<>();
 
@@ -17,14 +19,18 @@ public class RPNCalculator
                     String token = expression[i];
 
                     if (isOperator(token)) {
-                        String operand2 = stack.pop();
-                        String operand1 = stack.pop();
-
-                        if (operand1 == null || operand2 == null)
-                            throw new ArithmeticException("Wrong expression");
 
                         try {
-                            stack.push(Integer.toString(evaluate(operand1, operand2, "" + token)));
+                            String operand2 = stack.pop();
+                            String operand1 = stack.pop();
+
+                            if (operand1 == null || operand2 == null)
+                                throw new ArithmeticException("Wrong expression");
+
+                            stack.push(Double.toString(evaluate(operand1, operand2, "" + token)));
+                        }
+                        catch (EmptyStackException e) {
+                            System.out.println("Wrog expression: " + Arrays.asList(expression) + " empty stack!.");
                         }
                         catch (ArithmeticException exc) {
                             //skip
@@ -33,22 +39,23 @@ public class RPNCalculator
                         }
 
 
+
                     } else if (isOperand( token)) {
                         stack.push(token);
                     } else
                         throw new ArithmeticException("Could not process");
                 });
 
-        return Integer.parseInt(stack.pop());
+        return Double.parseDouble(stack.pop());
 
     }
 
-    public static int calculateExpression(String expression)
+    public static double calculateExpression(String expression)
     {
         return calculateExpression(expression.split(" "));
     }
 
-    public static int calculateExpression(List<String> expression) {
+    public static double calculateExpression(List<String> expression) {
         return calculateExpression(expression.toArray(new String[expression.size()]));
     }
 
@@ -71,13 +78,13 @@ public class RPNCalculator
                 x.equals("/"));
     }
 
-    public static int evaluate(String o1, String o2, String operator)
+    public static double evaluate(String o1, String o2, String operator)
     {
         if (operator.length() > 1 && !isOperator(operator))
             throw new IllegalArgumentException("Wrong operator definition");
 
-        int oper1 = Integer.parseInt(o1);
-        int oper2 = Integer.parseInt(o2);
+        double oper1 = Double.parseDouble(o1);
+        double oper2 = Double.parseDouble(o2);
 
         switch (operator) {
             case "+":

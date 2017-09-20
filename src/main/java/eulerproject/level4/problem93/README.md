@@ -47,7 +47,7 @@ can be obtained, giving your answer as a string: abcd.
 * using operators and abcd digits we can generate RPN equations **DONE**
 * RPN calculator needs to be implemented **DONE**
 * checking of consecutive numbers
-    * need to generate all sets of 4 of 10 digits by implementing combinations
+    * need to generate all sets of 4 of 10 digits by implementing combinations **DONE**
 
 ##### Algorithm
 1. generate RPN from a b c d and operators (say random) - using letters
