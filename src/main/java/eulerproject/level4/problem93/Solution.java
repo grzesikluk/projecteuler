@@ -22,12 +22,6 @@ public class Solution
         System.out.println(getResultsForDigits(1, 2, 3, 4));
     }
 
-    public static String createEquation(final int equationType, List<String> operators, final int... numbers)
-    {
-        List<String> digits = IntStream.of(numbers).mapToObj(i -> Integer.toString(i)).collect(Collectors.toList());
-        return getEquation(digits, operators, equationType).stream().reduce("", (a, b) -> a + b + " ");
-    }
-
     public static Set<Integer> getResultsForDigits(int... inputNumbers)
     {
         Set<Integer> result = new HashSet<>();
@@ -114,6 +108,7 @@ public class Solution
 
         return equation;
     }
+
 
     public static Set<List<String>> generateAllOrders(List<String> input)
     {

@@ -47,6 +47,7 @@ can be obtained, giving your answer as a string: abcd.
 * using operators and abcd digits we can generate RPN equations **DONE**
 * RPN calculator needs to be implemented **DONE**
 * checking of consecutive numbers
+    * need to generate all sets of 4 of 10 digits by implementing combinations
 
 ##### Algorithm
 1. generate RPN from a b c d and operators (say random) - using letters
@@ -55,4 +56,4 @@ can be obtained, giving your answer as a string: abcd.
 4. check map of results to obtain longest chain abcd vector
 
 ##### Links
-[RPN wiki](https://en.wikipedia.org/wiki/Reverse_Polish_notation)
+[Generating binary with k-bits set](https://stackoverflow.com/questions/1851134/generate-all-binary-strings-of-length-n-with-k-bits-set)

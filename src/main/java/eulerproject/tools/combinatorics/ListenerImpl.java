@@ -13,7 +13,7 @@ public class ListenerImpl<T> implements Listener<T> {
     ListenerImpl() {
         collectedResults = new LinkedList<>();
     }
-    public void activate(List<T> list) {
+    public void activate(final List<T> list) {
         collectedResults.add(new LinkedList<>(list));
     }
 
