@@ -54,7 +54,8 @@ public class Solution
 
         for (List<String> numbers : numbersVariants) {
             for (List<String> operators : operatorVariants) {
-                IntStream.range(0, 5).forEach(equationType -> allEquations.add(getEquation(numbers, operators, equationType)));
+                Arrays.stream(EquationType.values())
+                        .forEach(equationType -> allEquations.add(EquationType.getEquation(equationType,numbers, operators)));
             }
         }
 
@@ -69,66 +70,6 @@ public class Solution
         }
 
         return result;
-    }
-
-    private static List<String> getEquation(final List<String> digits, final List<String> operators, final int equationType)
-    {
-        final List<String> equation = new LinkedList<>();
-
-        switch (equationType) {
-            case 0: { //DDODODO
-                equation.add(digits.get(0));
-                equation.add(digits.get(1));
-                equation.add(operators.get(0));
-                equation.add(digits.get(2));
-                equation.add(operators.get(1));
-                equation.add(digits.get(3));
-                equation.add(operators.get(2));
-                break;
-            }
-            case 1: { //DDDODOO
-                equation.add(digits.get(0));
-                equation.add(digits.get(1));
-                equation.add(digits.get(2));
-                equation.add(operators.get(0));
-                equation.add(digits.get(3));
-                equation.add(operators.get(1));
-                equation.add(operators.get(2));
-                break;
-            }
-            case 2: { //DDODDOO
-                equation.add(digits.get(0));
-                equation.add(digits.get(1));
-                equation.add(operators.get(0));
-                equation.add(digits.get(2));
-                equation.add(digits.get(3));
-                equation.add(operators.get(1));
-                equation.add(operators.get(2));
-                break;
-            }
-            case 3: { //DDDDOOO
-                equation.add(digits.get(0));
-                equation.add(digits.get(1));
-                equation.add(digits.get(2));
-                equation.add(digits.get(3));
-                equation.add(operators.get(0));
-                equation.add(operators.get(1));
-                equation.add(operators.get(2));
-                break;
-            }
-            case 4: {  //DDDOODO
-                equation.add(digits.get(0));
-                equation.add(digits.get(1));
-                equation.add(digits.get(2));
-                equation.add(operators.get(0));
-                equation.add(operators.get(1));
-                equation.add(digits.get(3));
-                equation.add(operators.get(2));
-                break;
-            }
-        }
-
-        return equation;
     }
 
 

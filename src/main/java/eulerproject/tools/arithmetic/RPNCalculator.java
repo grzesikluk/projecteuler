@@ -8,8 +8,6 @@ import java.util.stream.IntStream;
 
 public class RPNCalculator
 {
-
-
     public static double calculateExpression(String[] expression) {
 
         final Stack<String> stack = new Stack<>();
@@ -18,7 +16,7 @@ public class RPNCalculator
                 i -> {
                     String token = expression[i];
 
-                    if (isOperator(token)) {
+                    if (ArithmeticOperator.isOperator(token)) {
 
                         try {
                             String operand2 = stack.pop();
@@ -27,7 +25,7 @@ public class RPNCalculator
                             if (operand1 == null || operand2 == null)
                                 throw new ArithmeticException("Wrong expression");
 
-                            stack.push(Double.toString(evaluate(operand1, operand2, "" + token)));
+                            stack.push(Double.toString(evaluate(operand1, operand2, ArithmeticOperator.fromString(token))));
                         }
                         catch (EmptyStackException e) {
                             System.out.println("Wrog expression: " + Arrays.asList(expression) + " empty stack!.");
@@ -37,8 +35,6 @@ public class RPNCalculator
                             stack.clear();
                             stack.push("0");
                         }
-
-
 
                     } else if (isOperand( token)) {
                         stack.push(token);
@@ -70,31 +66,20 @@ public class RPNCalculator
         }
     }
 
-    public static boolean isOperator(String x)
-    {
-        return (x.equals("+") |
-                x.equals("-") |
-                x.equals("*") |
-                x.equals("/"));
-    }
 
-    public static double evaluate(String o1, String o2, String operator)
+    public static double evaluate(String o1, String o2, ArithmeticOperator operator)
     {
-        if (operator.length() > 1 && !isOperator(operator))
-            throw new IllegalArgumentException("Wrong operator definition");
-
         double oper1 = Double.parseDouble(o1);
         double oper2 = Double.parseDouble(o2);
 
         switch (operator) {
-            case "+":
+            case ADD:
                 return oper1 + oper2;
-            case "-":
+            case SUB:
                 return oper1 - oper2;
-            case "*":
+            case MUL:
                 return oper1 * oper2;
-
-            case "/": {
+            case DIV: {
                 if(oper2 != 0)
                     return oper1 / oper2;
                 else
