@@ -36,22 +36,12 @@ public class RPNCalculatorTest
     }
 
     @Test
-    public void testIsOperator() throws Exception
-    {
-        assertThat(RPNCalculator.isOperator("+")).isTrue();
-        assertThat(RPNCalculator.isOperator("-")).isTrue();
-        assertThat(RPNCalculator.isOperator("/")).isTrue();
-        assertThat(RPNCalculator.isOperator("*")).isTrue();
-        assertThat(RPNCalculator.isOperator("1")).isFalse();
-    }
-
-    @Test
     public void testEvaluate() throws Exception
     {
-        assertThat(RPNCalculator.evaluate("1","2","+")).isEqualTo(3);
-        assertThat(RPNCalculator.evaluate("4", "2","-")).isEqualTo(2);
-        assertThat(RPNCalculator.evaluate("4", "2", "*")).isEqualTo(8);
-        assertThat(RPNCalculator.evaluate("4","3","*")).isEqualTo(12);
-        assertThat(RPNCalculator.evaluate("4","2","/")).isEqualTo(2);
+        assertThat(RPNCalculator.evaluate("1","2",ArithmeticOperator.ADD)).isEqualTo(3);
+        assertThat(RPNCalculator.evaluate("4", "2",ArithmeticOperator.SUB)).isEqualTo(2);
+        assertThat(RPNCalculator.evaluate("4", "2", ArithmeticOperator.MUL)).isEqualTo(8);
+        assertThat(RPNCalculator.evaluate("4","3",ArithmeticOperator.MUL)).isEqualTo(12);
+        assertThat(RPNCalculator.evaluate("4","2",ArithmeticOperator.DIV)).isEqualTo(2);
     }
 }
