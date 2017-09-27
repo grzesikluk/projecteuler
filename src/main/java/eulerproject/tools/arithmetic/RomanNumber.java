@@ -2,6 +2,7 @@ package eulerproject.tools.arithmetic;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class RomanNumber
 {
@@ -12,21 +13,29 @@ public class RomanNumber
 
     private String numberString;
 
-
-    public RomanNumber(final String value) {
+    public RomanNumber(final String value)
+    {
         numberString = new String(value);
     }
 
-    public enum RomanNumberSymbol implements Comparable<RomanNumberSymbol> {
+    public enum RomanNumberSymbol implements Comparable<RomanNumberSymbol>
+    {
         I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
+
+        public int getVal()
+        {
+            return val;
+        }
 
         private int val;
 
-        RomanNumberSymbol(int v) {
+        RomanNumberSymbol(int v)
+        {
             val = v;
         }
 
-        public static RomanNumberSymbol getRomanNumber(char c) {
+        public static RomanNumberSymbol getRomanNumber(char c)
+        {
             switch (c) {
                 case 'I':
                     return I;
@@ -49,16 +58,16 @@ public class RomanNumber
 
     }
 
-    public boolean checkAllRules() {
+    public boolean checkAllRules()
+    {
 
         return
                 !(checkRuleOne(this) != -1 ||
-                checkRuleTwo(this) != -1 ||
-                checkRuleThree(this) != -1 ||
-                checkRuleFour(this) != -1 ||
-                checkRuleFive(this) != -1 );
+                        checkRuleTwo(this) != -1 ||
+                        checkRuleThree(this) != -1 ||
+                        checkRuleFour(this) != -1 ||
+                        checkRuleFive(this) != -1);
     }
-
 
     /**
      * Numerals must be arranged in descending order of size.
@@ -66,7 +75,8 @@ public class RomanNumber
      * @param number
      * @return int position index where the rule is broken
      */
-    public static int checkRuleOne(RomanNumber number) {
+    public static int checkRuleOne(RomanNumber number)
+    {
         for (int i = 0; i < number.numberString.length() - 1; i++) {
             if (RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i)).compareTo(RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i + 1))) < 0) {
                 return i;
@@ -81,7 +91,8 @@ public class RomanNumber
      * @param number
      * @return int position index where the rule is broken
      */
-    public static int checkRuleTwo(RomanNumber number) {
+    public static int checkRuleTwo(RomanNumber number)
+    {
 
         int ix = -1;
 
@@ -115,7 +126,8 @@ public class RomanNumber
      * @param number
      * @return int position index where the rule is broken
      */
-    public static int checkRuleThree(RomanNumber number) {
+    public static int checkRuleThree(RomanNumber number)
+    {
 
         if ((number.numberString.length() - number.numberString.replace("V", "").length() > 1) ||
                 (number.numberString.length() - number.numberString.replace("D", "").length()) > 1 ||
@@ -136,7 +148,8 @@ public class RomanNumber
      * @param s
      * @return
      */
-    public static int checkRuleFour(RomanNumber s) {
+    public static int checkRuleFour(RomanNumber s)
+    {
         int result;
 
         if ((result = findString(s.numberString, "[IXVLD]M")) >= 0)
@@ -163,7 +176,8 @@ public class RomanNumber
      * @param s
      * @return
      */
-    public static int checkRuleFive(RomanNumber s) {
+    public static int checkRuleFive(RomanNumber s)
+    {
         int result;
 
         if ((result = findString(s.numberString, "VIIII")) >= 0)
@@ -179,22 +193,21 @@ public class RomanNumber
         if ((result = findString(s.numberString, "LXXXX")) >= 0)
             return result;
 
-
         return -1;
-
     }
 
-    private static int findString(String input, String search) {
+    private static int findString(String input, String search)
+    {
         Pattern pattern = Pattern.compile(search);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find())
             return matcher.start();
         else
             return -1;
-
     }
 
-    public static RomanNumber optimiseRomanNumber(RomanNumber input) {
+    public static RomanNumber optimiseRomanNumber(RomanNumber input)
+    {
         RomanNumber output = new RomanNumber(input.numberString);
         String oldValue = "";
         int index = -1;
@@ -210,20 +223,19 @@ public class RomanNumber
                         output.numberString = output.numberString.replace("IIIII", "V");
                         break;
                     case 'V':
-                        output.numberString  = output.numberString.replace("VV", "X");
+                        output.numberString = output.numberString.replace("VV", "X");
                         break;
                     case 'X':
-                        output.numberString  = output.numberString.replace("XXXXX", "L");
+                        output.numberString = output.numberString.replace("XXXXX", "L");
                         break;
                     case 'L':
-                        output.numberString  = output.numberString.replace("LL", "C");
+                        output.numberString = output.numberString.replace("LL", "C");
                         break;
                     case 'C':
-                        output.numberString  = output.numberString.replace("CCCCC", "D");
+                        output.numberString = output.numberString.replace("CCCCC", "D");
                         break;
                 }
                 continue;
-
             }
         }
         oldValue = "";
@@ -231,16 +243,15 @@ public class RomanNumber
         while (!output.getNumberString().equals(oldValue)) {
             oldValue = output.numberString;
 
-            output.numberString  = output.numberString.replace("VIIII", "IX");
-            output.numberString  = output.numberString.replace("DCCCC", "CM");
-            output.numberString  = output.numberString.replace("CCCC", "CD");
-            output.numberString  = output.numberString.replace("IIII", "IV");
-            output.numberString  = output.numberString.replace("XXXX", "XL");
-            output.numberString  = output.numberString.replace("LXXXX", "XC");
-            output.numberString  = output.numberString.replace("DCD", "CM");
-            output.numberString  = output.numberString.replace("LXL", "XC");
-            output.numberString  = output.numberString.replace("VIV", "IX");
-
+            output.numberString = output.numberString.replace("VIIII", "IX");
+            output.numberString = output.numberString.replace("DCCCC", "CM");
+            output.numberString = output.numberString.replace("CCCC", "CD");
+            output.numberString = output.numberString.replace("IIII", "IV");
+            output.numberString = output.numberString.replace("XXXX", "XL");
+            output.numberString = output.numberString.replace("LXXXX", "XC");
+            output.numberString = output.numberString.replace("DCD", "CM");
+            output.numberString = output.numberString.replace("LXL", "XC");
+            output.numberString = output.numberString.replace("VIV", "IX");
         }
         return output;
     }
@@ -268,5 +279,23 @@ public class RomanNumber
         return "RomanNumber{" +
                 "numberString='" + numberString + '\'' +
                 '}';
+    }
+
+    public long asLong()
+    {
+        final long[] returnValue = {0};
+
+        IntStream.range(0, numberString.length()).forEach(i -> {
+            RomanNumberSymbol currSymbol = RomanNumberSymbol.getRomanNumber(numberString.charAt(i));
+            RomanNumberSymbol nextSymbol = (i<numberString.length()-1)?RomanNumberSymbol.getRomanNumber(numberString.charAt(i+1)):RomanNumberSymbol.getRomanNumber('I');
+
+            if (currSymbol.compareTo(nextSymbol) >= 0)
+                returnValue[0] += currSymbol.getVal();
+            else
+                returnValue[0] -= currSymbol.getVal();
+
+        });
+
+        return returnValue[0];
     }
 }

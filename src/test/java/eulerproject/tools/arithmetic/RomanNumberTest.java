@@ -91,4 +91,30 @@ public class RomanNumberTest
         });
 
     }
+
+    @Test
+    public void testAsLong() {
+
+        assertThat(new RomanNumber("I").asLong()).isEqualTo(1L);
+        assertThat(new RomanNumber("III").asLong()).isEqualTo(3L);
+        assertThat(new RomanNumber("IV").asLong()).isEqualTo(4L);
+        assertThat(new RomanNumber("V").asLong()).isEqualTo(5L);
+        assertThat(new RomanNumber("IX").asLong()).isEqualTo(9L);
+        assertThat(new RomanNumber("X").asLong()).isEqualTo(10L);
+        assertThat(new RomanNumber("XI").asLong()).isEqualTo(11L);
+        assertThat(new RomanNumber("XLIV").asLong()).isEqualTo(44L);
+        assertThat(new RomanNumber("LIV").asLong()).isEqualTo(54L);
+        assertThat(new RomanNumber("LXIV").asLong()).isEqualTo(64L);
+        assertThat(new RomanNumber("LXX").asLong()).isEqualTo(70L);
+        assertThat(new RomanNumber("XC").asLong()).isEqualTo(90L);
+        assertThat(new RomanNumber("C").asLong()).isEqualTo(100L);
+        assertThat(new RomanNumber("CXC").asLong()).isEqualTo(190L);
+        assertThat(new RomanNumber("CCCXX").asLong()).isEqualTo(320L);
+        assertThat(new RomanNumber("CD").asLong()).isEqualTo(400L);
+        assertThat(new RomanNumber("CM").asLong()).isEqualTo(900L);
+        assertThat(new RomanNumber("M").asLong()).isEqualTo(1000L);
+        assertThat(new RomanNumber("MCCLX").asLong()).isEqualTo(1260L);
+        assertThat(new RomanNumber("MCDXL").asLong()).isEqualTo(1440L);
+
+    }
 }
