@@ -1,0 +1,253 @@
+package eulerproject.tools.arithmetic;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RomanNumber
+{
+    public String getNumberString()
+    {
+        return numberString;
+    }
+
+    private String numberString;
+
+
+    public RomanNumber(final String value) {
+        numberString = new String(value);
+    }
+
+    public enum RomanNumberSymbol implements Comparable<RomanNumberSymbol> {
+        I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
+
+        private int val;
+
+        RomanNumberSymbol(int v) {
+            val = v;
+        }
+
+        public static RomanNumberSymbol getRomanNumber(char c) {
+            switch (c) {
+                case 'I':
+                    return I;
+                case 'V':
+                    return V;
+                case 'X':
+                    return X;
+                case 'L':
+                    return L;
+                case 'C':
+                    return C;
+                case 'D':
+                    return D;
+                case 'M':
+                    return M;
+                default:
+                    return I;
+            }
+        }
+
+    }
+
+    /**
+     * Numerals must be arranged in descending order of size.
+     *
+     * @param number
+     * @return int position index where the rule is broken
+     */
+    public static int checkRuleOne(RomanNumber number) {
+        for (int i = 0; i < number.numberString.length() - 1; i++) {
+            if (RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i)).compareTo(RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i + 1))) < 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * M, C, and X cannot be equalled or exceeded by smaller denominations.
+     *
+     * @param number
+     * @return int position index where the rule is broken
+     */
+    public static int checkRuleTwo(RomanNumber number) {
+
+        int ix = -1;
+
+        if ((ix = number.numberString.indexOf("IIIII")) >= 0)
+            return ix;
+
+        if ((ix = number.numberString.indexOf("VV")) >= 0)
+            return ix;
+
+        if ((ix = number.numberString.indexOf("IIIII")) >= 0)
+            return ix;
+
+        if ((ix = number.numberString.indexOf("XXXXX")) >= 0)
+            return ix;
+
+        if ((ix = number.numberString.indexOf("CCCCC")) >= 0)
+            return ix;
+
+        if ((ix = number.numberString.indexOf("LL")) >= 0) //
+            return ix;
+
+        if ((ix = number.numberString.indexOf("DD")) >= 0) //
+            return ix;
+
+        return -1;
+    }
+
+    /**
+     * D, L, and V can each only appear once.
+     *
+     * @param number
+     * @return int position index where the rule is broken
+     */
+    public static int checkRuleThree(RomanNumber number) {
+
+        if ((number.numberString.length() - number.numberString.replace("V", "").length() > 1) ||
+                (number.numberString.length() - number.numberString.replace("D", "").length()) > 1 ||
+                (number.numberString.length() - number.numberString.replace("L", "").length()) > 1) {
+            return 1;
+        }
+
+        return -1;
+    }
+
+    /**
+     * Only one I, X, and C can be used as the leading numeral in part of a subtractive pair.
+     * I can only be placed before V and X.
+     * X can only be placed before L and C.
+     * C can only be placed before D and M.
+     * I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
+     *
+     * @param s
+     * @return
+     */
+    public static int checkRuleFour(RomanNumber s) {
+        int result;
+
+        if ((result = findString(s.numberString, "[IXVLD]M")) >= 0)
+            return result;
+
+        if ((result = findString(s.numberString, "[V]X")) >= 0)
+            return result;
+
+        if ((result = findString(s.numberString, "[IV]L")) >= 0)
+            return result;
+
+        if ((result = findString(s.numberString, "[IVL]C")) >= 0)
+            return result;
+
+        if ((result = findString(s.numberString, "[IVXL]D")) >= 0)
+            return result;
+
+        return -1;
+    }
+
+    /**
+     * This rule checks if non optimal sequence found.
+     *
+     * @param s
+     * @return
+     */
+    public static int checkRuleFive(RomanNumber s) {
+        int result;
+
+        if ((result = findString(s.numberString, "VIIII")) >= 0)
+            return result;
+        if ((result = findString(s.numberString, "DCCCC")) >= 0)
+            return result;
+        if ((result = findString(s.numberString, "CCCC[LXVI]")) >= 0)
+            return result;
+        if ((result = findString(s.numberString, "IIII")) >= 0)
+            return result;
+        if ((result = findString(s.numberString, "XXXX")) >= 0)
+            return result;
+        if ((result = findString(s.numberString, "LXXXX")) >= 0)
+            return result;
+
+
+        return -1;
+
+    }
+
+    private static int findString(String input, String search) {
+        Pattern pattern = Pattern.compile(search);
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find())
+            return matcher.start();
+        else
+            return -1;
+
+    }
+
+    public static RomanNumber optimiseRomanNumber(RomanNumber input) {
+        RomanNumber output = new RomanNumber(input.numberString);
+        String oldValue = "";
+        int index = -1;
+
+        while (!output.getNumberString().equals(oldValue)) {
+            oldValue = output.numberString;
+
+            //part one optimisation
+            if ((index = checkRuleTwo(output)) != -1) {
+                Character c = output.numberString.charAt(index);
+                switch (c) {
+                    case 'I':
+                        output.numberString = output.numberString.replace("IIIII", "V");
+                        break;
+                    case 'V':
+                        output.numberString  = output.numberString.replace("VV", "X");
+                        break;
+                    case 'X':
+                        output.numberString  = output.numberString.replace("XXXXX", "L");
+                        break;
+                    case 'L':
+                        output.numberString  = output.numberString.replace("LL", "C");
+                        break;
+                    case 'C':
+                        output.numberString  = output.numberString.replace("CCCCC", "D");
+                        break;
+                }
+                continue;
+
+            }
+        }
+        oldValue = "";
+        //part two optimisation
+        while (!output.getNumberString().equals(oldValue)) {
+            oldValue = output.numberString;
+
+            output.numberString  = output.numberString.replace("VIIII", "IX");
+            output.numberString  = output.numberString.replace("DCCCC", "CM");
+            output.numberString  = output.numberString.replace("CCCC", "CD");
+            output.numberString  = output.numberString.replace("IIII", "IV");
+            output.numberString  = output.numberString.replace("XXXX", "XL");
+            output.numberString  = output.numberString.replace("LXXXX", "XC");
+            output.numberString  = output.numberString.replace("DCD", "CM");
+            output.numberString  = output.numberString.replace("LXL", "XC");
+            output.numberString  = output.numberString.replace("VIV", "IX");
+
+        }
+        return output;
+    }
+
+    @Override
+    public boolean equals(final Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final RomanNumber that = (RomanNumber) o;
+
+        return numberString != null ? numberString.equals(that.numberString) : that.numberString == null;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return numberString != null ? numberString.hashCode() : 0;
+    }
+}

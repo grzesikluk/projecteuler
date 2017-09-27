@@ -1,3 +1,7 @@
+
+### Problem 89
+
+#### Description
 For a number written in Roman numerals to be considered valid there are basic rules which must be followed. Even though
 the rules allow some numbers to be expressed in more than one way there is always a "best" way of writing a particular number.
 
@@ -79,3 +83,16 @@ written on the gilded and coffered wooden ceiling; I am sure that many would arg
 
 So if we believe the adage, "when in Rome do as the Romans do," and we see how the Romans write numerals, then it clearly
 gives us much more freedom than many would care to admit.
+
+
+#### Solution
+
+##### Ideas
+* 
+
+##### Algorithm
+*
+
+##### Links
+
+Created by lgrzesik 27/09/2017
