@@ -14,7 +14,7 @@ Find the expected value of the number represented by what we have written down w
 
 ##### Ideas
 * reuse problem 89 solution - refactoring needed **DONE** 
-* implement random generator with fixed probability
+* implement random generator with fixed probability **DONE**
 * what is `expected value`? 
 
 

@@ -49,6 +49,17 @@ public class RomanNumber
 
     }
 
+    public boolean checkAllRules() {
+
+        return
+                !(checkRuleOne(this) != -1 ||
+                checkRuleTwo(this) != -1 ||
+                checkRuleThree(this) != -1 ||
+                checkRuleFour(this) != -1 ||
+                checkRuleFive(this) != -1 );
+    }
+
+
     /**
      * Numerals must be arranged in descending order of size.
      *
@@ -249,5 +260,13 @@ public class RomanNumber
     public int hashCode()
     {
         return numberString != null ? numberString.hashCode() : 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "RomanNumber{" +
+                "numberString='" + numberString + '\'' +
+                '}';
     }
 }
