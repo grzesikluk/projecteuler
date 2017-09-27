@@ -25,15 +25,15 @@ public class RomanNumberTest
 
     @Test
     public void testEqualsOnRomanNumber() throws Exception {
-        Assert.assertTrue(RomanNumber.RomanNumberSymbol.C.compareTo(RomanNumber.RomanNumberSymbol.D) < 0);
-        Assert.assertTrue(RomanNumber.RomanNumberSymbol.M.compareTo(RomanNumber.RomanNumberSymbol.D) > 0);
-        Assert.assertTrue(RomanNumber.RomanNumberSymbol.C.compareTo(RomanNumber.RomanNumberSymbol.C) == 0);
+        Assert.assertTrue(RomanNumber.RomanNumerals.C.compareTo(RomanNumber.RomanNumerals.D) < 0);
+        Assert.assertTrue(RomanNumber.RomanNumerals.M.compareTo(RomanNumber.RomanNumerals.D) > 0);
+        Assert.assertTrue(RomanNumber.RomanNumerals.C.compareTo(RomanNumber.RomanNumerals.C) == 0);
     }
 
     @Test
     public void testCheckRuleOne() throws Exception {
-        List<String> testInput = Arrays.asList("MXCI","MCVIC","MCI");
-        List<Integer> testExpectedResults = Arrays.asList(1,3,-1);
+        List<String> testInput = Arrays.asList("MXCI","MCVIC","MCI","MMCCVLVI");
+        List<Integer> testExpectedResults = Arrays.asList(-1,3,-1,4);
 
         IntStream.range(0,testExpectedResults.size()).forEach(i-> {
             assertThat(RomanNumber.checkRuleOne(new RomanNumber(testInput.get(i)))).isEqualTo(testExpectedResults.get(i));

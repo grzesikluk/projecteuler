@@ -1,11 +1,27 @@
 package eulerproject.tools.arithmetic;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import static eulerproject.tools.arithmetic.RomanNumber.RomanNumerals.*;
+
 public class RomanNumber
 {
+    private final static Map<RomanNumerals, RomanNumerals> ALLOWED_SUBSTRACTIVE_PAIRS;
+
+    static {
+        ALLOWED_SUBSTRACTIVE_PAIRS = new HashMap<>();
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(I,V);
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(I,X);
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(X,L);
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(X,C);
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(C,D);
+        ALLOWED_SUBSTRACTIVE_PAIRS.put(C,M);
+    }
+
     public String getNumberString()
     {
         return numberString;
@@ -18,7 +34,7 @@ public class RomanNumber
         numberString = new String(value);
     }
 
-    public enum RomanNumberSymbol implements Comparable<RomanNumberSymbol>
+    public enum RomanNumerals implements Comparable<RomanNumerals>
     {
         I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
 
@@ -29,12 +45,12 @@ public class RomanNumber
 
         private int val;
 
-        RomanNumberSymbol(int v)
+        RomanNumerals(int v)
         {
             val = v;
         }
 
-        public static RomanNumberSymbol getRomanNumber(char c)
+        public static RomanNumerals getRomanNumber(char c)
         {
             switch (c) {
                 case 'I':
@@ -60,25 +76,31 @@ public class RomanNumber
 
     public boolean checkAllRules()
     {
-
         return
                 !(checkRuleOne(this) != -1 ||
-                        checkRuleTwo(this) != -1 ||
-                        checkRuleThree(this) != -1 ||
-                        checkRuleFour(this) != -1 ||
-                        checkRuleFive(this) != -1);
+                  checkRuleTwo(this) != -1 ||
+                  checkRuleThree(this) != -1 ||
+                  checkRuleFour(this) != -1 ||
+                  checkRuleFive(this) != -1);
     }
 
     /**
      * Numerals must be arranged in descending order of size.
+     * This rule doesn't apply to substractive pairs.
+     * todo: this must be revised for example correct number is: XLII but we have to discard CIIICIICL
      *
      * @param number
      * @return int position index where the rule is broken
      */
-    public static int checkRuleOne(RomanNumber number)
+    public static int checkRuleOne(final RomanNumber number)
     {
-        for (int i = 0; i < number.numberString.length() - 1; i++) {
-            if (RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i)).compareTo(RomanNumberSymbol.getRomanNumber(number.numberString.charAt(i + 1))) < 0) {
+        String copy = new String(number.getNumberString());
+
+        for (int i = 0; i < copy.length() - 1; i++) {
+            RomanNumerals first = RomanNumerals.getRomanNumber(copy.charAt(i));
+            RomanNumerals second = RomanNumerals.getRomanNumber(copy.charAt(i+1));
+
+            if (first.compareTo(second) < 0 && !isAllowedSubstractionPair(first,second)) {
                 return i;
             }
         }
@@ -143,7 +165,6 @@ public class RomanNumber
      * I can only be placed before V and X.
      * X can only be placed before L and C.
      * C can only be placed before D and M.
-     * I(1), V(5), X(10), L(50), C(100), D(500), M(1000);
      *
      * @param s
      * @return
@@ -286,8 +307,8 @@ public class RomanNumber
         final long[] returnValue = {0};
 
         IntStream.range(0, numberString.length()).forEach(i -> {
-            RomanNumberSymbol currSymbol = RomanNumberSymbol.getRomanNumber(numberString.charAt(i));
-            RomanNumberSymbol nextSymbol = (i<numberString.length()-1)?RomanNumberSymbol.getRomanNumber(numberString.charAt(i+1)):RomanNumberSymbol.getRomanNumber('I');
+            RomanNumerals currSymbol = RomanNumerals.getRomanNumber(numberString.charAt(i));
+            RomanNumerals nextSymbol = (i<numberString.length()-1)? RomanNumerals.getRomanNumber(numberString.charAt(i+1)): RomanNumerals.getRomanNumber('I');
 
             if (currSymbol.compareTo(nextSymbol) >= 0)
                 returnValue[0] += currSymbol.getVal();
@@ -297,5 +318,9 @@ public class RomanNumber
         });
 
         return returnValue[0];
+    }
+
+    private static boolean isAllowedSubstractionPair(RomanNumerals a, RomanNumerals next) {
+        return ALLOWED_SUBSTRACTIVE_PAIRS.containsKey(a) && ALLOWED_SUBSTRACTIVE_PAIRS.get(a).equals(next);
     }
 }

@@ -25,9 +25,13 @@ public class Solution
 
         RandomGenerator<Character> generator = new RandomGenerator(SYMBOLS_PROBABILITIES_MAP);
 
-        System.out.println(RomanNumber.optimiseRomanNumber(getRandomRoman(generator)));
-    }
 
+        while(true) {
+            RomanNumber number = getRandomRoman(generator);
+            System.out.println(number + " " + number.asLong());
+        }
+
+    }
 
     public static long getSolution() {
         return 0;
@@ -39,7 +43,6 @@ public class Solution
         StringBuilder sb = new StringBuilder();
 
         while(! (newChar=generator.getNext()).equals('#')) {
-
             if(new RomanNumber(sb.toString()+newChar).checkAllRules())
                 sb.append(newChar);
         }

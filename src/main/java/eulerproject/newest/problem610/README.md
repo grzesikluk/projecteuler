@@ -15,7 +15,8 @@ Find the expected value of the number represented by what we have written down w
 ##### Ideas
 * reuse problem 89 solution - refactoring needed **DONE** 
 * implement random generator with fixed probability **DONE**
-* need to add conversion from RomanNumber to long
+* need to add conversion from RomanNumber to long **DONE**
+* we need to revise rule number one **DONE**
 * what is `expected value`? 
 
 
