@@ -29,7 +29,7 @@ public class Solution
 
             if(isInt(areaSqr2) && squareNumbers.contains((long)areaSqr2)) {
                 System.out.println(i + " " + (i - 1) + " " + areaSqr2);
-                sumOfPerimeters[0] +=getPerimeter(i,i,-1);
+                sumOfPerimeters[0] +=getPerimeter(i,i,i -1);
             }
 
         });
