@@ -73,7 +73,7 @@ public class RandomGenerator<T>
     }
 
     private boolean isProbabilitiesMapCorrect(final Map<T,Double> probabilityMap) {
-        return probabilityMap.values().stream().mapToDouble(d->d).sum() == 1.0;
+        return Math.abs(probabilityMap.values().stream().mapToDouble(d->d).sum()-1.0)< 0.0000001;
     }
 
 }
