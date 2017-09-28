@@ -45,11 +45,12 @@ public class RomanNumberTest
                 "IIVII",
                 "VIIXIII",
                 "IVIII",
-                "DCCIVII"
+                "DCCIVII",
+                "XLIX"
 
         );
         List<Integer> testExpectedResults = Arrays.asList(
-                -1,3,-1,4,3,2,1,1,4,1,2,1,4);
+                -1,3,-1,4,3,2,1,1,4,1,2,1,4,-1);
 
         IntStream.range(0,8).forEach(i-> {
             assertThat(RomanNumber.checkRuleOne(new RomanNumber(testInput.get(i))))
