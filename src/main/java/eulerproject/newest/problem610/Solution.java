@@ -25,7 +25,6 @@ public class Solution
 
         RandomGenerator<Character> generator = new RandomGenerator(SYMBOLS_PROBABILITIES_MAP);
 
-
         while(true) {
             RomanNumber number = getRandomRoman(generator);
             System.out.println(number + " " + number.asLong());

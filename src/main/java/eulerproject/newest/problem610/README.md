@@ -26,5 +26,6 @@ Find the expected value of the number represented by what we have written down w
 ##### Links
 [Random Java 8](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html)
 [Roman Numerals](https://projecteuler.net/about=roman_numerals)
+[Expected value definition](http://www.statisticshowto.com/probability-and-statistics/expected-value/)
 
 Created by lgrzesik 26/09/2017
