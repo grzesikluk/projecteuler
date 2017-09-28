@@ -32,11 +32,28 @@ public class RomanNumberTest
 
     @Test
     public void testCheckRuleOne() throws Exception {
-        List<String> testInput = Arrays.asList("MXCI","MCVIC","MCI","MMCCVLVI");
-        List<Integer> testExpectedResults = Arrays.asList(-1,3,-1,4);
+        List<String> testInput = Arrays.asList(
+                "MXCI",
+                "MCVIC",
+                "MCI",
+                "MMCCVLVI",
+                "CXVIXIIIXXCMLXCXXXCIXCXXI",
+                "CVIXIII",
+                "IXX",
+                "IXIVI",
+                "IXIVIX",
+                "IIVII",
+                "VIIXIII",
+                "IVIII",
+                "DCCIVII"
 
-        IntStream.range(0,testExpectedResults.size()).forEach(i-> {
-            assertThat(RomanNumber.checkRuleOne(new RomanNumber(testInput.get(i)))).isEqualTo(testExpectedResults.get(i));
+        );
+        List<Integer> testExpectedResults = Arrays.asList(
+                -1,3,-1,4,3,2,1,1,4,1,2,1,4);
+
+        IntStream.range(0,8).forEach(i-> {
+            assertThat(RomanNumber.checkRuleOne(new RomanNumber(testInput.get(i))))
+                    .isEqualTo(testExpectedResults.get(i)).describedAs("wrong" + testInput.get(i));
         });
 
     }
