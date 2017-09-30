@@ -102,28 +102,25 @@ public class RomanNumber
     public static int checkRuleOne(final RomanNumber number)
     {
         String copy = new String(number.getNumberString());
-        RomanNumerals highest = RomanNumerals.UNSET;
+        RomanNumerals HSN = RomanNumerals.UNSET;
 
         int i = 0;
         while (i < copy.length() - 1) {
-
             RomanNumerals first = RomanNumerals.getRomanNumber(copy.charAt(i));
             RomanNumerals second = RomanNumerals.getRomanNumber(copy.charAt(i + 1));
 
-            if (first.compareTo(second) < 0) {
+            if (first.compareTo(second) >= 0) {
 
-                if (isAllowedSubstractionPair(first, second)) {
-
-                    if (second.compareTo(highest) < 0) {
-                        highest = first;
-                    } else
-                        return i;
-                } else
+                if (second.compareTo(HSN) >= 0)
                     return i;
             } else {
-                if (second.compareTo(highest) >= 0)
+                if (isAllowedSubstractionPair(first, second)) {
+                    if (second.compareTo(HSN) >= 0)
+                        return i;
+                    else
+                        HSN = first;
+                } else
                     return i;
-                highest = first;
             }
 
             i++;

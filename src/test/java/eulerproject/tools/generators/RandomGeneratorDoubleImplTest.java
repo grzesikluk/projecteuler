@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class RandomGeneratorTest
+public class RandomGeneratorDoubleImplTest
 {
     private static final int MAX = 100000000;
     private static final int MAX_DEVIATION = (int) (MAX * 0.0001);
@@ -19,7 +19,7 @@ public class RandomGeneratorTest
     public void testGetNext() throws Exception
     {
         final int elementsNumber = 5;
-        RandomGenerator<Integer> randomGeneratorEqualProbabilities = new RandomGenerator<Integer>(IntStream.range(0,elementsNumber).mapToObj(Integer::new).collect(Collectors.toSet()));
+        RandomGeneratorDoubleImpl<Integer> randomGeneratorEqualProbabilities = new RandomGeneratorDoubleImpl<Integer>(IntStream.range(0,elementsNumber).mapToObj(Integer::new).collect(Collectors.toSet()));
 
         int[] results = new int[elementsNumber];
 
@@ -47,7 +47,7 @@ public class RandomGeneratorTest
         probabilitiesMap.put(3,0.1);
         probabilitiesMap.put(4,0.6);
 
-        RandomGenerator<Integer> randomGeneratorEqualProbabilities = new RandomGenerator<Integer>(probabilitiesMap);
+        RandomGeneratorDoubleImpl<Integer> randomGeneratorEqualProbabilities = new RandomGeneratorDoubleImpl<Integer>(probabilitiesMap);
 
         int[] results = new int[5];
 
@@ -74,6 +74,6 @@ public class RandomGeneratorTest
         probabilitiesMap.put(0, 0.1);
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() ->
-                new RandomGenerator<Integer>(probabilitiesMap)).withMessage("Wrong probabilities definition");
+                new RandomGeneratorDoubleImpl<Integer>(probabilitiesMap)).withMessage("Wrong probabilities definition");
     }
 }

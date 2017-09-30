@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +20,7 @@ public class RomanNumberTest
         List<String> testExpectedResults = Arrays.asList("XXV","XXV","MCLX","MDLX");
 
         IntStream.range(0,testExpectedResults.size()).forEach(i-> {
-            assertThat(RomanNumber.optimiseRomanNumber(new RomanNumber(testInput.get(i)))).isEqualTo(new RomanNumber(testExpectedResults.get(i)));
+            assertThat(RomanNumber.optimiseRomanNumber(new RomanNumber(testInput.get(i)))).as(testInput.get(i)).isEqualTo(new RomanNumber(testExpectedResults.get(i)));
         });
     }
 
@@ -32,29 +34,31 @@ public class RomanNumberTest
 
     @Test
     public void testCheckRuleOne() throws Exception {
-        List<String> testInput = Arrays.asList(
-                "MXCI",
-                "MCVIC",
-                "MCI",
-                "MMCCVLVI",
-                "CXVIXIIIXXCMLXCXXXCIXCXXI",
-                "CVIXIII",
-                "IXX",
-                "IXIVI",
-                "IXIVIX",
-                "IIVII",
-                "VIIXIII",
-                "IVIII",
-                "DCCIVII",
-                "XLIX"
+        Map<String, Integer> testInput = new HashMap<>();
 
-        );
-        List<Integer> testExpectedResults = Arrays.asList(
-                -1,3,-1,4,3,2,1,1,4,1,2,1,4,-1);
 
-        IntStream.range(0,8).forEach(i-> {
-            assertThat(RomanNumber.checkRuleOne(new RomanNumber(testInput.get(i))))
-                    .isEqualTo(testExpectedResults.get(i)).describedAs("wrong" + testInput.get(i));
+        testInput.put("IXIVI",1);
+        testInput.put("III",-1);
+        testInput.put("MXCI",-1);
+        testInput.put("MCVIC",3);
+        testInput.put("MCI",-1);
+        testInput.put("MMCCVLVI",4);
+        testInput.put("CXVIXIIIXXCMLXCXXXCIXCXXI",4);
+        testInput.put("CVIXIII",3);
+        testInput.put("IXX",1);
+        testInput.put("IXIVIX",1);
+        testInput.put("IIVII",2);
+        testInput.put("VIIXIII",3);
+        testInput.put("IVIII",1);
+        testInput.put("DCCIVII",4);
+        testInput.put("XLIX",2);
+        testInput.put("CMD",1);
+        testInput.put("MCD",-1);
+        testInput.put("MMMMMMMMMMMMMMCMIII",-1);
+
+        testInput.keySet().forEach(key-> {
+            assertThat(RomanNumber.checkRuleOne(new RomanNumber(key))).as(key)
+                    .isEqualTo(testInput.get(key)).describedAs("Someething ");
         });
 
     }
@@ -112,7 +116,6 @@ public class RomanNumberTest
 
     @Test
     public void testAsLong() {
-
         assertThat(new RomanNumber("I").asLong()).isEqualTo(1L);
         assertThat(new RomanNumber("III").asLong()).isEqualTo(3L);
         assertThat(new RomanNumber("IV").asLong()).isEqualTo(4L);
@@ -135,4 +138,5 @@ public class RomanNumberTest
         assertThat(new RomanNumber("MCDXL").asLong()).isEqualTo(1440L);
 
     }
+
 }

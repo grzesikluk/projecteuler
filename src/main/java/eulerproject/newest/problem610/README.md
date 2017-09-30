@@ -17,11 +17,13 @@ Find the expected value of the number represented by what we have written down w
 * implement random generator with fixed probability **DONE**
 * need to add conversion from RomanNumber to long **DONE**
 * we need to revise rule number one **DONE**
-* what is `expected value`? 
+* what is `expected value`?  **DONE**
 
 
 ##### Algorithm
-*
+333.90062383216485
+
+
 
 ##### Links
 [Random Java 8](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html)
