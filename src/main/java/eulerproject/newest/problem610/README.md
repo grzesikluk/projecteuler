@@ -22,8 +22,10 @@ Find the expected value of the number represented by what we have written down w
 
 ##### Algorithm
 333.90062383216485
-
-
+333.49215988215394
+333.603376633614
+333.4795783563876
+333.7440236322585
 
 ##### Links
 [Random Java 8](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html)

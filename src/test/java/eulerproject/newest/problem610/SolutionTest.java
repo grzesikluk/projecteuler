@@ -13,12 +13,12 @@ public class SolutionTest
     @Test
     public void testGetSolution() throws Exception
     {
-        Map<Character,Double> probabilities = new HashMap<>();
-        probabilities.put('I',0.5);
-        probabilities.put('#',0.5);
+        Map<Character,Integer> probabilities = new HashMap<>();
+        probabilities.put('I',50);
+        probabilities.put('#',50);
 
 
-        assertThat(Solution.getSolution(probabilities, 100000))
-                .isCloseTo(7.0/8, Percentage.withPercentage(0.01));
+        assertThat(Solution.getSolution(probabilities, 10_000_000))
+                .isCloseTo(7.0/8, Percentage.withPercentage(1));
     }
 }

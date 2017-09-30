@@ -340,6 +340,10 @@ public class RomanNumber
         return returnValue[0];
     }
 
+    public int asInt() {
+        return (int)asLong();
+    }
+
     private static boolean isAllowedSubstractionPair(RomanNumerals a, RomanNumerals next)
     {
         return ALLOWED_SUBSTRACTIVE_PAIRS.containsKey(next) && ALLOWED_SUBSTRACTIVE_PAIRS.get(next).equals(a);

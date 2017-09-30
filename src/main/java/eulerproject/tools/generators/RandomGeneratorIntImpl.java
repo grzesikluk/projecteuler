@@ -5,14 +5,11 @@ import javafx.util.Pair;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 
 public class RandomGeneratorIntImpl<T> implements RandomGenerator<T>
 {
     private Map<T,Integer> probabilityMap;
     private Map<T,Pair<Integer,Integer>> probabilityMapRanges;
-    private Random generator;
-
 
     public RandomGeneratorIntImpl(final Map<T,Integer> map) {
         if(!isProbabilitiesMapCorrect(map))
@@ -23,8 +20,9 @@ public class RandomGeneratorIntImpl<T> implements RandomGenerator<T>
     }
 
     public T getNext() {
-        generator = new Random();
-        return getElement(generator.nextInt(100)).orElseThrow(()->new IllegalStateException("Cannot generate "));
+        int k = (int)(Math.random()*100);
+
+        return getElement(k).orElseThrow(()->new IllegalStateException("Cannot generate "));
     }
 
     public Optional<T> getElement(final int probability) {

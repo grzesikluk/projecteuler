@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class RandomGeneratorIntImplTest
 {
-    private static final int MAX = 10000000;
-    private static final int MAX_DEVIATION = (int) (MAX * 0.001);
+    private static final int MAX = 100000000;
+    private static final int MAX_DEVIATION = (int) (MAX * 0.0001);
 
     @Test
     public void testGetElement() throws Exception
@@ -54,7 +54,7 @@ public class RandomGeneratorIntImplTest
         int[] expectedNumbers = new int[probabilitiesMap.size()];
 
         IntStream.range(0,probabilitiesMap.size()).forEach(i->{
-            expectedNumbers[i] = (int) (MAX*probabilitiesMap.get(i)/100);
+            expectedNumbers[i] = (int) (MAX/100*probabilitiesMap.get(i));
         });
 
         IntStream.range(0, MAX).forEach(i-> {
@@ -62,7 +62,7 @@ public class RandomGeneratorIntImplTest
         });
 
         IntStream.range(0,probabilitiesMap.size()).forEach(k-> {
-            assertThat(results[k]).isBetween(expectedNumbers[k]-MAX_DEVIATION,expectedNumbers[k]+MAX_DEVIATION);
+            assertThat(results[k]).as(Integer.toString(results[k])).isBetween(expectedNumbers[k]-MAX_DEVIATION,expectedNumbers[k]+MAX_DEVIATION);
         });
 
     }

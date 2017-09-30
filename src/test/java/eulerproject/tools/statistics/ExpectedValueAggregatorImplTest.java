@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ExpectedValueAggregatorTest
+public class ExpectedValueAggregatorImplTest
 {
     @Test
     public void getExpectedValue() throws Exception
     {
-        ExpectedValueAggregator expectedValueAggregator = new ExpectedValueAggregator();
+        ExpectedValueAggregatorImpl expectedValueAggregator = new ExpectedValueAggregatorImpl();
 
         expectedValueAggregator.increment(0L);
         expectedValueAggregator.increment(1L);
