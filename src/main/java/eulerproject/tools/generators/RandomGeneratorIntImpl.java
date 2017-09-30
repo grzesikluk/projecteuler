@@ -27,7 +27,7 @@ public class RandomGeneratorIntImpl<T> implements RandomGenerator<T>
         return getElement(generator.nextInt(100)).orElseThrow(()->new IllegalStateException("Cannot generate "));
     }
 
-    private Optional<T> getElement(final int probability) {
+    public Optional<T> getElement(final int probability) {
 
         for(T key:probabilityMapRanges.keySet()) {
 
