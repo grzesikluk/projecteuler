@@ -51,7 +51,7 @@ public class RomanNumberTest
         testInput.put("VIIXIII",3);
         testInput.put("IVIII",1);
         testInput.put("DCCIVII",4);
-        testInput.put("XLIX",2);
+        testInput.put("XLIX",-1);
         testInput.put("CMD",1);
         testInput.put("MCD",-1);
         testInput.put("MMMMMMMMMMMMMMCMIII",-1);

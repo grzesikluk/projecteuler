@@ -18,7 +18,8 @@ Find the sum of the perimeters of all almost equilateral triangles with integral
         - if it is sqare number then we found triangle with integral area (and integral lengths)
 * if perimeter should be smaller that one billion the A maximum is ca one third of billion
     * is this too much to use above ideas?
-* what is the maximum for sq 
+* if perimeter is ca 10^9 then what is the area size? - 10^16?
+* the probable issue is the length of integers, area is very very big!
 
 
 ##### Algorithm
