@@ -22,20 +22,23 @@ class Solution():
     def solve(self):
         solution = []
         gen = Generator_A120893()
-        i = gen.next()
+        # i = gen.next()
+        i = 1
 
-        while 3 * i < int(self.max):
+        while 3 * i < self.max:
             t1 = Triangle(i, i, i - 1)
             t2 = Triangle(i, i, i + 1)
             area1 = t1.getArraySqrt()
             area2 = t2.getArraySqrt()
+
             if (Solution.isSquare(area1)):
                 solution.append(3 * i - 1)
                 print t1
             if (Solution.isSquare(area2)):
                 solution.append(3 * i + 1)
                 print t2
-            i = gen.next()
+            # i = gen.next()
+            i += 1
 
         print sum(solution)
 
