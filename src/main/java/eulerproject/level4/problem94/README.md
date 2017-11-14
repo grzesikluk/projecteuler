@@ -11,25 +11,32 @@ Find the sum of the perimeters of all almost equilateral triangles with integral
 #### Solution
 
 ##### Ideas
-* say triangle is size of {X,X,X-1} or {X, X, X+1}
-    * perimeter is P=3X-1 or P=3X+1
-    * area is from Herons formula: s = P/2, A= sqrt(s(s-a)(s-b)(s-c))
-    * say we have A^2 to not calculate sqrt function 
-        - if it is sqare number then we found triangle with integral area (and integral lengths)
-* if perimeter should be smaller that one billion the A maximum is ca one third of billion
-    * is this too much to use above ideas?
-* what is the maximum for sq 
+* generate Heronian triangles (have integer area and perimeter) HT
+* check if HT is an almost equillateral triangle
+* if yes add it to solution table
+* dont' need to calculate area!
+
+#### Problems 
+* Heronian isosceles do not generate all almost-equilateral triangles (!)
 
 
 ##### Algorithm
-* generate all square numbers to compare
-* from X=2 up to one billion/3 check
-    * calculate s, A^2 and 
-        * check if A^2 is square number
-    * if yes add P to some accumulated value
+
+
 
 ##### Links
 [Equilateral triangle wiki](https://en.wikipedia.org/wiki/Equilateral_triangle)
+
 [Herons formula](https://www.mathsisfun.com/geometry/herons-formula.html)
+
+[Heronian trangle](https://en.wikipedia.org/wiki/Heronian_triangle#Exact_formula_for_Heronian_triangles)
+
+[Isosceles triangle](https://en.wikipedia.org/wiki/Isosceles_triangle)
+
+[ON THE GENERATION OF HERONIAN TRIANGLES Sascha Kurz](http://sci-gems.math.bas.bg/jspui/bitstream/10525/382/1/sjc058-vol2-num2-2008.pdf)
+
+[Construction of Brahmagupta n-gons](http://forumgeom.fau.edu/FG2005volume5/FG200515.pdf)
+
+[A002531](https://oeis.org/A002531)
 
 Created by lgrzesik 20/09/2017

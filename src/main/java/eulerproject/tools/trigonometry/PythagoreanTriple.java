@@ -1,4 +1,4 @@
-package eulerproject.tools;
+package eulerproject.tools.trigonometry;
 
 import java.util.Arrays;
 import java.util.List;
