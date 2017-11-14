@@ -1,6 +1,6 @@
 package eulerproject.level4.problem86;
 
-import eulerproject.tools.PythagoreanTriple;
+import eulerproject.tools.trigonometry.PythagoreanTriple;
 
 import java.util.Arrays;
 import java.util.HashSet;

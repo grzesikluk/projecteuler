@@ -76,7 +76,7 @@ public class Fraction implements Comparable {
     }
 
     public Fraction simplifyFraction() {
-       long hcf = getHighestCommonFactor();
+       long hcf = gcd();
         Fraction result = new Fraction(this.nominator/hcf,this.denominator/hcf);
         return result;
     }
@@ -132,7 +132,7 @@ public class Fraction implements Comparable {
         return (double)nominator/(double)denominator;
     }
 
-    public long getHighestCommonFactor() {
+    public long gcd() {
         long hcf;
 
         if (nominator > denominator)
@@ -148,6 +148,6 @@ public class Fraction implements Comparable {
     }
 
     public boolean isReducedProperFraction() {
-        return getHighestCommonFactor() == 1;
+        return gcd() == 1;
     }
 }

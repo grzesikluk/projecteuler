@@ -16,7 +16,7 @@ public class SequenceGeneratorImplA002531Test
     {
         SequenceGeneratorIterative<Long> sg = new SequenceGeneratorImplA002531();
 
-        IntStream.range(0,10).forEach(i->{
+        IntStream.range(0,values.length).forEach(i->{
                 assertThat(sg.getNext()).isEqualTo(values[i]);
         });
     }
