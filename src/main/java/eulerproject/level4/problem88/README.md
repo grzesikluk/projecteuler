@@ -7,12 +7,14 @@ A natural number, N, that can be written as the sum and product of a given set o
 For example, 6 = 1 + 2 + 3 = 1 × 2 × 3.
 
 For a given set of size, k, we shall call the smallest N with this property a minimal product-sum number. The minimal product-sum numbers for sets of size, k = 2, 3, 4, 5, and 6 are as follows.
-
+```bash
 k=2: 4 = 2 × 2 = 2 + 2
 k=3: 6 = 1 × 2 × 3 = 1 + 2 + 3
 k=4: 8 = 1 × 1 × 2 × 4 = 1 + 1 + 2 + 4
 k=5: 8 = 1 × 1 × 2 × 2 × 2 = 1 + 1 + 2 + 2 + 2
 k=6: 12 = 1 × 1 × 1 × 1 × 2 × 6 = 1 + 1 + 1 + 1 + 2 + 6
+```
+
 
 Hence for 2≤k≤6, the sum of all the minimal product-sum numbers is 4+6+8+12 = 30; note that 8 is only counted once in the sum.
 
@@ -34,6 +36,17 @@ Another algo:
 1) generate values for all k - for p - positions of non "1". 
 2) This is k = product(p-positions) - sum(p-positions) + p 
 3) assign for this k value product(p-positions) - if not exists, otherwise if lower update.
+
+**after some time I resumed this problem new ideas**
+Initial idea to start with prototype:
+
+For given k, starting for integer i >= k
+1) generate all divisors  D of i
+2) generate all integer partitions of i IP for k parts
+3) create set of C from IP and D - containing integer partitions sets with partitions within D set
+
+
+
 
 ##### Algorithm
 
@@ -63,6 +76,9 @@ Another algo:
 
 [Just math perplexus discussionk](http://perplexus.info/show.php?pid=10221&cid=56331)
 
+[Liczby doskonałe](https://pl.wikipedia.org/wiki/Liczba_doskona%C5%82a)
+
+[Problem 88 hint](https://www.mathblog.dk/project-euler-88-minimal-product-sum-numbers/)
 Created by lgrzesik 01/08/17
 
 
