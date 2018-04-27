@@ -1,6 +1,5 @@
 package eulerproject.tools.generators;
 
-import eulerproject.level4.problem88.Solution;
 import eulerproject.tools.combinatorics.Listener;
 import org.junit.Assert;
 import org.junit.Test;
