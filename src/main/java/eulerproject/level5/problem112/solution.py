@@ -1,3 +1,4 @@
+
 def isBouncyNumber(k):
     arrayNumber = get_digit(k)
     converted = []
