@@ -8,7 +8,7 @@ This is a template file.
 
 ##### Ideas
 * [Sequence](https://oeis.org/A023106)
-
+* [Jack Reacher Novel](http://recursed.blogspot.com/2007/09/mathematics-in-jack-reacher-novel.html)
 ##### Algorithm
 *
 

@@ -1,3 +1,6 @@
+import math
+
+
 def getSumOfDigits(k):
     tenth = 1
     result = 0
@@ -27,13 +30,17 @@ def checkIfEqualToPowerOfDigitSum(k):
     return False
 
 
+def is_valid(n):
+    dsum = sum(map(int, str(n)))
+    return dsum ** int(round(math.log(n, dsum))) == n if dsum > 1 else n < 2
+
 if __name__ == "__main__":
 
     k = 1
     i = 10
 
     while True:
-        if checkIfEqualToPowerOfDigitSum(i):
+        if is_valid(i):
             print("{}".format(i))
             k+=1
         i+=1
