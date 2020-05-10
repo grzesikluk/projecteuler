@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from eulerproject.level5.problem103.solution import get_subsets, is_maybe_optional, get_optimal, \
-    get_subset_list_from_previous_optimal_list, get_product_list_from_range, get_optimal, \
-    remove_non_unique_lists
+from eulerproject.pyeuler.sets import get_subsets, is_special_sum_set, get_subset_list_from_previous_optimal_list, \
+    get_product_list_from_range, optimum_special_sum_set, \
+    rm_non_unique_elements
 
 
 class Test(TestCase):
@@ -13,23 +13,23 @@ class Test(TestCase):
                           (2, 3, 4), (1, 2, 5)})
 
     def test_is_optimal(self):
-        self.assertTrue(is_maybe_optional(set([1, 2])))
-        self.assertTrue(is_maybe_optional(set([2, 3, 4])))
-        self.assertTrue(is_maybe_optional(set([3, 5, 6, 7])))
-        self.assertTrue(is_maybe_optional(set([6, 9, 11, 12, 13])))
-        self.assertTrue(is_maybe_optional(set([11, 18, 19, 20, 22, 25])))
-        self.assertTrue(is_maybe_optional(set([11, 17, 20, 22, 23, 24])))
+        self.assertTrue(is_special_sum_set(set([1, 2])))
+        self.assertTrue(is_special_sum_set(set([2, 3, 4])))
+        self.assertTrue(is_special_sum_set(set([3, 5, 6, 7])))
+        self.assertTrue(is_special_sum_set(set([6, 9, 11, 12, 13])))
+        self.assertTrue(is_special_sum_set(set([11, 18, 19, 20, 22, 25])))
+        self.assertTrue(is_special_sum_set(set([11, 17, 20, 22, 23, 24])))
 
     def test_is_not_optimal(self):
-        self.assertFalse(is_maybe_optional(set([2, 3, 7])))
-        self.assertFalse(is_maybe_optional(set([11, 18, 19, 20, 22, 26])))
+        self.assertFalse(is_special_sum_set(set([2, 3, 7])))
+        self.assertFalse(is_special_sum_set(set([11, 18, 19, 20, 22, 26])))
 
     def test_get_optimal(self):
-        self.assertEqual(((1, 2), 3), get_optimal(2))
-        self.assertEqual(((2, 3, 4), 9), get_optimal(3))
-        self.assertEqual(((3, 5, 6, 7), 21), get_optimal(4))
-        self.assertEqual(((6, 9, 11, 12, 13), 51), get_optimal(5))
-        self.assertEqual(((11, 18, 19, 20, 22, 25), 115), get_optimal(6))
+        self.assertEqual(((1, 2), 3), optimum_special_sum_set(2))
+        self.assertEqual(((2, 3, 4), 9), optimum_special_sum_set(3))
+        self.assertEqual(((3, 5, 6, 7), 21), optimum_special_sum_set(4))
+        self.assertEqual(((6, 9, 11, 12, 13), 51), optimum_special_sum_set(5))
+        self.assertEqual(((11, 18, 19, 20, 22, 25), 115), optimum_special_sum_set(6))
 
     def test_get_subset_list_from_previous_optimal_list(self):
         self.assertEqual([(3, 5, 6, 7)],
@@ -66,4 +66,4 @@ class Test(TestCase):
         self.assertNotIn((-1, 2), l1)
 
     def test_remove_non_unique_lists(self):
-        self.assertIn((1, 2, 3), remove_non_unique_lists([(1, 2, 3), (1, 2, 2), (1, 3, 3)]))
+        self.assertIn((1, 2, 3), rm_non_unique_elements([(1, 2, 3), (1, 2, 2), (1, 3, 3)]))
