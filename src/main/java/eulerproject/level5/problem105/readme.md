@@ -20,6 +20,11 @@ NOTE: This problem is related to Problem 103 and Problem 106.
 ## Solution
 
 ## Ideas
+This problem might be solved with help of 103 problem - look at 
+```python
+import eulerproject.pyeuler.sets
+
+```
 
 ## Algorithm
 
