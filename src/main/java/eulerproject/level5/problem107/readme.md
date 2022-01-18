@@ -23,16 +23,15 @@ Using network.txt (right click and 'Save Link/Target As...'), a 6K text file con
 
 ##### Ideas
 TODO:
-* read the file
+* read the file to data structure - G (graph)
 * data representation - simple 2D matrix, symetric, can be simplified
 * calculation of weight, can be simplified too
 * verify if the graph is consistent (without orphans)
+* convert to list of edges that can be sorted by weight
+* calculation of cycles in created H (forest)
 
 ##### Algorithm
-1. search the highest value and remove
-2. check if graph is consistent, if yes #1, if no #4
-3. go to #1
-4. calculate weight
+Elegant Kruskals algorithm is well described in link below.
 
 ##### Links
 [problem](https://projecteuler.net/problem=107)
