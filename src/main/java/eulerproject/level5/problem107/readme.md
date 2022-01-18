@@ -7,7 +7,7 @@ The following undirected network consists of seven vertices and twelve edges wit
 
 The same network can be represented by the matrix below.
 
->     	A	B	C	D	E	F	G
+>     	    A	B	C	D	E	F	G
 >       A	-	16	12	21	-	-	-
 >       B	16	-	-	17	20	-	-
 >       C	12	-	-	28	-	31	-
@@ -22,16 +22,21 @@ Using network.txt (right click and 'Save Link/Target As...'), a 6K text file con
 #### Solution
 
 ##### Ideas
-* 
+TODO:
+* read the file
+* data representation - simple 2D matrix, symetric, can be simplified
+* calculation of weight, can be simplified too
+* verify if the graph is consistent (without orphans)
 
 ##### Algorithm
-*
+1. search the highest value and remove
+2. check if graph is consistent, if yes #1, if no #4
+3. go to #1
+4. calculate weight
 
 ##### Links
-[VTL reference](http://velocity.apache.org/engine/1.7/vtl-reference.html)
-
-[Diophantine reciprocals explanation](http://www.cut-the-knot.org/arithmetic/ShortEquationInReciprocals.shtml#solution)
-
 [problem](https://projecteuler.net/problem=107)
+[Minimum spanning tree](https://en.wikipedia.org/wiki/Minimum_spanning_tree#:~:text=A%20minimum%20spanning%20tree%20(MST,minimum%20possible%20total%20edge%20weight.)
+[Kruskal Dijkstra](https://math.dartmouth.edu/~nadia/math38/04_29_Kruskal_and_Dijkstra.pdf)
 
 Created by lgrzesik 2022-01-18
