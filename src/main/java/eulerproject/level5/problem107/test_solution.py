@@ -17,9 +17,17 @@ class TestProblem(unittest.TestCase):
         graphArray = solution.readFile("test_network.txt")
         self.assertEqual(243, solution.countWeight(graphArray))
 
+    def testBidirectionaWeighted(self):
+        graphArray = solution.readFile("test_network.txt")
+        self.assertTrue(solution.isBidirectionalWeighted(graphArray))
+
+    def testNotBidirectionalWeighted(self):
+        graphArray = solution.readFile("test_network_not_weighted.txt")
+        self.assertFalse(solution.isBidirectionalWeighted(graphArray))
+
+    @unittest.skip
     def test(self):
         self.assertEqual(solution.solution("./test_network.txt"), 150)
-
 
 if __name__ == '__main__':
     unittest.main()
