@@ -35,5 +35,7 @@ Elegant Kruskals algorithm is well described in link below.
 [problem](https://projecteuler.net/problem=107)
 [Minimum spanning tree](https://en.wikipedia.org/wiki/Minimum_spanning_tree#:~:text=A%20minimum%20spanning%20tree%20(MST,minimum%20possible%20total%20edge%20weight.)
 [Kruskal Dijkstra](https://math.dartmouth.edu/~nadia/math38/04_29_Kruskal_and_Dijkstra.pdf)
+[Detect cycles](https://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+[Detect cycles algo](https://en.wikipedia.org/wiki/Cycle_(graph_theory)#:~:text=real%20numbers%2C%20etc.-,Cycle%20detection,over%20are%20part%20of%20cycles.)
 
 Created by lgrzesik 2022-01-18
