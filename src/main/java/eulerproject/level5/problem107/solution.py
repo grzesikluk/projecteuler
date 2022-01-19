@@ -26,5 +26,16 @@ def isBidirectionalWeighted(graphArray):
                 return False
     return True
 
+def createEdges(graphArray):
+    edges = {}
+    for i in range(len(graphArray)):
+        for j in range(i, len(graphArray[i])):
+            edges[i,j]= graphArray[i][j]
+
+    return dict(filter(lambda edge: edge[1] > 0, edges.items()))
+
+def sortEdgesByWeight(edgesMap):
+    return sorted(edgesMap.items(), key=lambda kv: kv[1])
+
 if __name__ == '__main__':
     print(True)
