@@ -21,12 +21,19 @@ Using network.txt (right click and 'Save Link/Target As...'), a 6K text file con
 
 ##### Ideas
 TODO:
-* read the file to data structure - G (graph)
-* data representation - simple 2D matrix, symetric, can be simplified
-* calculation of weight, can be simplified too
-* verify if the graph is consistent (without orphans)
-* convert to list of edges that can be sorted by weight
-* calculation of cycles in created H (forest)
+The sorted list of edges proves there are edges with same weight and that means they might be processed in many orders.
+The number of possible solutions is total number of permutations of edges with same weight.
+* find the weights and do permutations of all orders
+
+Example = let's say there is edges list with w0..wn. There are w1, w2 for which there are many edges:
+(a,b), w1; (c,d), w1
+(b,e), w2; (f,k), w2, (n,p), w2
+We need to generate 2! * 3! edges list from that, containing different orders of same weight edges.
+
+
+
+
+
 
 ##### Algorithm
 Elegant Kruskals algorithm is well described in link below.

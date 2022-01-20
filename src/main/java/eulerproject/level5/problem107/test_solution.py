@@ -42,7 +42,6 @@ class TestProblem(unittest.TestCase):
         self.assertEqual(12, sorted[1][1])
         self.assertEqual(16, sorted[2][1])
 
-    @unittest.skip
     def test(self):
         self.assertEqual(solution.solution("./test_network.txt"), 150)
 
