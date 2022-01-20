@@ -28,7 +28,6 @@ class TestProblem(unittest.TestCase):
     def testCreateEdges(self):
         graphArray = solution.readFile("test_network.txt")
         edgesStructure = solution.createEdges(graphArray)
-        print(edgesStructure)
         self.assertIsNone(edgesStructure.get((0, 0)))
         self.assertIsNone(edgesStructure.get((0, 4)))
         self.assertIsNone(edgesStructure.get((5, 5)))
@@ -55,6 +54,19 @@ class TestProblem(unittest.TestCase):
         graphArray = solution.readFile("test_network_non_cycled.txt")
         self.assertFalse(solution.hasCycles(graphArray))
 
+    def testAddEdge(self):
+        graphArray = solution.readFile("test_network.txt")
+        edgesStructure = solution.createEdges(graphArray)
+        sortedEdges = solution.sortEdgesByWeight(edgesStructure)
+        forestArray = [[-1]*len(graphArray)]*len(graphArray)
+
+        solution.addEdge(sortedEdges[0], forestArray)
+        solution.addEdge(sortedEdges[1], forestArray)
+        solution.addEdge(sortedEdges[2], forestArray)
+
+        self.assertEqual(11, forestArray[4][6])
+        self.assertEqual(12, forestArray[0][2])
+        self.assertEqual(16, forestArray[0][1])
 
 if __name__ == '__main__':
     unittest.main()

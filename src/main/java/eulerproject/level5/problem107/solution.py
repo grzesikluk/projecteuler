@@ -1,7 +1,3 @@
-def solution(filename):
-    return 1;
-
-
 def readFile(filename):
     graphArray = []
     file = open(filename, "r")
@@ -67,6 +63,28 @@ def hasCycles(graphArray):
 
     return False
 
+def copyArray(x):
+    return [row[:] for row in x]
+
+def addEdge(edge, array):
+    array[edge[0][0]][edge[0][1]]=edge[1]
+
+def solution(file):
+    graphArray = readFile(file)
+    forestArray = [[-1]*len(graphArray)]*len(graphArray)
+    initWeight = countWeight(graphArray)
+
+    edgesStructure = createEdges(graphArray)
+    sortedEdges = sortEdgesByWeight(edgesStructure)
+
+    for edge in sortedEdges:
+        forestCopy = copyArray(forestArray)
+        addEdge(edge, forestCopy)
+        if not hasCycles(forestCopy):
+            forestArray=forestCopy
+
+    forestWeight = countWeight(forestArray)
+    return initWeight-forestWeight
 
 if __name__ == '__main__':
-    print(True)
+    print(solution("network.txt"))
