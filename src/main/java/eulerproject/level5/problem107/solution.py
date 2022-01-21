@@ -77,6 +77,8 @@ def copyArray(x):
 def addEdge(edge, array):
     array[edge[0][0]][edge[0][1]] = edge[1]
 
+def allEdgesVariants(edges):
+    return None
 
 def solution(file):
     graphArray = readFile(file)

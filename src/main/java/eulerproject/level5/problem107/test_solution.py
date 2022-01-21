@@ -57,7 +57,8 @@ class TestProblem(unittest.TestCase):
         graphArray = solution.readFile("test_network.txt")
         edgesStructure = solution.createEdges(graphArray)
         sortedEdges = solution.sortEdgesByWeight(edgesStructure)
-        forestArray = [[-1]*len(graphArray)]*len(graphArray)
+        print(sortedEdges)
+        forestArray = [[-1] * len(graphArray)] * len(graphArray)
 
         solution.addEdge(sortedEdges[0], forestArray)
         solution.addEdge(sortedEdges[1], forestArray)
@@ -66,6 +67,22 @@ class TestProblem(unittest.TestCase):
         self.assertEqual(11, forestArray[4][6])
         self.assertEqual(12, forestArray[0][2])
         self.assertEqual(16, forestArray[0][1])
+
+    def testGetAllEdgesVariants(self):
+        graphArray = solution.readFile("test_network_same_weight.txt")
+        edgesStructure = solution.createEdges(graphArray)
+        sortedEdges = solution.sortEdgesByWeight(edgesStructure)
+
+        allEdgesVariants = solution.allEdgesVariants(sortedEdges)
+        self.assertEqual(4, len(allEdgesVariants))
+        self.assertIn([((0, 2), 12), ((4, 6), 12), ((0, 1), 16), ((1, 3), 16), ((3, 4), 18), ((3, 5), 19), ((1, 4), 20),
+                       ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
+        self.assertIn([((4, 6), 12), ((0, 2), 12), ((0, 1), 16), ((1, 3), 16), ((3, 4), 18), ((3, 5), 19), ((1, 4), 20),
+                       ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
+        self.assertIn([((4, 6), 12), ((0, 2), 12), ((1, 3), 16), ((0, 1), 16), ((3, 4), 18), ((3, 5), 19), ((1, 4), 20),
+                       ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
+        self.assertIn([((0, 2), 12), ((4, 6), 12), ((1, 3), 16), ((0, 1), 16), ((3, 4), 18), ((3, 5), 19), ((1, 4), 20),
+                       ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
 
 if __name__ == '__main__':
     unittest.main()
