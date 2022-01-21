@@ -122,16 +122,23 @@ def allEdgesVariants(sortedEdges):
 
 def solution(file):
     graphArray = readFile(file)
-    forestArray = [[-1] * len(graphArray)] * len(graphArray)
     initWeight = countWeight(graphArray)
     sortedEdges = sortEdgesByWeight(createEdges(graphArray))
+    allSortedEdgesVariants = allEdgesVariants(sortedEdges)
+    allSolutions = []
 
-    for edge in sortedEdges:
-        forestCopy = copyArray(forestArray)
-        addEdge(edge, forestCopy)
-        if not hasCycles(forestCopy):
-            forestArray = forestCopy
-    return initWeight - countWeight(forestArray)
+    for sortedEdgesVariant in allSortedEdgesVariants:
+
+        forestArray = [[-1] * len(graphArray)] * len(graphArray)
+
+        for edge in sortedEdgesVariant:
+            forestCopy = copyArray(forestArray)
+            addEdge(edge, forestCopy)
+            if not hasCycles(forestCopy):
+                forestArray = forestCopy
+        allSolutions.append(initWeight - countWeight(forestArray))
+
+    return min(allSolutions)
 
 
 if __name__ == '__main__':
