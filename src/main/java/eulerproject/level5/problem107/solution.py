@@ -1,3 +1,6 @@
+import itertools
+
+
 def readFile(filename):
     graphArray = []
     file = open(filename, "r")
@@ -77,8 +80,45 @@ def copyArray(x):
 def addEdge(edge, array):
     array[edge[0][0]][edge[0][1]] = edge[1]
 
-def allEdgesVariants(edges):
-    return [edges, edges, edges, edges]
+
+def getSublistsWithSameWeight(sortedEdges):
+    lastWeight = -1
+    beginning = 0
+    indexes = []
+
+    for i in range(len(sortedEdges) - 1):
+        if sortedEdges[i][1] == sortedEdges[i + 1][1]:
+            if lastWeight != sortedEdges[i]:
+                beginning = i
+                lastWeight = sortedEdges[i][1]
+        else:
+            if lastWeight != -1:
+                indexes.append([beginning, i])
+            beginning = 0
+            lastWeight = -1
+
+    return indexes
+
+
+def allEdgesVariants(sortedEdges):
+    edgesVariants = [sortedEdges]
+    sublistIndexes = getSublistsWithSameWeight(sortedEdges)
+
+    for sublistIndex in sublistIndexes:
+        newPermutedEdges = []
+        permutations = list(itertools.permutations(sortedEdges[sublistIndex[0]:sublistIndex[1] + 1]))
+
+        for permutedSublist in permutations:
+
+            for existingEdges in edgesVariants:
+                copy = existingEdges[:]
+                copy[sublistIndex[0]:sublistIndex[1] + 1] = permutedSublist
+                newPermutedEdges.append(copy[:])
+
+        edgesVariants = newPermutedEdges[:]
+
+    return edgesVariants
+
 
 def solution(file):
     graphArray = readFile(file)

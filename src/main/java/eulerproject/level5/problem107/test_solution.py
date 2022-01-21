@@ -57,7 +57,6 @@ class TestProblem(unittest.TestCase):
         graphArray = solution.readFile("test_network.txt")
         edgesStructure = solution.createEdges(graphArray)
         sortedEdges = solution.sortEdgesByWeight(edgesStructure)
-        print(sortedEdges)
         forestArray = [[-1] * len(graphArray)] * len(graphArray)
 
         solution.addEdge(sortedEdges[0], forestArray)
@@ -83,6 +82,15 @@ class TestProblem(unittest.TestCase):
                        ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
         self.assertIn([((0, 2), 12), ((4, 6), 12), ((1, 3), 16), ((0, 1), 16), ((3, 4), 18), ((3, 5), 19), ((1, 4), 20),
                        ((0, 3), 21), ((3, 6), 23), ((5, 6), 27), ((2, 3), 28), ((2, 5), 31)], allEdgesVariants)
+
+    def testGetSublistsWithSameWeight(self):
+        graphArray = solution.readFile("test_network_same_weight.txt")
+        edgesStructure = solution.createEdges(graphArray)
+        sortedEdges = solution.sortEdgesByWeight(edgesStructure)
+
+        indexes = solution.getSublistsWithSameWeight(sortedEdges)
+        self.assertEqual([[0, 1], [2, 3]], indexes)
+
 
 if __name__ == '__main__':
     unittest.main()
