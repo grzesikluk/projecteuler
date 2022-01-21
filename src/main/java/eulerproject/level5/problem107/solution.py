@@ -78,7 +78,7 @@ def addEdge(edge, array):
     array[edge[0][0]][edge[0][1]] = edge[1]
 
 def allEdgesVariants(edges):
-    return None
+    return [edges, edges, edges, edges]
 
 def solution(file):
     graphArray = readFile(file)
